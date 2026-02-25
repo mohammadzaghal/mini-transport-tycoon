@@ -1,6 +1,75 @@
-# AI ABUSEEs
+# AI ABUSEEs - Mini Transport Tycoon Game Project
 
+## Description
+This project involves developing a simplified transportation-economic simulation game, inspired by *Transport Tycoon*, for the 2025/2026 Spring semester at ELTE Faculty of Informatics. The main goal of the game is to simulate road freight and passenger transport between cities and industrial facilities. The player will be tasked with organizing and managing a road transport network, purchasing vehicles, and maximizing profit through strategic route management.
 
+## Team Information
+- **Team Name**: AI ABUSEEs
+- **Game Title**: Mini Transport Tycoon
+- **Class**: Software Technology Practice, 2025/2026 Spring
+- **University**: ELTE Faculty of Informatics
+- **Teammates**:
+  - Dana Al Tamimi
+  - Mohammed Alzaghal
+  - Tiya Kumar
+
+## Technology Stack
+- **Game Engine**: Godot
+- **Programming Language**: C#
+
+## Core Game Features
+The game is based on a 2D top-down map featuring cities, industrial facilities, and a road network. The player can build roads, place stops, purchase vehicles, define routes, and transport goods and passengers.
+
+### Map and City Development
+- **Grid-based map**: The map consists of cities and industrial facilities placed on a grid, which cannot be moved but can be connected through roads. 
+- **City Growth**: Cities will expand over time, increasing in size and internal road networks. Growth will be influenced by regular traffic (both goods and passengers).
+- **Roads**: Roads can be constructed on empty tiles, with the primary task being to connect cities and industrial facilities.
+  
+### Vehicles and Routes
+- **Vehicle Types**: Different vehicle types will be available, each optimized for specific goods or passengers. Vehicles will have different speeds, capacities, and maintenance costs.
+- **Vehicles on the road**: Only one vehicle can occupy a road tile at a time, so vehicle management is crucial.
+- **Stops and Routes**: The player can create circular or linear routes, with vehicles automatically traveling along them.
+
+### Economy and Time Management
+- **Initial Capital**: Players begin with a set amount of capital, and income is generated based on successful deliveries.
+- **Costs**: Building roads, purchasing vehicles, and maintaining them will cost money. If the player runs out of funds, they go bankrupt.
+- **Time Speed**: The game will have multiple time speeds: pause, normal, fast (2x), and very fast (4x), allowing players to control game speed.
+
+## Subtasks
+
+### 1. **Forests [0.5 complexity]**
+   - Trees can appear on empty tiles. There can be 1–4 trees per tile, and the number of trees may increase over time.
+   - Roads can be built on forested tiles but at a higher cost for clearing.
+
+### 2. **Rivers and Lakes [0.5 complexity]**
+   - The map will feature rivers and lakes, which may require bridges for transportation. There will be at least three types of bridges with varying costs, distances, and speed limits.
+
+### 3. **Garage [0.5 complexity]**
+   - Players can build garages for vehicle maintenance. Vehicles will return to the garage for regular maintenance, with older vehicles requiring more frequent service. Players can sell vehicles that are too old to maintain cost-effectively.
+
+### 4. **City Growth [0.5 complexity]**
+   - Cities grow in size over time, especially if there is regular traffic (goods or passengers). This growth will expand into adjacent tiles, forming new buildings and road networks.
+
+### 5. **Minimap [0.5 complexity]**
+   - The game map should be scrollable, and a minimap will be provided for easier navigation.
+
+### 6. **Continuous Movement [0.5 complexity]**
+   - Vehicles will move smoothly and continuously between tiles, rather than jumping from one tile to another, providing a more realistic animation.
+
+### 7. **Map Generation [0.5 complexity]**
+   - The initial map will be generated using a procedural algorithm, such as the Wave Function Collapse algorithm, Perlin Noise, or an AI-based approach. This ensures a dynamic and varied experience for each game session.
+
+## Game Features Summary:
+- **Procedural Map Generation**: Use of algorithms for varied, dynamic map creation.
+- **Economic Management**: Profit generation through strategic vehicle management and city development.
+- **Vehicle Management**: Vehicles need regular maintenance and should be sold when they are too old.
+- **City Growth**: Dynamic expansion of cities based on traffic.
+- **Resource and Goods Transport**: Industrial facilities will produce goods, and cities will require them for growth.
+
+## Additional Information
+This project will be developed using **Godot** as the game engine and **C#** for scripting. The game will be tested and iteratively developed to meet all specified functionalities, with regular feedback and adjustments based on team progress.
+
+For more details on the inspiration for this game, you can check out [OpenTTD](https://www.openttd.org/) or [OpenTTD on Steam](https://store.steampowered.com/app/1536610/OpenTTD/).
 
 ## Getting started
 
@@ -44,9 +113,6 @@ Use the built-in continuous integration in GitLab.
 
 ***
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
 ## Suggestions for a good README
 
