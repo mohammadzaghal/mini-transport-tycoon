@@ -22,17 +22,16 @@ The game is based on a 2D top-down map featuring cities, industrial facilities, 
 
 ### Map and City Development
 - **Grid-based map**: The map consists of cities and industrial facilities placed on a grid, which cannot be moved but can be connected through roads. 
-- **City Growth**: Cities will expand over time, increasing in size and internal road networks. Growth will be influenced by regular traffic (both goods and passengers).
-- **Roads**: Roads can be constructed on empty tiles, with the primary task being to connect cities and industrial facilities.
+- **City Growth**: Cities will expand over time, increasing in size and internal road networks. Growth will be influenced by the city's economy.
+- **Roads**: Roads can be constructed on empty tiles (or after deforestation), with the primary task being to connect cities and industrial facilities.
   
 ### Vehicles and Routes
-- **Vehicle Types**: Different vehicle types will be available, each optimized for specific goods or passengers. Vehicles will have different speeds, capacities, and maintenance costs.
-- **Vehicles on the road**: Only one vehicle can occupy a road tile at a time, so vehicle management is crucial.
-- **Stops and Routes**: The player can create circular or linear routes, with vehicles automatically traveling along them.
+- **Vehicle Types**: Different vehicle types will be available (buses, trucks, and trains), each optimized for specific goods or passengers. Vehicles will have different speeds, capacities, and maintenance costs.
+- **Stops and Routes**: The player can create circular routes, with vehicles automatically traveling along them. They can create stops for buses to pick up passengers. 
 
 ### Economy and Time Management
 - **Initial Capital**: Players begin with a set amount of capital, and income is generated based on successful deliveries.
-- **Costs**: Building roads, purchasing vehicles, and maintaining them will cost money. If the player runs out of funds, they go bankrupt.
+- **Costs**: Building roads, purchasing vehicles, and maintaining them will cost money. If the player runs out of funds, they go bankrupt and it's game over.
 - **Time Speed**: The game will have multiple time speeds: pause, normal, fast (2x), and very fast (4x), allowing players to control game speed.
 
 ## Subtasks
@@ -42,10 +41,10 @@ The game is based on a 2D top-down map featuring cities, industrial facilities, 
    - Roads can be built on forested tiles but at a higher cost for clearing.
 
 ### 2. **Rivers and Lakes [0.5 complexity]**
-   - The map will feature rivers and lakes, which may require bridges for transportation. There will be at least three types of bridges with varying costs, distances, and speed limits.
+   - The map will feature rivers and lakes, which require bridges for transportation. There are be at least three types of bridges, each built with different materials and speed limits.
 
 ### 3. **Garage [0.5 complexity]**
-   - Players can build garages for vehicle maintenance. Vehicles will return to the garage for regular maintenance, with older vehicles requiring more frequent service. Players can sell vehicles that are too old to maintain cost-effectively.
+   - Players can build garages for vehicle maintenance. Vehicles will return to the garage for regular maintenance, with older vehicles requiring more frequent service. Players can sell vehicles that are too old to maintain cost-effectively or purchase vehicles from here.
 
 ### 4. **City Growth [0.5 complexity]**
    - Cities grow in size over time, especially if there is regular traffic (goods or passengers). This growth will expand into adjacent tiles, forming new buildings and road networks.
@@ -57,20 +56,15 @@ The game is based on a 2D top-down map featuring cities, industrial facilities, 
    - Vehicles will move smoothly and continuously between tiles, rather than jumping from one tile to another, providing a more realistic animation.
 
 ### 7. **Map Generation [0.5 complexity]**
+   - Algorithm tbd. 
    - The initial map will be generated using a procedural algorithm, such as the Wave Function Collapse algorithm, Perlin Noise, or an AI-based approach. This ensures a dynamic and varied experience for each game session.
 
-## Game Features Summary:
-- **Procedural Map Generation**: Use of algorithms for varied, dynamic map creation.
-- **Economic Management**: Profit generation through strategic vehicle management and city development.
-- **Vehicle Management**: Vehicles need regular maintenance and should be sold when they are too old.
-- **City Growth**: Dynamic expansion of cities based on traffic.
-- **Resource and Goods Transport**: Industrial facilities will produce goods, and cities will require them for growth.
-
 ## Additional Information
-This project will be developed using **Godot** as the game engine and **C#** for scripting. The game will be tested and iteratively developed to meet all specified functionalities, with regular feedback and adjustments based on team progress.
+This project will be developed using **Godot** as the game engine and **C#** for scripting.
 
 For more details on the inspiration for this game, you can check out [OpenTTD](https://www.openttd.org/) or [OpenTTD on Steam](https://store.steampowered.com/app/1536610/OpenTTD/).
 
+---------------------------------------------------------------------------------------------
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
