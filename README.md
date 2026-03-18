@@ -14,8 +14,7 @@ This project involves developing a simplified transportation-economic simulation
   - Tiya Kumar
 
 ## Technology Stack
-- **Game Engine**: Godot
-- **Programming Language**: C#
+- **Programming Language**: Python
 
 ## Core Game Features
 The game is based on a 2D top-down map featuring cities, industrial facilities, and a road network. The player can build roads, place stops, purchase vehicles, define routes, and transport goods and passengers.
@@ -59,8 +58,6 @@ The game is based on a 2D top-down map featuring cities, industrial facilities, 
    - Algorithm tbd. 
    - The initial map will be generated using a procedural algorithm, such as the Wave Function Collapse algorithm, Perlin Noise, or an AI-based approach. This ensures a dynamic and varied experience for each game session.
 
-## Additional Information
-This project will be developed using **Godot** as the game engine and **C#** for scripting.
 
 For more details on the inspiration for this game, you can check out [OpenTTD](https://www.openttd.org/) or [OpenTTD on Steam](https://store.steampowered.com/app/1536610/OpenTTD/).
 
