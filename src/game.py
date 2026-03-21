@@ -80,3 +80,4 @@ class Game:
     def run(self) -> None:
         self._draw()
         self.root.mainloop()
+        
