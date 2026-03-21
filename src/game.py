@@ -10,6 +10,7 @@ from src.config import (
     WINDOW_WIDTH,
 )
 from src.engine.camera import Camera
+from src.engine.map_generator import MapGenerator
 from src.enums import TileType
 from src.models.grid import Grid
 
@@ -40,6 +41,8 @@ class Game:
         self.canvas.pack(fill="both", expand=True)
 
         self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
+        self.stops = MapGenerator(seed=7).generate(self.grid)
+
         view_h = WINDOW_HEIGHT - TOP_BAR_HEIGHT - BOTTOM_BAR_HEIGHT
         self.camera = Camera(
             map_width_px=MAP_WIDTH * TILE_SIZE,
@@ -77,3 +80,5 @@ class Game:
     def run(self) -> None:
         self._draw()
         self.root.mainloop()
+
+        
