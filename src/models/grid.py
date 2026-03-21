@@ -1,6 +1,7 @@
 from collections.abc import Iterable
 from src.enums import TileType
 from src.models.tile import Tile
+from typing import Optional
 
 
 class Grid:
@@ -15,7 +16,7 @@ class Grid:
     def in_bounds(self, x: int, y: int) -> bool:
         return 0 <= x < self.width and 0 <= y < self.height
 
-    def get_tile(self, x: int, y: int) -> Tile | None:
+    def get_tile(self, x: int, y: int) -> Optional[Tile]:        
         if not self.in_bounds(x, y):
             return None
         return self._tiles[y][x]
