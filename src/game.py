@@ -31,6 +31,8 @@ class Game:
         self.root.title("Transport Tycoon (minimal map view)")
         self.root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
 
+        self.company = Company("Ares Colony Logistics", STARTING_MONEY)
+
         self.canvas = tk.Canvas(
             self.root,
             width=WINDOW_WIDTH,
