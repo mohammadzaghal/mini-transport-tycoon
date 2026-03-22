@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 from enum import Enum
 
 
 class TileType(Enum):
     GRASS = "grass"
     FOREST = "forest"
-    WATER = "water"
     ROAD = "road"
     CITY = "city"
     FACILITY = "facility"
@@ -12,9 +13,6 @@ class TileType(Enum):
 
 class CargoType(Enum):
     PASSENGERS = "Passengers"
-    WOOD = "Wood"
-    IRON = "Iron"
-    FOOD = "Food"
 
 
 class TimeSpeed(Enum):
@@ -25,8 +23,11 @@ class TimeSpeed(Enum):
 
 
 class Tool(Enum):
-    ROAD = "Road"
-    STOP = "Stop"
-    BULLDOZE = "Bulldoze"
-    BUS = "Spawn Bus"
-    NONE = "Cancel"
+    NONE = "none"
+    ROAD = "road"
+    ROUTE_P1 = "route_p1"
+    ROUTE_P2 = "route_p2"
+    VEHICLES = "vehicles"
+    DEPLOY_VEHICLE_P1 = "deploy_vehicle_p1"
+    DEPLOY_VEHICLE_P2 = "deploy_vehicle_p2"
+    BULLDOZE = "bulldoze"
