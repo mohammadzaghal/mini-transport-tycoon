@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Company:
     name: str
@@ -21,3 +22,4 @@ class Company:
     @property
     def is_bankrupt(self) -> bool:
         return self.money < 0
+
