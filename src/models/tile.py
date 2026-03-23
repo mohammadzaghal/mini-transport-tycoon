@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+
 from src.enums import TileType
-from typing import Optional
+
 
 @dataclass
 class Tile:
@@ -8,8 +11,11 @@ class Tile:
     y: int
     tile_type: TileType = TileType.GRASS
     tree_count: int = 0
-    has_stop: bool = False
-    zone_name: Optional[str] = None
+    zone_name: str = ""
+    is_bank: bool = False
+    is_entry_point: bool = False
+    is_route_road: bool = False
+
     @property
     def is_buildable(self) -> bool:
         return self.tile_type in {TileType.GRASS, TileType.FOREST, TileType.ROAD}
