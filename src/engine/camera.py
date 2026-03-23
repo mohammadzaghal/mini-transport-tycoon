@@ -1,3 +1,6 @@
+from __future__ import annotations
+from typing import Tuple
+
 class Camera:
     def __init__(self, map_width_px: int, map_height_px: int, view_width: int, view_height: int) -> None:
         self.map_width_px = map_width_px
@@ -18,8 +21,8 @@ class Camera:
         self.x = max(0, min(self.x, max_x))
         self.y = max(0, min(self.y, max_y))
 
-    def world_to_screen(self, world_x: int, world_y: int) -> tuple[int, int]:
+    def world_to_screen(self, world_x: int, world_y: int) -> Tuple[int, int]:
         return world_x - self.x, world_y - self.y
 
-    def screen_to_world(self, screen_x: int, screen_y: int) -> tuple[int, int]:
+    def screen_to_world(self, screen_x: int, screen_y: int) -> Tuple[int, int]:
         return screen_x + self.x, screen_y + self.y
