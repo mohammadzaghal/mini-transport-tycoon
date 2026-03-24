@@ -55,6 +55,22 @@ class Game:
 
         self.root.bind("<KeyPress>", self._on_key)
 
+    def _build_road(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if not self.grid.is_road_buildable(x, y):
+            self.status_message = "Can only build roads on grass or forest tiles."
+            return
+        cost = ROAD_COST + (FOREST_CLEAR_COST if tile.tile_type == TileType.FOREST else 0)
+        if not self.company.spend(cost):
+            self.status_message = "Not enough credits to build road (need ${}).".format(cost)
+            return
+        tile.tile_type = TileType.ROAD
+        tile.tree_count = 0
+        self.renderer.update_tile(x, y, tile)
+        self.status_message = "Road built at ({},{}) for ${}.".format(x, y, cost)
+
     def _on_key(self, event) -> None:
         step = TILE_SIZE
         if event.keysym in ("Left", "a", "A"):
