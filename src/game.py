@@ -1,86 +1,75 @@
-import tkinter as tk
+import pygame
 
 from src.config import (
-    BOTTOM_BAR_HEIGHT,
     MAP_HEIGHT,
     MAP_WIDTH,
     TILE_SIZE,
-    TOP_BAR_HEIGHT,
     WINDOW_HEIGHT,
     WINDOW_WIDTH,
+    BOTTOM_BAR_HEIGHT,
+    STARTING_MONEY,
 )
 from src.engine.camera import Camera
 from src.engine.map_generator import MapGenerator
-from src.enums import TileType
+from src.models.company import Company
 from src.models.grid import Grid
+from src.render.map_renderer import MapRenderer
 
 
-_TILE_COLORS = {
-    TileType.GRASS: "#2d6a2d",
-    TileType.FOREST: "#1d4a1d",
-    TileType.WATER: "#2a4a7a",
-    TileType.ROAD: "#5c5c5c",
-    TileType.CITY: "#8a3a3a",
-    TileType.FACILITY: "#8a6a2a",
-}
+FPS = 60
 
 
 class Game:
     def __init__(self) -> None:
-        self.root = tk.Tk()
-        self.root.title("Transport Tycoon (minimal map view)")
-        self.root.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}")
+        pygame.init()
+        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.display.set_caption("Transport Tycoon")
 
-        self.company = Company("Ares Colony Logistics", STARTING_MONEY)
-
-        self.canvas = tk.Canvas(
-            self.root,
-            width=WINDOW_WIDTH,
-            height=WINDOW_HEIGHT,
-            bg="#12060a",
-            highlightthickness=0,
-        )
-        self.canvas.pack(fill="both", expand=True)
+        self.clock = pygame.time.Clock()
+        self.running = True
 
         self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
-        self.stops = MapGenerator(seed=7).generate(self.grid)
+        self.company = Company("Player Co.", STARTING_MONEY)
 
-        view_h = WINDOW_HEIGHT - TOP_BAR_HEIGHT - BOTTOM_BAR_HEIGHT
         self.camera = Camera(
             map_width_px=MAP_WIDTH * TILE_SIZE,
-            map_height_px=MAP_HEIGHT * TILE_SIZE + TOP_BAR_HEIGHT,
+            map_height_px=MAP_HEIGHT * TILE_SIZE,
             view_width=WINDOW_WIDTH,
-            view_height=view_h,
+            view_height=WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT,
         )
 
-        self.root.bind("<KeyPress>", self._on_key)
+        MapGenerator(seed=7).generate(self.grid)
 
-    def _on_key(self, event) -> None:
-        step = TILE_SIZE
-        if event.keysym in ("Left", "a", "A"):
-            self.camera.move(-step, 0)
-        elif event.keysym in ("Right", "d", "D"):
-            self.camera.move(step, 0)
-        elif event.keysym in ("Up", "w", "W"):
-            self.camera.move(0, -step)
-        elif event.keysym in ("Down", "s", "S"):
-            self.camera.move(0, step)
-        self._draw()
+        self.renderer = MapRenderer()
+        self.renderer.build_map_image(self.grid)
 
-    def _draw(self) -> None:
-        self.canvas.delete("all")
-        ts = TILE_SIZE
-        for tile in self.grid.iter_tiles():
-            wx = tile.x * ts
-            wy = tile.y * ts + TOP_BAR_HEIGHT
-            sx, sy = self.camera.world_to_screen(wx, wy)
-            color = _TILE_COLORS.get(tile.tile_type, "#333333")
-            self.canvas.create_rectangle(
-                sx, sy, sx + ts, sy + ts, fill=color, outline="#1a0a08", width=1
-            )
 
     def run(self) -> None:
-        self._draw()
-        self.root.mainloop()
+        while self.running:
+            dt = self.clock.tick(FPS)
 
-        
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+
+            self.update(dt)
+
+            self.draw()
+            pygame.display.flip()
+
+        pygame.quit()
+
+
+    def update(self, dt: float) -> None:
+        pass
+
+
+    def draw(self) -> None:
+        self.renderer.draw(
+            self.screen,
+            self.grid,
+            self.camera,
+            routes=[],
+            vehicles=[],
+            hover_tile=None,
+        )
