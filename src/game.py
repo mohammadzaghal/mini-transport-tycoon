@@ -1,3 +1,6 @@
+# Cleaned version: Only Issues #10, #12, #13, #14 (Mohammed)
+# Removed: Issues #20–25 (roads, routes, vehicles, tree growth)
+
 from __future__ import annotations
 
 import pygame
@@ -113,7 +116,7 @@ class Game:
             vehicles=[],
         )
 
-=    def _draw_scrollbars(self) -> None:
+    def _draw_scrollbars(self) -> None:
         bar_width = 10
         bar_x = WINDOW_WIDTH - bar_width
         bar_height = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
