@@ -71,6 +71,20 @@ class Game:
         self.renderer.update_tile(x, y, tile)
         self.status_message = "Road built at ({},{}) for ${}.".format(x, y, cost)
 
+    def _bulldoze(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.tile_type == TileType.ROAD and not tile.is_entry_point:
+            for route in self.routes:
+                if (x, y) in route.path:
+                    self._dissolve_route(route)
+                    return
+            tile.tile_type = TileType.GRASS
+            tile.is_route_road = False
+            self.renderer.update_tile(x, y, tile)
+            self.status_message = "Road removed at ({},{}).".format(x, y)
+
     def _on_key(self, event) -> None:
         step = TILE_SIZE
         if event.keysym in ("Left", "a", "A"):
