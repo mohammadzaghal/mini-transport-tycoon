@@ -20,6 +20,7 @@ from src.render.map_renderer import MapRenderer
 FPS = 60
 
 
+
 class Game:
     def __init__(self) -> None:
         pygame.init()
