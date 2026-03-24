@@ -20,6 +20,7 @@ from src.render.map_renderer import MapRenderer
 FPS = 60
 
 
+
 class Game:
     def __init__(self) -> None:
         pygame.init()
@@ -28,6 +29,7 @@ class Game:
 
         self.clock = pygame.time.Clock()
         self.running = True
+        self.fullscreen = False
 
         self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
         self.company = Company("Player Co.", STARTING_MONEY)
@@ -47,6 +49,8 @@ class Game:
         self.renderer = MapRenderer()
         self.renderer.build_map_image(self.grid)
 
+        self.mouse_pos = (0, 0)
+
 
     def run(self) -> None:
         while self.running:
@@ -56,6 +60,23 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
+
+                elif event.type == pygame.KEYDOWN:
+                    self._on_key_down(event.key)
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self._on_left_press(event.pos)
+
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    if event.button == 1:
+                        self._on_left_release(event.pos)
+
+                elif event.type == pygame.MOUSEMOTION:
+                    self._on_mouse_move(event.pos)
+
+                elif event.type == pygame.MOUSEWHEEL:
+                    self._on_mouse_wheel(event)
 
             if self.time_speed != TimeSpeed.PAUSE:
                 sim_dt = real_dt * self.time_speed.value
@@ -68,7 +89,6 @@ class Game:
 
 
     def update(self, dt: float) -> None:
-        # Accumulate in-game time
         self.game_time += dt
 
 
@@ -81,3 +101,50 @@ class Game:
             vehicles=[],
             hover_tile=None,
         )
+
+
+    def _on_key_down(self, key: int) -> None:
+        if key == pygame.K_1:
+            self.time_speed = TimeSpeed.PAUSE
+        elif key == pygame.K_2:
+            self.time_speed = TimeSpeed.NORMAL
+        elif key == pygame.K_3:
+            self.time_speed = TimeSpeed.FAST
+        elif key == pygame.K_4:
+            self.time_speed = TimeSpeed.VERY_FAST
+
+        elif key == pygame.K_ESCAPE:
+            print("Cancel tool (placeholder)")
+
+        elif key == pygame.K_r:
+            print("Road tool selected (placeholder)")
+
+        elif key == pygame.K_b:
+            print("Bulldoze tool selected (placeholder)")
+
+        elif key == pygame.K_F11:
+            self._toggle_fullscreen()
+
+    def _toggle_fullscreen(self) -> None:
+        self.fullscreen = not self.fullscreen
+        flags = pygame.FULLSCREEN if self.fullscreen else 0
+        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), flags)
+
+
+    def _on_left_press(self, pos: tuple) -> None:
+        print(f"Mouse pressed at {pos}")
+
+    def _on_left_release(self, pos: tuple) -> None:
+        print(f"Mouse released at {pos}")
+
+    def _on_mouse_move(self, pos: tuple) -> None:
+        self.mouse_pos = pos
+
+    def _on_mouse_wheel(self, event) -> None:
+        scroll = event.y * 40
+
+        mods = pygame.key.get_mods()
+        if mods & pygame.KMOD_SHIFT:
+            self.camera.move(-scroll, 0)
+        else:
+            self.camera.move(0, -scroll)
