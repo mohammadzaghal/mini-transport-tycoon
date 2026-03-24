@@ -85,6 +85,7 @@ class Game:
             self.renderer.update_tile(x, y, tile)
             self.status_message = "Road removed at ({},{}).".format(x, y)
 
+
     def _on_key(self, event) -> None:
         step = TILE_SIZE
         if event.keysym in ("Left", "a", "A"):
