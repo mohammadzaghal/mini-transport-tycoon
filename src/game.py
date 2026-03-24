@@ -1,25 +1,39 @@
 from __future__ import annotations
 
+import random
+from typing import Optional, List
+
 import pygame
 
 from src.config import (
     BOTTOM_BAR_HEIGHT,
+    FOREST_CLEAR_COST,
     MAP_HEIGHT,
     MAP_WIDTH,
+    ROAD_COST,
+    STARTING_MONEY,
     TILE_SIZE,
     TICK_MS,
+    VEHICLE_DEFS,
     WINDOW_HEIGHT,
     WINDOW_WIDTH,
 )
 from src.engine.camera import Camera
 from src.engine.map_generator import MapGenerator
-from src.enums import TimeSpeed, Tool
+from src.engine.pathfinding import find_road_path
+from src.enums import CargoType, TimeSpeed, TileType, Tool
 from src.models.company import Company
 from src.models.grid import Grid
+from src.models.route import Route
+from src.models.vehicle import Vehicle
 from src.render.map_renderer import MapRenderer
 from src.ui.hud import HUD
 
+TREE_GROWTH_INTERVAL = 60.0
+
 FPS = 1000 // TICK_MS
+
+_CITY_NAMES = frozenset({"Greenfield", "Riverside", "Southport"})
 
 
 class Game:
@@ -31,12 +45,23 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
-        self.company = Company("Player Co.", 0)
+        self.company = Company("Player Co.", STARTING_MONEY)
         self.time_speed = TimeSpeed.NORMAL
         self.tool = Tool.NONE
-        self.status_message = "Basic mode (no building/vehicles)."
+        self.status_message = "Welcome! Build roads between entry points, create routes, then buy and deploy vehicles."
 
         self.game_time = 0.0
+        self.tree_growth_timer = 0.0
+
+        self.routes: List[Route] = []
+        self._next_route_id = 1
+        self._route_endpoint_a: Optional[tuple] = None
+
+        
+        self.garage: List[Vehicle] = []
+        self.vehicles: List[Vehicle] = []
+        self._pending_deploy_idx: Optional[int] = None   
+        self._deploy_endpoint_a: Optional[tuple] = None
 
         self.camera = Camera(
             map_width_px=MAP_WIDTH * TILE_SIZE,
@@ -50,13 +75,15 @@ class Game:
         MapGenerator(seed=7).generate(self.grid)
         self.renderer.build_map_image(self.grid)
 
-        self._hover_tile = None
+        self._rng = random.Random()
+        self._hover_tile: Optional[tuple] = None
 
-        self._drag_start_screen = None
-        self._drag_start_camera = None
+        self._drag_start_screen: Optional[tuple] = None
+        self._drag_start_camera: Optional[tuple] = None
         self._dragging_map = False
         self._drag_threshold = 8
 
+  
     def run(self) -> None:
         running = True
         while running:
@@ -73,8 +100,9 @@ class Game:
                 elif event.type == pygame.MOUSEMOTION:
                     self._on_mouse_move(event.pos, bool(event.buttons[0]))
                 elif event.type == pygame.MOUSEWHEEL:
+                    # Scroll vertically; hold Shift for horizontal
                     mods = pygame.key.get_mods()
-                    scroll = event.y * 48
+                    scroll = event.y * 48   # pixels per wheel notch
                     if mods & pygame.KMOD_SHIFT:
                         self.camera.move(-scroll, 0)
                     else:
@@ -96,10 +124,36 @@ class Game:
     def update(self, dt: float) -> None:
         self.game_time += dt
 
-    def draw(self) -> None:
+        for vehicle in self.vehicles:
+            completed = vehicle.update(dt)
+            if completed:
+                route = next((r for r in self.routes if r.id == vehicle.route_id), None)
+                if route and route.profitable:
+                    revenue = vehicle.revenue_per_leg
+                    self.company.earn(revenue)
+                    self.status_message = "{} delivered goods and earned ${}.".format(vehicle.name, revenue)
+
+        self.tree_growth_timer += dt
+        if self.tree_growth_timer >= TREE_GROWTH_INTERVAL:
+            self.tree_growth_timer -= TREE_GROWTH_INTERVAL
+            self._update_trees()
+
+
+
+
+
+
+
+
+
+
+
+
+
+def draw(self) -> None:
         self.renderer.draw(
             self.screen, self.grid, self.camera,
-            [], [], self._hover_tile,
+            self.routes, self.vehicles, self._hover_tile,
         )
         self._draw_scrollbars()
         self.hud.draw(
@@ -109,11 +163,11 @@ class Game:
             time_speed=self.time_speed,
             tool=self.tool,
             status=self.status_message,
-            garage=[],
-            vehicles=[],
+            garage=self.garage,
+            vehicles=self.vehicles,
         )
 
-=    def _draw_scrollbars(self) -> None:
+    def _draw_scrollbars(self) -> None:
         bar_width = 10
         bar_x = WINDOW_WIDTH - bar_width
         bar_height = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
@@ -121,7 +175,6 @@ class Game:
         thumb_y = int((bar_height - thumb_height) * self.camera.y / max(1, self.camera.map_height_px - self.camera.view_height))
         pygame.draw.rect(self.screen, (200, 200, 200), (bar_x, 0, bar_width, bar_height))
         pygame.draw.rect(self.screen, (100, 100, 100), (bar_x, thumb_y, bar_width, thumb_height))
-
         bar_y = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT - bar_width
         bar_width_h = WINDOW_WIDTH
         thumb_width = min(bar_width_h, int(bar_width_h * self.camera.view_width / self.camera.map_width_px))
@@ -130,26 +183,81 @@ class Game:
         pygame.draw.rect(self.screen, (100, 100, 100), (thumb_x, bar_y, thumb_width, bar_width))
 
     def _on_left_press(self, pos: tuple) -> None:
-        self._drag_start_screen = pos
-        self._drag_start_camera = (self.camera.x, self.camera.y)
-        self._dragging_map = False
+        x, y = pos
+        if self._is_in_map_view(x, y):
+            self._drag_start_screen = pos
+            self._drag_start_camera = (self.camera.x, self.camera.y)
+            self._dragging_map = False
 
     def _on_mouse_move(self, pos: tuple, left_held: bool) -> None:
         x, y = pos
-        if left_held and self._drag_start_screen:
+        self._update_hover_from_screen(x, y)
+
+        if left_held and self._drag_start_screen is not None:
             sx, sy = self._drag_start_screen
-            dx, dy = x - sx, y - sy
-            if abs(dx) > self._drag_threshold or abs(dy) > self._drag_threshold:
+            dx = x - sx
+            dy = y - sy
+            if abs(dx) >= self._drag_threshold or abs(dy) >= self._drag_threshold:
                 self._dragging_map = True
-            if self._dragging_map:
-                cam_x, cam_y = self._drag_start_camera
-                self.camera.x = cam_x - dx
-                self.camera.y = cam_y - dy
+            if self._dragging_map and self._drag_start_camera is not None:
+                cam_sx, cam_sy = self._drag_start_camera
+                self.camera.x = cam_sx - dx
+                self.camera.y = cam_sy - dy
                 self.camera.clamp()
 
+        if not (left_held and self._dragging_map):
+            grid_pos = self._screen_to_grid(x, y)
+            if grid_pos is not None:
+                gx, gy = grid_pos
+                tile = self.grid.get_tile(gx, gy)
+                if tile is not None:
+                    parts = ["Tile ({},{}) {}".format(gx, gy, tile.tile_type.name)]
+                    if tile.zone_name:
+                        parts.append(tile.zone_name)
+                    if tile.is_entry_point:
+                        parts.append("ENTRY")
+                    if tile.is_bank:
+                        parts.append("BANK")
+                    self.status_message = "  |  ".join(parts)
+
     def _on_left_release(self, pos: tuple) -> None:
-        self._drag_start_screen = None
-        self._dragging_map = False
+        x, y = pos
+        if self._dragging_map:
+            self._clear_drag_state()
+            return
+
+        # Dashboard buttons always take priority
+        hud_action = self.hud.button_at(x, y, self.tool, self.garage)
+        if hud_action is not None:
+            self._handle_hud_action(hud_action)
+            self._clear_drag_state()
+            return
+
+        if not self._is_in_map_view(x, y):
+            self._clear_drag_state()
+            return
+
+        grid_pos = self._screen_to_grid(x, y)
+        if grid_pos is None:
+            self._clear_drag_state()
+            return
+
+        gx, gy = grid_pos
+        if self.tool == Tool.ROAD:
+            self._build_road(gx, gy)
+        elif self.tool == Tool.ROUTE_P1:
+            self._handle_route_click_p1(gx, gy)
+        elif self.tool == Tool.ROUTE_P2:
+            self._handle_route_click_p2(gx, gy)
+        elif self.tool == Tool.DEPLOY_VEHICLE_P1:
+            self._handle_deploy_click_p1(gx, gy)
+        elif self.tool == Tool.DEPLOY_VEHICLE_P2:
+            self._handle_deploy_click_p2(gx, gy)
+        elif self.tool == Tool.BULLDOZE:
+            self._bulldoze(gx, gy)
+
+        self._clear_drag_state()
+
 
     def _on_key_down(self, key: int) -> None:
         if key == pygame.K_1:
@@ -161,7 +269,11 @@ class Game:
         elif key == pygame.K_4:
             self.time_speed = TimeSpeed.VERY_FAST
         elif key == pygame.K_ESCAPE:
-            self.tool = Tool.NONE
+            self._cancel_tool()
+        elif key == pygame.K_r:
+            self._set_tool(Tool.ROAD, "Road mode — click tiles to lay road.")
+        elif key == pygame.K_b:
+            self._set_tool(Tool.BULLDOZE, "Bulldoze mode — click roads to remove them.")
         elif key == pygame.K_F11:
             self._toggle_fullscreen()
 
@@ -181,3 +293,46 @@ class Game:
             self.camera.move(0, -step)
         if keys[pygame.K_s] or keys[pygame.K_DOWN]:
             self.camera.move(0, step)
+
+
+    def _handle_hud_action(self, action: str) -> None:
+        if action == "road":
+            if self.tool == Tool.ROAD:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.ROAD, "Road mode — click map tiles to lay road (${} each).".format(ROAD_COST))
+        elif action == "vehicles":
+            if self.tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2}:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.VEHICLES, "Purchase a vehicle or deploy one from your fleet.")
+        elif action == "route":
+            if self.tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.ROUTE_P1, "Route mode — click a city or facility entry point for the first endpoint.")
+        elif action == "speed_pause":
+            self.time_speed = TimeSpeed.PAUSE
+        elif action == "speed_1":
+            self.time_speed = TimeSpeed.NORMAL
+        elif action == "speed_2":
+            self.time_speed = TimeSpeed.FAST
+        elif action == "speed_4":
+            self.time_speed = TimeSpeed.VERY_FAST
+        elif action.startswith("buy_vehicle_"):
+            idx = int(action.split("_")[-1])
+            self._buy_vehicle(idx)
+        elif action.startswith("deploy_type_"):
+            type_idx = int(action.split("_")[-1])
+            self._select_garage_vehicle_by_type(type_idx)
+
+    def _set_tool(self, tool: Tool, msg: str) -> None:
+        self.tool = tool
+        self.status_message = msg
+
+    def _cancel_tool(self, message: str = "Ready.") -> None:
+        self.tool = Tool.NONE
+        self._route_endpoint_a = None
+        self._deploy_endpoint_a = None
+        self._pending_deploy_idx = None
+        self.status_message = message
