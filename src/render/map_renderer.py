@@ -102,4 +102,50 @@ class MapRenderer:
 
         self._draw_vehicles(screen, camera, vehicles)
 
-   
+    #for 1–4 trees
+    _TREE_POSITIONS = [
+        [(16, 14)],
+        [(9, 11), (23, 11)],
+        [(9, 10), (23, 10), (16, 22)],
+        [(9, 10), (23, 10), (9, 22), (23, 22)],
+    ]
+
+    def _draw_trees(self, screen: pygame.Surface, x: int, y: int, count: int) -> None:
+        count = max(1, min(count, 4))
+        for cx, cy in self._TREE_POSITIONS[count - 1]:
+            pygame.draw.ellipse(screen, (38, 122, 20),  (x + cx - 6, y + cy - 6, 12, 10))
+            pygame.draw.ellipse(screen, (61, 160, 32),  (x + cx - 6, y + cy - 6, 12, 10), 1)
+            pygame.draw.ellipse(screen, (74, 184, 48),  (x + cx - 3, y + cy - 5, 4, 3))
+            pygame.draw.rect(screen,   (90, 48, 16),   (x + cx - 1, y + cy + 4, 3, 5))
+
+    def _draw_entry_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        mid = TILE_SIZE // 2
+        r = 6
+        pts = [
+            (x + mid,     y + mid - r),
+            (x + mid + r, y + mid),
+            (x + mid,     y + mid + r),
+            (x + mid - r, y + mid),
+        ]
+        pygame.draw.polygon(screen, (255, 230, 40), pts)
+        pygame.draw.polygon(screen, (200, 140,  0), pts, 1)
+
+    def _draw_bank_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        font = self._get_bank_font()
+        surf = font.render("$", True, (255, 208, 96))
+        screen.blit(surf, (
+            x + TILE_SIZE // 2 - surf.get_width()  // 2,
+            y + TILE_SIZE // 2 - surf.get_height() // 2,
+        ))
+
+    def _draw_vehicles(self, screen: pygame.Surface, camera, vehicles) -> None:
+        for vehicle in vehicles:
+            world_x = int(vehicle.x * TILE_SIZE + TILE_SIZE // 2)
+            world_y = int(vehicle.y * TILE_SIZE + TILE_SIZE // 2)
+            sx = world_x - camera.x
+            sy = world_y - camera.y
+            color = _hex_to_rgb(vehicle.color)
+            pygame.draw.rect(screen, color, (sx - 9, sy - 7, 18, 14))
+            pygame.draw.rect(screen, (255, 255, 255), (sx - 9, sy - 7, 18, 14), 2)
+            pygame.draw.circle(screen, (51, 51, 51), (sx - 6, sy + 7), 4)
+            pygame.draw.circle(screen, (51, 51, 51), (sx + 6, sy + 7), 4)
