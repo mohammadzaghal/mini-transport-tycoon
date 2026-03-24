@@ -11,6 +11,7 @@ from src.config import (
 )
 from src.engine.camera import Camera
 from src.engine.map_generator import MapGenerator
+from src.enums import TimeSpeed
 from src.models.company import Company
 from src.models.grid import Grid
 from src.render.map_renderer import MapRenderer
@@ -31,6 +32,9 @@ class Game:
         self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
         self.company = Company("Player Co.", STARTING_MONEY)
 
+        self.time_speed = TimeSpeed.NORMAL
+        self.game_time = 0.0
+
         self.camera = Camera(
             map_width_px=MAP_WIDTH * TILE_SIZE,
             map_height_px=MAP_HEIGHT * TILE_SIZE,
@@ -46,13 +50,16 @@ class Game:
 
     def run(self) -> None:
         while self.running:
-            dt = self.clock.tick(FPS)
+            dt_ms = self.clock.tick(FPS)
+            real_dt = dt_ms / 1000.0
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.update(dt)
+            if self.time_speed != TimeSpeed.PAUSE:
+                sim_dt = real_dt * self.time_speed.value
+                self.update(sim_dt)
 
             self.draw()
             pygame.display.flip()
@@ -61,7 +68,8 @@ class Game:
 
 
     def update(self, dt: float) -> None:
-        pass
+        # Accumulate in-game time
+        self.game_time += dt
 
 
     def draw(self) -> None:
