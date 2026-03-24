@@ -27,3 +27,15 @@ def find_road_path(grid: Grid, start: Tuple[int, int], goal: Tuple[int, int]) ->
                 continue
             came_from[pos] = current
             queue.append(pos)
+
+    if goal not in came_from:
+        return []
+
+    path = []
+    current = goal
+    while current is not None:
+        path.append(current)
+        current = came_from[current]
+
+    path.reverse()
+    return path
