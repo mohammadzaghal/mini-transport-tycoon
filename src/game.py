@@ -379,3 +379,29 @@ def draw(self) -> None:
         self.tool = Tool.ROUTE_P2         
         self.status_message = "First endpoint: {} at ({},{}). Now click the second entry point.".format(
             tile.zone_name, x, y)
+
+    def _handle_route_click_p2(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "Second endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        if (x, y) == self._route_endpoint_a:
+            self.status_message = "Endpoints must be different tiles."
+            return 
+
+        ep_a = self._route_endpoint_a  
+        ep_b = (x, y)
+
+        outbound = find_road_path(self.grid, ep_a, ep_b)
+        if not outbound:
+            self._cancel_tool("ERROR: No road connecting those entry points — build roads between them first.")
+            return
+
+        inbound = list(reversed(outbound))
+        loop_path = outbound + inbound[1:]  
+
+        tile_a = self.grid.get_tile(*ep_a)
+        tile_b = self.grid.get_tile(*ep_b)
+        a_is_city = tile_a.zone_name in _CITY_NAMES  
+        b_is_city = tile_b.zone_name in _CITY_NAMES  
+        profitable = a_is_city != b_is_city           
