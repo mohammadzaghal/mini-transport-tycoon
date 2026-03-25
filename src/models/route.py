@@ -1,3 +1,6 @@
+from dataclasses import dataclass, field
+from typing import List, Tuple 
+
 @dataclass
 class Route:
     #for the game to identify the route
@@ -9,4 +12,3 @@ class Route:
     path: List[Tuple[int, int]] = field(default_factory=list)
     #the route is profitable for now if it goes city to facility only
     profitable: bool = False
-    

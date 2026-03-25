@@ -150,7 +150,7 @@ class Game:
 
 
 
-def draw(self) -> None:
+    def draw(self) -> None:
         self.renderer.draw(
             self.screen, self.grid, self.camera,
             self.routes, self.vehicles, self._hover_tile,
@@ -166,8 +166,6 @@ def draw(self) -> None:
             garage=self.garage,
             vehicles=self.vehicles,
         )
-        self.renderer = MapRenderer()
-        self.hud = HUD()
 
     def _draw_scrollbars(self) -> None:
         bar_width = 10
@@ -369,3 +367,195 @@ def draw(self) -> None:
             tile.is_route_road = False
             self.renderer.update_tile(x, y, tile)
             self.status_message = "Road removed at ({},{}).".format(x, y)
+
+    def _handle_route_click_p1(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "First endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        self._route_endpoint_a = (x, y)  #store the first endpoint coordinates for use in step 2
+        self.tool = Tool.ROUTE_P2         
+        self.status_message = "First endpoint: {} at ({},{}). Now click the second entry point.".format(
+            tile.zone_name, x, y)
+
+    def _handle_route_click_p2(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "Second endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        if (x, y) == self._route_endpoint_a:
+            self.status_message = "Endpoints must be different tiles."
+            return 
+
+        ep_a = self._route_endpoint_a  
+        ep_b = (x, y)
+
+        outbound = find_road_path(self.grid, ep_a, ep_b)
+        if not outbound:
+            self._cancel_tool("ERROR: No road connecting those entry points — build roads between them first.")
+            return
+
+        inbound = list(reversed(outbound))
+        loop_path = outbound + inbound[1:]  
+
+        tile_a = self.grid.get_tile(*ep_a)
+        tile_b = self.grid.get_tile(*ep_b)
+        a_is_city = tile_a.zone_name in _CITY_NAMES  
+        b_is_city = tile_b.zone_name in _CITY_NAMES  
+        profitable = a_is_city != b_is_city           
+
+        route = Route(
+            id=self._next_route_id,
+            name="Route {}".format(self._next_route_id),
+            endpoint_a=ep_a,
+            endpoint_b=ep_b,
+            path=loop_path,
+            profitable=profitable,
+        )
+
+        self._next_route_id += 1
+        self.routes.append(route)
+
+        for rx, ry in outbound:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None:
+                t.is_route_road = True
+                self.renderer.update_tile(rx, ry, t)
+
+        income_note = "Earns income (facility→city)." if profitable else "No income — connect a facility to a city for revenue."
+        self.status_message = "{} created ({} tiles). {} Deploy a vehicle to use it!".format(
+            route.name, len(outbound), income_note)
+        self._cancel_tool()
+
+    def _handle_deploy_click_p1(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "First endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        self._deploy_endpoint_a = (x, y)
+        self.tool = Tool.DEPLOY_VEHICLE_P2
+        self.status_message = "First endpoint: {} at ({},{}). Now click the second entry point of the route.".format(
+            tile.zone_name, x, y)
+
+    def _handle_deploy_click_p2(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "Second endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        if (x, y) == self._deploy_endpoint_a:
+            self.status_message = "Endpoints must be different tiles."
+            return
+
+        ep_a = self._deploy_endpoint_a
+        ep_b = (x, y)
+        endpoints = {ep_a, ep_b}
+
+        matching = [r for r in self.routes if {r.endpoint_a, r.endpoint_b} == endpoints]
+        if not matching:
+            self._cancel_tool("No route connects those two entry points. Select endpoints of an existing route.")
+            return
+
+        route = matching[0]
+
+        if self._pending_deploy_idx is None:
+            self._cancel_tool()
+            return
+
+        vehicle = self.garage[self._pending_deploy_idx]
+        distance = max(1, len(route.path) // 2)
+        vehicle.reward_distance = distance
+        vehicle.revenue_per_leg = self._calc_revenue(distance, vehicle.capacity)
+        vehicle.path = route.path
+        vehicle.route_id = route.id
+        vehicle.initialize_position()
+
+        self.vehicles.append(vehicle)
+        self.garage.pop(self._pending_deploy_idx)
+        self._pending_deploy_idx = None
+        self._deploy_endpoint_a = None
+
+        self.status_message = "{} deployed on {}.".format(vehicle.name, route.name)
+        self._cancel_tool()
+
+    def _dissolve_route(self, route: Route) -> None:
+        for rx, ry in route.path:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None:
+                t.is_route_road = False
+                if t.tile_type == TileType.ROAD and not t.is_entry_point:
+                    t.tile_type = TileType.GRASS
+                self.renderer.update_tile(rx, ry, t)
+
+        staying = [v for v in self.vehicles if v.route_id != route.id]
+        returning = [v for v in self.vehicles if v.route_id == route.id]
+        for v in returning:
+            v.path = []
+            v.route_id = -1
+            v.current_index = 0
+            self.garage.append(v)
+        self.vehicles = staying
+
+        self.routes = [r for r in self.routes if r.id != route.id]
+        self.status_message = "{} dissolved. {} vehicle(s) returned to garage.".format(
+            route.name, len(returning))
+
+    def _buy_vehicle(self, vdef_index: int) -> None:
+        vdef = VEHICLE_DEFS[vdef_index]  
+        if not self.company.spend(vdef["cost"]):
+            self.status_message = "Not enough credits (need ${}).".format(vdef["cost"])
+            return
+
+        vehicle_number = len(self.garage) + len(self.vehicles) + 1
+        vehicle = Vehicle(
+            name="{} {}".format(vdef["name"], vehicle_number),
+            cargo_type=CargoType.PASSENGERS,
+            path=[],
+            speed_tiles_per_second=vdef["speed"],
+            capacity=vdef["capacity"],
+            color=vdef["color"],
+            route_id=-1,
+            vdef_name=vdef["name"],
+        )
+        self.garage.append(vehicle)
+        self.status_message = "{} purchased for ${}. Open Fleet to deploy it.".format(
+            vdef["name"], vdef["cost"])
+
+    def _select_garage_vehicle_by_type(self, type_idx: int) -> None:
+        vdef_name = VEHICLE_DEFS[type_idx]["name"]
+        for i, v in enumerate(self.garage):
+            if v.vdef_name == vdef_name:
+                self._pending_deploy_idx = i
+                self._set_tool(
+                    Tool.DEPLOY_VEHICLE_P1,
+                    "Deploying {} — click the first route endpoint.".format(vdef_name)
+                )
+                return
+        self.status_message = "No {} in garage.".format(vdef_name)
+
+    def _calc_revenue(self, distance: int, capacity: int) -> int:
+        speed_bonus = self.time_speed.value if self.time_speed.value > 0 else 1
+        return int(18 * distance + capacity * 6 + speed_bonus * 5)
+
+    def _is_in_map_view(self, x: int, y: int) -> bool:
+        return 0 <= y < WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
+
+    def _screen_to_grid(self, screen_x: int, screen_y: int) -> Optional[tuple]:
+        world_x, world_y = self.camera.screen_to_world(screen_x, screen_y)
+        grid_x = world_x // TILE_SIZE
+        grid_y = world_y // TILE_SIZE
+        if not self.grid.in_bounds(grid_x, grid_y):
+            return None
+        return grid_x, grid_y
+
+    def _update_hover_from_screen(self, screen_x: int, screen_y: int) -> None:
+        if not self._is_in_map_view(screen_x, screen_y):
+            self._hover_tile = None
+            return
+        self._hover_tile = self._screen_to_grid(screen_x, screen_y)
+
+    def _clear_drag_state(self) -> None:
+        self._drag_start_screen = None
+        self._drag_start_camera = None
+        self._dragging_map = False
+
+    
