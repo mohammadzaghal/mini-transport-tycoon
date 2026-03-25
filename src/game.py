@@ -414,7 +414,7 @@ def draw(self) -> None:
         path=loop_path,
         profitable=profitable,
     )
-    
+
     self._next_route_id += 1
     self.routes.append(route)
 
@@ -500,3 +500,5 @@ def draw(self) -> None:
         self.routes = [r for r in self.routes if r.id != route.id]
         self.status_message = "{} dissolved. {} vehicle(s) returned to garage.".format(
             route.name, len(returning))
+
+        #def buy vehicle
