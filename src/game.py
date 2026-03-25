@@ -506,3 +506,56 @@ def draw(self) -> None:
         if not self.company.spend(vdef["cost"]):
             self.status_message = "Not enough credits (need ${}).".format(vdef["cost"])
             return
+    
+    vehicle_number = len(self.garage) + len(self.vehicles) + 1
+    vehicle = Vehicle(
+        name="{} {}".format(vdef["name"], vehicle_number),
+        cargo_type=CargoType.PASSENGERS,
+        path=[],
+        speed_tiles_per_second=vdef["speed"],
+        capacity=vdef["capacity"],
+        color=vdef["color"],
+        route_id=-1,
+        vdef_name=vdef["name"],
+    )
+    self.garage.append(vehicle)
+    self.status_message = "{} purchased for ${}. Open Fleet to deploy it.".format(
+        vdef["name"], vdef["cost"])
+
+    def _select_garage_vehicle_by_type(self, type_idx: int) -> None:
+        vdef_name = VEHICLE_DEFS[type_idx]["name"]
+        for i, v in enumerate(self.garage):
+            if v.vdef_name == vdef_name:
+                self._pending_deploy_idx = i
+                self._set_tool(
+                    Tool.DEPLOY_VEHICLE_P1,
+                    "Deploying {} — click the first route endpoint.".format(vdef_name)
+                )
+                return
+        self.status_message = "No {} in garage.".format(vdef_name)
+
+    def _calc_revenue(self, distance: int, capacity: int) -> int:
+        speed_bonus = self.time_speed.value if self.time_speed.value > 0 else 1
+        return int(18 * distance + capacity * 6 + speed_bonus * 5)
+
+    def _is_in_map_view(self, x: int, y: int) -> bool:
+        return 0 <= y < WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
+
+    def _screen_to_grid(self, screen_x: int, screen_y: int) -> Optional[tuple]:
+        world_x, world_y = self.camera.screen_to_world(screen_x, screen_y)
+        grid_x = world_x // TILE_SIZE
+        grid_y = world_y // TILE_SIZE
+        if not self.grid.in_bounds(grid_x, grid_y):
+            return None
+        return grid_x, grid_y
+
+    def _update_hover_from_screen(self, screen_x: int, screen_y: int) -> None:
+        if not self._is_in_map_view(screen_x, screen_y):
+            self._hover_tile = None
+            return
+        self._hover_tile = self._screen_to_grid(screen_x, screen_y)
+
+    def _clear_drag_state(self) -> None:
+        self._drag_start_screen = None
+        self._drag_start_camera = None
+        self._dragging_map = False
