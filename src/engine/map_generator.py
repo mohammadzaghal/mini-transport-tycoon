@@ -1,96 +1,147 @@
+from __future__ import annotations
+
 import random
+from typing import List
+
 from src.enums import TileType
 from src.models.grid import Grid
-from src.models.stop import Stop
+
+
+# City layout constants
+CITY_SIZE = 8
+ROAD_COLS = {2, 5}
+ROAD_ROWS = {2, 5}
+BANK_CELLS = {(3, 3), (4, 3), (3, 4), (4, 4)}
+
 
 class MapGenerator:
     def __init__(self, seed: int = 7) -> None:
-        self.random = random.Random(seed)
+        self.rng = random.Random(seed)
 
-    def generate(self, grid: Grid) -> list[Stop]:
+    def generate(self, grid: Grid) -> List:
         self._scatter_forests(grid)
-        self._add_lake(grid)
-        self._place_zone(grid, 5, 5, 4, 4, TileType.CITY, "North City")
-        self._place_zone(grid, 30, 18, 5, 5, TileType.CITY, "South City")
-        self._place_zone(grid, 37, 5, 3, 3, TileType.FACILITY, "Iron Mine")
-        self._place_zone(grid, 8, 23, 3, 3, TileType.FACILITY, "Forest Camp")
-        self._build_demo_roads(grid)
-        return self._create_demo_stops(grid)
+
+        self._place_city(grid, 3,  2,  "Greenfield")
+        self._place_city(grid, 36, 2,  "Riverside")
+        self._place_city(grid, 20, 28, "Southport")
+
+        self._place_facility(grid, 48, 4,  3, 3, "Iron Mine",    entry_side="west")
+        self._place_facility(grid, 50, 25, 2, 2, "Coal Depot",   entry_side="west")
+        self._place_facility(grid, 3,  36, 3, 3, "Lumber Yard",  entry_side="east")
+        self._place_facility(grid, 28, 15, 3, 3, "Steel Mill",   entry_side="west")
+        self._place_facility(grid, 15, 14, 2, 2, "Farm",         entry_side="north")
+
+        return []
 
     def _scatter_forests(self, grid: Grid) -> None:
         for tile in grid.iter_tiles():
-            roll = self.random.random()
-            if roll < 0.12:
+            if self.rng.random() < 0.06:
                 tile.tile_type = TileType.FOREST
-                tile.tree_count = self.random.randint(1, 4)
+                tile.tree_count = 1
 
-    def _add_lake(self, grid: Grid) -> None:
-        cx, cy = 20, 10
-        for y in range(cy - 3, cy + 4):
-            for x in range(cx - 5, cx + 6):
-                tile = grid.get_tile(x, y)
+    def _place_city(self, grid: Grid, sx: int, sy: int, city_name: str) -> None:
+        for rel_y in range(CITY_SIZE):
+            for rel_x in range(CITY_SIZE):
+                ax, ay = sx + rel_x, sy + rel_y
+                tile = grid.get_tile(ax, ay)
                 if tile is None:
                     continue
-                if ((x - cx) ** 2) / 25 + ((y - cy) ** 2) / 9 <= 1.0:
-                    tile.tile_type = TileType.WATER
-                    tile.tree_count = 0
 
-    def _place_zone(
+                tile.zone_name = city_name
+                tile.tree_count = 0
+
+                is_road = (rel_x in ROAD_COLS) or (rel_y in ROAD_ROWS)
+                is_bank = (rel_x, rel_y) in BANK_CELLS
+
+                if is_road:
+                    tile.tile_type = TileType.ROAD
+                elif is_bank:
+                    tile.tile_type = TileType.CITY
+                    tile.is_bank = True
+                else:
+                    tile.tile_type = TileType.CITY
+
+        entry = grid.get_tile(sx + 2, sy + 3)
+        if entry is not None:
+            entry.is_entry_point = True
+
+    def _place_facility(
         self,
         grid: Grid,
-        start_x: int,
-        start_y: int,
-        width: int,
-        height: int,
-        tile_type: TileType,
-        zone_name: str,
+        sx: int,
+        sy: int,
+        w: int,
+        h: int,
+        name: str,
+        entry_side: str,
     ) -> None:
-        for y in range(start_y, start_y + height):
-            for x in range(start_x, start_x + width):
-                tile = grid.get_tile(x, y)
+        for fy in range(sy, sy + h):
+            for fx in range(sx, sx + w):
+                tile = grid.get_tile(fx, fy)
                 if tile is None:
                     continue
-                tile.tile_type = tile_type
-                tile.zone_name = zone_name
+                tile.tile_type = TileType.FACILITY
+                tile.zone_name = name
                 tile.tree_count = 0
+
+        if entry_side == "west":
+            ex, ey = sx - 1, sy + h // 2
+        elif entry_side == "east":
+            ex, ey = sx + w, sy + h // 2
+        elif entry_side == "north":
+            ex, ey = sx + w // 2, sy - 1
+        else:
+            ex, ey = sx + w // 2, sy + h
+
+        entry = grid.get_tile(ex, ey)
+        if entry is not None and entry.tile_type == TileType.GRASS:
+            entry.tile_type = TileType.ROAD
+            entry.zone_name = name
+            entry.is_entry_point = True
+        elif entry is not None and entry.tile_type == TileType.FOREST:
+            entry.tile_type = TileType.ROAD
+            entry.zone_name = name
+            entry.is_entry_point = True
+            entry.tree_count = 0
 
     def _road_line(self, grid: Grid, x1: int, y1: int, x2: int, y2: int) -> None:
         if x1 == x2:
             y_start, y_end = sorted((y1, y2))
             for y in range(y_start, y_end + 1):
                 tile = grid.get_tile(x1, y)
-                if tile and tile.tile_type not in {TileType.CITY, TileType.FACILITY, TileType.WATER}:
+                if tile and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
                     tile.tile_type = TileType.ROAD
+                    tile.tree_count = 0
         elif y1 == y2:
             x_start, x_end = sorted((x1, x2))
             for x in range(x_start, x_end + 1):
                 tile = grid.get_tile(x, y1)
-                if tile and tile.tile_type not in {TileType.CITY, TileType.FACILITY, TileType.WATER}:
+                if tile and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
                     tile.tile_type = TileType.ROAD
+                    tile.tree_count = 0
 
-    def _build_demo_roads(self, grid: Grid) -> None:
-        self._road_line(grid, 9, 9, 14, 9)
-        self._road_line(grid, 14, 9, 14, 17)
-        self._road_line(grid, 14, 17, 29, 17)
-        self._road_line(grid, 29, 17, 29, 20)
-        self._road_line(grid, 14, 17, 14, 24)
-        self._road_line(grid, 14, 24, 11, 24)
-        self._road_line(grid, 29, 17, 38, 17)
-        self._road_line(grid, 38, 17, 38, 9)
+    def _build_road_network(self, grid: Grid) -> None:
+        self._road_line(grid, 5,  10, 5,  14)
+        self._road_line(grid, 5,  14, 47, 14)
+        self._road_line(grid, 47, 14, 47, 6)
+        self._road_line(grid, 47,  6, 48,  6)
 
-    def _create_demo_stops(self, grid: Grid) -> list[Stop]:
-        stop_specs = [
-            (0, "North City Stop", 9, 9, "North City"),
-            (1, "South City Stop", 29, 20, "South City"),
-            (2, "Mine Stop", 38, 9, "Iron Mine"),
-            (3, "Camp Stop", 11, 24, "Forest Camp"),
-        ]
-        stops: list[Stop] = []
-        for stop_id, name, x, y, zone_name in stop_specs:
-            tile = grid.get_tile(x, y)
-            if tile is None:
-                continue
-            tile.has_stop = True
-            tile.zone_name = zone_name
-            stops.append(Stop(stop_id, name, x, y, zone_name))
-        return stops
+        self._road_line(grid, 11,  4, 36,  4)
+
+        self._road_line(grid, 38, 10, 38, 14)
+        self._road_line(grid, 41, 10, 41, 14)
+
+        self._road_line(grid, 22, 28, 22, 14)
+
+        self._road_line(grid, 27, 30, 47, 30)
+        self._road_line(grid, 47, 30, 47, 27)
+        self._road_line(grid, 47, 27, 50, 27)
+        self._road_line(grid, 50, 27, 50, 26)
+
+        self._road_line(grid, 6,  37, 6,  30)
+        self._road_line(grid, 6,  30, 20, 30)
+
+        self._road_line(grid, 27, 16, 27, 14)
+
+        self._road_line(grid, 15, 13, 15, 14)
+        self._road_line(grid, 15, 14, 16, 14)
