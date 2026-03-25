@@ -405,3 +405,98 @@ def draw(self) -> None:
         a_is_city = tile_a.zone_name in _CITY_NAMES  
         b_is_city = tile_b.zone_name in _CITY_NAMES  
         profitable = a_is_city != b_is_city           
+
+        route = Route(
+        id=self._next_route_id,
+        name="Route {}".format(self._next_route_id),
+        endpoint_a=ep_a,
+        endpoint_b=ep_b,
+        path=loop_path,
+        profitable=profitable,
+    )
+    
+    self._next_route_id += 1
+    self.routes.append(route)
+
+    for rx, ry in outbound:
+        t = self.grid.get_tile(rx, ry)
+        if t is not None:
+            t.is_route_road = True
+            self.renderer.update_tile(rx, ry, t)
+
+    income_note = "Earns income (facility→city)." if profitable else "No income — connect a facility to a city for revenue."
+    self.status_message = "{} created ({} tiles). {} Deploy a vehicle to use it!".format(
+        route.name, len(outbound), income_note)
+    self._cancel_tool()
+
+    def _handle_deploy_click_p1(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "First endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        self._deploy_endpoint_a = (x, y)
+        self.tool = Tool.DEPLOY_VEHICLE_P2
+        self.status_message = "First endpoint: {} at ({},{}). Now click the second entry point of the route.".format(
+            tile.zone_name, x, y)
+
+    def _handle_deploy_click_p2(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "Second endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        if (x, y) == self._deploy_endpoint_a:
+            self.status_message = "Endpoints must be different tiles."
+            return
+
+        ep_a = self._deploy_endpoint_a
+        ep_b = (x, y)
+        endpoints = {ep_a, ep_b}
+
+        matching = [r for r in self.routes if {r.endpoint_a, r.endpoint_b} == endpoints]
+        if not matching:
+            self._cancel_tool("No route connects those two entry points. Select endpoints of an existing route.")
+            return
+
+        route = matching[0]
+
+        if self._pending_deploy_idx is None:
+            self._cancel_tool()
+            return
+
+        vehicle = self.garage[self._pending_deploy_idx]
+        distance = max(1, len(route.path) // 2)
+        vehicle.reward_distance = distance
+        vehicle.revenue_per_leg = self._calc_revenue(distance, vehicle.capacity)
+        vehicle.path = route.path
+        vehicle.route_id = route.id
+        vehicle.initialize_position()
+
+        self.vehicles.append(vehicle)
+        self.garage.pop(self._pending_deploy_idx)
+        self._pending_deploy_idx = None
+        self._deploy_endpoint_a = None
+
+        self.status_message = "{} deployed on {}.".format(vehicle.name, route.name)
+        self._cancel_tool()
+
+    def _dissolve_route(self, route: Route) -> None:
+        for rx, ry in route.path:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None:
+                t.is_route_road = False
+                if t.tile_type == TileType.ROAD and not t.is_entry_point:
+                    t.tile_type = TileType.GRASS
+                self.renderer.update_tile(rx, ry, t)
+
+        staying = [v for v in self.vehicles if v.route_id != route.id]
+        returning = [v for v in self.vehicles if v.route_id == route.id]
+        for v in returning:
+            v.path = []
+            v.route_id = -1
+            v.current_index = 0
+            self.garage.append(v)
+        self.vehicles = staying
+
+        self.routes = [r for r in self.routes if r.id != route.id]
+        self.status_message = "{} dissolved. {} vehicle(s) returned to garage.".format(
+            route.name, len(returning))
