@@ -166,6 +166,8 @@ def draw(self) -> None:
             garage=self.garage,
             vehicles=self.vehicles,
         )
+        self.renderer = MapRenderer()
+        self.hud = HUD()
 
     def _draw_scrollbars(self) -> None:
         bar_width = 10
