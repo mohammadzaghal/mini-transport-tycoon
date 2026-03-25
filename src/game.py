@@ -501,4 +501,8 @@ def draw(self) -> None:
         self.status_message = "{} dissolved. {} vehicle(s) returned to garage.".format(
             route.name, len(returning))
 
-        #def buy vehicle
+        def _buy_vehicle(self, vdef_index: int) -> None:
+        vdef = VEHICLE_DEFS[vdef_index]  
+        if not self.company.spend(vdef["cost"]):
+            self.status_message = "Not enough credits (need ${}).".format(vdef["cost"])
+            return
