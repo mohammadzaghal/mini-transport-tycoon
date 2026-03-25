@@ -1,15 +1,3 @@
-# ── Issue #15 – Mohammed ──────────────────────────────────────────────────────
-# HUD: Panel Layout, Credits & Action Buttons
-# (HUD class, _font/_text helpers, button_at hit-test, _draw_action_btn, panel + credits + ROAD/VEHICLES/ROUTE buttons)
-#
-# ── Issue #16 – Mohammed ──────────────────────────────────────────────────────
-# HUD: Speed Controls & Game Clock Display
-# (_draw_speed_buttons: PAUSE/1x/2x/4x buttons, HH:MM:SS time display)
-#
-# ── Issue #17 – Mohammed ──────────────────────────────────────────────────────
-# HUD: Vehicle Purchase Popup & Fleet Management UI
-# (_draw_vehicle_popup: purchase cards, fleet owned/on-routes rows, _vehicle_card_index, _fleet_type_index)
-
 from __future__ import annotations
 
 from typing import Optional, List
