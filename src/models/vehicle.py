@@ -26,18 +26,14 @@ class Vehicle:
 
     def initialize_position(self) -> None:
         if not self.path:
-            return #if no path nothing to init
+            return 
         self.x, self.y = self.path[0]
         self.current_index = 0
         self._initialized = True
 
-
-# moves vehicle one frame at a time (is there a more efficient way to do this?)
     def update(self, dt: float) -> bool:
         if not self.path or len(self.path) < 2:
             return False 
-
-            # FOR COLLIDING PATHS - DANA
 
         if not self._initialized:
             self.initialize_position()
