@@ -558,19 +558,18 @@ class Game:
         self._dragging_map = False
 
     def _update_trees(self) -> None:
-            new_forests = []
-            for tile in self.grid.iter_tiles():
-                if self._rng.random() < 0.45:
-                    continue
-                if tile.tile_type == TileType.FOREST:
-                    if tile.tree_count < 4 and self._rng.random() < 0.07:
-                        tile.tree_count += 1
-                    for nb in self.grid.neighbors4(tile.x, tile.y):
-                        if nb.tile_type == TileType.GRASS and self._rng.random() < 0.012:
-                            new_forests.append(nb)
-            for tile in new_forests:
-                if tile.tile_type == TileType.GRASS:
-                    tile.tile_type = TileType.FOREST
-                    tile.tree_count = 1
-                    self.renderer.update_tile(tile.x, tile.y, tile)
-        
+        new_forests = []
+        for tile in self.grid.iter_tiles():
+            if self._rng.random() < 0.45:
+                continue
+            if tile.tile_type == TileType.FOREST:
+                if tile.tree_count < 4 and self._rng.random() < 0.07:
+                    tile.tree_count += 1
+                for nb in self.grid.neighbors4(tile.x, tile.y):
+                    if nb.tile_type == TileType.GRASS and self._rng.random() < 0.012:
+                        new_forests.append(nb)
+        for tile in new_forests:
+            if tile.tile_type == TileType.GRASS:
+                tile.tile_type = TileType.FOREST
+                tile.tree_count = 1
+                self.renderer.update_tile(tile.x, tile.y, tile)
