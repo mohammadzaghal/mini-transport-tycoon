@@ -369,3 +369,13 @@ def draw(self) -> None:
             tile.is_route_road = False
             self.renderer.update_tile(x, y, tile)
             self.status_message = "Road removed at ({},{}).".format(x, y)
+
+    def _handle_route_click_p1(self, x: int, y: int) -> None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not tile.is_entry_point:
+            self.status_message = "First endpoint must be a city or facility entry point (marked ENTRY)."
+            return
+        self._route_endpoint_a = (x, y)  #store the first endpoint coordinates for use in step 2
+        self.tool = Tool.ROUTE_P2         
+        self.status_message = "First endpoint: {} at ({},{}). Now click the second entry point.".format(
+            tile.zone_name, x, y)
