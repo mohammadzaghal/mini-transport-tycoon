@@ -1,6 +1,3 @@
-# Cleaned version: Only Issues #10, #12, #13, #14 (Mohammed)
-# Removed: Issues #20–25 (roads, routes, vehicles, tree growth)
-
 from __future__ import annotations
 
 import random
@@ -229,7 +226,6 @@ class Game:
             self._clear_drag_state()
             return
 
-        # Dashboard buttons always take priority
         hud_action = self.hud.button_at(x, y, self.tool, self.garage)
         if hud_action is not None:
             self._handle_hud_action(hud_action)

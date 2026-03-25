@@ -102,7 +102,6 @@ class MapRenderer:
 
         self._draw_vehicles(screen, camera, vehicles)
 
-    #for 1–4 trees
     _TREE_POSITIONS = [
         [(16, 14)],
         [(9, 11), (23, 11)],
