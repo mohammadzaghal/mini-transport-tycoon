@@ -1,3 +1,6 @@
+# Cleaned version: Only Issues #10, #12, #13, #14 (Mohammed)
+# Removed: Issues #20–25 (roads, routes, vehicles, tree growth)
+
 from __future__ import annotations
 
 import random
