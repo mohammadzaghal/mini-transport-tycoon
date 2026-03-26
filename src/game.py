@@ -337,6 +337,8 @@ class Game:
         self.status_message = message
 
 
+# for bulldoze we should make it more user friendly
+
     def _build_road(self, x: int, y: int) -> None:
         tile = self.grid.get_tile(x, y)
         if tile is None:
@@ -352,6 +354,8 @@ class Game:
         tile.tree_count = 0
         self.renderer.update_tile(x, y, tile)
         self.status_message = "Road built at ({},{}) for ${}.".format(x, y, cost)
+
+
 
     def _bulldoze(self, x: int, y: int) -> None:
         tile = self.grid.get_tile(x, y)
