@@ -12,3 +12,5 @@ class Route:
     path: List[Tuple[int, int]] = field(default_factory=list)
     #the route is profitable for now if it goes city to facility only
     profitable: bool = False
+    path_type: str = "road"
+    stop_positions: List[Tuple[int, int]] = field(default_factory=list)
