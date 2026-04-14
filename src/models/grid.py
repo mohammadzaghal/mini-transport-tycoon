@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from collections.abc import Iterable
 
 from src.enums import TileType
@@ -48,7 +49,6 @@ class Grid:
         return tile.tile_type in {TileType.GRASS, TileType.FOREST}
 
     def is_track_buildable(self, x: int, y: int) -> bool:
-        """Returns True if a train-track tile can be built here."""
         tile = self.get_tile(x, y)
         if tile is None:
             return False
