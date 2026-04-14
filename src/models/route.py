@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 @dataclass
 class Route:
-    #for the game to identify the route
+
     id: int
     name: str   
     #the two endpoints of the route
