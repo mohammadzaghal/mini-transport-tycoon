@@ -907,7 +907,7 @@ class Game:
 
         vehicle = self.garage[self._pending_deploy_idx]
 
-        if vehicle.vehicle_type == VehicleType.TRAIN and route.path_type != "track":
+       if vehicle.vehicle_type == VehicleType.TRAIN and route.path_type != "track":
             self._cancel_tool("Trains can only run on track routes. Build a track route first.")
             return
         if vehicle.vehicle_type in {VehicleType.BUS, VehicleType.TRUCK} and route.path_type == "track":
