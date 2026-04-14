@@ -7,7 +7,10 @@ class Company:
     money: int
     total_income: int = 0
     total_expenses: int = 0
-    
+    fuel: float = 0.0
+    iron_ore: float = 0.0
+    alloy_ore: float = 0.0
+    titanium_ore: float = 0.0
 
     def spend(self, amount: int) -> bool:
         if amount > self.money:

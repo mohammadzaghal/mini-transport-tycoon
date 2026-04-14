@@ -1,15 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional, TYPE_CHECKING
 
 from src.enums import TileType, BridgeType
 
+from typing import Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from src.models.stop import Stop
     from src.models.facility import Facility
     from src.models.garage import Garage
-
 
 @dataclass
 class Tile:

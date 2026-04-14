@@ -5,7 +5,6 @@ from collections.abc import Iterable
 from src.enums import TileType
 from src.models.tile import Tile
 
-
 class Grid:
     def __init__(self, width: int, height: int) -> None:
         self.width = width
