@@ -128,6 +128,7 @@ VEHICLE_DEFS = [
     },
 ]
 
+
 VEHICLE_LEVEL_DEFS = {
     VehicleType.BUS: {
         2: {"oil": 50,  "speed_mult": 1.25, "cap_mult": 1.30},
