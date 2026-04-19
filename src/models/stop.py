@@ -5,7 +5,7 @@ from typing import Dict, Optional
 
 from src.enums import CargoType
 
-
+# Stop class: player-built structure for cargo delivery and pickup
 @dataclass
 class Stop:
     id: int
