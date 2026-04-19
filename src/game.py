@@ -458,7 +458,7 @@ class Game:
                 return
             if self._garage_panel_tile is not None:
                 self._garage_panel_tile = None
-
+        #validate vehicle type vs route path type
         if self.tool == Tool.ROAD:
             self._build_road(gx, gy)
         elif self.tool == Tool.TRACK:
