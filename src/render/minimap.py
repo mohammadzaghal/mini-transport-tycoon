@@ -39,3 +39,47 @@ class Minimap:
             self._surface.set_at((tile.x, tile.y), c)
         self._dirty = False
 
+    def update_tile(self, x: int, y: int, tile) -> None:
+        if self._surface is None:
+            return
+        c = _MM_COLORS.get(tile.tile_type, (50, 50, 50))
+        if tile.is_stop:
+            c = _MM_STOP_COLOR
+        self._surface.set_at((x, y), c)
+
+    def draw(self, screen: pygame.Surface, camera, vehicles: list, stops: list) -> None:
+        if self._surface is None:
+            return
+
+        scaled = pygame.transform.scale(self._surface, (MM_W, MM_H))
+
+        scale_x = MM_W / MAP_WIDTH
+        scale_y = MM_H / MAP_HEIGHT
+        for v in vehicles:
+            px = int(v.x * scale_x)
+            py = int(v.y * scale_y)
+            if 0 <= px < MM_W and 0 <= py < MM_H:
+                pygame.draw.circle(scaled, _MM_VEH_COLOR, (px, py), 2)
+
+        pygame.draw.rect(scaled, (80, 80, 80), (0, 0, MM_W, MM_H), 1)
+
+        vp_x = int(camera.x / TILE_SIZE * scale_x)
+        vp_y = int(camera.y / TILE_SIZE * scale_y)
+        vp_w = int(camera.view_width / TILE_SIZE * scale_x)
+        vp_h = int((camera.view_height) / TILE_SIZE * scale_y)
+        pygame.draw.rect(scaled, _MM_VIEWPORT, (vp_x, vp_y, vp_w, vp_h), 1)
+
+        pygame.draw.rect(screen, (10, 10, 20), (MM_X - 2, MM_Y - 2, MM_W + 4, MM_H + 4))
+        screen.blit(scaled, (MM_X, MM_Y))
+
+    def handle_click(self, screen_x: int, screen_y: int, camera) -> bool:
+        if MM_X <= screen_x <= MM_X + MM_W and MM_Y <= screen_y <= MM_Y + MM_H:
+            rel_x = (screen_x - MM_X) / MM_W
+            rel_y = (screen_y - MM_Y) / MM_H
+            new_cx = int(rel_x * MAP_WIDTH * TILE_SIZE - camera.view_width // 2)
+            new_cy = int(rel_y * MAP_HEIGHT * TILE_SIZE - camera.view_height // 2)
+            camera.x = new_cx
+            camera.y = new_cy
+            camera.clamp()
+            return True
+        return False
