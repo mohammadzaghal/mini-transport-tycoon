@@ -70,4 +70,29 @@ class MapRenderer:
         if self._sprites is None:
             self._sprites = SpriteCache.get()
             self._sprites.build()
-        return self._sprites            
+        return self._sprites    
+            
+    def _tile_sprite_key(self, tile) -> str | None:
+        if tile.is_entry_point:
+            return "road_entry"
+        if tile.is_garage:
+            return "garage"
+        if tile.bridge_type is not None:
+            suffix = "_route" if tile.is_route_road else ""
+            return f"bridge_{tile.bridge_type.name}{suffix}"
+        if tile.tile_type == TileType.WATER:
+            return "water"
+        if tile.tile_type == TileType.GRASS:
+            return "grass"
+        if tile.tile_type == TileType.FOREST:
+            return "forest"
+        if tile.tile_type == TileType.ROAD:
+            return "road_route" if tile.is_route_road else "road"
+        if tile.tile_type == TileType.TRACK:                      # v1.1 #3
+            return "track_route" if tile.is_route_road else "track"
+        if tile.tile_type == TileType.CITY:
+            return "city_bank" if tile.is_bank else "city"
+        if tile.tile_type == TileType.FACILITY:
+            if tile.facility_ref is not None:
+                return f"fac_{tile.facility_ref.fac_type.name}"
+        return None
