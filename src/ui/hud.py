@@ -175,7 +175,6 @@ class HUD:
         return None
 
     def _fleet_type_index(self, x: int, y: int, garage: List) -> Optional[int]:
-        """Return vdef index (0/1/2) if (x,y) hits an owned-type row that has count > 0."""
         if not (_FLEET_X1 <= x <= _FLEET_X2):
             return None
         owned_y0 = _POPUP_Y1 + 20
@@ -185,6 +184,23 @@ class HUD:
                 count = sum(1 for v in garage if v.vdef_name == vdef["name"])
                 return i if count > 0 else None
         return None
+
+     def _routes_panel_action(self, x: int, y: int, routes: List) -> Optional[str]:  # v1.1 #14
+        if not routes:
+            return None
+        px1 = _ROUTES_PANEL_X
+        px2 = _ROUTES_PANEL_X + _ROUTES_PANEL_W
+        if not (px1 <= x <= px2):
+            return None
+        for i, route in enumerate(routes):
+            ry = _ROUTES_PANEL_Y + 26 + i * _ROUTES_ROW_H
+            if ry <= y <= ry + _ROUTES_ROW_H - 2:
+                bx1 = px2 - 60
+                bx2 = px2 - 4
+                if bx1 <= x <= bx2:
+                    return "remove_route_{}".format(route.id)
+        return None
+
 
     def draw(
         self,
