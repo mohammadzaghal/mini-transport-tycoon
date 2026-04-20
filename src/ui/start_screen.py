@@ -178,3 +178,67 @@ class StartScreen:
             self._text(screen, hint_str,
                        WINDOW_WIDTH - 14, WINDOW_HEIGHT - 22, 12,
                        (255, 180, 60), bold=True, anchor="ne")
+
+
+
+
+
+ def _render_controls(self, surf: pygame.Surface) -> None:
+        """Render controls in two balanced columns (index-based split)."""
+        col_w   = WINDOW_WIDTH // 2 - 40
+        col0_x  = 20
+        col1_x  = WINDOW_WIDTH // 2 + 20
+        base_y  = 10 - self._scroll_y
+
+        # Pre-compute y-positions for each item in its column
+        y0 = base_y  
+        y1 = base_y  
+
+        surf_h = surf.get_height()
+
+        for idx, (key_label, desc, is_header) in enumerate(_CONTROLS):
+            in_col1 = (idx >= _MID)
+            cx      = col1_x if in_col1 else col0_x
+            cy      = y1     if in_col1 else y0
+
+            # Row height
+            if is_header:
+                row_h = 24
+            elif key_label == "":
+                row_h = 10
+            else:
+                row_h = 19
+
+          
+            if -row_h <= cy <= surf_h:
+                if is_header:
+                    self._text(surf, key_label, cx, cy, 12, (220, 150, 60), bold=True)
+                    pygame.draw.line(surf, (120, 60, 20),
+                                     (cx, cy + 16), (cx + col_w - 20, cy + 16), 1)
+                elif key_label == "":
+                    pass   # blank spacer — no draw needed
+                else:
+                    if key_label:
+                        badge_w = max(56, len(key_label) * 8 + 10)
+                        pygame.draw.rect(surf, (30, 18, 8),
+                                         (cx, cy + 1, badge_w, 16), border_radius=3)
+                        pygame.draw.rect(surf, (100, 55, 20),
+                                         (cx, cy + 1, badge_w, 16), 1, border_radius=3)
+                        self._text(surf, key_label,
+                                   cx + badge_w // 2, cy + 9, 10,
+                                   (255, 200, 120), bold=True, anchor="center")
+                        if desc:
+                            self._text(surf, desc, cx + badge_w + 8, cy + 2, 10,
+                                       (190, 160, 110))
+                    else:
+                        self._text(surf, "·  " + desc, cx + 8, cy + 2, 10,
+                                   (160, 130, 90))
+
+          
+            if in_col1:
+                y1 += row_h
+            else:
+                y0 += row_h
+
+        total_h = max(y0, y1) + self._scroll_y
+        self._max_scroll = max(0, total_h - surf_h + 20)
