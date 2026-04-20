@@ -4,8 +4,8 @@ from typing import Optional, List
 
 import pygame
 
-from src.config import BOTTOM_BAR_HEIGHT, VEHICLE_DEFS, WINDOW_HEIGHT, WINDOW_WIDTH
-from src.enums import TimeSpeed, Tool
+from src.config import BOTTOM_BAR_HEIGHT, VEHICLE_DEFS, VEHICLE_LEVEL_DEFS, WINDOW_HEIGHT, WINDOW_WIDTH
+from src.enums import TimeSpeed, Tool, BridgeType, VehicleType
 
 
 _BAR_Y = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT   
