@@ -107,3 +107,74 @@ class StartScreen:
         elif anchor in ("ne", "e"):
             rx -= surf.get_width()
         screen.blit(surf, (rx, ry))
+
+
+  def draw(self, screen: pygame.Surface) -> None:
+        self._hint_tick += 1
+
+       
+        screen.fill((8, 5, 3))
+
+        # Subtle dust-storm grid lines
+        for i in range(0, WINDOW_WIDTH, 80):
+            pygame.draw.line(screen, (18, 10, 6), (i, 0), (i, WINDOW_HEIGHT), 1)
+        for j in range(0, WINDOW_HEIGHT, 80):
+            pygame.draw.line(screen, (18, 10, 6), (0, j), (WINDOW_WIDTH, j), 1)
+
+        
+        title_panel_h = 170
+        pygame.draw.rect(screen, (14, 8, 5), (0, 0, WINDOW_WIDTH, title_panel_h))
+        pygame.draw.line(screen, (180, 90, 30), (0, title_panel_h), (WINDOW_WIDTH, title_panel_h), 3)
+
+
+        cx = WINDOW_WIDTH // 2
+        self._text(screen, "MINI TRANSPORT TYCOON", cx + 2, 20 + 2, 46,
+                   (0, 0, 0), bold=True, anchor="center")
+        self._text(screen, "MINI TRANSPORT TYCOON", cx, 20, 46,
+                   (255, 180, 60), bold=True, anchor="center")
+        self._text(screen, "MARS AUTHORITY", cx + 1, 72 + 1, 28,
+                   (0, 0, 0), bold=True, anchor="center")
+        self._text(screen, "MARS AUTHORITY", cx, 72, 28,
+                   (220, 120, 50), bold=True, anchor="center")
+
+    
+        self._text(
+            screen,
+            "Build dust roads & mag-rails  ·  Connect colonies  ·  Transport resources  ·  Grow Mars",  # v1.1 #18
+            cx, 110, 13, (180, 130, 80), anchor="center",
+        )
+
+        self._text(screen, "Prototype v1.2  |  Mars Authority Edition", cx, 133, 10,
+                   (100, 70, 40), anchor="center")
+
+
+        btn_w, btn_h = 300, 64
+        bx = cx - btn_w // 2
+        by = title_panel_h + 18
+        self._btn_rect = (bx, by, bx + btn_w, by + btn_h)
+
+        pygame.draw.rect(screen, (120, 60, 20), (bx - 3, by - 3, btn_w + 6, btn_h + 6), border_radius=12)
+        pygame.draw.rect(screen, (60, 30, 10), (bx, by, btn_w, btn_h), border_radius=10)
+        pygame.draw.rect(screen, (220, 140, 60), (bx, by, btn_w, btn_h), 3, border_radius=10)
+
+        self._text(screen, "▶  LAUNCH MISSION", cx, by + btn_h // 2, 22,
+                   (255, 220, 140), bold=True, anchor="center")
+        self._text(screen, "or press  ENTER", cx, by + btn_h + 8, 10,
+                   (140, 90, 50), anchor="center")
+
+        
+        ctrl_y_start = by + btn_h + 30
+        ctrl_area_h = WINDOW_HEIGHT - ctrl_y_start - 14
+        ctrl_surface = pygame.Surface((WINDOW_WIDTH, ctrl_area_h))
+        ctrl_surface.fill((8, 5, 3))
+
+        self._render_controls(ctrl_surface)
+
+        screen.blit(ctrl_surface, (0, ctrl_y_start))
+
+
+        if self._max_scroll > 0:
+            hint_str = ("▼  Scroll for more" if (self._hint_tick // 30) % 2 == 0 else "▼")
+            self._text(screen, hint_str,
+                       WINDOW_WIDTH - 14, WINDOW_HEIGHT - 22, 12,
+                       (255, 180, 60), bold=True, anchor="ne")
