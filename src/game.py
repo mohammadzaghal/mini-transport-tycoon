@@ -1,4 +1,5 @@
 from __future__ import annotations
+from src.ui.fonts import font_display
 
 import random
 from typing import Optional, List
@@ -324,7 +325,7 @@ class Game:
             )
             overlay.fill((180, 0, 0, 120))
             self.screen.blit(overlay, (0, 0))
-            font = pygame.font.SysFont("segoeui", 48, bold=True)
+            font = font_display(48, bold=True)              
             surf = font.render("BANKRUPT — GAME OVER", True, (255, 60, 60))
             self.screen.blit(
                 surf,
