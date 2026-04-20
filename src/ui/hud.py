@@ -8,33 +8,54 @@ from src.config import BOTTOM_BAR_HEIGHT, VEHICLE_DEFS, VEHICLE_LEVEL_DEFS, WIND
 from src.enums import TimeSpeed, Tool, BridgeType, VehicleType
 
 
-_BAR_Y = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT   
+_BAR_Y = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
 
-_BTN_Y1 = _BAR_Y + 18
-_BTN_Y2 = _BAR_Y + 88
+_BTN_Y1 = _BAR_Y + 12
+_BTN_Y2 = _BAR_Y + 52
 
-_BTN_ROAD      = (250,  _BTN_Y1, 360,  _BTN_Y2)
-_BTN_VEHICLES  = (380,  _BTN_Y1, 510,  _BTN_Y2)
-_BTN_ROUTE     = (530,  _BTN_Y1, 640,  _BTN_Y2)
+_BTN_ROAD      = (10,   _BTN_Y1, 90,   _BTN_Y2)
+_BTN_TRACK     = (94,   _BTN_Y1, 184,  _BTN_Y2)                
+_BTN_VEHICLES  = (188,  _BTN_Y1, 278,  _BTN_Y2)
+_BTN_ROUTE     = (282,  _BTN_Y1, 362,  _BTN_Y2)
+_BTN_STOP      = (366,  _BTN_Y1, 440,  _BTN_Y2)
+_BTN_BRIDGE    = (444,  _BTN_Y1, 524,  _BTN_Y2)
+_BTN_BULLDOZE  = (528,  _BTN_Y1, 624,  _BTN_Y2)
+_BTN_GARAGE    = (628,  _BTN_Y1, 714,  _BTN_Y2)
 
-_SPD_Y1 = _BAR_Y + 35
-_SPD_Y2 = _BAR_Y + 62
-_SPD_X  = WINDOW_WIDTH - 260
+_SPD_Y1 = _BAR_Y + 58
+_SPD_Y2 = _BAR_Y + 88
+_SPD_X  = WINDOW_WIDTH - 310
 _BTN_SPD_PAUSE = (_SPD_X,       _SPD_Y1, _SPD_X + 38,  _SPD_Y2)
 _BTN_SPD_1     = (_SPD_X + 42,  _SPD_Y1, _SPD_X + 80,  _SPD_Y2)
 _BTN_SPD_2     = (_SPD_X + 84,  _SPD_Y1, _SPD_X + 122, _SPD_Y2)
 _BTN_SPD_4     = (_SPD_X + 126, _SPD_Y1, _SPD_X + 164, _SPD_Y2)
 
-_POPUP_Y1 = _BAR_Y - 170
-_POPUP_Y2 = _BAR_Y - 10
-_POPUP_X1 = 230
-_CARD_W   = 200
-_CARD_GAP = 16
+_BRIDGE_BTN_Y1 = _BAR_Y - 50
+_BRIDGE_BTN_Y2 = _BAR_Y - 8
+_BTN_BRIDGE_L1 = (444, _BRIDGE_BTN_Y1, 524, _BRIDGE_BTN_Y2)
+_BTN_BRIDGE_L2 = (528, _BRIDGE_BTN_Y1, 608, _BRIDGE_BTN_Y2)
+_BTN_BRIDGE_L3 = (612, _BRIDGE_BTN_Y1, 692, _BRIDGE_BTN_Y2)
 
-_FLEET_X1   = _POPUP_X1 + len(VEHICLE_DEFS) * (_CARD_W + _CARD_GAP) + 20
-_FLEET_W    = 270
-_FLEET_X2   = _FLEET_X1 + _FLEET_W
-_FLEET_ROW_H = 22   
+_POPUP_Y1 = _BAR_Y - 190
+_POPUP_Y2 = _BAR_Y - 10
+_POPUP_X1 = 10
+_CARD_W   = 170
+_CARD_GAP = 10
+_FLEET_X1    = _POPUP_X1 + len(VEHICLE_DEFS) * (_CARD_W + _CARD_GAP) + 20
+_FLEET_W     = 230
+_FLEET_X2    = _FLEET_X1 + _FLEET_W
+_FLEET_ROW_H = 22
+
+_ROUTES_PANEL_X = 10                                            
+_ROUTES_PANEL_Y = _BAR_Y - 220
+_ROUTES_PANEL_W = 500
+_ROUTES_ROW_H   = 24
+
+_GARAGE_PANEL_X = WINDOW_WIDTH - 420                            
+_GARAGE_PANEL_Y = _BAR_Y - 260
+_GARAGE_PANEL_W = 410
+_GARAGE_ROW_H   = 28
+
 
 
 def _in_rect(rect, px, py) -> bool:
