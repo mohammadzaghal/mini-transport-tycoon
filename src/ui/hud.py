@@ -70,6 +70,7 @@ def _hex_to_rgb(h: str) -> tuple:
 class HUD:
     def __init__(self) -> None:
         self._fonts: dict = {}
+        self.selected_bridge_type: BridgeType = BridgeType.WOODEN
 
     def _font(self, size: int, bold: bool = False) -> pygame.font.Font:
         key = (size, bold)
@@ -77,17 +78,7 @@ class HUD:
             self._fonts[key] = pygame.font.SysFont("segoeui", size, bold=bold)
         return self._fonts[key]
 
-    def _text(
-        self,
-        screen: pygame.Surface,
-        text: str,
-        x: int,
-        y: int,
-        size: int,
-        color: tuple,
-        bold: bool = False,
-        anchor: str = "nw",
-    ) -> None:
+    def _text(self, screen, text, x, y, size, color, bold=False, anchor="nw"):
         surf = self._font(size, bold).render(text, True, color)
         if anchor == "center":
             x -= surf.get_width() // 2
@@ -96,22 +87,32 @@ class HUD:
             x -= surf.get_width()
         screen.blit(surf, (x, y))
 
-    def button_at(self, x: int, y: int, tool: Tool, garage: Optional[List] = None) -> Optional[str]:
-        """Return button name hit by (x, y), or None."""
-        if _in_rect(_BTN_ROAD, x, y):
-            return "road"
-        if _in_rect(_BTN_VEHICLES, x, y):
-            return "vehicles"
-        if _in_rect(_BTN_ROUTE, x, y):
-            return "route"
-        if _in_rect(_BTN_SPD_PAUSE, x, y):
-            return "speed_pause"
-        if _in_rect(_BTN_SPD_1, x, y):
-            return "speed_1"
-        if _in_rect(_BTN_SPD_2, x, y):
-            return "speed_2"
-        if _in_rect(_BTN_SPD_4, x, y):
-            return "speed_4"
+   def button_at(
+        self,
+        x: int,
+        y: int,
+        tool: Tool,
+        garage: Optional[List] = None,
+        routes: Optional[List] = None,
+    ) -> Optional[str]:
+        if _in_rect(_BTN_ROAD,     x, y): return "road"
+        if _in_rect(_BTN_TRACK,    x, y): return "track"          
+        if _in_rect(_BTN_VEHICLES, x, y): return "vehicles"
+        if _in_rect(_BTN_ROUTE,    x, y): return "route"
+        if _in_rect(_BTN_STOP,     x, y): return "stop"
+        if _in_rect(_BTN_BRIDGE,   x, y): return "bridge"
+        if _in_rect(_BTN_BULLDOZE, x, y): return "bulldoze"
+        if _in_rect(_BTN_GARAGE,   x, y): return "garage"
+        if _in_rect(_BTN_SPD_PAUSE, x, y): return "speed_pause"
+        if _in_rect(_BTN_SPD_1,     x, y): return "speed_1"
+        if _in_rect(_BTN_SPD_2,     x, y): return "speed_2"
+        if _in_rect(_BTN_SPD_4,     x, y): return "speed_4"
+
+        if tool == Tool.BRIDGE:
+            if _in_rect(_BTN_BRIDGE_L1, x, y): return "bridge_wooden"
+            if _in_rect(_BTN_BRIDGE_L2, x, y): return "bridge_stone"
+            if _in_rect(_BTN_BRIDGE_L3, x, y): return "bridge_steel"
+
         if tool == Tool.VEHICLES:
             idx = self._vehicle_card_index(x, y)
             if idx is not None:
@@ -120,7 +121,48 @@ class HUD:
                 tidx = self._fleet_type_index(x, y, garage)
                 if tidx is not None:
                     return "deploy_type_{}".format(tidx)
+
+        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2} and routes is not None:  # v1.1 #14
+            action = self._routes_panel_action(x, y, routes)
+            if action is not None:
+                return action
+
         return None
+
+
+
+  def is_in_garage_panel(self, x: int, y: int) -> bool:        # v1.1 #13
+        """Return True if (x, y) falls within the garage upgrade panel bounds."""
+        panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
+        return (
+            _GARAGE_PANEL_X - 4 <= x <= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
+            and _GARAGE_PANEL_Y - 4 <= y <= _GARAGE_PANEL_Y + panel_h_max + 8
+        )
+
+    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]:  # v1.1 #13
+        """Hit-test for the garage upgrade panel buttons."""
+        if not garage_vehicles:
+            return None
+        px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+        # Close button
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        if close_x <= x <= close_x + 18 and close_y <= y <= close_y + 16:
+            return "close_garage_panel"
+        for i in range(len(garage_vehicles)):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            if ry <= y <= ry + _GARAGE_ROW_H - 2:
+                upg_x1 = px2 - 128
+                upg_x2 = px2 - 68
+                sell_x1 = px2 - 63
+                sell_x2 = px2 - 4
+                if upg_x1 <= x <= upg_x2:
+                    return "upgrade_vehicle_{}".format(i)
+                if sell_x1 <= x <= sell_x2:
+                    return "sell_vehicle_{}".format(i)
+        return None
+
+
 
     def _vehicle_card_index(self, x: int, y: int) -> Optional[int]:
         if not (_POPUP_Y1 <= y <= _POPUP_Y2):
