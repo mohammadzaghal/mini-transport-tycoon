@@ -242,3 +242,18 @@ class StartScreen:
 
         total_h = max(y0, y1) + self._scroll_y
         self._max_scroll = max(0, total_h - surf_h + 20)
+
+
+        def handle_event(self, event: pygame.event.Event) -> bool:
+        """Return True when the player wants to start the game."""
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            if self._btn_rect is not None:
+                bx1, by1, bx2, by2 = self._btn_rect
+                x, y = event.pos
+                if bx1 <= x <= bx2 and by1 <= y <= by2:
+                    return True
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+            return True
+        if event.type == pygame.MOUSEWHEEL:
+            self._scroll_y = max(0, min(self._max_scroll, self._scroll_y - event.y * 30))
+        return False
