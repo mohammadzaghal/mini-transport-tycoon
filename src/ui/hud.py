@@ -407,3 +407,102 @@ def _hint_text(self, tool: Tool, status: str) -> str:
             self._text(screen, vdef["name"], _FLEET_X1 + 16, ay + 4, 9, nc2)
             cc2 = (80, 220, 80) if n_active > 0 else (50, 80, 50)
             self._text(screen, "×{}".format(n_active), _FLEET_X2 - 3, ay + 4, 9, cc2, bold=True, anchor="ne")
+
+
+
+            def _draw_routes_panel(self, screen: pygame.Surface, routes: List) -> None:  # v1.1 #14
+        if not routes:
+            panel_h = 48
+        else:
+            panel_h = 30 + len(routes) * _ROUTES_ROW_H + 10
+
+        pygame.draw.rect(screen, (12, 18, 30), (_ROUTES_PANEL_X - 4, _ROUTES_PANEL_Y - 4,
+                                                 _ROUTES_PANEL_W + 8, panel_h + 8))
+        pygame.draw.rect(screen, (50, 120, 50), (_ROUTES_PANEL_X - 4, _ROUTES_PANEL_Y - 4,
+                                                  _ROUTES_PANEL_W + 8, panel_h + 8), 2)
+
+        self._text(screen, "ACTIVE ROUTES  (✕ removes route, roads stay intact)",
+                   _ROUTES_PANEL_X, _ROUTES_PANEL_Y + 4, 9, (100, 200, 100), bold=True)
+
+        if not routes:
+            self._text(screen, "No routes yet. Click two entry/stop points to create one.",
+                       _ROUTES_PANEL_X, _ROUTES_PANEL_Y + 26, 9, (140, 160, 140))
+            return
+
+        for i, route in enumerate(routes):
+            ry = _ROUTES_PANEL_Y + 26 + i * _ROUTES_ROW_H
+            col = (25, 45, 25) if i % 2 == 0 else (20, 38, 20)
+            pygame.draw.rect(screen, col, (_ROUTES_PANEL_X, ry, _ROUTES_PANEL_W, _ROUTES_ROW_H - 2))
+
+            ptype_col = (100, 200, 255) if route.path_type == "track" else (150, 255, 150)
+            ptype_lbl = "[TRAIN]" if route.path_type == "track" else "[BUS/TRUCK]"
+            self._text(screen, route.name, _ROUTES_PANEL_X + 4, ry + 5, 9, (200, 240, 200), bold=True)
+            self._text(screen, ptype_lbl, _ROUTES_PANEL_X + 80, ry + 5, 8, ptype_col)
+            tiles = len(route.path) // 2
+            prof = "profitable" if route.profitable else "no income"
+            self._text(screen, "{} tiles · {}".format(tiles, prof),
+                       _ROUTES_PANEL_X + 160, ry + 5, 8, (140, 165, 140))
+
+            bx1 = _ROUTES_PANEL_X + _ROUTES_PANEL_W - 58
+            bx2 = _ROUTES_PANEL_X + _ROUTES_PANEL_W - 4
+            pygame.draw.rect(screen, (100, 30, 30), (bx1, ry + 2, bx2 - bx1, _ROUTES_ROW_H - 6), border_radius=3)
+            pygame.draw.rect(screen, (200, 80, 80), (bx1, ry + 2, bx2 - bx1, _ROUTES_ROW_H - 6), 1, border_radius=3)
+            self._text(screen, "✕ Remove", (bx1 + bx2) // 2, ry + _ROUTES_ROW_H // 2 - 4,
+                       8, (255, 160, 160), anchor="center")
+
+   
+   
+    def _draw_garage_panel(self, screen: pygame.Surface, garage_vehicles: List) -> None:  # v1.1 #13
+        panel_h = max(60, 36 + len(garage_vehicles) * _GARAGE_ROW_H + 10)
+
+        pygame.draw.rect(screen, (14, 22, 38), (_GARAGE_PANEL_X - 4, _GARAGE_PANEL_Y - 4,
+                                                  _GARAGE_PANEL_W + 8, panel_h + 8))
+        pygame.draw.rect(screen, (80, 120, 200), (_GARAGE_PANEL_X - 4, _GARAGE_PANEL_Y - 4,
+                                                   _GARAGE_PANEL_W + 8, panel_h + 8), 2)
+
+        self._text(screen, "GARAGE — Upgrade with FUEL  |  Sell vehicles",
+                   _GARAGE_PANEL_X, _GARAGE_PANEL_Y + 4, 9, (140, 180, 255), bold=True)
+
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        pygame.draw.rect(screen, (80, 30, 30), (close_x, close_y, 18, 16), border_radius=3)
+        self._text(screen, "✕", close_x + 9, close_y + 1, 9, (255, 160, 160), anchor="center")
+
+        if not garage_vehicles:
+            self._text(screen, "No vehicles in garage. Buy from FLEET.",
+                       _GARAGE_PANEL_X, _GARAGE_PANEL_Y + 28, 9, (140, 160, 140))
+            return
+
+        for i, v in enumerate(garage_vehicles):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            col = (22, 38, 55) if i % 2 == 0 else (18, 30, 45)
+            pygame.draw.rect(screen, col, (_GARAGE_PANEL_X, ry, _GARAGE_PANEL_W, _GARAGE_ROW_H - 2))
+
+            lv_col = {1: (180, 180, 180), 2: (100, 220, 100), 3: (255, 200, 60)}.get(v.level, (180, 180, 180))
+            self._text(screen, v.name, _GARAGE_PANEL_X + 4, ry + 5, 9, (200, 220, 255), bold=True)
+            self._text(screen, "L{}".format(v.level), _GARAGE_PANEL_X + 110, ry + 5, 9, lv_col, bold=True)
+            self._text(screen, "Spd:{:.1f} Cap:{}".format(v.speed_tiles_per_second, v.capacity),
+                       _GARAGE_PANEL_X + 130, ry + 5, 8, (160, 180, 200))
+
+            px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+            upg_x1 = px2 - 128
+            upg_x2 = px2 - 68
+            if v.level < 3:
+                next_level = v.level + 1
+                level_def = VEHICLE_LEVEL_DEFS.get(v.vehicle_type, {}).get(next_level, {})
+                oil_cost = level_def.get("oil", "?")
+                upg_label = "↑L{} ({}fuel)".format(next_level, oil_cost)
+                pygame.draw.rect(screen, (30, 70, 120), (upg_x1, ry + 2, upg_x2 - upg_x1, _GARAGE_ROW_H - 6), border_radius=3)
+                pygame.draw.rect(screen, (80, 160, 255), (upg_x1, ry + 2, upg_x2 - upg_x1, _GARAGE_ROW_H - 6), 1, border_radius=3)
+                self._text(screen, upg_label, (upg_x1 + upg_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                           7, (180, 220, 255), anchor="center")
+            else:
+                self._text(screen, "MAX LVL", (upg_x1 + upg_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                           7, (255, 200, 60), bold=True, anchor="center")
+
+            sell_x1 = px2 - 63
+            sell_x2 = px2 - 4
+            pygame.draw.rect(screen, (70, 30, 30), (sell_x1, ry + 2, sell_x2 - sell_x1, _GARAGE_ROW_H - 6), border_radius=3)
+            pygame.draw.rect(screen, (200, 80, 80), (sell_x1, ry + 2, sell_x2 - sell_x1, _GARAGE_ROW_H - 6), 1, border_radius=3)
+            self._text(screen, "SELL", (sell_x1 + sell_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                       8, (255, 160, 160), anchor="center")
