@@ -212,3 +212,44 @@ class MapRenderer:
             x + TILE_SIZE // 2 - surf.get_width()  // 2,
             y + TILE_SIZE // 2 - surf.get_height() // 2,
         ))
+
+    def _draw_stop_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        pygame.draw.rect(screen, (220, 220, 220), (x + TILE_SIZE // 2 - 1, y + 4, 2, 20))
+        pygame.draw.rect(screen, (20, 100, 220), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9))
+        pygame.draw.rect(screen, (255, 255, 255), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9), 1)
+        font = self._get_stop_font()
+        surf = font.render("S", True, (255, 255, 255))
+        screen.blit(surf, (x + TILE_SIZE // 2 - surf.get_width() // 2, y + 4))
+
+    def _draw_garage_label(self, screen: pygame.Surface, x: int, y: int) -> None:
+        font = self._get_bank_font()
+        surf = font.render("G", True, (255, 180, 80))
+        screen.blit(surf, (
+            x + TILE_SIZE // 2 - surf.get_width()  // 2,
+            y + TILE_SIZE // 2 - surf.get_height() // 2,
+        ))
+
+    def _draw_facility_label(self, screen: pygame.Surface, sx: int, sy: int, tile) -> None:
+        name = tile.facility_ref.name
+        abbr = _FAC_ABBR.get(name, name[:4].upper())
+        badge = pygame.Surface((TILE_SIZE - 2, 12), pygame.SRCALPHA)
+        badge.fill((0, 0, 0, 160))
+        screen.blit(badge, (sx + 1, sy + TILE_SIZE - 13))
+        font = self._get_label_font()
+        surf = font.render(abbr, True, (255, 240, 180))
+        screen.blit(surf, (
+            sx + TILE_SIZE // 2 - surf.get_width() // 2,
+            sy + TILE_SIZE - 13,
+        ))
+
+    def _draw_vehicles(self, screen: pygame.Surface, camera, vehicles) -> None:
+        sp = self._get_sprites()
+        for vehicle in vehicles:
+            world_x = int(vehicle.x * TILE_SIZE + TILE_SIZE // 2)
+            world_y = int(vehicle.y * TILE_SIZE + TILE_SIZE // 2)
+            sx = world_x - camera.x
+            sy = world_y - camera.y
+
+            vsurf = sp.vehicle(vehicle.vdef_name, vehicle.color)
+            vw, vh = vsurf.get_size()
+            screen.blit(vsurf, (sx - vw // 2, sy - vh // 2))
