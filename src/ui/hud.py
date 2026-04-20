@@ -87,14 +87,14 @@ class HUD:
             x -= surf.get_width()
         screen.blit(surf, (x, y))
 
-   def button_at(
+    def button_at(
         self,
         x: int,
         y: int,
         tool: Tool,
         garage: Optional[List] = None,
         routes: Optional[List] = None,
-    ) -> Optional[str]:
+     ) -> Optional[str]:
         if _in_rect(_BTN_ROAD,     x, y): return "road"
         if _in_rect(_BTN_TRACK,    x, y): return "track"          
         if _in_rect(_BTN_VEHICLES, x, y): return "vehicles"
@@ -122,7 +122,7 @@ class HUD:
                 if tidx is not None:
                     return "deploy_type_{}".format(tidx)
 
-        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2} and routes is not None:  # v1.1 #14
+        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2} and routes is not None:  
             action = self._routes_panel_action(x, y, routes)
             if action is not None:
                 return action
@@ -131,7 +131,7 @@ class HUD:
 
 
 
-  def is_in_garage_panel(self, x: int, y: int) -> bool:        # v1.1 #13
+    def is_in_garage_panel(self, x: int, y: int) -> bool:    
         """Return True if (x, y) falls within the garage upgrade panel bounds."""
         panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
         return (
@@ -139,7 +139,7 @@ class HUD:
             and _GARAGE_PANEL_Y - 4 <= y <= _GARAGE_PANEL_Y + panel_h_max + 8
         )
 
-    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]:  # v1.1 #13
+    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]: 
         """Hit-test for the garage upgrade panel buttons."""
         if not garage_vehicles:
             return None
@@ -185,7 +185,7 @@ class HUD:
                 return i if count > 0 else None
         return None
 
-     def _routes_panel_action(self, x: int, y: int, routes: List) -> Optional[str]:  # v1.1 #14
+    def _routes_panel_action(self, x: int, y: int, routes: List) -> Optional[str]:  # v1.1 #14
         if not routes:
             return None
         px1 = _ROUTES_PANEL_X
@@ -220,7 +220,7 @@ class HUD:
         routes: Optional[List] = None,
         garage_panel_tile: Optional[tuple] = None,
         garage_vehicles: Optional[List] = None,
-    ) -> None:
+     ) -> None:
         bar_y = _BAR_Y
 
         pygame.draw.rect(screen, (18, 10, 8), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
@@ -276,7 +276,7 @@ class HUD:
 
 
 
-def _hint_text(self, tool: Tool, status: str) -> str:
+    def _hint_text(self, tool: Tool, status: str) -> str:
         hints = {
             Tool.ROAD:              "Click tiles to build dust roads  [ESC to cancel]",
             Tool.TRACK:             "Click tiles to lay mag-rails  [ESC to cancel]",
@@ -304,7 +304,7 @@ def _hint_text(self, tool: Tool, status: str) -> str:
         cy = (y1 + y2) // 2
         self._text(screen, label, cx, cy, 12, (255, 255, 255), bold=True, anchor="center")
 
-       def _draw_bridge_sub(self, screen: pygame.Surface) -> None:   # v1.1 #7
+    def _draw_bridge_sub(self, screen: pygame.Surface) -> None:   # v1.1 #7
         specs = [
             (_BTN_BRIDGE_L1, "L1 BASIC\n10 Fe · Hauler", BridgeType.WOODEN),
             (_BTN_BRIDGE_L2, "L2 REIN\n10 Al · +Rover", BridgeType.STONE),
@@ -323,7 +323,7 @@ def _hint_text(self, tool: Tool, status: str) -> str:
             self._text(screen, line2, cx, y1 + 19, 8, (160, 200, 255), anchor="center")
 
 
-     def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -> None:
+    def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -> None:
         specs = [
             (_BTN_SPD_PAUSE, "||",  TimeSpeed.PAUSE),
             (_BTN_SPD_1,     "1x",  TimeSpeed.NORMAL),
@@ -342,7 +342,7 @@ def _hint_text(self, tool: Tool, status: str) -> str:
             self._text(screen, label, cx, cy, 9, (200, 255, 180), bold=True, anchor="center")
 
 
-    def _draw_vehicle_popup(self, screen: pygame.Surface, garage: List, vehicles: List) -> None:  # v1.1 #6
+    def _draw_vehicle_popup(self, screen: pygame.Surface, garage: List, vehicles: List) -> None:  
         card_h = _POPUP_Y2 - _POPUP_Y1
         total_w = len(VEHICLE_DEFS) * (_CARD_W + _CARD_GAP) + _FLEET_W + 30
 
@@ -410,7 +410,7 @@ def _hint_text(self, tool: Tool, status: str) -> str:
 
 
 
-            def _draw_routes_panel(self, screen: pygame.Surface, routes: List) -> None:  # v1.1 #14
+    def _draw_routes_panel(self, screen: pygame.Surface, routes: List) -> None:  
         if not routes:
             panel_h = 48
         else:
@@ -452,7 +452,7 @@ def _hint_text(self, tool: Tool, status: str) -> str:
 
    
    
-    def _draw_garage_panel(self, screen: pygame.Surface, garage_vehicles: List) -> None:  # v1.1 #13
+    def _draw_garage_panel(self, screen: pygame.Surface, garage_vehicles: List) -> None: 
         panel_h = max(60, 36 + len(garage_vehicles) * _GARAGE_ROW_H + 10)
 
         pygame.draw.rect(screen, (14, 22, 38), (_GARAGE_PANEL_X - 4, _GARAGE_PANEL_Y - 4,

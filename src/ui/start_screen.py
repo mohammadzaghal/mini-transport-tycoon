@@ -98,7 +98,7 @@ class StartScreen:
         color: tuple,
         bold: bool = False,
         anchor: str = "nw",
-    ) -> None:
+       ) -> None:
         surf = self._font(size, bold).render(text, True, color)
         rx, ry = x, y
         if anchor == "center":
@@ -109,7 +109,7 @@ class StartScreen:
         screen.blit(surf, (rx, ry))
 
 
-  def draw(self, screen: pygame.Surface) -> None:
+    def draw(self, screen: pygame.Surface) -> None:
         self._hint_tick += 1
 
        
@@ -183,7 +183,7 @@ class StartScreen:
 
 
 
- def _render_controls(self, surf: pygame.Surface) -> None:
+    def _render_controls(self, surf: pygame.Surface) -> None:
         """Render controls in two balanced columns (index-based split)."""
         col_w   = WINDOW_WIDTH // 2 - 40
         col0_x  = 20
@@ -244,7 +244,7 @@ class StartScreen:
         self._max_scroll = max(0, total_h - surf_h + 20)
 
 
-        def handle_event(self, event: pygame.event.Event) -> bool:
+    def handle_event(self, event: pygame.event.Event) -> bool:
         """Return True when the player wants to start the game."""
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             if self._btn_rect is not None:
