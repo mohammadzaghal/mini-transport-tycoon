@@ -181,3 +181,34 @@ class MapRenderer:
                     )
 
         self._draw_vehicles(screen, camera, vehicles)
+        
+    def _draw_rocks(self, screen: pygame.Surface, x: int, y: int) -> None:
+        import random
+        rng = random.Random(x * 100 + y)
+        for _ in range(2):
+            rx = x + rng.randint(4, TILE_SIZE - 5)
+            ry = y + rng.randint(4, TILE_SIZE - 5)
+            rw = rng.randint(5, 10)
+            rh = rng.randint(3, 6)
+            pygame.draw.ellipse(screen, (155, 85, 50), (rx - rw//2, ry - rh//2, rw, rh))
+            pygame.draw.ellipse(screen, (195, 115, 68), (rx - rw//2, ry - rh//2, rw, rh), 1)
+
+    def _draw_entry_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        mid = TILE_SIZE // 2
+        r = 6
+        pts = [
+            (x + mid,     y + mid - r),
+            (x + mid + r, y + mid),
+            (x + mid,     y + mid + r),
+            (x + mid - r, y + mid),
+        ]
+        pygame.draw.polygon(screen, (255, 230, 40), pts)
+        pygame.draw.polygon(screen, (200, 140,  0), pts, 1)
+
+    def _draw_bank_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        font = self._get_bank_font()
+        surf = font.render("$", True, (255, 208, 96))
+        screen.blit(surf, (
+            x + TILE_SIZE // 2 - surf.get_width()  // 2,
+            y + TILE_SIZE // 2 - surf.get_height() // 2,
+        ))
