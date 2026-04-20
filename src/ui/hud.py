@@ -323,85 +323,87 @@ def _hint_text(self, tool: Tool, status: str) -> str:
             self._text(screen, line2, cx, y1 + 19, 8, (160, 200, 255), anchor="center")
 
 
-    def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -> None:
+     def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -> None:
         specs = [
-            (_BTN_SPD_PAUSE, "II",  TimeSpeed.PAUSE),
+            (_BTN_SPD_PAUSE, "||",  TimeSpeed.PAUSE),
             (_BTN_SPD_1,     "1x",  TimeSpeed.NORMAL),
             (_BTN_SPD_2,     "2x",  TimeSpeed.FAST),
             (_BTN_SPD_4,     "4x",  TimeSpeed.VERY_FAST),
         ]
         for rect, label, spd in specs:
             x1, y1, x2, y2 = rect
-            active  = time_speed == spd
-            fill    = (176, 64, 16) if active else (58, 20, 6)
-            outline = (255, 176, 96) if active else (160, 64, 16)
-            pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1))
-            pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 1)
+            active = time_speed == spd
+            fill    = (50, 80, 50) if active else (20, 30, 20)
+            outline = (100, 200, 80) if active else (40, 70, 40)
+            pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1), border_radius=3)
+            pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 1, border_radius=3)
             cx = (x1 + x2) // 2
             cy = (y1 + y2) // 2
-            self._text(screen, label, cx, cy, 9, (255, 255, 255), bold=True, anchor="center")
+            self._text(screen, label, cx, cy, 9, (200, 255, 180), bold=True, anchor="center")
 
-    def _draw_vehicle_popup(self, screen: pygame.Surface, garage: List, vehicles: List) -> None:
-        from src.config import VEHICLE_DEFS as _VDEFS
+
+    def _draw_vehicle_popup(self, screen: pygame.Surface, garage: List, vehicles: List) -> None:  # v1.1 #6
         card_h = _POPUP_Y2 - _POPUP_Y1
-        total_w = len(_VDEFS) * (_CARD_W + _CARD_GAP) + _FLEET_W + 30
+        total_w = len(VEHICLE_DEFS) * (_CARD_W + _CARD_GAP) + _FLEET_W + 30
 
-        pygame.draw.rect(screen, (22, 6, 0),   (_POPUP_X1 - 12, _POPUP_Y1 - 32, total_w + 14, card_h + 42))
-        pygame.draw.rect(screen, (192, 80, 16), (_POPUP_X1 - 12, _POPUP_Y1 - 32, total_w + 14, card_h + 42), 2)
+        pygame.draw.rect(screen, (12, 18, 28), (_POPUP_X1 - 8, _POPUP_Y1 - 30, total_w + 16, card_h + 40))
+        pygame.draw.rect(screen, (50, 120, 50), (_POPUP_X1 - 8, _POPUP_Y1 - 30, total_w + 16, card_h + 40), 2)
 
-        
-        self._text(screen, "Purchase:", _POPUP_X1, _POPUP_Y1 - 24, 10, (255, 144, 80), bold=True)
+        self._text(screen, "PURCHASE VEHICLES:", _POPUP_X1, _POPUP_Y1 - 22, 10, (100, 200, 100), bold=True)
 
-        for i, vdef in enumerate(_VDEFS):
+        type_labels = {
+            VehicleType.BUS:   "Road · Passengers",
+            VehicleType.TRUCK: "Road · Cargo",
+            VehicleType.TRAIN: "Track · Bulk Cargo",
+        }
+
+        for i, vdef in enumerate(VEHICLE_DEFS):
             cx1 = _POPUP_X1 + i * (_CARD_W + _CARD_GAP)
-            cx2 = cx1 + _CARD_W
-
-            pygame.draw.rect(screen, (58, 18, 6),    (cx1, _POPUP_Y1, _CARD_W, card_h))
-            pygame.draw.rect(screen, (208, 80, 16),  (cx1, _POPUP_Y1, _CARD_W, card_h), 2)
+            pygame.draw.rect(screen, (20, 30, 44), (cx1, _POPUP_Y1, _CARD_W, card_h))
+            pygame.draw.rect(screen, (50, 90, 50), (cx1, _POPUP_Y1, _CARD_W, card_h), 1)
 
             swatch = _hex_to_rgb(vdef["color"])
-            pygame.draw.rect(screen, swatch,          (cx1 + 10, _POPUP_Y1 + 12, 24, 24))
-            pygame.draw.rect(screen, (255, 255, 255), (cx1 + 10, _POPUP_Y1 + 12, 24, 24), 1)
+            pygame.draw.rect(screen, swatch,          (cx1 + 8, _POPUP_Y1 + 10, 20, 20))
+            pygame.draw.rect(screen, (255, 255, 255), (cx1 + 8, _POPUP_Y1 + 10, 20, 20), 1)
 
-            self._text(screen, vdef["name"],  cx1 + 42, _POPUP_Y1 + 14, 11, (255, 255, 255), bold=True)
-            self._text(screen, vdef["desc"],  cx1 + 10, _POPUP_Y1 + 50, 9,  (255, 176, 128))
-            self._text(screen, "${:,}".format(vdef["cost"]), cx1 + 10, _POPUP_Y1 + 74, 13, (255, 224, 96), bold=True)
+            self._text(screen, vdef["name"],  cx1 + 34, _POPUP_Y1 + 12, 11, (220, 255, 200), bold=True)
+            self._text(screen, type_labels.get(vdef["vehicle_type"], ""), cx1 + 8, _POPUP_Y1 + 38, 8, (160, 200, 180))
+            self._text(screen, "${:,}".format(vdef["cost"]), cx1 + 8, _POPUP_Y1 + 56, 13, (255, 220, 80), bold=True)
             self._text(screen, "Spd {:.1f}  Cap {}".format(vdef["speed"], vdef["capacity"]),
-                       cx1 + 10, _POPUP_Y1 + 96, 8, (180, 140, 100))
-            self._text(screen, "Click to buy", (cx1 + cx2) // 2, _POPUP_Y2 - 16, 8, (255, 128, 64), anchor="center")
+                       cx1 + 8, _POPUP_Y1 + 78, 8, (160, 190, 160))
+            self._text(screen, vdef["desc"], cx1 + 8, _POPUP_Y1 + 96, 8, (140, 170, 140))
+            self._text(screen, "▶ Click to buy", (cx1 + cx1 + _CARD_W) // 2, _POPUP_Y2 - 12, 8, (80, 200, 80), anchor="center")
 
-        
-        pygame.draw.line(screen, (192, 80, 32),
-                         (_FLEET_X1 - 12, _POPUP_Y1 - 28), (_FLEET_X1 - 12, _POPUP_Y2), 1)
+        pygame.draw.line(screen, (50, 120, 50), (_FLEET_X1 - 10, _POPUP_Y1 - 26), (_FLEET_X1 - 10, _POPUP_Y2), 1)
 
-        owned_y0  = _POPUP_Y1 + 20         
-        active_y0 = owned_y0 + len(_VDEFS) * _FLEET_ROW_H + 18   
-        self._text(screen, "OWNED",     _FLEET_X1, _POPUP_Y1 + 4,  9, (255, 144, 80), bold=True)
-        self._text(screen, "ON ROUTES", _FLEET_X1, active_y0 - 14, 9, (255, 144, 80), bold=True)
-        pygame.draw.line(screen, (160, 60, 20),
-                         (_FLEET_X1, active_y0 - 16), (_FLEET_X2, active_y0 - 16), 1)
+        owned_y0  = _POPUP_Y1 + 20
+        active_y0 = owned_y0 + len(VEHICLE_DEFS) * _FLEET_ROW_H + 18
 
-        for i, vdef in enumerate(_VDEFS):
+        self._text(screen, "OWNED",     _FLEET_X1, _POPUP_Y1 + 4, 9, (100, 200, 100), bold=True)
+        self._text(screen, "ON ROUTES", _FLEET_X1, active_y0 - 14, 9, (100, 200, 100), bold=True)
+        pygame.draw.line(screen, (50, 100, 50), (_FLEET_X1, active_y0 - 16), (_FLEET_X2, active_y0 - 16), 1)
+
+        for i, vdef in enumerate(VEHICLE_DEFS):
             color    = _hex_to_rgb(vdef["color"])
             n_owned  = sum(1 for v in garage   if v.vdef_name == vdef["name"])
             n_active = sum(1 for v in vehicles if v.vdef_name == vdef["name"])
 
             oy = owned_y0 + i * _FLEET_ROW_H
             if n_owned > 0:
-                pygame.draw.rect(screen, (75, 28, 8), (_FLEET_X1, oy, _FLEET_W, _FLEET_ROW_H - 2))
-            pygame.draw.rect(screen, color, (_FLEET_X1 + 4, oy + 5, 10, 10))
-            name_col = (255, 255, 255) if n_owned > 0 else (100, 70, 50)
-            self._text(screen, vdef["name"], _FLEET_X1 + 18, oy + 4, 9, name_col)
-            count_col = (255, 200, 60) if n_owned > 0 else (80, 55, 35)
-            self._text(screen, "\xd7{}".format(n_owned), _FLEET_X2 - 4, oy + 4, 9, count_col, bold=True, anchor="ne")
+                pygame.draw.rect(screen, (25, 50, 25), (_FLEET_X1, oy, _FLEET_W, _FLEET_ROW_H - 2))
+            pygame.draw.rect(screen, color, (_FLEET_X1 + 3, oy + 5, 10, 10))
+            nc = (220, 255, 200) if n_owned > 0 else (80, 110, 80)
+            self._text(screen, vdef["name"], _FLEET_X1 + 16, oy + 4, 9, nc)
+            cc = (255, 200, 60) if n_owned > 0 else (70, 100, 70)
+            self._text(screen, "×{}".format(n_owned), _FLEET_X2 - 3, oy + 4, 9, cc, bold=True, anchor="ne")
             if n_owned > 0:
-                self._text(screen, "deploy \u25b6", _FLEET_X1 + 18, oy + 14, 7, (255, 110, 40))
+                self._text(screen, "deploy ▶", _FLEET_X1 + 16, oy + 14, 7, (80, 200, 80))
 
             ay = active_y0 + i * _FLEET_ROW_H
             if n_active > 0:
                 pygame.draw.rect(screen, (20, 50, 20), (_FLEET_X1, ay, _FLEET_W, _FLEET_ROW_H - 2))
-            pygame.draw.rect(screen, color, (_FLEET_X1 + 4, ay + 5, 10, 10))
-            name_col2 = (200, 255, 200) if n_active > 0 else (60, 80, 60)
-            self._text(screen, vdef["name"], _FLEET_X1 + 18, ay + 4, 9, name_col2)
-            count_col2 = (100, 230, 100) if n_active > 0 else (50, 80, 50)
-            self._text(screen, "\xd7{}".format(n_active), _FLEET_X2 - 4, ay + 4, 9, count_col2, bold=True, anchor="ne")
+            pygame.draw.rect(screen, color, (_FLEET_X1 + 3, ay + 5, 10, 10))
+            nc2 = (180, 255, 180) if n_active > 0 else (60, 90, 60)
+            self._text(screen, vdef["name"], _FLEET_X1 + 16, ay + 4, 9, nc2)
+            cc2 = (80, 220, 80) if n_active > 0 else (50, 80, 50)
+            self._text(screen, "×{}".format(n_active), _FLEET_X2 - 3, ay + 4, 9, cc2, bold=True, anchor="ne")
