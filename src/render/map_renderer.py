@@ -88,7 +88,7 @@ class MapRenderer:
             return "forest"
         if tile.tile_type == TileType.ROAD:
             return "road_route" if tile.is_route_road else "road"
-        if tile.tile_type == TileType.TRACK:                      # v1.1 #3
+        if tile.tile_type == TileType.TRACK:                      
             return "track_route" if tile.is_route_road else "track"
         if tile.tile_type == TileType.CITY:
             return "city_bank" if tile.is_bank else "city"
@@ -96,3 +96,88 @@ class MapRenderer:
             if tile.facility_ref is not None:
                 return f"fac_{tile.facility_ref.fac_type.name}"
         return None
+    
+    def build_map_image(self, grid: Grid) -> None:
+        sp = self._get_sprites()
+        self._map_w = grid.width  * TILE_SIZE
+        self._map_h = grid.height * TILE_SIZE
+        self._map_surface = pygame.Surface((self._map_w, self._map_h))
+        for tile in grid.iter_tiles():
+            self._paint_tile(tile)
+
+    def _paint_tile(self, tile) -> None:
+        if self._map_surface is None:
+            return
+        x0 = tile.x * TILE_SIZE
+        y0 = tile.y * TILE_SIZE
+        sp = self._get_sprites()
+        key = self._tile_sprite_key(tile)
+        surf = sp.tile(key) if key else None
+        if surf is not None:
+            self._map_surface.blit(surf, (x0, y0))
+        else:
+            color = _tile_color(tile)
+            pygame.draw.rect(self._map_surface, color, (x0, y0, TILE_SIZE, TILE_SIZE))
+
+    def update_tile(self, x: int, y: int, tile) -> None:
+        if self._map_surface is None:
+            return
+        self._paint_tile(tile)
+
+
+    def draw(
+        self,
+        screen: pygame.Surface,
+        grid: Grid,
+        camera,
+        routes,
+        vehicles,
+        hover_tile=None,
+        stops=None,
+    ) -> None:
+        screen.fill((10, 6, 4))  
+
+        if self._map_surface is not None:
+            screen.blit(self._map_surface, (-camera.x, -camera.y))
+
+        visible_left   = max(0, camera.x // TILE_SIZE)
+        visible_top    = max(0, camera.y // TILE_SIZE)
+        visible_right  = min(grid.width,  (camera.x + WINDOW_WIDTH) // TILE_SIZE + 2)
+        visible_bottom = min(grid.height, (camera.y + WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT) // TILE_SIZE + 2)
+
+        for y in range(visible_top, visible_bottom):
+            for x in range(visible_left, visible_right):
+                tile = grid.get_tile(x, y)
+                if tile is None:
+                    continue
+                sx = x * TILE_SIZE - camera.x
+                sy = y * TILE_SIZE - camera.y
+
+                if tile.tile_type == TileType.FOREST:
+                    self._draw_rocks(screen, sx, sy)
+
+                if tile.is_entry_point:
+                    self._draw_entry_marker(screen, sx, sy)
+
+                if tile.is_bank:
+                    self._draw_bank_marker(screen, sx, sy)
+
+                if tile.is_stop:
+                    self._draw_stop_marker(screen, sx, sy)
+
+                if tile.is_garage:
+                    self._draw_garage_label(screen, sx, sy)
+
+                if (tile.tile_type == TileType.FACILITY
+                        and tile.facility_ref is not None
+                        and tile.x == tile.facility_ref.x
+                        and tile.y == tile.facility_ref.y):
+                    self._draw_facility_label(screen, sx, sy, tile)
+
+                if hover_tile == (x, y):
+                    pygame.draw.rect(
+                        screen, (255, 200, 80),
+                        (sx + 1, sy + 1, TILE_SIZE - 2, TILE_SIZE - 2), 2,
+                    )
+
+        self._draw_vehicles(screen, camera, vehicles)
