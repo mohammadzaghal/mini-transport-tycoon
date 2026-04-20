@@ -291,7 +291,9 @@ def _hint_text(self, tool: Tool, status: str) -> str:
         }
         return hints.get(tool, status)
 
-        
+
+
+
     def _draw_action_btn(self, screen: pygame.Surface, rect, label: str, active: bool) -> None:
         x1, y1, x2, y2 = rect
         fill    = (208, 80, 16)  if active else (90, 32, 8)
@@ -301,6 +303,25 @@ def _hint_text(self, tool: Tool, status: str) -> str:
         cx = (x1 + x2) // 2
         cy = (y1 + y2) // 2
         self._text(screen, label, cx, cy, 12, (255, 255, 255), bold=True, anchor="center")
+
+       def _draw_bridge_sub(self, screen: pygame.Surface) -> None:   # v1.1 #7
+        specs = [
+            (_BTN_BRIDGE_L1, "L1 BASIC\n10 Fe · Hauler", BridgeType.WOODEN),
+            (_BTN_BRIDGE_L2, "L2 REIN\n10 Al · +Rover", BridgeType.STONE),
+            (_BTN_BRIDGE_L3, "L3 MAG\n10 Ti · +Maglev", BridgeType.STEEL),
+        ]
+        for rect, label, bt in specs:
+            x1, y1, x2, y2 = rect
+            active = self.selected_bridge_type == bt
+            fill    = (60, 90, 130) if active else (25, 40, 60)
+            outline = (120, 180, 255) if active else (60, 90, 130)
+            pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1), border_radius=3)
+            pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 2, border_radius=3)
+            cx = (x1 + x2) // 2
+            line1, line2 = label.split("\n")
+            self._text(screen, line1, cx, y1 + 5, 9, (200, 220, 255), bold=True, anchor="center")
+            self._text(screen, line2, cx, y1 + 19, 8, (160, 200, 255), anchor="center")
+
 
     def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -> None:
         specs = [
