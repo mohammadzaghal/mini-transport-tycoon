@@ -206,52 +206,92 @@ class HUD:
         self,
         screen: pygame.Surface,
         money: int,
-        game_time: float,
-        time_speed: TimeSpeed,
-        tool: Tool,
-        status: str,
+        oil: int = 0,
+        iron_ore: int = 0,
+        alloy_ore: int = 0,
+        titanium_ore: int = 0,
+        game_time: float = 0.0,
+        time_speed: TimeSpeed = TimeSpeed.NORMAL,
+        tool: Tool = Tool.NONE,
+        status: str = "",
         garage: Optional[List] = None,
         vehicles: Optional[List] = None,
+        stops: Optional[List] = None,
+        routes: Optional[List] = None,
+        garage_panel_tile: Optional[tuple] = None,
+        garage_vehicles: Optional[List] = None,
     ) -> None:
         bar_y = _BAR_Y
 
-        pygame.draw.rect(screen, (26, 8, 0), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
-        pygame.draw.line(screen, (192, 80, 32), (0, bar_y), (WINDOW_WIDTH, bar_y), 2)
+        pygame.draw.rect(screen, (18, 10, 8), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
+        pygame.draw.line(screen, (160, 80, 30), (0, bar_y), (WINDOW_WIDTH, bar_y), 2)
 
-        self._text(screen, "CREDITS", 24, bar_y + 18, 9, (255, 144, 80), bold=True)
-        self._text(screen, "${:,}".format(money), 24, bar_y + 36, 20, (255, 224, 96), bold=True)
+        self._text(screen, "CREDITS", WINDOW_WIDTH - 8, bar_y + 8, 9, (255, 180, 80),
+                   bold=True, anchor="ne")
+        self._text(screen, "${:,}".format(money), WINDOW_WIDTH - 8, bar_y + 24, 20,
+                   (255, 224, 96) if money >= 0 else (255, 80, 80), bold=True, anchor="ne")
+        fuel_col = (100, 240, 255) if oil > 0 else (80, 100, 110)
+        self._text(screen, "FUEL: {}".format(int(oil)), WINDOW_WIDTH - 8, bar_y + 50, 9,
+                   fuel_col, bold=True, anchor="ne")
+      
+        ore_col = (255, 200, 120)
+        self._text(screen, "Fe: {}  Al: {}  Ti: {}".format(int(iron_ore), int(alloy_ore), int(titanium_ore)),
+                   WINDOW_WIDTH - 8, bar_y + 63, 11, ore_col, bold=True, anchor="ne")
 
-        self._draw_action_btn(screen, _BTN_ROAD,     "ROAD",     tool == Tool.ROAD)
-        self._draw_action_btn(screen, _BTN_VEHICLES, "VEHICLES", tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2})
-        route_active = tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}
-        self._draw_action_btn(screen, _BTN_ROUTE,    "ROUTE",    route_active)
-
-        if tool == Tool.ROUTE_P1:
-            hint = "Click a city or facility entry point (first endpoint)"
-        elif tool == Tool.ROUTE_P2:
-            hint = "Click the second entry point"
-        elif tool == Tool.DEPLOY_VEHICLE_P1:
-            hint = "Click the first route endpoint on the map"
-        elif tool == Tool.DEPLOY_VEHICLE_P2:
-            hint = "Click the second route endpoint on the map"
-        else:
-            hint = status
-
-        self._text(screen, hint, 660, bar_y + 48, 10, (255, 216, 160))
-
-        self._draw_speed_buttons(screen, time_speed)
-
+        
         total_secs = int(game_time)
         h = total_secs // 3600
         m = (total_secs % 3600) // 60
         s = total_secs % 60
-        time_str = "{:02d}:{:02d}:{:02d}".format(h, m, s)
-        self._text(screen, time_str, WINDOW_WIDTH - 20, bar_y + 74, 11, (200, 232, 255), bold=True, anchor="ne")
+        day = total_secs // 60 + 1
+        self._text(screen, "SOL {:d}  {:02d}:{:02d}:{:02d}".format(day, h, m, s),
+                   WINDOW_WIDTH - 8, bar_y + 90, 9, (200, 180, 140), bold=True, anchor="ne")
+
+        
+        hint = self._hint_text(tool, status)
+        self._text(screen, hint, WINDOW_WIDTH // 2, bar_y + 8, 10, (180, 210, 160), anchor="center")
+
+        self._draw_action_btn(screen, _BTN_ROAD,     "ROAD[R]",  tool == Tool.ROAD)
+        self._draw_action_btn(screen, _BTN_TRACK,    "RAIL[T]",  tool == Tool.TRACK)  # v1.1 #18
+        self._draw_action_btn(screen, _BTN_VEHICLES, "FLEET",    tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2})
+        self._draw_action_btn(screen, _BTN_ROUTE,    "ROUTE",    tool in {Tool.ROUTE_P1, Tool.ROUTE_P2})
+        self._draw_action_btn(screen, _BTN_STOP,     "STOP[S]",  tool == Tool.STOP)
+        self._draw_action_btn(screen, _BTN_BRIDGE,   "BRIDGE[K]",tool == Tool.BRIDGE)
+        self._draw_action_btn(screen, _BTN_BULLDOZE, "DEMO[B]",  tool == Tool.BULLDOZE)
+        self._draw_action_btn(screen, _BTN_GARAGE,   "GARAGE[G]",tool == Tool.GARAGE)
+
+        if tool == Tool.BRIDGE:
+            self._draw_bridge_sub(screen)
+
+        self._draw_speed_buttons(screen, time_speed)
 
         if tool == Tool.VEHICLES:
             self._draw_vehicle_popup(screen, garage or [], vehicles or [])
 
+        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
+            self._draw_routes_panel(screen, routes or [])
 
+        if garage_panel_tile is not None:
+            self._draw_garage_panel(screen, garage_vehicles or [])
+
+
+
+def _hint_text(self, tool: Tool, status: str) -> str:
+        hints = {
+            Tool.ROAD:              "Click tiles to build dust roads  [ESC to cancel]",
+            Tool.TRACK:             "Click tiles to lay mag-rails  [ESC to cancel]",
+            Tool.ROUTE_P1:          "Click FIRST entry point (◆) or stop (S)",
+            Tool.ROUTE_P2:          "Click SECOND entry point (◆) or stop (S)",
+            Tool.STOP:              "Click a road or rail tile to place a stop  [ESC to cancel]",
+            Tool.BRIDGE:            "Select bridge level below, then click an ICE tile",
+            Tool.BULLDOZE:          "1st click: remove route (road stays). 2nd click: remove tile.",
+            Tool.GARAGE:            "Click an open regolith tile to build a garage  [ESC to cancel]",
+            Tool.DEPLOY_VEHICLE_P1: "Click FIRST route endpoint",
+            Tool.DEPLOY_VEHICLE_P2: "Click SECOND route endpoint",
+        }
+        return hints.get(tool, status)
+
+        
     def _draw_action_btn(self, screen: pygame.Surface, rect, label: str, active: bool) -> None:
         x1, y1, x2, y2 = rect
         fill    = (208, 80, 16)  if active else (90, 32, 8)
