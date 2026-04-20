@@ -75,29 +75,35 @@ _MID = len(_CONTROLS) // 2
 
 
 class StartScreen:
-    def __init__(self, game):
-        self.game = game
-        self.font_title = pygame.font.SysFont("Arial", 36, bold=True)
-        self.font_header = pygame.font.SysFont("Arial", 24, bold=True)
-        self.font_text = pygame.font.SysFont("Arial", 20)
-        self.bg_color = (30, 30, 30)
-        self.text_color = (220, 220, 220)
+    def __init__(self) -> None:
+        self._fonts: dict = {}
+        self._btn_rect: tuple | None = None
+        self._scroll_y: int = 0
+        self._max_scroll: int = 0
+        self._hint_tick: int = 0
 
-    def draw(self):
-        surface = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
-        surface.fill(self.bg_color)
+    def _font(self, size: int, bold: bool = False) -> pygame.font.Font:
+        key = (size, bold)
+        if key not in self._fonts:
+            self._fonts[key] = pygame.font.SysFont("segoeui", size, bold=bold)
+        return self._fonts[key]
 
-        # Draw title
-        title_surf = self.font_title.render("MARS AUTHORITY", True, self.text_color)
-        title_rect = title_surf.get_rect(center=(WINDOW_WIDTH // 2, 60))
-        surface.blit(title_surf, title_rect)
-
-        # Draw controls
-        y_offset = 120
-        for i, (key, desc, is_header) in enumerate(_CONTROLS):
-            font = self.font_header if is_header else self.font_text
-            text_surf = font.render(f"{key:15} {desc}", True, self.text_color)
-            text_rect = text_surf.get_rect(topleft=(50, y_offset + i * 30))
-            surface.blit(text_surf, text_rect)
-
-        return surface
+    def _text(
+        self,
+        screen: pygame.Surface,
+        text: str,
+        x: int,
+        y: int,
+        size: int,
+        color: tuple,
+        bold: bool = False,
+        anchor: str = "nw",
+    ) -> None:
+        surf = self._font(size, bold).render(text, True, color)
+        rx, ry = x, y
+        if anchor == "center":
+            rx -= surf.get_width() // 2
+            ry -= surf.get_height() // 2
+        elif anchor in ("ne", "e"):
+            rx -= surf.get_width()
+        screen.blit(surf, (rx, ry))
