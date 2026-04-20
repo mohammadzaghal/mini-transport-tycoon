@@ -131,7 +131,7 @@ class HUD:
 
 
 
-   def is_in_garage_panel(self, x: int, y: int) -> bool:    
+    def is_in_garage_panel(self, x: int, y: int) -> bool:    
         """Return True if (x, y) falls within the garage upgrade panel bounds."""
         panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
         return (
