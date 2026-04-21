@@ -5,6 +5,7 @@ from typing import Optional, List
 import pygame
 
 from src.config import BOTTOM_BAR_HEIGHT, VEHICLE_DEFS, VEHICLE_LEVEL_DEFS, WINDOW_HEIGHT, WINDOW_WIDTH
+from src.ui.fonts import font_ui
 from src.enums import TimeSpeed, Tool, BridgeType, VehicleType
 
 
@@ -73,10 +74,7 @@ class HUD:
         self.selected_bridge_type: BridgeType = BridgeType.WOODEN
 
     def _font(self, size: int, bold: bool = False) -> pygame.font.Font:
-        key = (size, bold)
-        if key not in self._fonts:
-            self._fonts[key] = pygame.font.SysFont("segoeui", size, bold=bold)
-        return self._fonts[key]
+        return font_ui(size, bold=bold)
 
     def _text(self, screen, text, x, y, size, color, bold=False, anchor="nw"):
         surf = self._font(size, bold).render(text, True, color)
@@ -86,6 +84,7 @@ class HUD:
         elif anchor in ("ne", "e"):
             x -= surf.get_width()
         screen.blit(surf, (x, y))
+
 
     def button_at(
         self,
@@ -127,6 +126,34 @@ class HUD:
             if action is not None:
                 return action
 
+        return None
+
+    def is_in_garage_panel(self, x: int, y: int) -> bool:
+        panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
+        return (
+            _GARAGE_PANEL_X - 4 <= x <= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
+            and _GARAGE_PANEL_Y - 4 <= y <= _GARAGE_PANEL_Y + panel_h_max + 8
+        )
+
+    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]:
+        if not garage_vehicles:
+            return None
+        px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        if close_x <= x <= close_x + 18 and close_y <= y <= close_y + 16:
+            return "close_garage_panel"
+        for i in range(len(garage_vehicles)):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            if ry <= y <= ry + _GARAGE_ROW_H - 2:
+                upg_x1 = px2 - 128
+                upg_x2 = px2 - 68
+                sell_x1 = px2 - 63
+                sell_x2 = px2 - 4
+                if upg_x1 <= x <= upg_x2:
+                    return "upgrade_vehicle_{}".format(i)
+                if sell_x1 <= x <= sell_x2:
+                    return "sell_vehicle_{}".format(i)
         return None
 
 
@@ -185,7 +212,7 @@ class HUD:
                 return i if count > 0 else None
         return None
 
-    def _routes_panel_action(self, x: int, y: int, routes: List) -> Optional[str]:  # v1.1 #14
+    def _routes_panel_action(self, x: int, y: int, routes: List) -> Optional[str]:
         if not routes:
             return None
         px1 = _ROUTES_PANEL_X
