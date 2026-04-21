@@ -6,13 +6,14 @@ from src.config import BOTTOM_BAR_HEIGHT, TILE_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH
 from src.enums import TileType
 from src.models.grid import Grid
 from src.assets.sprites import SpriteCache, TILE, _hex_to_rgb
+from src.ui.fonts import font_map
 
 
 _FALLBACK = {
     TileType.GRASS:    (185, 100, 55),
     TileType.FOREST:   (140,  70, 35),
     TileType.ROAD:     (155, 120, 80),
-    TileType.TRACK:    (100,  70, 50),
+    TileType.TRACK:    (100,  70, 50),                            
     TileType.CITY:     (170, 178, 195),
     TileType.FACILITY: (80,   75, 90),
     TileType.WATER:    (170, 195, 220),
@@ -52,25 +53,25 @@ class MapRenderer:
 
     def _get_bank_font(self) -> pygame.font.Font:
         if self._bank_font is None:
-            self._bank_font = pygame.font.SysFont("segoeui", 14, bold=True)
+            self._bank_font = font_map(14, bold=True)
         return self._bank_font
 
     def _get_stop_font(self) -> pygame.font.Font:
         if self._stop_font is None:
-            self._stop_font = pygame.font.SysFont("segoeui", 12, bold=True)
+            self._stop_font = font_map(12, bold=True)
         return self._stop_font
 
     def _get_label_font(self) -> pygame.font.Font:
         if self._label_font is None:
-            self._label_font = pygame.font.SysFont("segoeui", 10, bold=True)
+            self._label_font = font_map(10, bold=True)
         return self._label_font
 
     def _get_sprites(self) -> SpriteCache:
         if self._sprites is None:
             self._sprites = SpriteCache.get()
             self._sprites.build()
-        return self._sprites
-
+        return self._sprites    
+            
     def _tile_sprite_key(self, tile) -> str | None:
         if tile.is_entry_point:
             return "road_entry"
@@ -87,7 +88,7 @@ class MapRenderer:
             return "forest"
         if tile.tile_type == TileType.ROAD:
             return "road_route" if tile.is_route_road else "road"
-        if tile.tile_type == TileType.TRACK:
+        if tile.tile_type == TileType.TRACK:                      
             return "track_route" if tile.is_route_road else "track"
         if tile.tile_type == TileType.CITY:
             return "city_bank" if tile.is_bank else "city"
@@ -95,7 +96,7 @@ class MapRenderer:
             if tile.facility_ref is not None:
                 return f"fac_{tile.facility_ref.fac_type.name}"
         return None
-
+    
     def build_map_image(self, grid: Grid) -> None:
         sp = self._get_sprites()
         self._map_w = grid.width  * TILE_SIZE
@@ -123,6 +124,7 @@ class MapRenderer:
             return
         self._paint_tile(tile)
 
+
     def draw(
         self,
         screen: pygame.Surface,
@@ -133,7 +135,7 @@ class MapRenderer:
         hover_tile=None,
         stops=None,
     ) -> None:
-        screen.fill((10, 6, 4))
+        screen.fill((10, 6, 4))  
 
         if self._map_surface is not None:
             screen.blit(self._map_surface, (-camera.x, -camera.y))
@@ -179,7 +181,7 @@ class MapRenderer:
                     )
 
         self._draw_vehicles(screen, camera, vehicles)
-
+        
     def _draw_rocks(self, screen: pygame.Surface, x: int, y: int) -> None:
         import random
         rng = random.Random(x * 100 + y)
