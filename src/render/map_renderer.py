@@ -8,12 +8,11 @@ from src.models.grid import Grid
 from src.assets.sprites import SpriteCache, TILE, _hex_to_rgb
 from src.ui.fonts import font_map
 
-
 _FALLBACK = {
     TileType.GRASS:    (185, 100, 55),
     TileType.FOREST:   (140,  70, 35),
     TileType.ROAD:     (155, 120, 80),
-    TileType.TRACK:    (100,  70, 50),                            
+    TileType.TRACK:    (100,  70, 50),                            # v1.1 #3
     TileType.CITY:     (170, 178, 195),
     TileType.FACILITY: (80,   75, 90),
     TileType.WATER:    (170, 195, 220),
@@ -32,14 +31,12 @@ _FAC_ABBR = {
     "Crystal Lab": "CRYS",
 }
 
-
 def _tile_color(tile) -> tuple:
     if tile.is_entry_point:
         return ENTRY_POINT_COLOR
     if tile.tile_type == TileType.ROAD and tile.is_route_road:
         return ROUTE_ROAD_COLOR
     return _FALLBACK.get(tile.tile_type, (30, 30, 30))
-
 
 class MapRenderer:
     def __init__(self) -> None:
@@ -70,9 +67,10 @@ class MapRenderer:
         if self._sprites is None:
             self._sprites = SpriteCache.get()
             self._sprites.build()
-        return self._sprites    
-            
+        return self._sprites
+
     def _tile_sprite_key(self, tile) -> str | None:
+        """Return sprite cache key for a tile, or None to use fallback."""
         if tile.is_entry_point:
             return "road_entry"
         if tile.is_garage:
@@ -88,7 +86,7 @@ class MapRenderer:
             return "forest"
         if tile.tile_type == TileType.ROAD:
             return "road_route" if tile.is_route_road else "road"
-        if tile.tile_type == TileType.TRACK:                      
+        if tile.tile_type == TileType.TRACK:                      # v1.1 #3
             return "track_route" if tile.is_route_road else "track"
         if tile.tile_type == TileType.CITY:
             return "city_bank" if tile.is_bank else "city"
@@ -96,7 +94,7 @@ class MapRenderer:
             if tile.facility_ref is not None:
                 return f"fac_{tile.facility_ref.fac_type.name}"
         return None
-    
+
     def build_map_image(self, grid: Grid) -> None:
         sp = self._get_sprites()
         self._map_w = grid.width  * TILE_SIZE
@@ -124,7 +122,6 @@ class MapRenderer:
             return
         self._paint_tile(tile)
 
-
     def draw(
         self,
         screen: pygame.Surface,
@@ -135,7 +132,7 @@ class MapRenderer:
         hover_tile=None,
         stops=None,
     ) -> None:
-        screen.fill((10, 6, 4))  
+        screen.fill((10, 6, 4))  # Dark Mars background
 
         if self._map_surface is not None:
             screen.blit(self._map_surface, (-camera.x, -camera.y))
@@ -181,8 +178,9 @@ class MapRenderer:
                     )
 
         self._draw_vehicles(screen, camera, vehicles)
-        
+
     def _draw_rocks(self, screen: pygame.Surface, x: int, y: int) -> None:
+        """Draw rock-outcrop detail overlay on rocky tiles."""
         import random
         rng = random.Random(x * 100 + y)
         for _ in range(2):
@@ -214,6 +212,7 @@ class MapRenderer:
         ))
 
     def _draw_stop_marker(self, screen: pygame.Surface, x: int, y: int) -> None:
+        """Draw a small stop sign on stop tiles."""
         pygame.draw.rect(screen, (220, 220, 220), (x + TILE_SIZE // 2 - 1, y + 4, 2, 20))
         pygame.draw.rect(screen, (20, 100, 220), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9))
         pygame.draw.rect(screen, (255, 255, 255), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9), 1)
@@ -230,8 +229,10 @@ class MapRenderer:
         ))
 
     def _draw_facility_label(self, screen: pygame.Surface, sx: int, sy: int, tile) -> None:
+        """Draw abbreviated facility name badge on the top-left tile of the facility."""
         name = tile.facility_ref.name
         abbr = _FAC_ABBR.get(name, name[:4].upper())
+
         badge = pygame.Surface((TILE_SIZE - 2, 12), pygame.SRCALPHA)
         badge.fill((0, 0, 0, 160))
         screen.blit(badge, (sx + 1, sy + TILE_SIZE - 13))
