@@ -6,7 +6,6 @@ omit =
     src/assets/*
     src/render/*
     src/game.py
-    src/engine/map_generator.py
 
 [report]
 show_missing = True
