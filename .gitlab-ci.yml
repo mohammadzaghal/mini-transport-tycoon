@@ -1,0 +1,54 @@
+stages:
+  - lint
+  - test
+
+default:
+  image: python:3.12-slim
+  cache:
+    key: pip-$CI_COMMIT_REF_SLUG
+    paths:
+      - .cache/pip
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONUNBUFFERED: "1"
+  # Run pygame headless in CI (no display / audio device available)
+  SDL_VIDEODRIVER: "dummy"
+  SDL_AUDIODRIVER: "dummy"
+
+.install_python_deps: &install_python_deps
+  - python -m pip install --upgrade pip
+  - pip install -r requirements.txt
+  - pip install pytest flake8
+
+.install_sdl_deps: &install_sdl_deps
+  - apt-get update -qq
+  - apt-get install -y --no-install-recommends
+      libsdl2-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-ttf-2.0-0
+      libfreetype6 libportmidi0
+
+lint:
+  stage: lint
+  script:
+    - *install_python_deps
+    # Fail only on real errors (syntax / undefined names)
+    - flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    # Soft style pass — report but do not fail
+    - flake8 . --count --exit-zero --max-complexity=12 --max-line-length=120 --statistics
+    # Byte-compile everything as an extra syntax safety net
+    - python -m compileall -q main.py src tests
+
+test:
+  stage: test
+  script:
+    - *install_sdl_deps
+    - *install_python_deps
+    - pytest -q --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+    paths:
+      - report.xml
+    expire_in: 1 week

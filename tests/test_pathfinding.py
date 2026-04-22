@@ -1,162 +1,163 @@
-"""Tests for src/engine/pathfinding.py"""
+"""Unit tests for src.engine.pathfinding.
+
+These tests build small synthetic grids so they are fast and deterministic,
+and they never touch pygame (pathfinding only depends on Grid/Tile/enums).
+"""
+from __future__ import annotations
+
 import pytest
-from src.models.grid import Grid
-from src.enums import TileType, BridgeType
+
 from src.engine.pathfinding import find_road_path, find_track_path
+from src.enums import BridgeType, TileType
+from src.models.grid import Grid
 
 
-def road_grid(width=10, height=10):
-    """Grid with a horizontal road across row 0."""
-    g = Grid(width, height)
-    for x in range(width):
-        g.set_tile_type(x, 0, TileType.ROAD)
-    return g
+def _blank_grid(w: int = 5, h: int = 5) -> Grid:
+    """Return a grid of all-GRASS tiles (nothing driveable)."""
+    return Grid(w, h)
 
 
-def track_grid(width=10, height=10):
-    """Grid with a horizontal track across row 0."""
-    g = Grid(width, height)
-    for x in range(width):
-        g.set_tile_type(x, 0, TileType.TRACK)
-    return g
+def _paint_road(grid: Grid, cells) -> None:
+    for (x, y) in cells:
+        grid.set_tile_type(x, y, TileType.ROAD)
 
 
-# ===========================================================================
-# find_road_path
-# ===========================================================================
+def _paint_track(grid: Grid, cells) -> None:
+    for (x, y) in cells:
+        grid.set_tile_type(x, y, TileType.TRACK)
+
 
 class TestFindRoadPath:
-    def test_same_start_and_goal(self):
-        g = road_grid()
-        path = find_road_path(g, (0, 0), (0, 0))
-        assert path == [(0, 0)]
+    def test_start_equals_goal_returns_single_tile(self):
+        grid = _blank_grid()
+        assert find_road_path(grid, (2, 2), (2, 2)) == [(2, 2)]
 
-    def test_adjacent_road_tiles(self):
-        g = road_grid()
-        path = find_road_path(g, (0, 0), (1, 0))
-        assert path == [(0, 0), (1, 0)]
+    def test_straight_horizontal_road(self):
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0), (2, 0), (3, 0)])
+        path = find_road_path(grid, (0, 0), (3, 0))
+        assert path == [(0, 0), (1, 0), (2, 0), (3, 0)]
 
-    def test_straight_horizontal_path(self):
-        g = road_grid()
-        path = find_road_path(g, (0, 0), (4, 0))
+    def test_l_shaped_road(self):
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)])
+        path = find_road_path(grid, (0, 0), (2, 2))
         assert path[0] == (0, 0)
-        assert path[-1] == (4, 0)
-        assert len(path) == 5
+        assert path[-1] == (2, 2)
+        # BFS gives the shortest path; with this layout only one path exists
+        assert path == [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
 
-    def test_no_path_through_grass(self):
-        """No road → should return empty list."""
-        g = Grid(5, 5)
-        path = find_road_path(g, (0, 0), (4, 0))
-        assert path == []
+    def test_no_road_returns_empty(self):
+        grid = _blank_grid()
+        assert find_road_path(grid, (0, 0), (3, 3)) == []
 
-    def test_goal_reachable_even_if_not_driveable(self):
-        """Pathfinding allows non-driveable goal tile (entry/stop)."""
-        g = road_grid()
-        # goal is grass (non-driveable), but BFS allows it as final step
-        path = find_road_path(g, (0, 0), (5, 1))
-        # Should find a path ending at (5,1) even though it's grass
-        assert path[-1] == (5, 1) if path else True
+    def test_disconnected_roads_return_empty(self):
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0)])          # island A
+        _paint_road(grid, [(3, 3), (4, 3)])          # island B, not connected
+        assert find_road_path(grid, (0, 0), (4, 3)) == []
 
-    def test_path_endpoints_correct(self):
-        g = road_grid()
-        path = find_road_path(g, (0, 0), (9, 0))
-        assert path[0] == (0, 0)
-        assert path[-1] == (9, 0)
+    def test_grass_gap_is_not_traversable(self):
+        """A single grass tile between two road tiles must break the path."""
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0), (3, 0), (4, 0)])  # gap at (2,0)
+        assert find_road_path(grid, (0, 0), (4, 0)) == []
 
-    def test_path_is_contiguous(self):
-        """Each step in the path must be adjacent (4-connected)."""
-        g = road_grid()
-        path = find_road_path(g, (0, 0), (5, 0))
-        for i in range(len(path) - 1):
-            x1, y1 = path[i]
-            x2, y2 = path[i + 1]
-            assert abs(x2 - x1) + abs(y2 - y1) == 1
-
-    def test_road_with_bridge_over_water(self):
-        """Road path uses bridge (water tile with bridge_type set)."""
-        g = Grid(5, 5)
-        for x in [0, 1, 3, 4]:
-            g.set_tile_type(x, 0, TileType.ROAD)
-        water = g.get_tile(2, 0)
-        water.tile_type = TileType.WATER
-        water.bridge_type = BridgeType.WOODEN  # makes it driveable
-        path = find_road_path(g, (0, 0), (4, 0))
-        assert (2, 0) in path
-
-    def test_disconnected_road_returns_empty(self):
-        g = Grid(10, 10)
-        g.set_tile_type(0, 0, TileType.ROAD)
-        g.set_tile_type(9, 9, TileType.ROAD)
-        path = find_road_path(g, (0, 0), (9, 9))
-        assert path == []
-
-
-# ===========================================================================
-# find_track_path
-# ===========================================================================
-
-class TestFindTrackPath:
-    def test_same_start_and_goal(self):
-        g = track_grid()
-        path = find_track_path(g, (0, 0), (0, 0))
-        assert path == [(0, 0)]
-
-    def test_straight_track_path(self):
-        g = track_grid()
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert path[0] == (0, 0)
-        assert path[-1] == (4, 0)
-
-    def test_no_path_through_grass(self):
-        g = Grid(5, 5)
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert path == []
-
-    def test_path_is_contiguous(self):
-        g = track_grid()
-        path = find_track_path(g, (0, 0), (5, 0))
-        for i in range(len(path) - 1):
-            x1, y1 = path[i]
-            x2, y2 = path[i + 1]
-            assert abs(x2 - x1) + abs(y2 - y1) == 1
-
-    def test_entry_point_traversable(self):
-        """BFS for track allows entry points as intermediate tiles."""
-        g = Grid(5, 5)
-        for x in range(5):
-            g.set_tile_type(x, 0, TileType.TRACK)
-        g.get_tile(2, 0).is_entry_point = True
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert path is not None
-        assert len(path) > 0
-
-    def test_stop_tile_traversable(self):
-        """BFS for track allows stop tiles as intermediate tiles."""
-        g = Grid(5, 5)
-        for x in range(5):
-            g.set_tile_type(x, 0, TileType.TRACK)
-        g.get_tile(2, 0).is_stop = True
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert (2, 0) in path
-
-    def test_steel_bridge_traversable_for_track(self):
-        """Steel bridge (BridgeType.STEEL) allows train traversal."""
-        g = Grid(5, 5)
-        for x in [0, 1, 3, 4]:
-            g.set_tile_type(x, 0, TileType.TRACK)
-        water = g.get_tile(2, 0)
-        water.tile_type = TileType.WATER
-        water.bridge_type = BridgeType.STEEL
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert (2, 0) in path
-
-    def test_wooden_bridge_not_traversable_for_track(self):
-        """Wooden bridge does NOT allow train traversal."""
-        g = Grid(5, 5)
-        for x in [0, 1, 3, 4]:
-            g.set_tile_type(x, 0, TileType.TRACK)
-        water = g.get_tile(2, 0)
+    def test_bridge_allows_crossing_water(self):
+        grid = _blank_grid(6, 1)
+        _paint_road(grid, [(0, 0), (1, 0), (3, 0), (4, 0), (5, 0)])
+        # Water tile with a wooden bridge should be driveable for road vehicles
+        water = grid.get_tile(2, 0)
         water.tile_type = TileType.WATER
         water.bridge_type = BridgeType.WOODEN
-        path = find_track_path(g, (0, 0), (4, 0))
-        assert path == []
+        path = find_road_path(grid, (0, 0), (5, 0))
+        assert path == [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0)]
+
+    def test_water_without_bridge_blocks(self):
+        grid = _blank_grid(6, 1)
+        _paint_road(grid, [(0, 0), (1, 0), (3, 0), (4, 0), (5, 0)])
+        grid.get_tile(2, 0).tile_type = TileType.WATER  # no bridge_type
+        assert find_road_path(grid, (0, 0), (5, 0)) == []
+
+    def test_goal_tile_is_accepted_even_if_not_driveable(self):
+        """The BFS explicitly allows the goal tile itself to be non-driveable
+        (e.g. a city/facility entry point sitting on a non-ROAD tile)."""
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0), (2, 0)])
+        # (3, 0) is still GRASS (not driveable) but is the goal
+        path = find_road_path(grid, (0, 0), (3, 0))
+        assert path == [(0, 0), (1, 0), (2, 0), (3, 0)]
+
+    def test_bfs_returns_shortest_when_multiple_routes_exist(self):
+        """Fill a rectangle with road; BFS should pick a length-5 path from
+        (0,0) to (2,2), not a meandering one."""
+        grid = _blank_grid(3, 3)
+        for y in range(3):
+            for x in range(3):
+                grid.set_tile_type(x, y, TileType.ROAD)
+        path = find_road_path(grid, (0, 0), (2, 2))
+        assert len(path) == 5
+        assert path[0] == (0, 0)
+        assert path[-1] == (2, 2)
+
+
+class TestFindTrackPath:
+    def test_start_equals_goal_returns_single_tile(self):
+        grid = _blank_grid()
+        assert find_track_path(grid, (1, 1), (1, 1)) == [(1, 1)]
+
+    def test_straight_track(self):
+        grid = _blank_grid()
+        _paint_track(grid, [(0, 0), (1, 0), (2, 0)])
+        assert find_track_path(grid, (0, 0), (2, 0)) == [(0, 0), (1, 0), (2, 0)]
+
+    def test_road_does_not_count_as_track(self):
+        """Roads are not track-traversable, so a pure-road corridor must fail."""
+        grid = _blank_grid()
+        _paint_road(grid, [(0, 0), (1, 0), (2, 0)])
+        assert find_track_path(grid, (0, 0), (2, 0)) == []
+
+    def test_steel_bridge_allows_train_crossing(self):
+        grid = _blank_grid(5, 1)
+        _paint_track(grid, [(0, 0), (1, 0), (3, 0), (4, 0)])
+        water = grid.get_tile(2, 0)
+        water.tile_type = TileType.WATER
+        water.bridge_type = BridgeType.STEEL
+        path = find_track_path(grid, (0, 0), (4, 0))
+        assert path == [(0, 0), (1, 0), (2, 0), (3, 0), (4, 0)]
+
+    @pytest.mark.parametrize("bridge", [BridgeType.WOODEN, BridgeType.STONE])
+    def test_non_steel_bridge_blocks_trains(self, bridge):
+        grid = _blank_grid(5, 1)
+        _paint_track(grid, [(0, 0), (1, 0), (3, 0), (4, 0)])
+        water = grid.get_tile(2, 0)
+        water.tile_type = TileType.WATER
+        water.bridge_type = bridge
+        assert find_track_path(grid, (0, 0), (4, 0)) == []
+
+    def test_entry_point_is_traversable_even_without_track(self):
+        """Per the docstring: entry points and stops may sit on ROAD tiles but
+        should still be treated as traversable so trains can reach them."""
+        grid = _blank_grid()
+        _paint_track(grid, [(0, 0), (1, 0), (2, 0)])
+        # (3, 0) is a ROAD tile flagged as an entry point
+        entry = grid.get_tile(3, 0)
+        entry.tile_type = TileType.ROAD
+        entry.is_entry_point = True
+        path = find_track_path(grid, (0, 0), (3, 0))
+        assert path == [(0, 0), (1, 0), (2, 0), (3, 0)]
+
+    def test_stop_tile_is_traversable_even_without_track(self):
+        grid = _blank_grid()
+        _paint_track(grid, [(0, 0), (1, 0)])
+        stop = grid.get_tile(2, 0)
+        stop.tile_type = TileType.ROAD
+        stop.is_stop = True
+        path = find_track_path(grid, (0, 0), (2, 0))
+        assert path == [(0, 0), (1, 0), (2, 0)]
+
+    def test_no_connection_returns_empty(self):
+        grid = _blank_grid()
+        _paint_track(grid, [(0, 0), (1, 0)])
+        _paint_track(grid, [(4, 4)])
+        assert find_track_path(grid, (0, 0), (4, 4)) == []
