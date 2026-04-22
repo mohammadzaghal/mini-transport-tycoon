@@ -20,7 +20,7 @@ variables:
 .install_python_deps: &install_python_deps
   - python -m pip install --upgrade pip
   - pip install -r requirements.txt
-  - pip install pytest flake8
+  - pip install pytest pytest-cov flake8
 
 .install_sdl_deps: &install_sdl_deps
   - apt-get update -qq
@@ -44,11 +44,17 @@ test:
   script:
     - *install_sdl_deps
     - *install_python_deps
-    - pytest -q --junitxml=report.xml
+    - pytest -q --cov=src --cov-report=term --cov-report=html --cov-report=xml --junitxml=report.xml
+  coverage: '/TOTAL.*\s+(\d+%)\s*$/'
   artifacts:
     when: always
     reports:
       junit: report.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
     paths:
       - report.xml
+      - coverage.xml
+      - htmlcov/
     expire_in: 1 week
