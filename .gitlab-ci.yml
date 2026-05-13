@@ -35,24 +35,11 @@ lint:
     - flake8 . --count --exit-zero --max-complexity=12 --max-line-length=120 --statistics
     - python -m compileall -q main.py src tests
 
-
-.install_python_deps: &install_python_deps
-  - python -m pip install --upgrade pip
-  - pip install -r requirements.txt
-  - pip install pytest pytest-cov flake8
-
 test:
   stage: test
   script:
     - *install_sdl_deps
     - *install_python_deps
-    - pytest -q
-        --cov=src
-        --cov-report=term
-        --cov-report=xml:coverage.xml
-        --cov-report=html:htmlcov
-        --junitxml=report.xml
-  coverage: '/TOTAL.*\s+(\d+%)/'
     - pytest -q
         --cov=src
         --cov-report=term
@@ -67,13 +54,8 @@ test:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage.xml
     paths:
       - report.xml
-      - coverage.xml
-      - htmlcov/
       - coverage.xml
       - htmlcov/
     expire_in: 1 week
