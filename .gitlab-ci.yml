@@ -13,7 +13,6 @@ variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   PYTHONDONTWRITEBYTECODE: "1"
   PYTHONUNBUFFERED: "1"
-  # Run pygame headless in CI (no display / audio device available)
   SDL_VIDEODRIVER: "dummy"
   SDL_AUDIODRIVER: "dummy"
 
@@ -32,11 +31,8 @@ lint:
   stage: lint
   script:
     - *install_python_deps
-    # Fail only on real errors (syntax / undefined names)
     - flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-    # Soft style pass — report but do not fail
     - flake8 . --count --exit-zero --max-complexity=12 --max-line-length=120 --statistics
-    # Byte-compile everything as an extra syntax safety net
     - python -m compileall -q main.py src tests
 
 test:
@@ -44,8 +40,13 @@ test:
   script:
     - *install_sdl_deps
     - *install_python_deps
-    - pytest -q --cov=src --cov-report=term --cov-report=html --cov-report=xml --junitxml=report.xml
-  coverage: '/TOTAL.*\s+(\d+%)\s*$/'
+    - pytest -q
+        --cov=src
+        --cov-report=term
+        --cov-report=xml:coverage.xml
+        --cov-report=html:htmlcov
+        --junitxml=report.xml
+  coverage: '/TOTAL.*\s+(\d+%)/'
   artifacts:
     when: always
     reports:
@@ -58,3 +59,20 @@ test:
       - coverage.xml
       - htmlcov/
     expire_in: 1 week
+
+test:frontend-coverage:
+  stage: test
+  script:
+    - *install_sdl_deps
+    - *install_python_deps
+    - pytest tests/frontend -q
+        --cov=src
+        --cov-report=term
+        --cov-report=html:htmlcov-frontend
+  coverage: '/TOTAL.*\s+(\d+%)/'
+  artifacts:
+    when: always
+    paths:
+      - htmlcov-frontend/
+    expire_in: 1 week
+  allow_failure: true
