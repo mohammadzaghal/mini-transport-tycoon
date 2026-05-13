@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.models.vehicle API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.models.vehicle</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.models.vehicle.Vehicle"><code class="flex name class">
+<span>class <span class="ident">Vehicle</span></span>
+<span>(</span><span>name: str,<br>vehicle_type: VehicleType,<br>path: list,<br>speed_tiles_per_second: float = 2.2,<br>capacity: int = 1,<br>base_speed: float = 0.0,<br>base_capacity: int = 0,<br>level: int = 1,<br>vdef_name: str = '',<br>reward_distance: int = 0,<br>current_index: int = 0,<br>x: float = 0.0,<br>y: float = 0.0,<br>delivered_legs: int = 0,<br>revenue_per_leg: int = 0,<br>color: str = '#f59e0b',<br>route_id: int = -1,<br>cargo_on_board: Dict[CargoType, float] = &lt;factory&gt;,<br>age_days: float = 0.0,<br>maintenance_timer: float = 0.0,<br>needs_maintenance: bool = False,<br>maintenance_due_days: float = 30.0,<br>returning_to_garage: bool = False,<br>garage_path: list = &lt;factory&gt;,<br>garage_index: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Vehicle:
+    &#34;&#34;&#34;An autonomous vehicle that moves along a route carrying cargo or passengers.
+
+    Attributes:
+        name: Display name of this vehicle.
+        vehicle_type: Classification (bus, truck, or train) that determines
+            which road/track type it can use.
+        path: Ordered list of (x, y) tile coordinates forming the route loop.
+        speed_tiles_per_second: Movement speed in tiles per real-time second.
+        capacity: Maximum total cargo units this vehicle can carry.
+        base_speed: Original speed before any upgrades.
+        base_capacity: Original capacity before any upgrades.
+        level: Current upgrade level (starts at 1).
+        vdef_name: Key into VEHICLE_DEFS config used for this vehicle.
+        reward_distance: Accumulated tile distance used in revenue calculations.
+        current_index: Index into ``path`` pointing to the next target tile.
+        x: Current fractional tile x-position.
+        y: Current fractional tile y-position.
+        delivered_legs: Number of complete route loops the vehicle has finished.
+        revenue_per_leg: Money earned each time the vehicle completes one loop.
+        color: Hex colour string used when rendering this vehicle on the map.
+        route_id: ID of the Route this vehicle is assigned to, or -1 if none.
+        cargo_on_board: Mapping of CargoType to current load amount.
+        age_days: Total simulated days this vehicle has been in service.
+        maintenance_timer: Accumulated days since the last maintenance event.
+        needs_maintenance: True when maintenance is overdue.
+        maintenance_due_days: Interval in simulated days between maintenance events.
+        returning_to_garage: True when the vehicle has been recalled to its garage.
+        garage_path: Path tiles to follow when returning to the garage.
+        garage_index: Current progress index into ``garage_path``.
+    &#34;&#34;&#34;
+
+    name: str
+    vehicle_type: VehicleType  # bus / truck / train
+    path: list  # list of (x, y) tiles the vehicle follows
+    speed_tiles_per_second: float = 2.2
+    capacity: int = 1  # max cargo capacity (can change with upgrades)
+
+    base_speed: float = 0.0
+    base_capacity: int = 0
+    level: int = 1  # upgrade level
+    vdef_name: str = &#34;&#34;
+
+    reward_distance: int = 0  # used for calculating rewards (money/oil)
+    current_index: int = 0
+
+    x: float = 0.0
+    y: float = 0.0
+
+    delivered_legs: int = 0  # number of completed route loops
+    revenue_per_leg: int = 0  # money earned per completed loop
+
+    color: str = &#34;#f59e0b&#34;
+    route_id: int = -1
+
+    cargo_on_board: Dict[CargoType, float] = field(default_factory=dict)  # current cargo
+
+    age_days: float = 0.0
+    maintenance_timer: float = 0.0
+    needs_maintenance: bool = False
+    maintenance_due_days: float = 30.0
+
+    returning_to_garage: bool = False
+    garage_path: list = field(default_factory=list)
+    garage_index: int = 0
+
+    _initialized: bool = field(default=False, init=False, repr=False)
+
+    at_stop: bool = field(default=False, init=False, repr=False)
+    _prev_index: int = field(default=0, init=False, repr=False)
+
+    def initialize_position(self) -&gt; None:
+        &#34;&#34;&#34;Snap the vehicle to the first tile in its path and reset movement state.
+
+        Does nothing if ``path`` is empty.
+        &#34;&#34;&#34;
+        if not self.path:
+            return
+        self.x, self.y = self.path[0]
+        self.current_index = 0
+        self._initialized = True
+        self.at_stop = False
+
+    def update(self, dt: float) -&gt; bool:
+        &#34;&#34;&#34;Advance the vehicle along its path by one simulation tick.
+
+        Moves the vehicle toward the next tile at the current speed.  When the
+        vehicle reaches the end of the path and wraps back to index 0 it
+        increments ``delivered_legs`` and returns True, signalling that a full
+        loop has been completed.
+
+        Args:
+            dt: Elapsed real time in seconds since the last call.
+
+        Returns:
+            True if the vehicle just completed a full route loop, False otherwise.
+        &#34;&#34;&#34;
+        if not self.path or len(self.path) &lt; 2:
+            return False
+
+        if not self._initialized:
+            self.initialize_position()
+
+        self.at_stop = False
+        self._prev_index = self.current_index  # track previous tile index
+
+        target_index = (self.current_index + 1) % len(self.path)
+        target_x, target_y = self.path[target_index]
+
+        dx = target_x - self.x
+        dy = target_y - self.y
+        distance = math.hypot(dx, dy)  # straight-line distance
+
+        if distance &lt; 1e-6:
+            self.current_index = target_index
+            if self.current_index == 0:
+                self.delivered_legs += 1
+                return True
+            return False
+
+        step = self.speed_tiles_per_second * dt
+
+        if step &gt;= distance:
+            self.x = float(target_x)
+            self.y = float(target_y)
+
+            old_index = self.current_index
+            self.current_index = target_index
+
+            if self.current_index != old_index:
+                self.at_stop = True  # reached a node/tile
+
+            if self.current_index == 0:
+                self.delivered_legs += 1
+                return True
+            return False
+
+        self.x += (dx / distance) * step
+        self.y += (dy / distance) * step
+        return False
+
+    def load(self, cargo: CargoType, amount: float) -&gt; float:
+        &#34;&#34;&#34;Load as much of a cargo type as the vehicle&#39;s free capacity allows.
+
+        Args:
+            cargo: The cargo type to load.
+            amount: The desired amount to load.
+
+        Returns:
+            The actual amount loaded, which may be less than ``amount`` if the
+            vehicle does not have sufficient free capacity.
+        &#34;&#34;&#34;
+        current_load = sum(self.cargo_on_board.values())
+        space = self.capacity - current_load
+        to_load = min(space, amount)
+
+        if to_load &gt; 0:
+            self.cargo_on_board[cargo] = self.cargo_on_board.get(cargo, 0.0) + to_load
+
+        return to_load
+
+    def unload_all(self) -&gt; Dict[CargoType, float]:
+        &#34;&#34;&#34;Remove and return all cargo currently on board.
+
+        Returns:
+            A dictionary mapping each carried CargoType to its amount.
+            The vehicle&#39;s ``cargo_on_board`` is empty after this call.
+        &#34;&#34;&#34;
+        unloaded = dict(self.cargo_on_board)
+        self.cargo_on_board.clear()
+        return unloaded
+
+    def unload(self, cargo: CargoType) -&gt; float:
+        &#34;&#34;&#34;Remove and return the entire load of one cargo type.
+
+        Args:
+            cargo: The cargo type to remove.
+
+        Returns:
+            The amount that was on board, or 0.0 if none was carried.
+        &#34;&#34;&#34;
+        return self.cargo_on_board.pop(cargo, 0.0)
+
+    @property
+    def total_cargo(self) -&gt; float:
+        &#34;&#34;&#34;Total number of cargo units currently on board across all types.&#34;&#34;&#34;
+        return sum(self.cargo_on_board.values())</code></pre>
+</details>
+<div class="desc"><p>An autonomous vehicle that moves along a route carrying cargo or passengers.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Display name of this vehicle.</dd>
+<dt><strong><code>vehicle_type</code></strong></dt>
+<dd>Classification (bus, truck, or train) that determines
+which road/track type it can use.</dd>
+<dt><strong><code>path</code></strong></dt>
+<dd>Ordered list of (x, y) tile coordinates forming the route loop.</dd>
+<dt><strong><code>speed_tiles_per_second</code></strong></dt>
+<dd>Movement speed in tiles per real-time second.</dd>
+<dt><strong><code>capacity</code></strong></dt>
+<dd>Maximum total cargo units this vehicle can carry.</dd>
+<dt><strong><code>base_speed</code></strong></dt>
+<dd>Original speed before any upgrades.</dd>
+<dt><strong><code>base_capacity</code></strong></dt>
+<dd>Original capacity before any upgrades.</dd>
+<dt><strong><code>level</code></strong></dt>
+<dd>Current upgrade level (starts at 1).</dd>
+<dt><strong><code>vdef_name</code></strong></dt>
+<dd>Key into VEHICLE_DEFS config used for this vehicle.</dd>
+<dt><strong><code>reward_distance</code></strong></dt>
+<dd>Accumulated tile distance used in revenue calculations.</dd>
+<dt><strong><code>current_index</code></strong></dt>
+<dd>Index into <code>path</code> pointing to the next target tile.</dd>
+<dt><strong><code>x</code></strong></dt>
+<dd>Current fractional tile x-position.</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>Current fractional tile y-position.</dd>
+<dt><strong><code>delivered_legs</code></strong></dt>
+<dd>Number of complete route loops the vehicle has finished.</dd>
+<dt><strong><code>revenue_per_leg</code></strong></dt>
+<dd>Money earned each time the vehicle completes one loop.</dd>
+<dt><strong><code>color</code></strong></dt>
+<dd>Hex colour string used when rendering this vehicle on the map.</dd>
+<dt><strong><code>route_id</code></strong></dt>
+<dd>ID of the Route this vehicle is assigned to, or -1 if none.</dd>
+<dt><strong><code>cargo_on_board</code></strong></dt>
+<dd>Mapping of CargoType to current load amount.</dd>
+<dt><strong><code>age_days</code></strong></dt>
+<dd>Total simulated days this vehicle has been in service.</dd>
+<dt><strong><code>maintenance_timer</code></strong></dt>
+<dd>Accumulated days since the last maintenance event.</dd>
+<dt><strong><code>needs_maintenance</code></strong></dt>
+<dd>True when maintenance is overdue.</dd>
+<dt><strong><code>maintenance_due_days</code></strong></dt>
+<dd>Interval in simulated days between maintenance events.</dd>
+<dt><strong><code>returning_to_garage</code></strong></dt>
+<dd>True when the vehicle has been recalled to its garage.</dd>
+<dt><strong><code>garage_path</code></strong></dt>
+<dd>Path tiles to follow when returning to the garage.</dd>
+<dt><strong><code>garage_index</code></strong></dt>
+<dd>Current progress index into <code>garage_path</code>.</dd>
+</dl></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.models.vehicle.Vehicle.age_days"><code class="name">var <span class="ident">age_days</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.at_stop"><code class="name">var <span class="ident">at_stop</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.base_capacity"><code class="name">var <span class="ident">base_capacity</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.base_speed"><code class="name">var <span class="ident">base_speed</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.capacity"><code class="name">var <span class="ident">capacity</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.cargo_on_board"><code class="name">var <span class="ident">cargo_on_board</span> : Dict[<a title="src.enums.CargoType" href="../enums.html#src.enums.CargoType">CargoType</a>, float]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.color"><code class="name">var <span class="ident">color</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.current_index"><code class="name">var <span class="ident">current_index</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.delivered_legs"><code class="name">var <span class="ident">delivered_legs</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.garage_index"><code class="name">var <span class="ident">garage_index</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.garage_path"><code class="name">var <span class="ident">garage_path</span> : list</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.level"><code class="name">var <span class="ident">level</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.maintenance_due_days"><code class="name">var <span class="ident">maintenance_due_days</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.maintenance_timer"><code class="name">var <span class="ident">maintenance_timer</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.needs_maintenance"><code class="name">var <span class="ident">needs_maintenance</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.path"><code class="name">var <span class="ident">path</span> : list</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.returning_to_garage"><code class="name">var <span class="ident">returning_to_garage</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.revenue_per_leg"><code class="name">var <span class="ident">revenue_per_leg</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.reward_distance"><code class="name">var <span class="ident">reward_distance</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.route_id"><code class="name">var <span class="ident">route_id</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.speed_tiles_per_second"><code class="name">var <span class="ident">speed_tiles_per_second</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.total_cargo"><code class="name">prop <span class="ident">total_cargo</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def total_cargo(self) -&gt; float:
+    &#34;&#34;&#34;Total number of cargo units currently on board across all types.&#34;&#34;&#34;
+    return sum(self.cargo_on_board.values())</code></pre>
+</details>
+<div class="desc"><p>Total number of cargo units currently on board across all types.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.vdef_name"><code class="name">var <span class="ident">vdef_name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.vehicle_type"><code class="name">var <span class="ident">vehicle_type</span> : <a title="src.enums.VehicleType" href="../enums.html#src.enums.VehicleType">VehicleType</a></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.x"><code class="name">var <span class="ident">x</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.y"><code class="name">var <span class="ident">y</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.models.vehicle.Vehicle.initialize_position"><code class="name flex">
+<span>def <span class="ident">initialize_position</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialize_position(self) -&gt; None:
+    &#34;&#34;&#34;Snap the vehicle to the first tile in its path and reset movement state.
+
+    Does nothing if ``path`` is empty.
+    &#34;&#34;&#34;
+    if not self.path:
+        return
+    self.x, self.y = self.path[0]
+    self.current_index = 0
+    self._initialized = True
+    self.at_stop = False</code></pre>
+</details>
+<div class="desc"><p>Snap the vehicle to the first tile in its path and reset movement state.</p>
+<p>Does nothing if <code>path</code> is empty.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.load"><code class="name flex">
+<span>def <span class="ident">load</span></span>(<span>self, cargo: CargoType, amount: float) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load(self, cargo: CargoType, amount: float) -&gt; float:
+    &#34;&#34;&#34;Load as much of a cargo type as the vehicle&#39;s free capacity allows.
+
+    Args:
+        cargo: The cargo type to load.
+        amount: The desired amount to load.
+
+    Returns:
+        The actual amount loaded, which may be less than ``amount`` if the
+        vehicle does not have sufficient free capacity.
+    &#34;&#34;&#34;
+    current_load = sum(self.cargo_on_board.values())
+    space = self.capacity - current_load
+    to_load = min(space, amount)
+
+    if to_load &gt; 0:
+        self.cargo_on_board[cargo] = self.cargo_on_board.get(cargo, 0.0) + to_load
+
+    return to_load</code></pre>
+</details>
+<div class="desc"><p>Load as much of a cargo type as the vehicle's free capacity allows.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cargo</code></strong></dt>
+<dd>The cargo type to load.</dd>
+<dt><strong><code>amount</code></strong></dt>
+<dd>The desired amount to load.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The actual amount loaded, which may be less than <code>amount</code> if the
+vehicle does not have sufficient free capacity.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.unload"><code class="name flex">
+<span>def <span class="ident">unload</span></span>(<span>self, cargo: CargoType) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def unload(self, cargo: CargoType) -&gt; float:
+    &#34;&#34;&#34;Remove and return the entire load of one cargo type.
+
+    Args:
+        cargo: The cargo type to remove.
+
+    Returns:
+        The amount that was on board, or 0.0 if none was carried.
+    &#34;&#34;&#34;
+    return self.cargo_on_board.pop(cargo, 0.0)</code></pre>
+</details>
+<div class="desc"><p>Remove and return the entire load of one cargo type.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>cargo</code></strong></dt>
+<dd>The cargo type to remove.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The amount that was on board, or 0.0 if none was carried.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.unload_all"><code class="name flex">
+<span>def <span class="ident">unload_all</span></span>(<span>self) ‑> Dict[<a title="src.enums.CargoType" href="../enums.html#src.enums.CargoType">CargoType</a>, float]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def unload_all(self) -&gt; Dict[CargoType, float]:
+    &#34;&#34;&#34;Remove and return all cargo currently on board.
+
+    Returns:
+        A dictionary mapping each carried CargoType to its amount.
+        The vehicle&#39;s ``cargo_on_board`` is empty after this call.
+    &#34;&#34;&#34;
+    unloaded = dict(self.cargo_on_board)
+    self.cargo_on_board.clear()
+    return unloaded</code></pre>
+</details>
+<div class="desc"><p>Remove and return all cargo currently on board.</p>
+<h2 id="returns">Returns</h2>
+<p>A dictionary mapping each carried CargoType to its amount.
+The vehicle's <code>cargo_on_board</code> is empty after this call.</p></div>
+</dd>
+<dt id="src.models.vehicle.Vehicle.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, dt: float) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, dt: float) -&gt; bool:
+    &#34;&#34;&#34;Advance the vehicle along its path by one simulation tick.
+
+    Moves the vehicle toward the next tile at the current speed.  When the
+    vehicle reaches the end of the path and wraps back to index 0 it
+    increments ``delivered_legs`` and returns True, signalling that a full
+    loop has been completed.
+
+    Args:
+        dt: Elapsed real time in seconds since the last call.
+
+    Returns:
+        True if the vehicle just completed a full route loop, False otherwise.
+    &#34;&#34;&#34;
+    if not self.path or len(self.path) &lt; 2:
+        return False
+
+    if not self._initialized:
+        self.initialize_position()
+
+    self.at_stop = False
+    self._prev_index = self.current_index  # track previous tile index
+
+    target_index = (self.current_index + 1) % len(self.path)
+    target_x, target_y = self.path[target_index]
+
+    dx = target_x - self.x
+    dy = target_y - self.y
+    distance = math.hypot(dx, dy)  # straight-line distance
+
+    if distance &lt; 1e-6:
+        self.current_index = target_index
+        if self.current_index == 0:
+            self.delivered_legs += 1
+            return True
+        return False
+
+    step = self.speed_tiles_per_second * dt
+
+    if step &gt;= distance:
+        self.x = float(target_x)
+        self.y = float(target_y)
+
+        old_index = self.current_index
+        self.current_index = target_index
+
+        if self.current_index != old_index:
+            self.at_stop = True  # reached a node/tile
+
+        if self.current_index == 0:
+            self.delivered_legs += 1
+            return True
+        return False
+
+    self.x += (dx / distance) * step
+    self.y += (dy / distance) * step
+    return False</code></pre>
+</details>
+<div class="desc"><p>Advance the vehicle along its path by one simulation tick.</p>
+<p>Moves the vehicle toward the next tile at the current speed.
+When the
+vehicle reaches the end of the path and wraps back to index 0 it
+increments <code>delivered_legs</code> and returns True, signalling that a full
+loop has been completed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dt</code></strong></dt>
+<dd>Elapsed real time in seconds since the last call.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if the vehicle just completed a full route loop, False otherwise.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.models" href="index.html">src.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.models.vehicle.Vehicle" href="#src.models.vehicle.Vehicle">Vehicle</a></code></h4>
+<ul class="">
+<li><code><a title="src.models.vehicle.Vehicle.age_days" href="#src.models.vehicle.Vehicle.age_days">age_days</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.at_stop" href="#src.models.vehicle.Vehicle.at_stop">at_stop</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.base_capacity" href="#src.models.vehicle.Vehicle.base_capacity">base_capacity</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.base_speed" href="#src.models.vehicle.Vehicle.base_speed">base_speed</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.capacity" href="#src.models.vehicle.Vehicle.capacity">capacity</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.cargo_on_board" href="#src.models.vehicle.Vehicle.cargo_on_board">cargo_on_board</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.color" href="#src.models.vehicle.Vehicle.color">color</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.current_index" href="#src.models.vehicle.Vehicle.current_index">current_index</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.delivered_legs" href="#src.models.vehicle.Vehicle.delivered_legs">delivered_legs</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.garage_index" href="#src.models.vehicle.Vehicle.garage_index">garage_index</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.garage_path" href="#src.models.vehicle.Vehicle.garage_path">garage_path</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.initialize_position" href="#src.models.vehicle.Vehicle.initialize_position">initialize_position</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.level" href="#src.models.vehicle.Vehicle.level">level</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.load" href="#src.models.vehicle.Vehicle.load">load</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.maintenance_due_days" href="#src.models.vehicle.Vehicle.maintenance_due_days">maintenance_due_days</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.maintenance_timer" href="#src.models.vehicle.Vehicle.maintenance_timer">maintenance_timer</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.name" href="#src.models.vehicle.Vehicle.name">name</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.needs_maintenance" href="#src.models.vehicle.Vehicle.needs_maintenance">needs_maintenance</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.path" href="#src.models.vehicle.Vehicle.path">path</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.returning_to_garage" href="#src.models.vehicle.Vehicle.returning_to_garage">returning_to_garage</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.revenue_per_leg" href="#src.models.vehicle.Vehicle.revenue_per_leg">revenue_per_leg</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.reward_distance" href="#src.models.vehicle.Vehicle.reward_distance">reward_distance</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.route_id" href="#src.models.vehicle.Vehicle.route_id">route_id</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.speed_tiles_per_second" href="#src.models.vehicle.Vehicle.speed_tiles_per_second">speed_tiles_per_second</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.total_cargo" href="#src.models.vehicle.Vehicle.total_cargo">total_cargo</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.unload" href="#src.models.vehicle.Vehicle.unload">unload</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.unload_all" href="#src.models.vehicle.Vehicle.unload_all">unload_all</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.update" href="#src.models.vehicle.Vehicle.update">update</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.vdef_name" href="#src.models.vehicle.Vehicle.vdef_name">vdef_name</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.vehicle_type" href="#src.models.vehicle.Vehicle.vehicle_type">vehicle_type</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.x" href="#src.models.vehicle.Vehicle.x">x</a></code></li>
+<li><code><a title="src.models.vehicle.Vehicle.y" href="#src.models.vehicle.Vehicle.y">y</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

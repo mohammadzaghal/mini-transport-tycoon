@@ -23,14 +23,32 @@ _MM_VEH_COLOR   = (255, 80, 80)
 _MM_VIEWPORT    = (255, 255, 255)
 
 class Minimap:
+    """A small overview map displayed in the top-right corner of the screen.
+
+    The minimap is rendered at ``MAP_WIDTH × MAP_HEIGHT`` pixels internally and
+    scaled up to ``MM_W × MM_H`` for display.  It shows terrain colours,
+    vehicle positions, and stop locations.  Clicking the minimap scrolls the
+    main camera to that area of the map.
+    """
+
     def __init__(self) -> None:
+        """Initialise the minimap in a dirty state ready to be built."""
         self._surface: pygame.Surface | None = None
         self._dirty = True
 
     def invalidate(self) -> None:
+        """Mark the minimap as needing a full rebuild on the next frame."""
         self._dirty = True
 
     def build(self, grid) -> None:
+        """Construct the minimap surface from the current grid state.
+
+        Sets one pixel per tile using the terrain colour palette.  Stop tiles
+        are drawn in a distinct highlight colour.
+
+        Args:
+            grid: The game grid to read tile types from.
+        """
         self._surface = pygame.Surface((MAP_WIDTH, MAP_HEIGHT))
         for tile in grid.iter_tiles():
             c = _MM_COLORS.get(tile.tile_type, (50, 50, 50))
@@ -40,6 +58,13 @@ class Minimap:
         self._dirty = False
 
     def update_tile(self, x: int, y: int, tile) -> None:
+        """Update a single pixel on the minimap surface to match a changed tile.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+            tile: The updated Tile whose new appearance should be reflected.
+        """
         if self._surface is None:
             return
         c = _MM_COLORS.get(tile.tile_type, (50, 50, 50))
@@ -48,6 +73,14 @@ class Minimap:
         self._surface.set_at((x, y), c)
 
     def draw(self, screen: pygame.Surface, camera, vehicles: list, stops: list) -> None:
+        """Render the scaled minimap and overlay vehicles, stops, and viewport rect.
+
+        Args:
+            screen: The pygame display surface.
+            camera: The Camera whose viewport rectangle is drawn on the minimap.
+            vehicles: List of active Vehicle objects to draw as coloured dots.
+            stops: List of active Stop objects (currently used for future extension).
+        """
         if self._surface is None:
             return
 

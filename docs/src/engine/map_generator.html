@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.engine.map_generator API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.engine.map_generator</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.engine.map_generator.MapGenerator"><code class="flex name class">
+<span>class <span class="ident">MapGenerator</span></span>
+<span>(</span><span>seed: int | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MapGenerator:
+    &#34;&#34;&#34;Procedurally generates the game map including terrain, cities, and facilities.
+
+    The generator uses a seeded pseudo-random number source so that any given
+    seed always produces the same map layout.  Generation happens in stages:
+    terrain scattering, water channel placement, city placement, and finally
+    facility placement.
+
+    Attributes:
+        seed: Integer seed used to initialise the random number generator.
+        rng: Seeded ``random.Random`` instance used for all random decisions.
+    &#34;&#34;&#34;
+
+    def __init__(self, seed: int | None = None) -&gt; None:
+        &#34;&#34;&#34;Initialise the map generator with an optional fixed seed.
+
+        Args:
+            seed: Integer seed for reproducible map generation.  If None a
+                random seed is chosen automatically.
+        &#34;&#34;&#34;
+        if seed is None:
+            seed = random.randrange(1 &lt;&lt; 30)
+        self.seed = seed
+        self.rng = random.Random(seed)
+
+    def generate(self, grid: Grid) -&gt; Tuple[Dict[str, Facility], List[Tuple[str, int, int]]]:
+        &#34;&#34;&#34;Populate a blank grid with terrain, cities, and facilities.
+
+        Modifies the grid in-place and also stores the facility dictionary on
+        ``grid.facilities``.
+
+        Args:
+            grid: An initialised Grid whose tiles are all GRASS.
+
+        Returns:
+            A two-tuple of:
+            - A ``Dict[str, Facility]`` mapping facility names to Facility objects.
+            - A ``List[(name, sx, sy)]`` of city names and their origin tile coordinates.
+        &#34;&#34;&#34;
+        self._scatter_rocks(grid)
+        self._place_ice_channels(grid)
+
+        occupied: List[Tuple[int, int, int, int]] = []
+        city_origins = self._place_cities_random(grid, occupied)
+
+        self._place_city_hint_lakes(grid, city_origins)
+
+        facilities: Dict[str, Facility] = {}
+        self._place_facilities_random(grid, facilities, occupied)
+
+        grid.facilities = facilities
+        return facilities, city_origins
+
+    @staticmethod
+    def _bb_intersect(ax: int, ay: int, aw: int, ah: int, bx: int, by: int, bw: int, bh: int) -&gt; bool:
+        return ax &lt; bx + bw and bx &lt; ax + aw and ay &lt; by + bh and by &lt; ay + ah
+
+    def _hits_occupied(
+        self, occupied: List[Tuple[int, int, int, int]], sx: int, sy: int, w: int, h: int, margin: int
+    ) -&gt; bool:
+        ax, ay = sx - margin, sy - margin
+        aw, ah = w + 2 * margin, h + 2 * margin
+        for bx, by, bw, bh in occupied:
+            if self._bb_intersect(ax, ay, aw, ah, bx, by, bw, bh):
+                return True
+        return False
+
+    def _footprint_is_grass_or_forest(self, grid: Grid, sx: int, sy: int, w: int, h: int) -&gt; bool:
+        for fy in range(sy, sy + h):
+            for fx in range(sx, sx + w):
+                t = grid.get_tile(fx, fy)
+                if t is None or t.tile_type not in {TileType.GRASS, TileType.FOREST}:
+                    return False
+        return True
+
+    def _place_cities_random(
+        self, grid: Grid, occupied: List[Tuple[int, int, int, int]]
+    ) -&gt; List[Tuple[str, int, int]]:
+        &#34;&#34;&#34;Place all cities on the grid using random placement with fallbacks.
+
+        Attempts random placement up to 900 times per city.  If random
+        placement fails, tries a pre-defined legacy position.  If that also
+        fails, performs an exhaustive scan of the grid.
+
+        Args:
+            grid: The grid to place cities on.
+            occupied: Mutable list of bounding boxes (x, y, w, h) of already
+                placed objects; updated in-place as cities are added.
+
+        Returns:
+            List of ``(city_name, origin_x, origin_y)`` tuples for every
+            successfully placed city.
+
+        Raises:
+            RuntimeError: If a city cannot be placed by any method.
+        &#34;&#34;&#34;
+        out: List[Tuple[str, int, int]] = []
+        margin = 4
+        for name in _CITY_NAMES:
+            placed = False
+            for _ in range(900):
+                sx = self.rng.randint(2, grid.width - CITY_SIZE - 2)
+                sy = self.rng.randint(2, grid.height - CITY_SIZE - 2)
+                if self._hits_occupied(occupied, sx, sy, CITY_SIZE, CITY_SIZE, margin):
+                    continue
+                if not self._footprint_is_grass_or_forest(grid, sx, sy, CITY_SIZE, CITY_SIZE):
+                    continue
+                self._place_city(grid, sx, sy, name)
+                out.append((name, sx, sy))
+                ox, oy = sx - margin, sy - margin
+                occupied.append((ox, oy, CITY_SIZE + 2 * margin, CITY_SIZE + 2 * margin))
+                placed = True
+                break
+            if not placed:
+                for leg_name, lsx, lsy in _LEGACY_CITIES:
+                    if leg_name != name:
+                        continue
+                    if self._hits_occupied(occupied, lsx, lsy, CITY_SIZE, CITY_SIZE, margin):
+                        break
+                    if not self._footprint_is_grass_or_forest(grid, lsx, lsy, CITY_SIZE, CITY_SIZE):
+                        break
+                    self._place_city(grid, lsx, lsy, name)
+                    out.append((name, lsx, lsy))
+                    ox, oy = lsx - margin, lsy - margin
+                    occupied.append((ox, oy, CITY_SIZE + 2 * margin, CITY_SIZE + 2 * margin))
+                    placed = True
+                    break
+            if not placed:
+                for sy in range(2, grid.height - CITY_SIZE - 2):
+                    for sx in range(2, grid.width - CITY_SIZE - 2):
+                        if self._hits_occupied(occupied, sx, sy, CITY_SIZE, CITY_SIZE, margin):
+                            continue
+                        if not self._footprint_is_grass_or_forest(grid, sx, sy, CITY_SIZE, CITY_SIZE):
+                            continue
+                        self._place_city(grid, sx, sy, name)
+                        out.append((name, sx, sy))
+                        ox, oy = sx - margin, sy - margin
+                        occupied.append((ox, oy, CITY_SIZE + 2 * margin, CITY_SIZE + 2 * margin))
+                        placed = True
+                        break
+                    if placed:
+                        break
+            if not placed:
+                raise RuntimeError(&#34;MapGenerator: could not place city {!r}&#34;.format(name))
+        return out
+
+    def _facility_entry_xy(self, sx: int, sy: int, w: int, h: int, entry_side: str) -&gt; Tuple[int, int]:
+        if entry_side == &#34;west&#34;:
+            return sx - 1, sy + h // 2
+        if entry_side == &#34;east&#34;:
+            return sx + w, sy + h // 2
+        if entry_side == &#34;north&#34;:
+            return sx + w // 2, sy - 1
+        return sx + w // 2, sy + h
+
+    def _entry_ok(self, grid: Grid, ex: int, ey: int) -&gt; bool:
+        t = grid.get_tile(ex, ey)
+        return t is not None and t.tile_type in {TileType.GRASS, TileType.FOREST, TileType.WATER}
+
+    def _try_place_facility(
+        self,
+        grid: Grid,
+        facilities: Dict[str, Facility],
+        occupied: List[Tuple[int, int, int, int]],
+        name: str,
+        w: int,
+        h: int,
+    ) -&gt; bool:
+        &#34;&#34;&#34;Attempt to place a single facility at a random valid location.
+
+        Tries up to 500 random positions.  For each candidate the method
+        checks: no overlap with occupied bounding boxes, all footprint tiles
+        are GRASS or FOREST, and at least one adjacent entry-point tile is
+        suitable.
+
+        Args:
+            grid: The grid to place the facility on.
+            facilities: Mutable mapping updated with the new Facility on success.
+            occupied: Mutable list of bounding boxes updated on success.
+            name: Facility name used to look up the production recipe.
+            w: Footprint width in tiles.
+            h: Footprint height in tiles.
+
+        Returns:
+            True if the facility was placed successfully, False otherwise.
+        &#34;&#34;&#34;
+        margin = 3
+        sides = [&#34;north&#34;, &#34;south&#34;, &#34;east&#34;, &#34;west&#34;]
+        for _ in range(500):
+            sx = self.rng.randint(2, grid.width - w - 2)
+            sy = self.rng.randint(2, grid.height - h - 2)
+            if self._hits_occupied(occupied, sx, sy, w, h, margin):
+                continue
+            if not self._footprint_is_grass_or_forest(grid, sx, sy, w, h):
+                continue
+            self.rng.shuffle(sides)
+            for side in sides:
+                ex, ey = self._facility_entry_xy(sx, sy, w, h, side)
+                if not self._entry_ok(grid, ex, ey):
+                    continue
+                self._place_facility(grid, facilities, sx, sy, w, h, name, side)
+                ox, oy = sx - margin, sy - margin
+                occupied.append((ox, oy, w + 2 * margin, h + 2 * margin))
+                return True
+        return False
+
+    def _place_facilities_random(
+        self, grid: Grid, facilities: Dict[str, Facility], occupied: List[Tuple[int, int, int, int]]
+    ) -&gt; None:
+        &#34;&#34;&#34;Place all facilities defined in ``_FACILITY_LAYOUTS`` onto the grid.
+
+        For each facility, tries random placement first, then an exhaustive
+        grid scan, and finally falls back to the legacy hard-coded positions.
+
+        Args:
+            grid: The grid to place facilities on.
+            facilities: Mutable mapping updated with each placed Facility.
+            occupied: Mutable bounding-box list updated as facilities are placed.
+
+        Raises:
+            RuntimeError: If a facility cannot be placed by any method.
+        &#34;&#34;&#34;
+        for name, w, h in _FACILITY_LAYOUTS:
+            if self._try_place_facility(grid, facilities, occupied, name, w, h):
+                continue
+            placed = False
+            for sx in range(2, grid.width - w - 2, 1):
+                for sy in range(2, grid.height - h - 2, 1):
+                    if self._hits_occupied(occupied, sx, sy, w, h, 3):
+                        continue
+                    if not self._footprint_is_grass_or_forest(grid, sx, sy, w, h):
+                        continue
+                    for side in (&#34;south&#34;, &#34;east&#34;, &#34;north&#34;, &#34;west&#34;):
+                        ex, ey = self._facility_entry_xy(sx, sy, w, h, side)
+                        if self._entry_ok(grid, ex, ey):
+                            self._place_facility(grid, facilities, sx, sy, w, h, name, side)
+                            occupied.append((sx - 3, sy - 3, w + 6, h + 6))
+                            placed = True
+                            break
+                    if placed:
+                        break
+                if placed:
+                    break
+            if placed:
+                continue
+            for leg_name, lsx, lsy, lw, lh, lside in _LEGACY_FACILITIES:
+                if leg_name != name:
+                    continue
+                self._place_facility(grid, facilities, lsx, lsy, lw, lh, name, lside)
+                occupied.append((lsx - 3, lsy - 3, lw + 6, lh + 6))
+                placed = True
+                break
+            if not placed:
+                raise RuntimeError(&#34;MapGenerator: could not place facility {!r}&#34;.format(name))
+
+    def _place_city_hint_lakes(self, grid: Grid, city_origins: List[Tuple[str, int, int]]) -&gt; None:
+        for _name, sx, sy in city_origins:
+            for _ in range(24):
+                lx = sx + self.rng.randint(-1, 7)
+                ly = sy + self.rng.randint(6, 16)
+                if lx &lt; 1 or ly &lt; 1 or lx &gt;= grid.width - 1 or ly &gt;= grid.height - 1:
+                    continue
+                self._place_lake(grid, lx, ly, radius=2)
+                break
+
+    def _scatter_rocks(self, grid: Grid) -&gt; None:
+        for tile in grid.iter_tiles():
+            if self.rng.random() &lt; 0.06:
+                tile.tile_type = TileType.FOREST
+                tile.tree_count = 1
+
+        ccx = self.rng.randint(12, max(12, grid.width - 13))
+        ccy = self.rng.randint(12, max(12, grid.height - 13))
+        for dy in range(-4, 5):
+            for dx in range(-4, 5):
+                tile = grid.get_tile(ccx + dx, ccy + dy)
+                if tile is not None and tile.tile_type == TileType.GRASS and self.rng.random() &lt; 0.55:
+                    tile.tile_type = TileType.FOREST
+                    tile.tree_count = 1
+
+    def _place_ice_channels(self, grid: Grid) -&gt; None:
+        hy = self.rng.randint(6, max(6, grid.height - 7))
+        self._carve_river(grid, start_x=0, start_y=hy, horizontal=True, length=grid.width)
+
+        vx = self.rng.randint(8, max(8, grid.width - 9))
+        vlen = self.rng.randint(18, max(18, min(50, grid.height - 6)))
+        self._carve_river(grid, start_x=vx, start_y=0, horizontal=False, length=vlen)
+
+        lr = self.rng.randint(3, 5)
+        lx = self.rng.randint(lr + 8, max(lr + 8, grid.width - lr - 9))
+        ly = self.rng.randint(lr + 8, max(lr + 8, grid.height - lr - 9))
+        self._place_lake(grid, lx=lx, ly=ly, radius=lr)
+
+        if self.rng.random() &lt; 0.45:
+            sr = 2
+            sx = self.rng.randint(sr + 4, max(sr + 4, grid.width - sr - 5))
+            sy = self.rng.randint(sr + 4, max(sr + 4, grid.height - sr - 5))
+            self._place_lake(grid, lx=sx, ly=sy, radius=sr)
+
+    def _carve_river(
+        self, grid: Grid, start_x: int, start_y: int, horizontal: bool, length: int
+    ) -&gt; None:
+        x, y = start_x, start_y
+        for _ in range(length):
+            for width in range(-1, 2):
+                if horizontal:
+                    tx, ty = x, y + width
+                else:
+                    tx, ty = x + width, y
+                tile = grid.get_tile(tx, ty)
+                if tile is not None and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
+                    tile.tile_type = TileType.WATER
+                    tile.tree_count = 0
+
+            if horizontal:
+                x += 1
+                if self.rng.random() &lt; 0.2:
+                    y += self.rng.choice([-1, 1])
+                y = max(2, min(grid.height - 3, y))
+            else:
+                y += 1
+                if self.rng.random() &lt; 0.2:
+                    x += self.rng.choice([-1, 1])
+                x = max(2, min(grid.width - 3, x))
+
+    def _place_lake(self, grid: Grid, lx: int, ly: int, radius: int) -&gt; None:
+        for dy in range(-radius, radius + 1):
+            for dx in range(-radius, radius + 1):
+                if dx * dx + dy * dy &lt;= radius * radius:
+                    tile = grid.get_tile(lx + dx, ly + dy)
+                    if tile is not None and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
+                        tile.tile_type = TileType.WATER
+                        tile.tree_count = 0
+
+    def _place_city(self, grid: Grid, sx: int, sy: int, city_name: str) -&gt; None:
+        &#34;&#34;&#34;Stamp a city footprint onto the grid at the given top-left position.
+
+        Converts a ``CITY_SIZE × CITY_SIZE`` block of tiles into city blocks,
+        road tiles (on fixed column/row indices), and bank tiles.  A single
+        entry-point tile is placed to the south of the city&#39;s road column.
+
+        Args:
+            grid: The grid to modify.
+            sx: Top-left column of the city footprint.
+            sy: Top-left row of the city footprint.
+            city_name: Zone name assigned to every tile in the footprint.
+        &#34;&#34;&#34;
+        for rel_y in range(CITY_SIZE):
+            for rel_x in range(CITY_SIZE):
+                ax, ay = sx + rel_x, sy + rel_y
+                tile = grid.get_tile(ax, ay)
+                if tile is None:
+                    continue
+                tile.zone_name = city_name
+                tile.tree_count = 0
+                tile.tile_type = TileType.WATER if tile.tile_type == TileType.WATER else TileType.CITY
+
+                is_road = (rel_x in ROAD_COLS) or (rel_y in ROAD_ROWS)
+                is_bank = (rel_x, rel_y) in BANK_CELLS
+
+                if is_road:
+                    tile.tile_type = TileType.ROAD
+                    tile.is_city_road = True
+                elif is_bank:
+                    tile.tile_type = TileType.CITY
+                    tile.is_bank = True
+                else:
+                    tile.tile_type = TileType.CITY
+
+        entry = grid.get_tile(sx + 2, sy + 3)
+        if entry is not None:
+            entry.is_entry_point = True
+
+    def _place_facility(
+        self,
+        grid: Grid,
+        facilities: Dict[str, Facility],
+        sx: int, sy: int,
+        w: int, h: int,
+        name: str,
+        entry_side: str,
+    ) -&gt; None:
+        &#34;&#34;&#34;Stamp a facility footprint onto the grid and register the Facility object.
+
+        Sets all tiles in the ``w × h`` footprint to FACILITY type, attaches
+        the Facility reference, and places an entry-point tile on the
+        specified side of the building.
+
+        Args:
+            grid: The grid to modify.
+            facilities: Mutable mapping updated with the new Facility.
+            sx: Top-left column of the facility footprint.
+            sy: Top-left row of the facility footprint.
+            w: Width of the footprint in tiles.
+            h: Height of the footprint in tiles.
+            name: Facility name used to resolve the FacilityType from config.
+            entry_side: Cardinal direction (``&#34;north&#34;``, ``&#34;south&#34;``, ``&#34;east&#34;``,
+                or ``&#34;west&#34;``) where the vehicle entry-point tile is placed.
+        &#34;&#34;&#34;
+        fac_type = FACILITY_NAME_TO_TYPE.get(name)
+        facility = Facility(name=name, fac_type=fac_type, x=sx, y=sy) if fac_type else None
+
+        for fy in range(sy, sy + h):
+            for fx in range(sx, sx + w):
+                tile = grid.get_tile(fx, fy)
+                if tile is None:
+                    continue
+                tile.tile_type = TileType.FACILITY
+                tile.zone_name = name
+                tile.tree_count = 0
+                if facility is not None:
+                    tile.facility_ref = facility
+
+        if entry_side == &#34;west&#34;:
+            ex, ey = sx - 1, sy + h // 2
+        elif entry_side == &#34;east&#34;:
+            ex, ey = sx + w, sy + h // 2
+        elif entry_side == &#34;north&#34;:
+            ex, ey = sx + w // 2, sy - 1
+        else:
+            ex, ey = sx + w // 2, sy + h
+
+        entry = grid.get_tile(ex, ey)
+        if entry is not None and entry.tile_type in {TileType.GRASS, TileType.FOREST, TileType.WATER}:
+            entry.tile_type = TileType.ROAD
+            entry.zone_name = name
+            entry.is_entry_point = True
+            entry.tree_count = 0
+            if facility is not None:
+                entry.facility_ref = facility
+
+        if facility is not None:
+            facilities[name] = facility
+
+    def _road_line(self, grid: Grid, x1: int, y1: int, x2: int, y2: int) -&gt; None:
+        if x1 == x2:
+            y_start, y_end = sorted((y1, y2))
+            for y in range(y_start, y_end + 1):
+                tile = grid.get_tile(x1, y)
+                if tile and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
+                    tile.tile_type = TileType.ROAD
+                    tile.tree_count = 0
+        elif y1 == y2:
+            x_start, x_end = sorted((x1, x2))
+            for x in range(x_start, x_end + 1):
+                tile = grid.get_tile(x, y1)
+                if tile and tile.tile_type in {TileType.GRASS, TileType.FOREST}:
+                    tile.tile_type = TileType.ROAD
+                    tile.tree_count = 0</code></pre>
+</details>
+<div class="desc"><p>Procedurally generates the game map including terrain, cities, and facilities.</p>
+<p>The generator uses a seeded pseudo-random number source so that any given
+seed always produces the same map layout.
+Generation happens in stages:
+terrain scattering, water channel placement, city placement, and finally
+facility placement.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>seed</code></strong></dt>
+<dd>Integer seed used to initialise the random number generator.</dd>
+<dt><strong><code>rng</code></strong></dt>
+<dd>Seeded <code>random.Random</code> instance used for all random decisions.</dd>
+</dl>
+<p>Initialise the map generator with an optional fixed seed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>seed</code></strong></dt>
+<dd>Integer seed for reproducible map generation.
+If None a
+random seed is chosen automatically.</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="src.engine.map_generator.MapGenerator.generate"><code class="name flex">
+<span>def <span class="ident">generate</span></span>(<span>self, grid: Grid) ‑> Tuple[Dict[str, <a title="src.models.facility.Facility" href="../models/facility.html#src.models.facility.Facility">Facility</a>], List[Tuple[str, int, int]]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate(self, grid: Grid) -&gt; Tuple[Dict[str, Facility], List[Tuple[str, int, int]]]:
+    &#34;&#34;&#34;Populate a blank grid with terrain, cities, and facilities.
+
+    Modifies the grid in-place and also stores the facility dictionary on
+    ``grid.facilities``.
+
+    Args:
+        grid: An initialised Grid whose tiles are all GRASS.
+
+    Returns:
+        A two-tuple of:
+        - A ``Dict[str, Facility]`` mapping facility names to Facility objects.
+        - A ``List[(name, sx, sy)]`` of city names and their origin tile coordinates.
+    &#34;&#34;&#34;
+    self._scatter_rocks(grid)
+    self._place_ice_channels(grid)
+
+    occupied: List[Tuple[int, int, int, int]] = []
+    city_origins = self._place_cities_random(grid, occupied)
+
+    self._place_city_hint_lakes(grid, city_origins)
+
+    facilities: Dict[str, Facility] = {}
+    self._place_facilities_random(grid, facilities, occupied)
+
+    grid.facilities = facilities
+    return facilities, city_origins</code></pre>
+</details>
+<div class="desc"><p>Populate a blank grid with terrain, cities, and facilities.</p>
+<p>Modifies the grid in-place and also stores the facility dictionary on
+<code>grid.facilities</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid</code></strong></dt>
+<dd>An initialised Grid whose tiles are all GRASS.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A two-tuple of:
+- A <code>Dict[str, Facility]</code> mapping facility names to Facility objects.
+- A <code>List[(name, sx, sy)]</code> of city names and their origin tile coordinates.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.engine" href="index.html">src.engine</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.engine.map_generator.MapGenerator" href="#src.engine.map_generator.MapGenerator">MapGenerator</a></code></h4>
+<ul class="">
+<li><code><a title="src.engine.map_generator.MapGenerator.generate" href="#src.engine.map_generator.MapGenerator.generate">generate</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

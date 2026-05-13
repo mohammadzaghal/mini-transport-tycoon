@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.models.company API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.models.company</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.models.company.Company"><code class="flex name class">
+<span>class <span class="ident">Company</span></span>
+<span>(</span><span>name: str,<br>money: int,<br>total_income: int = 0,<br>total_expenses: int = 0,<br>fuel: float = 0.0,<br>iron_ore: float = 0.0,<br>alloy_ore: float = 0.0,<br>titanium_ore: float = 0.0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Company:
+    &#34;&#34;&#34;Tracks the player&#39;s finances and resource inventory.
+
+    Attributes:
+        name: Display name of the company.
+        money: Current cash balance in game currency.
+        total_income: Cumulative earnings over the entire session.
+        total_expenses: Cumulative spending over the entire session.
+        fuel: Current fuel stock held by the company (in units).
+        iron_ore: Current iron ore stock (in units).
+        alloy_ore: Current alloy ore stock (in units).
+        titanium_ore: Current titanium ore stock (in units).
+    &#34;&#34;&#34;
+
+    name: str
+    money: int
+    total_income: int = 0
+    total_expenses: int = 0
+    fuel: float = 0.0
+    iron_ore: float = 0.0
+    alloy_ore: float = 0.0
+    titanium_ore: float = 0.0
+
+    def spend(self, amount: int) -&gt; bool:
+        &#34;&#34;&#34;Deduct an amount from the company&#39;s cash balance.
+
+        Args:
+            amount: The positive integer amount to deduct.
+
+        Returns:
+            True if the balance remains non-negative after the deduction,
+            False if the company has gone into debt.
+        &#34;&#34;&#34;
+        self.money -= amount
+        self.total_expenses += amount
+        return self.money &gt;= 0
+
+    def earn(self, amount: int) -&gt; None:
+        &#34;&#34;&#34;Add an amount to the company&#39;s cash balance.
+
+        Args:
+            amount: The positive integer amount to add.
+        &#34;&#34;&#34;
+        self.money += amount
+        self.total_income += amount
+
+    @property
+    def is_bankrupt(self) -&gt; bool:
+        &#34;&#34;&#34;True when the company&#39;s cash balance has dropped below zero.&#34;&#34;&#34;
+        return self.money &lt; 0</code></pre>
+</details>
+<div class="desc"><p>Tracks the player's finances and resource inventory.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>name</code></strong></dt>
+<dd>Display name of the company.</dd>
+<dt><strong><code>money</code></strong></dt>
+<dd>Current cash balance in game currency.</dd>
+<dt><strong><code>total_income</code></strong></dt>
+<dd>Cumulative earnings over the entire session.</dd>
+<dt><strong><code>total_expenses</code></strong></dt>
+<dd>Cumulative spending over the entire session.</dd>
+<dt><strong><code>fuel</code></strong></dt>
+<dd>Current fuel stock held by the company (in units).</dd>
+<dt><strong><code>iron_ore</code></strong></dt>
+<dd>Current iron ore stock (in units).</dd>
+<dt><strong><code>alloy_ore</code></strong></dt>
+<dd>Current alloy ore stock (in units).</dd>
+<dt><strong><code>titanium_ore</code></strong></dt>
+<dd>Current titanium ore stock (in units).</dd>
+</dl></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.models.company.Company.alloy_ore"><code class="name">var <span class="ident">alloy_ore</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.fuel"><code class="name">var <span class="ident">fuel</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.iron_ore"><code class="name">var <span class="ident">iron_ore</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.is_bankrupt"><code class="name">prop <span class="ident">is_bankrupt</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_bankrupt(self) -&gt; bool:
+    &#34;&#34;&#34;True when the company&#39;s cash balance has dropped below zero.&#34;&#34;&#34;
+    return self.money &lt; 0</code></pre>
+</details>
+<div class="desc"><p>True when the company's cash balance has dropped below zero.</p></div>
+</dd>
+<dt id="src.models.company.Company.money"><code class="name">var <span class="ident">money</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.titanium_ore"><code class="name">var <span class="ident">titanium_ore</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.total_expenses"><code class="name">var <span class="ident">total_expenses</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.company.Company.total_income"><code class="name">var <span class="ident">total_income</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.models.company.Company.earn"><code class="name flex">
+<span>def <span class="ident">earn</span></span>(<span>self, amount: int) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def earn(self, amount: int) -&gt; None:
+    &#34;&#34;&#34;Add an amount to the company&#39;s cash balance.
+
+    Args:
+        amount: The positive integer amount to add.
+    &#34;&#34;&#34;
+    self.money += amount
+    self.total_income += amount</code></pre>
+</details>
+<div class="desc"><p>Add an amount to the company's cash balance.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>amount</code></strong></dt>
+<dd>The positive integer amount to add.</dd>
+</dl></div>
+</dd>
+<dt id="src.models.company.Company.spend"><code class="name flex">
+<span>def <span class="ident">spend</span></span>(<span>self, amount: int) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spend(self, amount: int) -&gt; bool:
+    &#34;&#34;&#34;Deduct an amount from the company&#39;s cash balance.
+
+    Args:
+        amount: The positive integer amount to deduct.
+
+    Returns:
+        True if the balance remains non-negative after the deduction,
+        False if the company has gone into debt.
+    &#34;&#34;&#34;
+    self.money -= amount
+    self.total_expenses += amount
+    return self.money &gt;= 0</code></pre>
+</details>
+<div class="desc"><p>Deduct an amount from the company's cash balance.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>amount</code></strong></dt>
+<dd>The positive integer amount to deduct.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True if the balance remains non-negative after the deduction,
+False if the company has gone into debt.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.models" href="index.html">src.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.models.company.Company" href="#src.models.company.Company">Company</a></code></h4>
+<ul class="two-column">
+<li><code><a title="src.models.company.Company.alloy_ore" href="#src.models.company.Company.alloy_ore">alloy_ore</a></code></li>
+<li><code><a title="src.models.company.Company.earn" href="#src.models.company.Company.earn">earn</a></code></li>
+<li><code><a title="src.models.company.Company.fuel" href="#src.models.company.Company.fuel">fuel</a></code></li>
+<li><code><a title="src.models.company.Company.iron_ore" href="#src.models.company.Company.iron_ore">iron_ore</a></code></li>
+<li><code><a title="src.models.company.Company.is_bankrupt" href="#src.models.company.Company.is_bankrupt">is_bankrupt</a></code></li>
+<li><code><a title="src.models.company.Company.money" href="#src.models.company.Company.money">money</a></code></li>
+<li><code><a title="src.models.company.Company.name" href="#src.models.company.Company.name">name</a></code></li>
+<li><code><a title="src.models.company.Company.spend" href="#src.models.company.Company.spend">spend</a></code></li>
+<li><code><a title="src.models.company.Company.titanium_ore" href="#src.models.company.Company.titanium_ore">titanium_ore</a></code></li>
+<li><code><a title="src.models.company.Company.total_expenses" href="#src.models.company.Company.total_expenses">total_expenses</a></code></li>
+<li><code><a title="src.models.company.Company.total_income" href="#src.models.company.Company.total_income">total_income</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

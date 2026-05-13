@@ -87,6 +87,13 @@ _HELP_ROWS: list[tuple[str, str, bool]] = [
 ]
 
 class StartScreen:
+    """Animated main menu displayed before the game starts.
+
+    Shows the game title, a pulsing start button, and a scrollable "How to Play"
+    help overlay.  Returns control to the game runner when the player clicks
+    Start or presses Enter.
+    """
+
     def __init__(self) -> None:
         self._btn_start: pygame.Rect | None = None
         self._btn_help: pygame.Rect | None = None
@@ -255,6 +262,11 @@ class StartScreen:
                        text_col, bold=True, anchor="center")
 
     def draw(self, screen: pygame.Surface) -> None:
+        """Render the start screen (title, buttons, optional help overlay) to the screen.
+
+        Args:
+            screen: The pygame display surface.
+        """
         self._pulse += 0.04
         mx, my = pygame.mouse.get_pos()
 

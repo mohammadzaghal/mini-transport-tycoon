@@ -12,7 +12,7 @@ _FALLBACK = {
     TileType.GRASS:    (185, 100, 55),
     TileType.FOREST:   (140,  70, 35),
     TileType.ROAD:     (155, 120, 80),
-    TileType.TRACK:    (100,  70, 50),                            # v1.1 #3
+    TileType.TRACK:    (100,  70, 50),
     TileType.CITY:     (170, 178, 195),
     TileType.FACILITY: (80,   75, 90),
     TileType.WATER:    (170, 195, 220),
@@ -39,6 +39,14 @@ def _tile_color(tile) -> tuple:
     return _FALLBACK.get(tile.tile_type, (30, 30, 30))
 
 class MapRenderer:
+    """Renders the game map, vehicles, routes, and UI overlays to a pygame surface.
+
+    The renderer maintains an off-screen surface of the full map that is built
+    once and then partially invalidated as tiles change.  Each frame only the
+    visible portion is blitted to the screen, making rendering efficient even
+    for large maps.
+    """
+
     def __init__(self) -> None:
         self._map_surface: pygame.Surface | None = None
         self._map_w = 0
@@ -86,7 +94,7 @@ class MapRenderer:
             return "forest"
         if tile.tile_type == TileType.ROAD:
             return "road_route" if tile.is_route_road else "road"
-        if tile.tile_type == TileType.TRACK:                      # v1.1 #3
+        if tile.tile_type == TileType.TRACK:
             return "track_route" if tile.is_route_road else "track"
         if tile.tile_type == TileType.CITY:
             return "city_bank" if tile.is_bank else "city"
@@ -96,6 +104,15 @@ class MapRenderer:
         return None
 
     def build_map_image(self, grid: Grid) -> None:
+        """Build the full off-screen map surface from the given grid.
+
+        This must be called once after map generation and again whenever the
+        map is fully regenerated.  For incremental tile changes, use
+        ``update_tile`` instead.
+
+        Args:
+            grid: The game grid whose tiles will be rendered.
+        """
         sp = self._get_sprites()
         self._map_w = grid.width  * TILE_SIZE
         self._map_h = grid.height * TILE_SIZE
@@ -118,6 +135,16 @@ class MapRenderer:
             pygame.draw.rect(self._map_surface, color, (x0, y0, TILE_SIZE, TILE_SIZE))
 
     def update_tile(self, x: int, y: int, tile) -> None:
+        """Redraw a single tile on the off-screen map surface.
+
+        Call this whenever a tile's type or appearance changes (road built,
+        bridge placed, tree grown, etc.) to keep the cached surface in sync.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+            tile: The updated Tile object to repaint.
+        """
         if self._map_surface is None:
             return
         self._paint_tile(tile)
@@ -132,6 +159,21 @@ class MapRenderer:
         hover_tile=None,
         stops=None,
     ) -> None:
+        """Render the visible map area plus all overlays to the screen surface.
+
+        Blits the pre-built map surface with camera offset applied, then draws
+        route highlights, entry-point markers, vehicle sprites, stop icons,
+        hover highlights, and facility labels on top.
+
+        Args:
+            screen: The pygame surface to draw onto (typically the display surface).
+            grid: The game grid (used for overlay queries).
+            camera: The Camera providing the current scroll offset.
+            routes: List of active Route objects whose paths should be highlighted.
+            vehicles: List of active Vehicle objects to render.
+            hover_tile: Optional (x, y) tile the mouse is currently over.
+            stops: Optional list of Stop objects to render stop icons for.
+        """
         screen.fill((10, 6, 4))  # Dark Mars background
 
         if self._map_surface is not None:

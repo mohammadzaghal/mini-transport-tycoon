@@ -33,3 +33,30 @@ jobs:
       - name: Print full coverage report
         if: always()
         run: python -m coverage report --include="src/**"
+
+  docs:
+    name: Generate API Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygame-ce pdoc3
+
+      - name: Generate HTML documentation
+        run: python -m pdoc --html --output-dir docs/ --template-dir pdoc_templates/ src/
+
+      - name: Upload API docs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs
+          path: docs/

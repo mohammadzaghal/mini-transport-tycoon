@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.ui.start_screen API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.ui.start_screen</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.ui.start_screen.StartScreen"><code class="flex name class">
+<span>class <span class="ident">StartScreen</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class StartScreen:
+    &#34;&#34;&#34;Animated main menu displayed before the game starts.
+
+    Shows the game title, a pulsing start button, and a scrollable &#34;How to Play&#34;
+    help overlay.  Returns control to the game runner when the player clicks
+    Start or presses Enter.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        self._btn_start: pygame.Rect | None = None
+        self._btn_help: pygame.Rect | None = None
+        self._btn_close: pygame.Rect | None = None
+        self._help_open: bool = False
+        self._help_scroll: int = 0
+        self._help_max_scroll: int = 0
+        self._pulse: float = 0.0
+
+    def _text(
+        self,
+        surf: pygame.Surface,
+        text: str,
+        x: int,
+        y: int,
+        size: int,
+        color: tuple[int, int, int],
+        bold: bool = False,
+        anchor: str = &#34;nw&#34;,
+        *,
+        display: bool = False,
+    ) -&gt; pygame.Rect:
+        face = font_display(size, bold=bold) if display else font_ui(size, bold=bold)
+        img = face.render(text, True, color)
+        rx, ry = x, y
+        if anchor == &#34;center&#34;:
+            rx -= img.get_width() // 2
+            ry -= img.get_height() // 2
+        elif anchor in (&#34;ne&#34;, &#34;e&#34;):
+            rx -= img.get_width()
+        surf.blit(img, (rx, ry))
+        return img.get_rect(topleft=(rx, ry))
+
+    def _draw_background(self, screen: pygame.Surface) -&gt; None:
+        &#34;&#34;&#34;Dramatic Mars gradient + horizon glow + stars + terrain ridge.&#34;&#34;&#34;
+        h = WINDOW_HEIGHT
+
+        stops = [
+            (0,   (8,   6,  18)),
+            (280, (16,  10, 28)),
+            (440, (38,  18, 12)),
+            (700, (55,  26, 10)),
+        ]
+        for y in range(h):
+            for i in range(len(stops) - 1):
+                y0, c0 = stops[i]
+                y1, c1 = stops[i + 1]
+                if y0 &lt;= y &lt;= y1:
+                    t = (y - y0) / (y1 - y0)
+                    r = int(c0[0] + t * (c1[0] - c0[0]))
+                    g = int(c0[1] + t * (c1[1] - c0[1]))
+                    b = int(c0[2] + t * (c1[2] - c0[2]))
+                    break
+            pygame.draw.line(screen, (r, g, b), (0, y), (WINDOW_WIDTH, y))
+
+        glow_layers = [
+            (255, 130, 50, 55,  1280, 100,  0),
+            (220,  90, 30, 38,  1480, 160, 22),
+            (180,  60, 20, 24,  1680, 230, 44),
+            (255, 160, 60, 14,  1900, 310, 66),
+        ]
+        base_y = int(h * 0.56)
+        for lr, lg, lb, la, el_w, el_h, y_off in glow_layers:
+            ex = (WINDOW_WIDTH - el_w) // 2
+            ey = base_y + y_off
+            glow = pygame.Surface((el_w, el_h), pygame.SRCALPHA)
+            pygame.draw.ellipse(glow, (lr, lg, lb, la), glow.get_rect())
+            screen.blit(glow, (ex, ey))
+
+        for i in range(60):
+            sx = (i * 97 + 13) % WINDOW_WIDTH
+            sy = (i * 53 + 29) % int(h * 0.50)
+            br = 160 + (i * 23) % 95
+
+            if i % 7 == 0:
+                col = (br, int(br * 0.85), int(br * 0.65))   # warm yellow-white
+            elif i % 5 == 0:
+                col = (int(br * 0.75), int(br * 0.80), br)   # cold blue-white
+            else:
+                col = (br, br, int(br * 0.95))               # near-white
+
+            if i % 3 == 0:
+                pygame.draw.circle(screen, col, (sx, sy), 1)  # 2px dot
+            else:
+                screen.set_at((sx, sy), col)
+
+            if i % 10 == 0:
+                dim = (col[0] // 3, col[1] // 3, col[2] // 3)
+                pygame.draw.line(screen, dim, (sx - 3, sy), (sx + 3, sy))
+                pygame.draw.line(screen, dim, (sx, sy - 3), (sx, sy + 3))
+
+        terrain_y_base = int(h * 0.60)
+        prev = (0, terrain_y_base)
+        for x in range(0, WINDOW_WIDTH, 4):
+            y_off = (
+                int(12 * math.sin(x * 0.008))
+                + int(5 * math.sin(x * 0.021 + 1.3))
+                + int(3 * math.sin(x * 0.047 + 2.7))
+            )
+            ty = terrain_y_base + y_off
+            pygame.draw.line(screen, (60, 28, 14), prev, (x, ty), 2)
+            prev = (x, ty)
+
+        v = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SRCALPHA)
+        for cx, cy in ((0, 0), (WINDOW_WIDTH, 0), (0, WINDOW_HEIGHT), (WINDOW_WIDTH, WINDOW_HEIGHT)):
+            pygame.draw.circle(v, (0, 0, 0, 130), (cx, cy), 340)
+        screen.blit(v, (0, 0))
+
+    def _draw_glass_card(
+        self,
+        screen: pygame.Surface,
+        rect: pygame.Rect,
+        border: tuple[int, int, int] = (200, 120, 70),
+    ) -&gt; None:
+        inner = rect.inflate(-2, -2)
+        card = pygame.Surface(inner.size, pygame.SRCALPHA)
+        card.fill((18, 12, 10, 210))
+        screen.blit(card, inner.topleft)
+        pygame.draw.rect(screen, border, rect, width=2, border_radius=16)
+        pygame.draw.rect(screen, (40, 24, 16), rect, width=1, border_radius=16)
+
+    def _draw_button(
+        self,
+        screen: pygame.Surface,
+        rect: pygame.Rect,
+        label: str,
+        *,
+        primary: bool,
+        hover: bool,
+    ) -&gt; None:
+        if primary:
+
+            glow_alpha = int(55 + 35 * math.sin(self._pulse))
+            glow_rect = rect.inflate(14, 14)
+            glow_surf = pygame.Surface(glow_rect.size, pygame.SRCALPHA)
+            pygame.draw.rect(
+                glow_surf, (255, 160, 60, glow_alpha),
+                glow_surf.get_rect(), border_radius=18,
+            )
+            screen.blit(glow_surf, glow_rect.topleft)
+
+            pygame.draw.rect(screen, (180, 90, 30), rect.inflate(4, 4),
+                             width=1, border_radius=14)
+
+            fill = (200, 95, 35) if hover else (150, 70, 28)
+            edge = (255, 190, 110) if hover else (230, 150, 80)
+            text_col = (255, 200, 120)
+
+            pygame.draw.rect(screen, fill, rect, border_radius=12)
+            pygame.draw.rect(screen, edge, rect, width=2, border_radius=12)
+            self._text(screen, label, rect.centerx, rect.centery, 20,
+                       text_col, bold=True, anchor=&#34;center&#34;)
+
+        else:
+
+            ghost_surf = pygame.Surface(rect.size, pygame.SRCALPHA)
+            ghost_fill = (45, 28, 18, 160) if hover else (28, 18, 12, 120)
+            ghost_surf.fill(ghost_fill)
+            screen.blit(ghost_surf, rect.topleft)
+
+            border_width = 2 if hover else 1
+            border_col = (160, 110, 75) if hover else (100, 70, 50)
+            text_col = (220, 190, 160) if hover else (160, 130, 100)
+            pygame.draw.rect(screen, border_col, rect, width=border_width, border_radius=12)
+            self._text(screen, label, rect.centerx, rect.centery, 17,
+                       text_col, bold=True, anchor=&#34;center&#34;)
+
+    def draw(self, screen: pygame.Surface) -&gt; None:
+        &#34;&#34;&#34;Render the start screen (title, buttons, optional help overlay) to the screen.
+
+        Args:
+            screen: The pygame display surface.
+        &#34;&#34;&#34;
+        self._pulse += 0.04
+        mx, my = pygame.mouse.get_pos()
+
+        self._draw_background(screen)
+
+        cx = WINDOW_WIDTH // 2
+        title_y = 48
+
+        shadow_stack = [
+            (6, 6, (12,   6,   3)),
+            (4, 4, (45,  18,   6)),
+            (2, 2, (120,  50,  15)),
+            (1, 1, (200, 110,  40)),
+        ]
+        for ox, oy, sc in shadow_stack:
+            self._text(screen, &#34;MINI TRANSPORT TYCOON&#34;, cx + ox, title_y + oy, 56,
+                       sc, bold=True, anchor=&#34;center&#34;, display=True)
+        self._text(screen, &#34;MINI TRANSPORT TYCOON&#34;, cx, title_y, 56,
+                   (255, 215, 145), bold=True, anchor=&#34;center&#34;, display=True)
+
+        badge_w, badge_h = 272, 30
+        badge_x = cx - badge_w // 2
+        badge_y = title_y + 60
+        badge_surf = pygame.Surface((badge_w, badge_h), pygame.SRCALPHA)
+        badge_surf.fill((80, 35, 12, 185))
+        screen.blit(badge_surf, (badge_x, badge_y))
+        pygame.draw.rect(screen, (220, 110, 50),
+                         pygame.Rect(badge_x, badge_y, badge_w, badge_h),
+                         width=1, border_radius=10)
+
+        pygame.draw.line(screen, (255, 160, 70),
+                         (badge_x + 6, badge_y + 1), (badge_x + badge_w - 6, badge_y + 1))
+
+        sub_glow = int(200 + 40 * math.sin(self._pulse))
+        self._text(screen, &#34;MARS COLONY EDITION&#34;, cx, badge_y + badge_h // 2, 15,
+                   (sub_glow, 150, 80), bold=True, anchor=&#34;center&#34;, display=True)
+
+        self._text(screen, &#34;Roads · rails · cargo · growth&#34;,
+                   cx, title_y + 100, 15, (200, 170, 140), anchor=&#34;center&#34;)
+        self._text(screen, &#34;Prototype — each new game uses a fresh procedural map&#34;,
+                   cx, title_y + 120, 11, (120, 95, 80), anchor=&#34;center&#34;)
+
+        div_y = title_y + 138
+        pygame.draw.line(screen, (90, 55, 35), (470, div_y), (612, div_y))
+        pygame.draw.line(screen, (90, 55, 35), (668, div_y), (810, div_y))
+        pygame.draw.circle(screen, (200, 120, 60), (640, div_y), 3)
+        pygame.draw.circle(screen, (90, 55, 35), (640, div_y), 5, width=1)
+
+        gap = 18
+        bw_p, bh = 280, 50
+        bw_s = 220
+        total_w = bw_p + gap + bw_s
+        bx0 = cx - total_w // 2
+        by_btn = title_y + 158
+
+        self._btn_start = pygame.Rect(bx0, by_btn, bw_p, bh)
+        self._btn_help = pygame.Rect(bx0 + bw_p + gap, by_btn, bw_s, bh)
+
+        h_start = self._btn_start.collidepoint(mx, my)
+        h_help = self._btn_help.collidepoint(mx, my) and not self._help_open
+        self._draw_button(screen, self._btn_start, &#34;▶  Start game&#34;, primary=True, hover=h_start)
+        self._draw_button(screen, self._btn_help, &#34;How to play&#34;, primary=False, hover=h_help)
+
+        self._text(screen, &#34;or press  Enter&#34;, cx, by_btn + bh + 8, 11,
+                   (140, 110, 90), anchor=&#34;center&#34;)
+
+        header_y = by_btn + bh + 32
+        self._text(screen, &#34;BEFORE YOU LAUNCH&#34;, 80, header_y, 11,
+                   (200, 110, 55), bold=True)
+        pygame.draw.line(screen, (80, 42, 22),
+                         (258, header_y + 7), (WINDOW_WIDTH - 80, header_y + 7))
+
+        card_w, card_h = 364, 82
+        col_gap, row_gap = 14, 12
+        col_xs = [80, 80 + card_w + col_gap, 80 + 2 * (card_w + col_gap)]
+        row_ys = [header_y + 22, header_y + 22 + card_h + row_gap]
+
+        for idx, (icon, phrase, detail) in enumerate(_TIP_CARDS):
+            col = idx % 3
+            row = idx // 3
+            cx_card = col_xs[col]
+            cy_card = row_ys[row]
+            border_col = _CARD_BORDERS[idx]
+            card_rect = pygame.Rect(cx_card, cy_card, card_w, card_h)
+
+            inner = card_rect.inflate(-2, -2)
+            fill_surf = pygame.Surface(inner.size, pygame.SRCALPHA)
+            fill_surf.fill((18, 10, 6, 200))
+            screen.blit(fill_surf, inner.topleft)
+
+            pygame.draw.rect(screen, border_col, card_rect, width=1, border_radius=10)
+            hl = (border_col[0] // 4, border_col[1] // 4, border_col[2] // 4)
+            pygame.draw.line(screen, hl,
+                             (cx_card + 6, cy_card + 1), (cx_card + card_w - 6, cy_card + 1))
+
+            self._text(screen, icon, cx_card + 14, cy_card + 16, 22, (220, 140, 60))
+
+            self._text(screen, phrase, cx_card + 46, cy_card + 12, 13,
+                       (255, 200, 130), bold=True)
+
+            self._text(screen, detail, cx_card + 46, cy_card + 32, 11, (185, 158, 130))
+
+            pygame.draw.line(screen, border_col,
+                             (cx_card + 14, cy_card + card_h - 9),
+                             (cx_card + 52, cy_card + card_h - 9))
+
+        grid_bottom = row_ys[1] + card_h
+        strip_y = grid_bottom + 18
+        pygame.draw.line(screen, (55, 32, 18), (80, strip_y), (WINDOW_WIDTH - 80, strip_y))
+        shortcut_items = [
+            &#34;[R] Road&#34;, &#34;[T] Track&#34;, &#34;[S] Stop&#34;, &#34;[K] Bridge&#34;,
+            &#34;[G] Garage&#34;, &#34;[B] Demo&#34;, &#34;[M] Minimap&#34;, &#34;[1–4] Speed&#34;,
+        ]
+        item_w = (WINDOW_WIDTH - 160) // len(shortcut_items)
+        for i, label in enumerate(shortcut_items):
+            ix = 80 + i * item_w + item_w // 2
+            self._text(screen, label, ix, strip_y + 7, 10, (130, 95, 68), anchor=&#34;center&#34;)
+        pygame.draw.line(screen, (55, 32, 18),
+                         (80, strip_y + 26), (WINDOW_WIDTH - 80, strip_y + 26))
+
+        sep_y = WINDOW_HEIGHT - 44
+        pygame.draw.line(screen, (65, 38, 22), (80, sep_y), (WINDOW_WIDTH - 80, sep_y))
+        pygame.draw.rect(screen, (65, 38, 22), pygame.Rect(636, sep_y - 2, 8, 4))
+        self._text(
+            screen,
+            &#34;Tip: use the toolbar for routes, vehicles, and bridge levels — keys are shortcuts.&#34;,
+            cx, WINDOW_HEIGHT - 22, 11,
+            (155, 128, 100), anchor=&#34;center&#34;,
+        )
+
+        if self._help_open:
+            self._draw_help_overlay(screen, mx, my)
+
+    def _draw_help_overlay(self, screen: pygame.Surface, mx: int, my: int) -&gt; None:
+        veil = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT), pygame.SRCALPHA)
+        veil.fill((0, 0, 0, 200))
+        screen.blit(veil, (0, 0))
+
+        panel_w, panel_h = 720, 520
+        px = (WINDOW_WIDTH - panel_w) // 2
+        py = (WINDOW_HEIGHT - panel_h) // 2
+        panel = pygame.Rect(px, py, panel_w, panel_h)
+
+        inner = panel.inflate(-4, -4)
+        body = pygame.Surface(inner.size, pygame.SRCALPHA)
+        body.fill((14, 10, 8, 245))
+        screen.blit(body, inner.topleft)
+        pygame.draw.rect(screen, (210, 130, 70), panel, width=2, border_radius=18)
+
+        title_y = panel.y + 22
+        self._text(screen, &#34;How to play&#34;, panel.centerx, title_y, 24,
+                   (255, 200, 130), bold=True, anchor=&#34;center&#34;, display=True)
+        self._text(screen, &#34;Full controls &amp; systems&#34;, panel.centerx, title_y + 30, 12,
+                   (160, 130, 110), anchor=&#34;center&#34;)
+
+        clip = pygame.Rect(panel.x + 20, panel.y + 64, panel_w - 40, panel_h - 120)
+        clip_surf = screen.subsurface(clip)
+        col_w = clip.width // 2 - 12
+        x0 = 0
+        x1 = col_w + 24
+        mid = len(_HELP_ROWS) // 2
+        y_base = 8 - self._help_scroll
+
+        y_left = y_base
+        y_right = y_base
+        max_y = y_base
+
+        for idx, (key_label, desc, is_header) in enumerate(_HELP_ROWS):
+            in_right = idx &gt;= mid
+            cx = x1 if in_right else x0
+            cy = y_right if in_right else y_left
+            row_h = 24 if is_header else (10 if key_label == &#34;&#34; else 19)
+
+            if -row_h &lt;= cy &lt;= clip.height + row_h:
+                if is_header:
+                    self._text(clip_surf, key_label, cx, cy, 12, (240, 160, 80), bold=True)
+                    pygame.draw.line(
+                        clip_surf, (120, 70, 40),
+                        (cx, cy + 16), (cx + col_w - 8, cy + 16), 1,
+                    )
+                elif key_label == &#34;&#34;:
+                    pass
+                else:
+                    if key_label:
+                        badge_w = max(52, len(key_label) * 7 + 12)
+                        pygame.draw.rect(clip_surf, (36, 22, 14), (cx, cy + 1, badge_w, 16), border_radius=4)
+                        pygame.draw.rect(clip_surf, (95, 55, 30), (cx, cy + 1, badge_w, 16), 1, border_radius=4)
+                        self._text(
+                            clip_surf, key_label, cx + badge_w // 2, cy + 9, 10,
+                            (255, 210, 140), bold=True, anchor=&#34;center&#34;,
+                        )
+                        if desc:
+                            self._text(clip_surf, desc, cx + badge_w + 8, cy + 2, 10, (190, 165, 135))
+                    else:
+                        self._text(clip_surf, &#34;·  &#34; + desc, cx + 6, cy + 2, 10, (165, 140, 115))
+
+            if in_right:
+                y_right += row_h
+            else:
+                y_left += row_h
+            max_y = max(max_y, y_left, y_right)
+
+        total_content = max_y - y_base + self._help_scroll + 24
+        self._help_max_scroll = max(0, total_content - clip.height)
+
+        close_w, close_h = 120, 40
+        self._btn_close = pygame.Rect(
+            panel.right - close_w - 18, panel.bottom - close_h - 16, close_w, close_h,
+        )
+        h_close = self._btn_close.collidepoint(mx, my)
+        self._draw_button(screen, self._btn_close, &#34;Close&#34;, primary=False, hover=h_close)
+
+        if self._help_max_scroll &gt; 0:
+            self._text(
+                screen, &#34;Scroll  ·  Esc to close&#34;, panel.x + 24, panel.bottom - 36, 11,
+                (130, 110, 95),
+            )
+
+    def handle_event(self, event: pygame.event.Event) -&gt; bool:
+        &#34;&#34;&#34;Return True when the player wants to start the game.&#34;&#34;&#34;
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                if self._help_open:
+                    self._help_open = False
+                    self._help_scroll = 0
+                return False
+            if event.key == pygame.K_RETURN and not self._help_open:
+                return True
+
+        if event.type == pygame.MOUSEWHEEL and self._help_open:
+            self._help_scroll = max(
+                0, min(self._help_max_scroll, self._help_scroll - event.y * 28),
+            )
+            return False
+
+        if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            x, y = event.pos
+            if self._help_open:
+                if self._btn_close and self._btn_close.collidepoint(x, y):
+                    self._help_open = False
+                    self._help_scroll = 0
+                    return False
+
+                panel_w, panel_h = 720, 520
+                px = (WINDOW_WIDTH - panel_w) // 2
+                py = (WINDOW_HEIGHT - panel_h) // 2
+                panel = pygame.Rect(px, py, panel_w, panel_h)
+                if not panel.collidepoint(x, y):
+                    self._help_open = False
+                    self._help_scroll = 0
+                    return False
+                return False
+
+            if self._btn_start and self._btn_start.collidepoint(x, y):
+                return True
+            if self._btn_help and self._btn_help.collidepoint(x, y):
+                self._help_open = True
+                self._help_scroll = 0
+
+        return False</code></pre>
+</details>
+<div class="desc"><p>Animated main menu displayed before the game starts.</p>
+<p>Shows the game title, a pulsing start button, and a scrollable "How to Play"
+help overlay.
+Returns control to the game runner when the player clicks
+Start or presses Enter.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="src.ui.start_screen.StartScreen.draw"><code class="name flex">
+<span>def <span class="ident">draw</span></span>(<span>self, screen: pygame.Surface) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def draw(self, screen: pygame.Surface) -&gt; None:
+    &#34;&#34;&#34;Render the start screen (title, buttons, optional help overlay) to the screen.
+
+    Args:
+        screen: The pygame display surface.
+    &#34;&#34;&#34;
+    self._pulse += 0.04
+    mx, my = pygame.mouse.get_pos()
+
+    self._draw_background(screen)
+
+    cx = WINDOW_WIDTH // 2
+    title_y = 48
+
+    shadow_stack = [
+        (6, 6, (12,   6,   3)),
+        (4, 4, (45,  18,   6)),
+        (2, 2, (120,  50,  15)),
+        (1, 1, (200, 110,  40)),
+    ]
+    for ox, oy, sc in shadow_stack:
+        self._text(screen, &#34;MINI TRANSPORT TYCOON&#34;, cx + ox, title_y + oy, 56,
+                   sc, bold=True, anchor=&#34;center&#34;, display=True)
+    self._text(screen, &#34;MINI TRANSPORT TYCOON&#34;, cx, title_y, 56,
+               (255, 215, 145), bold=True, anchor=&#34;center&#34;, display=True)
+
+    badge_w, badge_h = 272, 30
+    badge_x = cx - badge_w // 2
+    badge_y = title_y + 60
+    badge_surf = pygame.Surface((badge_w, badge_h), pygame.SRCALPHA)
+    badge_surf.fill((80, 35, 12, 185))
+    screen.blit(badge_surf, (badge_x, badge_y))
+    pygame.draw.rect(screen, (220, 110, 50),
+                     pygame.Rect(badge_x, badge_y, badge_w, badge_h),
+                     width=1, border_radius=10)
+
+    pygame.draw.line(screen, (255, 160, 70),
+                     (badge_x + 6, badge_y + 1), (badge_x + badge_w - 6, badge_y + 1))
+
+    sub_glow = int(200 + 40 * math.sin(self._pulse))
+    self._text(screen, &#34;MARS COLONY EDITION&#34;, cx, badge_y + badge_h // 2, 15,
+               (sub_glow, 150, 80), bold=True, anchor=&#34;center&#34;, display=True)
+
+    self._text(screen, &#34;Roads · rails · cargo · growth&#34;,
+               cx, title_y + 100, 15, (200, 170, 140), anchor=&#34;center&#34;)
+    self._text(screen, &#34;Prototype — each new game uses a fresh procedural map&#34;,
+               cx, title_y + 120, 11, (120, 95, 80), anchor=&#34;center&#34;)
+
+    div_y = title_y + 138
+    pygame.draw.line(screen, (90, 55, 35), (470, div_y), (612, div_y))
+    pygame.draw.line(screen, (90, 55, 35), (668, div_y), (810, div_y))
+    pygame.draw.circle(screen, (200, 120, 60), (640, div_y), 3)
+    pygame.draw.circle(screen, (90, 55, 35), (640, div_y), 5, width=1)
+
+    gap = 18
+    bw_p, bh = 280, 50
+    bw_s = 220
+    total_w = bw_p + gap + bw_s
+    bx0 = cx - total_w // 2
+    by_btn = title_y + 158
+
+    self._btn_start = pygame.Rect(bx0, by_btn, bw_p, bh)
+    self._btn_help = pygame.Rect(bx0 + bw_p + gap, by_btn, bw_s, bh)
+
+    h_start = self._btn_start.collidepoint(mx, my)
+    h_help = self._btn_help.collidepoint(mx, my) and not self._help_open
+    self._draw_button(screen, self._btn_start, &#34;▶  Start game&#34;, primary=True, hover=h_start)
+    self._draw_button(screen, self._btn_help, &#34;How to play&#34;, primary=False, hover=h_help)
+
+    self._text(screen, &#34;or press  Enter&#34;, cx, by_btn + bh + 8, 11,
+               (140, 110, 90), anchor=&#34;center&#34;)
+
+    header_y = by_btn + bh + 32
+    self._text(screen, &#34;BEFORE YOU LAUNCH&#34;, 80, header_y, 11,
+               (200, 110, 55), bold=True)
+    pygame.draw.line(screen, (80, 42, 22),
+                     (258, header_y + 7), (WINDOW_WIDTH - 80, header_y + 7))
+
+    card_w, card_h = 364, 82
+    col_gap, row_gap = 14, 12
+    col_xs = [80, 80 + card_w + col_gap, 80 + 2 * (card_w + col_gap)]
+    row_ys = [header_y + 22, header_y + 22 + card_h + row_gap]
+
+    for idx, (icon, phrase, detail) in enumerate(_TIP_CARDS):
+        col = idx % 3
+        row = idx // 3
+        cx_card = col_xs[col]
+        cy_card = row_ys[row]
+        border_col = _CARD_BORDERS[idx]
+        card_rect = pygame.Rect(cx_card, cy_card, card_w, card_h)
+
+        inner = card_rect.inflate(-2, -2)
+        fill_surf = pygame.Surface(inner.size, pygame.SRCALPHA)
+        fill_surf.fill((18, 10, 6, 200))
+        screen.blit(fill_surf, inner.topleft)
+
+        pygame.draw.rect(screen, border_col, card_rect, width=1, border_radius=10)
+        hl = (border_col[0] // 4, border_col[1] // 4, border_col[2] // 4)
+        pygame.draw.line(screen, hl,
+                         (cx_card + 6, cy_card + 1), (cx_card + card_w - 6, cy_card + 1))
+
+        self._text(screen, icon, cx_card + 14, cy_card + 16, 22, (220, 140, 60))
+
+        self._text(screen, phrase, cx_card + 46, cy_card + 12, 13,
+                   (255, 200, 130), bold=True)
+
+        self._text(screen, detail, cx_card + 46, cy_card + 32, 11, (185, 158, 130))
+
+        pygame.draw.line(screen, border_col,
+                         (cx_card + 14, cy_card + card_h - 9),
+                         (cx_card + 52, cy_card + card_h - 9))
+
+    grid_bottom = row_ys[1] + card_h
+    strip_y = grid_bottom + 18
+    pygame.draw.line(screen, (55, 32, 18), (80, strip_y), (WINDOW_WIDTH - 80, strip_y))
+    shortcut_items = [
+        &#34;[R] Road&#34;, &#34;[T] Track&#34;, &#34;[S] Stop&#34;, &#34;[K] Bridge&#34;,
+        &#34;[G] Garage&#34;, &#34;[B] Demo&#34;, &#34;[M] Minimap&#34;, &#34;[1–4] Speed&#34;,
+    ]
+    item_w = (WINDOW_WIDTH - 160) // len(shortcut_items)
+    for i, label in enumerate(shortcut_items):
+        ix = 80 + i * item_w + item_w // 2
+        self._text(screen, label, ix, strip_y + 7, 10, (130, 95, 68), anchor=&#34;center&#34;)
+    pygame.draw.line(screen, (55, 32, 18),
+                     (80, strip_y + 26), (WINDOW_WIDTH - 80, strip_y + 26))
+
+    sep_y = WINDOW_HEIGHT - 44
+    pygame.draw.line(screen, (65, 38, 22), (80, sep_y), (WINDOW_WIDTH - 80, sep_y))
+    pygame.draw.rect(screen, (65, 38, 22), pygame.Rect(636, sep_y - 2, 8, 4))
+    self._text(
+        screen,
+        &#34;Tip: use the toolbar for routes, vehicles, and bridge levels — keys are shortcuts.&#34;,
+        cx, WINDOW_HEIGHT - 22, 11,
+        (155, 128, 100), anchor=&#34;center&#34;,
+    )
+
+    if self._help_open:
+        self._draw_help_overlay(screen, mx, my)</code></pre>
+</details>
+<div class="desc"><p>Render the start screen (title, buttons, optional help overlay) to the screen.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>screen</code></strong></dt>
+<dd>The pygame display surface.</dd>
+</dl></div>
+</dd>
+<dt id="src.ui.start_screen.StartScreen.handle_event"><code class="name flex">
+<span>def <span class="ident">handle_event</span></span>(<span>self, event: pygame.event.Event) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def handle_event(self, event: pygame.event.Event) -&gt; bool:
+    &#34;&#34;&#34;Return True when the player wants to start the game.&#34;&#34;&#34;
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_ESCAPE:
+            if self._help_open:
+                self._help_open = False
+                self._help_scroll = 0
+            return False
+        if event.key == pygame.K_RETURN and not self._help_open:
+            return True
+
+    if event.type == pygame.MOUSEWHEEL and self._help_open:
+        self._help_scroll = max(
+            0, min(self._help_max_scroll, self._help_scroll - event.y * 28),
+        )
+        return False
+
+    if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+        x, y = event.pos
+        if self._help_open:
+            if self._btn_close and self._btn_close.collidepoint(x, y):
+                self._help_open = False
+                self._help_scroll = 0
+                return False
+
+            panel_w, panel_h = 720, 520
+            px = (WINDOW_WIDTH - panel_w) // 2
+            py = (WINDOW_HEIGHT - panel_h) // 2
+            panel = pygame.Rect(px, py, panel_w, panel_h)
+            if not panel.collidepoint(x, y):
+                self._help_open = False
+                self._help_scroll = 0
+                return False
+            return False
+
+        if self._btn_start and self._btn_start.collidepoint(x, y):
+            return True
+        if self._btn_help and self._btn_help.collidepoint(x, y):
+            self._help_open = True
+            self._help_scroll = 0
+
+    return False</code></pre>
+</details>
+<div class="desc"><p>Return True when the player wants to start the game.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.ui" href="index.html">src.ui</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.ui.start_screen.StartScreen" href="#src.ui.start_screen.StartScreen">StartScreen</a></code></h4>
+<ul class="">
+<li><code><a title="src.ui.start_screen.StartScreen.draw" href="#src.ui.start_screen.StartScreen.draw">draw</a></code></li>
+<li><code><a title="src.ui.start_screen.StartScreen.handle_event" href="#src.ui.start_screen.StartScreen.handle_event">handle_event</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

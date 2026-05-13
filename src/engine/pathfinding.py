@@ -5,6 +5,21 @@ from src.models.grid import Grid
 
 
 def find_road_path(grid: Grid, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:
+    """Find the shortest road path between two tile coordinates using BFS.
+
+    Only tiles where ``Tile.is_driveable`` is True are traversed, except for
+    the goal tile which is always included regardless of type (allowing routes
+    to end at facility entry points or stops).
+
+    Args:
+        grid: The game grid to search.
+        start: The (x, y) coordinate of the starting tile.
+        goal: The (x, y) coordinate of the destination tile.
+
+    Returns:
+        An ordered list of (x, y) coordinates from ``start`` to ``goal``
+        (inclusive), or an empty list if no path exists.
+    """
     if start == goal:
         return [start]
 
@@ -38,8 +53,22 @@ def find_road_path(grid: Grid, start: Tuple[int, int], goal: Tuple[int, int]) ->
     path.reverse()
     return path
 
-def find_track_path(grid: Grid, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:  
+def find_track_path(grid: Grid, start: Tuple[int, int], goal: Tuple[int, int]) -> List[Tuple[int, int]]:
+    """Find the shortest rail path between two tile coordinates using BFS.
 
+    Traversable tiles include those where ``Tile.is_track_driveable`` is True,
+    facility entry points, and stop tiles.  The goal tile is always reachable
+    regardless of type.
+
+    Args:
+        grid: The game grid to search.
+        start: The (x, y) coordinate of the starting tile.
+        goal: The (x, y) coordinate of the destination tile.
+
+    Returns:
+        An ordered list of (x, y) coordinates from ``start`` to ``goal``
+        (inclusive), or an empty list if no path exists.
+    """
     if start == goal:
         return [start]
 

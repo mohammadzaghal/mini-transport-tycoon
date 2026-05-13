@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.models.tile API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.models.tile</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.models.tile.Tile"><code class="flex name class">
+<span>class <span class="ident">Tile</span></span>
+<span>(</span><span>x: int,<br>y: int,<br>tile_type: TileType = TileType.GRASS,<br>tree_count: int = 0,<br>zone_name: str = '',<br>is_bank: bool = False,<br>is_entry_point: bool = False,<br>is_route_road: bool = False,<br>is_stop: bool = False,<br>is_city_road: bool = False,<br>bridge_type: Optional[BridgeType] = None,<br>stop_ref: "Optional['Stop']" = None,<br>facility_ref: "Optional['Facility']" = None,<br>garage_ref: "Optional['Garage']" = None,<br>is_garage: bool = False)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Tile:
+    &#34;&#34;&#34;A single cell in the game map grid.
+
+    Attributes:
+        x: Column index of this tile in the grid.
+        y: Row index of this tile in the grid.
+        tile_type: The terrain or infrastructure type (GRASS, WATER, ROAD, etc.).
+        tree_count: Number of trees on this tile; used for forest density.
+        zone_name: Name of the city or zone this tile belongs to, if any.
+        is_bank: True when this tile contains a bank building.
+        is_entry_point: True when this tile is a facility&#39;s designated entry/exit.
+        is_route_road: True when a player-defined route passes through here.
+        is_stop: True when a cargo/passenger stop has been built on this tile.
+        is_city_road: True when the tile is part of a procedurally generated city road.
+        bridge_type: The bridge level installed on a WATER tile, or None if unbridged.
+        stop_ref: Reference to the Stop object placed on this tile, or None.
+        facility_ref: Reference to the Facility object on this tile, or None.
+        garage_ref: Reference to the Garage object on this tile, or None.
+        is_garage: True when a vehicle garage has been built here.
+    &#34;&#34;&#34;
+
+    x: int
+    y: int
+    tile_type: TileType = TileType.GRASS
+    tree_count: int = 0
+    zone_name: str = &#34;&#34;
+    is_bank: bool = False
+    is_entry_point: bool = False
+    is_route_road: bool = False
+    is_stop: bool = False
+    is_city_road: bool = False
+    bridge_type: Optional[BridgeType] = None
+    stop_ref: Optional[&#34;Stop&#34;] = field(default=None, repr=False)
+    facility_ref: Optional[&#34;Facility&#34;] = field(default=None, repr=False)
+    garage_ref: Optional[&#34;Garage&#34;] = field(default=None, repr=False)
+    is_garage: bool = False
+
+    @property
+    def is_buildable(self) -&gt; bool:
+        &#34;&#34;&#34;True when a road or stop can be built on this tile.
+
+        City road tiles are excluded even when their terrain would otherwise allow it.
+        &#34;&#34;&#34;
+        if self.is_city_road:
+            return False
+        return self.tile_type in {TileType.GRASS, TileType.FOREST, TileType.ROAD}
+
+    @property
+    def is_track_buildable(self) -&gt; bool:
+        &#34;&#34;&#34;True when a rail track can be built on this tile.
+
+        City road tiles are excluded even when their terrain would otherwise allow it.
+        &#34;&#34;&#34;
+        if self.is_city_road:
+            return False
+        return self.tile_type in {TileType.GRASS, TileType.FOREST, TileType.TRACK}
+
+    @property
+    def is_driveable(self) -&gt; bool:
+        &#34;&#34;&#34;True when wheeled vehicles (buses, trucks) can traverse this tile.
+
+        ROAD tiles are always driveable.  WATER tiles are driveable only when
+        a bridge of any type has been installed.
+        &#34;&#34;&#34;
+        if self.tile_type == TileType.ROAD:
+            return True
+        if self.tile_type == TileType.WATER and self.bridge_type is not None:
+            return True
+        return False
+
+    @property
+    def is_track_driveable(self) -&gt; bool:
+        &#34;&#34;&#34;True when rail vehicles (maglev) can traverse this tile.
+
+        TRACK tiles are always track-driveable.  WATER tiles are track-driveable
+        only when a STEEL bridge has been installed.
+        &#34;&#34;&#34;
+        if self.tile_type == TileType.TRACK:
+            return True
+        if self.tile_type == TileType.WATER and self.bridge_type == BridgeType.STEEL:
+            return True
+        return False
+
+    @property
+    def is_water(self) -&gt; bool:
+        &#34;&#34;&#34;True when this tile&#39;s terrain is WATER.&#34;&#34;&#34;
+        return self.tile_type == TileType.WATER</code></pre>
+</details>
+<div class="desc"><p>A single cell in the game map grid.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>Column index of this tile in the grid.</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>Row index of this tile in the grid.</dd>
+<dt><strong><code>tile_type</code></strong></dt>
+<dd>The terrain or infrastructure type (GRASS, WATER, ROAD, etc.).</dd>
+<dt><strong><code>tree_count</code></strong></dt>
+<dd>Number of trees on this tile; used for forest density.</dd>
+<dt><strong><code>zone_name</code></strong></dt>
+<dd>Name of the city or zone this tile belongs to, if any.</dd>
+<dt><strong><code>is_bank</code></strong></dt>
+<dd>True when this tile contains a bank building.</dd>
+<dt><strong><code>is_entry_point</code></strong></dt>
+<dd>True when this tile is a facility's designated entry/exit.</dd>
+<dt><strong><code>is_route_road</code></strong></dt>
+<dd>True when a player-defined route passes through here.</dd>
+<dt><strong><code>is_stop</code></strong></dt>
+<dd>True when a cargo/passenger stop has been built on this tile.</dd>
+<dt><strong><code>is_city_road</code></strong></dt>
+<dd>True when the tile is part of a procedurally generated city road.</dd>
+<dt><strong><code>bridge_type</code></strong></dt>
+<dd>The bridge level installed on a WATER tile, or None if unbridged.</dd>
+<dt><strong><code>stop_ref</code></strong></dt>
+<dd>Reference to the Stop object placed on this tile, or None.</dd>
+<dt><strong><code>facility_ref</code></strong></dt>
+<dd>Reference to the Facility object on this tile, or None.</dd>
+<dt><strong><code>garage_ref</code></strong></dt>
+<dd>Reference to the Garage object on this tile, or None.</dd>
+<dt><strong><code>is_garage</code></strong></dt>
+<dd>True when a vehicle garage has been built here.</dd>
+</dl></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="src.models.tile.Tile.bridge_type"><code class="name">var <span class="ident">bridge_type</span> : Optional[BridgeType]</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.facility_ref"><code class="name">var <span class="ident">facility_ref</span> : Optional['Facility']</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.garage_ref"><code class="name">var <span class="ident">garage_ref</span> : Optional['Garage']</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_bank"><code class="name">var <span class="ident">is_bank</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_buildable"><code class="name">prop <span class="ident">is_buildable</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_buildable(self) -&gt; bool:
+    &#34;&#34;&#34;True when a road or stop can be built on this tile.
+
+    City road tiles are excluded even when their terrain would otherwise allow it.
+    &#34;&#34;&#34;
+    if self.is_city_road:
+        return False
+    return self.tile_type in {TileType.GRASS, TileType.FOREST, TileType.ROAD}</code></pre>
+</details>
+<div class="desc"><p>True when a road or stop can be built on this tile.</p>
+<p>City road tiles are excluded even when their terrain would otherwise allow it.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_city_road"><code class="name">var <span class="ident">is_city_road</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_driveable"><code class="name">prop <span class="ident">is_driveable</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_driveable(self) -&gt; bool:
+    &#34;&#34;&#34;True when wheeled vehicles (buses, trucks) can traverse this tile.
+
+    ROAD tiles are always driveable.  WATER tiles are driveable only when
+    a bridge of any type has been installed.
+    &#34;&#34;&#34;
+    if self.tile_type == TileType.ROAD:
+        return True
+    if self.tile_type == TileType.WATER and self.bridge_type is not None:
+        return True
+    return False</code></pre>
+</details>
+<div class="desc"><p>True when wheeled vehicles (buses, trucks) can traverse this tile.</p>
+<p>ROAD tiles are always driveable.
+WATER tiles are driveable only when
+a bridge of any type has been installed.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_entry_point"><code class="name">var <span class="ident">is_entry_point</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_garage"><code class="name">var <span class="ident">is_garage</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_route_road"><code class="name">var <span class="ident">is_route_road</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_stop"><code class="name">var <span class="ident">is_stop</span> : bool</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_track_buildable"><code class="name">prop <span class="ident">is_track_buildable</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_track_buildable(self) -&gt; bool:
+    &#34;&#34;&#34;True when a rail track can be built on this tile.
+
+    City road tiles are excluded even when their terrain would otherwise allow it.
+    &#34;&#34;&#34;
+    if self.is_city_road:
+        return False
+    return self.tile_type in {TileType.GRASS, TileType.FOREST, TileType.TRACK}</code></pre>
+</details>
+<div class="desc"><p>True when a rail track can be built on this tile.</p>
+<p>City road tiles are excluded even when their terrain would otherwise allow it.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_track_driveable"><code class="name">prop <span class="ident">is_track_driveable</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_track_driveable(self) -&gt; bool:
+    &#34;&#34;&#34;True when rail vehicles (maglev) can traverse this tile.
+
+    TRACK tiles are always track-driveable.  WATER tiles are track-driveable
+    only when a STEEL bridge has been installed.
+    &#34;&#34;&#34;
+    if self.tile_type == TileType.TRACK:
+        return True
+    if self.tile_type == TileType.WATER and self.bridge_type == BridgeType.STEEL:
+        return True
+    return False</code></pre>
+</details>
+<div class="desc"><p>True when rail vehicles (maglev) can traverse this tile.</p>
+<p>TRACK tiles are always track-driveable.
+WATER tiles are track-driveable
+only when a STEEL bridge has been installed.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.is_water"><code class="name">prop <span class="ident">is_water</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def is_water(self) -&gt; bool:
+    &#34;&#34;&#34;True when this tile&#39;s terrain is WATER.&#34;&#34;&#34;
+    return self.tile_type == TileType.WATER</code></pre>
+</details>
+<div class="desc"><p>True when this tile's terrain is WATER.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.stop_ref"><code class="name">var <span class="ident">stop_ref</span> : Optional['Stop']</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.tile_type"><code class="name">var <span class="ident">tile_type</span> : TileType</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.tree_count"><code class="name">var <span class="ident">tree_count</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.x"><code class="name">var <span class="ident">x</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.y"><code class="name">var <span class="ident">y</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.models.tile.Tile.zone_name"><code class="name">var <span class="ident">zone_name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.models" href="index.html">src.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.models.tile.Tile" href="#src.models.tile.Tile">Tile</a></code></h4>
+<ul class="two-column">
+<li><code><a title="src.models.tile.Tile.bridge_type" href="#src.models.tile.Tile.bridge_type">bridge_type</a></code></li>
+<li><code><a title="src.models.tile.Tile.facility_ref" href="#src.models.tile.Tile.facility_ref">facility_ref</a></code></li>
+<li><code><a title="src.models.tile.Tile.garage_ref" href="#src.models.tile.Tile.garage_ref">garage_ref</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_bank" href="#src.models.tile.Tile.is_bank">is_bank</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_buildable" href="#src.models.tile.Tile.is_buildable">is_buildable</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_city_road" href="#src.models.tile.Tile.is_city_road">is_city_road</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_driveable" href="#src.models.tile.Tile.is_driveable">is_driveable</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_entry_point" href="#src.models.tile.Tile.is_entry_point">is_entry_point</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_garage" href="#src.models.tile.Tile.is_garage">is_garage</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_route_road" href="#src.models.tile.Tile.is_route_road">is_route_road</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_stop" href="#src.models.tile.Tile.is_stop">is_stop</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_track_buildable" href="#src.models.tile.Tile.is_track_buildable">is_track_buildable</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_track_driveable" href="#src.models.tile.Tile.is_track_driveable">is_track_driveable</a></code></li>
+<li><code><a title="src.models.tile.Tile.is_water" href="#src.models.tile.Tile.is_water">is_water</a></code></li>
+<li><code><a title="src.models.tile.Tile.stop_ref" href="#src.models.tile.Tile.stop_ref">stop_ref</a></code></li>
+<li><code><a title="src.models.tile.Tile.tile_type" href="#src.models.tile.Tile.tile_type">tile_type</a></code></li>
+<li><code><a title="src.models.tile.Tile.tree_count" href="#src.models.tile.Tile.tree_count">tree_count</a></code></li>
+<li><code><a title="src.models.tile.Tile.x" href="#src.models.tile.Tile.x">x</a></code></li>
+<li><code><a title="src.models.tile.Tile.y" href="#src.models.tile.Tile.y">y</a></code></li>
+<li><code><a title="src.models.tile.Tile.zone_name" href="#src.models.tile.Tile.zone_name">zone_name</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
