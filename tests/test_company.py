@@ -38,16 +38,20 @@ class TestCompanySpend:
         c.spend(200)
         assert c.total_expenses == 500
 
-    def test_spend_fails_when_insufficient_funds(self):
+    def test_spend_returns_false_when_overdrafting(self):
         c = Company("X", 100)
         result = c.spend(200)
         assert result is False
-        assert c.money == 100  # unchanged
 
-    def test_spend_does_not_record_failed_expense(self):
+    def test_overspend_drives_balance_negative(self):
+        c = Company("X", 100)
+        c.spend(200)
+        assert c.money == -100
+
+    def test_overspend_records_full_expense(self):
         c = Company("X", 100)
         c.spend(999)
-        assert c.total_expenses == 0
+        assert c.total_expenses == 999
 
     def test_spend_exact_amount_succeeds(self):
         c = Company("X", 500)

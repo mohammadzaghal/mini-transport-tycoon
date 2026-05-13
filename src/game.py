@@ -634,14 +634,17 @@ class Game:
             self.status_message = "Roads can only be built on grass or forest tiles."
             return
         cost = ROAD_COST + (FOREST_CLEAR_COST if tile.tile_type == TileType.FOREST else 0)
-        if not self.company.spend(cost):
-            self.status_message = "Not enough credits (need ${}).".format(cost)
-            return
+        solvent = self.company.spend(cost)
         tile.tile_type = TileType.ROAD
         tile.tree_count = 0
         self.renderer.update_tile(x, y, tile)
         self.minimap.update_tile(x, y, tile)
-        self.status_message = "Road built at ({},{}) — ${}.".format(x, y, cost)
+        if solvent:
+            self.status_message = "Road built at ({},{}) — ${}.".format(x, y, cost)
+        else:
+            self.status_message = "Road built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).".format(
+                x, y, cost, self.company.money
+            )
 
     def _build_track(self, x: int, y: int) -> None:
         tile = self.grid.get_tile(x, y)
@@ -654,15 +657,18 @@ class Game:
             self.status_message = "Tracks can only be built on grass, forest, or road tiles."
             return
         cost = TRACK_COST + (FOREST_CLEAR_COST if tile.tile_type == TileType.FOREST else 0)
-        if not self.company.spend(cost):
-            self.status_message = "Not enough credits (need ${}).".format(cost)
-            return
+        solvent = self.company.spend(cost)
         tile.tile_type = TileType.TRACK
         tile.is_route_road = False
         tile.tree_count = 0
         self.renderer.update_tile(x, y, tile)
         self.minimap.update_tile(x, y, tile)
-        self.status_message = "Track built at ({},{}) — ${}.".format(x, y, cost)
+        if solvent:
+            self.status_message = "Track built at ({},{}) — ${}.".format(x, y, cost)
+        else:
+            self.status_message = "Track built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).".format(
+                x, y, cost, self.company.money
+            )
 
     def _build_stop(self, x: int, y: int) -> None:
         tile = self.grid.get_tile(x, y)
@@ -737,10 +743,7 @@ class Game:
         if tile.is_garage:
             self.status_message = "There is already a garage here."
             return
-        if not self.company.spend(GARAGE_COST):
-            self.status_message = "Not enough credits for a garage (need ${}).".format(GARAGE_COST)
-            return
-
+        solvent = self.company.spend(GARAGE_COST)
         garage = Garage(x=x, y=y)
         tile.tile_type = TileType.GRASS
         tile.is_garage = True
@@ -749,9 +752,14 @@ class Game:
         self.garages.append(garage)
         self.renderer.update_tile(x, y, tile)
         self.minimap.update_tile(x, y, tile)
-        self.status_message = "Garage built at ({},{}) — ${}.  Click it to upgrade vehicles.".format(
-            x, y, GARAGE_COST
-        )
+        if solvent:
+            self.status_message = "Garage built at ({},{}) — ${}.  Click it to upgrade vehicles.".format(
+                x, y, GARAGE_COST
+            )
+        else:
+            self.status_message = "Garage built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).".format(
+                x, y, GARAGE_COST, self.company.money
+            )
 
     def _bulldoze(self, x: int, y: int) -> None:
         tile = self.grid.get_tile(x, y)
@@ -965,9 +973,7 @@ class Game:
 
     def _buy_vehicle(self, vdef_index: int) -> None:
         vdef = VEHICLE_DEFS[vdef_index]
-        if not self.company.spend(vdef["cost"]):
-            self.status_message = "Not enough credits (need ${}).".format(vdef["cost"])
-            return
+        solvent = self.company.spend(vdef["cost"])
         vehicle_number = len(self.garage) + len(self.vehicles) + 1
         vtype = vdef["vehicle_type"]
         spd = vdef["speed"]
@@ -986,9 +992,14 @@ class Game:
             vdef_name=vdef["name"],
         )
         self.garage.append(vehicle)
-        self.status_message = "{} purchased for ${}. Open Fleet to deploy it.".format(
-            vdef["name"], vdef["cost"]
-        )
+        if solvent:
+            self.status_message = "{} purchased for ${}. Open Fleet to deploy it.".format(
+                vdef["name"], vdef["cost"]
+            )
+        else:
+            self.status_message = "{} purchased for ${}. WARNING: balance ${} (bankrupt!).".format(
+                vdef["name"], vdef["cost"], self.company.money
+            )
 
     def _select_garage_vehicle_by_type(self, type_idx: int) -> None:
         vdef_name = VEHICLE_DEFS[type_idx]["name"]

@@ -13,11 +13,9 @@ class Company:
     titanium_ore: float = 0.0
 
     def spend(self, amount: int) -> bool:
-        if amount > self.money:
-            return False
         self.money -= amount
         self.total_expenses += amount
-        return True
+        return self.money >= 0
 
     def earn(self, amount: int) -> None:
         self.money += amount
