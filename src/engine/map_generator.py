@@ -44,13 +44,44 @@ _LEGACY_FACILITIES: List[Tuple[str, int, int, int, int, str]] = [
 
 
 class MapGenerator:
+    """Procedurally generates the game map including terrain, cities, and facilities.
+
+    The generator uses a seeded pseudo-random number source so that any given
+    seed always produces the same map layout.  Generation happens in stages:
+    terrain scattering, water channel placement, city placement, and finally
+    facility placement.
+
+    Attributes:
+        seed: Integer seed used to initialise the random number generator.
+        rng: Seeded ``random.Random`` instance used for all random decisions.
+    """
+
     def __init__(self, seed: int | None = None) -> None:
+        """Initialise the map generator with an optional fixed seed.
+
+        Args:
+            seed: Integer seed for reproducible map generation.  If None a
+                random seed is chosen automatically.
+        """
         if seed is None:
             seed = random.randrange(1 << 30)
         self.seed = seed
         self.rng = random.Random(seed)
 
     def generate(self, grid: Grid) -> Tuple[Dict[str, Facility], List[Tuple[str, int, int]]]:
+        """Populate a blank grid with terrain, cities, and facilities.
+
+        Modifies the grid in-place and also stores the facility dictionary on
+        ``grid.facilities``.
+
+        Args:
+            grid: An initialised Grid whose tiles are all GRASS.
+
+        Returns:
+            A two-tuple of:
+            - A ``Dict[str, Facility]`` mapping facility names to Facility objects.
+            - A ``List[(name, sx, sy)]`` of city names and their origin tile coordinates.
+        """
         self._scatter_rocks(grid)
         self._place_ice_channels(grid)
 
@@ -90,6 +121,24 @@ class MapGenerator:
     def _place_cities_random(
         self, grid: Grid, occupied: List[Tuple[int, int, int, int]]
     ) -> List[Tuple[str, int, int]]:
+        """Place all cities on the grid using random placement with fallbacks.
+
+        Attempts random placement up to 900 times per city.  If random
+        placement fails, tries a pre-defined legacy position.  If that also
+        fails, performs an exhaustive scan of the grid.
+
+        Args:
+            grid: The grid to place cities on.
+            occupied: Mutable list of bounding boxes (x, y, w, h) of already
+                placed objects; updated in-place as cities are added.
+
+        Returns:
+            List of ``(city_name, origin_x, origin_y)`` tuples for every
+            successfully placed city.
+
+        Raises:
+            RuntimeError: If a city cannot be placed by any method.
+        """
         out: List[Tuple[str, int, int]] = []
         margin = 4
         for name in _CITY_NAMES:
@@ -162,6 +211,24 @@ class MapGenerator:
         w: int,
         h: int,
     ) -> bool:
+        """Attempt to place a single facility at a random valid location.
+
+        Tries up to 500 random positions.  For each candidate the method
+        checks: no overlap with occupied bounding boxes, all footprint tiles
+        are GRASS or FOREST, and at least one adjacent entry-point tile is
+        suitable.
+
+        Args:
+            grid: The grid to place the facility on.
+            facilities: Mutable mapping updated with the new Facility on success.
+            occupied: Mutable list of bounding boxes updated on success.
+            name: Facility name used to look up the production recipe.
+            w: Footprint width in tiles.
+            h: Footprint height in tiles.
+
+        Returns:
+            True if the facility was placed successfully, False otherwise.
+        """
         margin = 3
         sides = ["north", "south", "east", "west"]
         for _ in range(500):
@@ -185,6 +252,19 @@ class MapGenerator:
     def _place_facilities_random(
         self, grid: Grid, facilities: Dict[str, Facility], occupied: List[Tuple[int, int, int, int]]
     ) -> None:
+        """Place all facilities defined in ``_FACILITY_LAYOUTS`` onto the grid.
+
+        For each facility, tries random placement first, then an exhaustive
+        grid scan, and finally falls back to the legacy hard-coded positions.
+
+        Args:
+            grid: The grid to place facilities on.
+            facilities: Mutable mapping updated with each placed Facility.
+            occupied: Mutable bounding-box list updated as facilities are placed.
+
+        Raises:
+            RuntimeError: If a facility cannot be placed by any method.
+        """
         for name, w, h in _FACILITY_LAYOUTS:
             if self._try_place_facility(grid, facilities, occupied, name, w, h):
                 continue
@@ -298,6 +378,18 @@ class MapGenerator:
                         tile.tree_count = 0
 
     def _place_city(self, grid: Grid, sx: int, sy: int, city_name: str) -> None:
+        """Stamp a city footprint onto the grid at the given top-left position.
+
+        Converts a ``CITY_SIZE × CITY_SIZE`` block of tiles into city blocks,
+        road tiles (on fixed column/row indices), and bank tiles.  A single
+        entry-point tile is placed to the south of the city's road column.
+
+        Args:
+            grid: The grid to modify.
+            sx: Top-left column of the city footprint.
+            sy: Top-left row of the city footprint.
+            city_name: Zone name assigned to every tile in the footprint.
+        """
         for rel_y in range(CITY_SIZE):
             for rel_x in range(CITY_SIZE):
                 ax, ay = sx + rel_x, sy + rel_y
@@ -333,6 +425,23 @@ class MapGenerator:
         name: str,
         entry_side: str,
     ) -> None:
+        """Stamp a facility footprint onto the grid and register the Facility object.
+
+        Sets all tiles in the ``w × h`` footprint to FACILITY type, attaches
+        the Facility reference, and places an entry-point tile on the
+        specified side of the building.
+
+        Args:
+            grid: The grid to modify.
+            facilities: Mutable mapping updated with the new Facility.
+            sx: Top-left column of the facility footprint.
+            sy: Top-left row of the facility footprint.
+            w: Width of the footprint in tiles.
+            h: Height of the footprint in tiles.
+            name: Facility name used to resolve the FacilityType from config.
+            entry_side: Cardinal direction (``"north"``, ``"south"``, ``"east"``,
+                or ``"west"``) where the vehicle entry-point tile is placed.
+        """
         fac_type = FACILITY_NAME_TO_TYPE.get(name)
         facility = Facility(name=name, fac_type=fac_type, x=sx, y=sy) if fac_type else None
 

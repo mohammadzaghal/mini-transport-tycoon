@@ -38,6 +38,7 @@ from src.models.garage import Garage
 from src.models.grid import Grid
 from src.models.route import Route
 from src.models.stop import Stop
+from src.models.tile import Tile
 from src.models.vehicle import Vehicle
 from src.render.map_renderer import MapRenderer
 from src.render.minimap import Minimap
@@ -50,6 +51,14 @@ _CITY_NAMES = frozenset({"Olympus Base", "Valles Station", "Arcadia Colony"})
 
 
 class Game:
+    """Main game controller that owns all subsystems and runs the game loop.
+
+    ``Game`` is the top-level orchestrator.  It creates and holds references to
+    the grid, company, vehicles, routes, stops, garages, camera, renderer, HUD,
+    minimap, and city-growth manager.  Each frame the game loop calls ``tick``
+    which processes events, advances the simulation, and redraws the screen.
+    """
+
     def __init__(self, screen: pygame.Surface) -> None:
         self.screen = screen
         self.fullscreen = False
@@ -118,6 +127,17 @@ class Game:
         self._bankrupt = False
 
     def tick(self, events: list) -> bool:
+        """Process one frame: handle events, update simulation, and redraw.
+
+        This is the main entry point called by the game runner every frame.
+        Simulation is paused automatically when the company is bankrupt.
+
+        Args:
+            events: The list of ``pygame.Event`` objects for this frame.
+
+        Returns:
+            True to continue running, False when the player quits or goes bankrupt.
+        """
         dt_ms = self.clock.tick(FPS)
         real_dt = dt_ms / 1000.0
 
@@ -152,6 +172,15 @@ class Game:
         return not self._bankrupt
 
     def update(self, dt: float) -> None:
+        """Advance all simulation systems by one time step.
+
+        Updates facilities, vehicles, city growth, tree regeneration, and
+        vehicle maintenance.  Should only be called when the game is not paused.
+
+        Args:
+            dt: Elapsed simulated time in seconds (real time multiplied by the
+                current speed multiplier).
+        """
         self.game_time += dt
 
         for facility in self.facilities.values():
@@ -202,7 +231,18 @@ class Game:
             self._bankrupt = True
             self.status_message = "BANKRUPT! Game over. Close the window to exit."
 
-    def _handle_vehicle_at_stop(self, vehicle: Vehicle, tile) -> None:
+    def _handle_vehicle_at_stop(self, vehicle: Vehicle, tile: Tile) -> None:
+        """Process cargo loading, unloading, and revenue when a vehicle reaches a stop.
+
+        Called each time a vehicle's position index advances to a tile that is
+        a stop, entry point, or garage.  Handles passenger pickups for buses,
+        cargo transfers between vehicle and stop/facility inventories, fuel
+        refuelling at garages, and city-growth point awards on delivery.
+
+        Args:
+            vehicle: The vehicle that has just arrived at the stop tile.
+            tile: The Tile object the vehicle has arrived at.
+        """
         from src.config import CARGO_PRICE
 
         zone = tile.zone_name or (tile.stop_ref.zone_name if tile.stop_ref else "")
@@ -289,6 +329,12 @@ class Game:
                 self.renderer.update_tile(tile.x, tile.y, tile)
 
     def draw(self) -> None:
+        """Render the current frame to the screen surface.
+
+        Draws the map, vehicles, minimap, HUD, scrollbars, and any active
+        tool overlays.  Call ``pygame.display.flip()`` after this method to
+        push the frame to the display.
+        """
         self.renderer.draw(
             self.screen, self.grid, self.camera,
             self.routes, self.vehicles, self._hover_tile, self.stops,
@@ -535,82 +581,81 @@ class Game:
             self.camera.move(0, step)
 
     def _handle_hud_action(self, action: str) -> None:
-        if action == "road":
-            if self.tool == Tool.ROAD:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.ROAD, "Road mode — click tiles to lay road (${}/tile).".format(ROAD_COST))
-        elif action == "track":
-            if self.tool == Tool.TRACK:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.TRACK, "Track mode — click tiles to lay train track (${}/tile).".format(TRACK_COST))
-        elif action == "vehicles":
-            if self.tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2}:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.VEHICLES, "Purchase a vehicle or deploy one from your fleet.")
-        elif action == "route":
-            if self.tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.ROUTE_P1, "Route — click first endpoint (entry point or stop).")
-        elif action == "stop":
-            if self.tool == Tool.STOP:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.STOP, "Stop mode — click a road or track tile to place a stop.")
-        elif action == "bridge":
-            if self.tool == Tool.BRIDGE:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.BRIDGE, "Bridge mode — select level below, then click a WATER tile.")
-        elif action == "bulldoze":
-            if self.tool == Tool.BULLDOZE:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.BULLDOZE, "Bulldoze — 1st click on route road removes route; 2nd click removes tile.")
-        elif action == "garage":
-            if self.tool == Tool.GARAGE:
-                self._cancel_tool()
-            else:
-                self._set_tool(Tool.GARAGE, "Garage mode — click an empty tile (${}).".format(GARAGE_COST))
-        elif action == "bridge_wooden":
-            self.hud.selected_bridge_type = BridgeType.WOODEN
-            self.status_message = "L1 Basic bridge — costs 10 Iron Ore/tile · Hauler only. Click a water tile."
-        elif action == "bridge_stone":
-            self.hud.selected_bridge_type = BridgeType.STONE
-            self.status_message = "L2 Reinforced bridge — costs 10 Alloy Ore/tile · Hauler + Rover. Click a water tile."
-        elif action == "bridge_steel":
-            self.hud.selected_bridge_type = BridgeType.STEEL
-            self.status_message = "L3 Magnetic bridge — costs 10 Titanium Ore/tile · all vehicles. Click a water tile."
-        elif action == "speed_pause":
-            self.time_speed = TimeSpeed.PAUSE
-        elif action == "speed_1":
-            self.time_speed = TimeSpeed.NORMAL
-        elif action == "speed_2":
-            self.time_speed = TimeSpeed.FAST
-        elif action == "speed_4":
-            self.time_speed = TimeSpeed.VERY_FAST
-        elif action.startswith("buy_vehicle_"):
-            idx = int(action.split("_")[-1])
-            self._buy_vehicle(idx)
-        elif action.startswith("deploy_type_"):
-            type_idx = int(action.split("_")[-1])
-            self._select_garage_vehicle_by_type(type_idx)
-        elif action.startswith("remove_route_"):
-            route_id = int(action.split("_")[-1])
-            route = next((r for r in self.routes if r.id == route_id), None)
+        """Route a named HUD button action to the appropriate game state change.
+
+        Args:
+            action: Action string returned by ``HUD.button_at`` or
+                ``HUD.garage_panel_button_at``.
+        """
+        # Prefix-based dynamic actions
+        if action.startswith("buy_vehicle_"):
+            self._buy_vehicle(int(action.split("_")[-1]))
+            return
+        if action.startswith("deploy_type_"):
+            self._select_garage_vehicle_by_type(int(action.split("_")[-1]))
+            return
+        if action.startswith("remove_route_"):
+            route = next((r for r in self.routes if r.id == int(action.split("_")[-1])), None)
             if route:
                 self._dissolve_route(route)
-        elif action.startswith("upgrade_vehicle_"):
-            v_idx = int(action.split("_")[-1])
-            self._upgrade_vehicle(v_idx)
-        elif action.startswith("sell_vehicle_"):
-            v_idx = int(action.split("_")[-1])
-            self._sell_garage_vehicle(v_idx)
-        elif action == "close_garage_panel":
+            return
+        if action.startswith("upgrade_vehicle_"):
+            self._upgrade_vehicle(int(action.split("_")[-1]))
+            return
+        if action.startswith("sell_vehicle_"):
+            self._sell_garage_vehicle(int(action.split("_")[-1]))
+            return
+
+        # Speed dispatch
+        _SPEED = {
+            "speed_pause": TimeSpeed.PAUSE,
+            "speed_1":     TimeSpeed.NORMAL,
+            "speed_2":     TimeSpeed.FAST,
+            "speed_4":     TimeSpeed.VERY_FAST,
+        }
+        if action in _SPEED:
+            self.time_speed = _SPEED[action]
+            return
+
+        # Bridge sub-type dispatch
+        _BRIDGE = {
+            "bridge_wooden": (BridgeType.WOODEN, "L1 Basic bridge — costs 10 Iron Ore/tile · Hauler only. Click a water tile."),
+            "bridge_stone":  (BridgeType.STONE,  "L2 Reinforced bridge — costs 10 Alloy Ore/tile · Hauler + Rover. Click a water tile."),
+            "bridge_steel":  (BridgeType.STEEL,  "L3 Magnetic bridge — costs 10 Titanium Ore/tile · all vehicles. Click a water tile."),
+        }
+        if action in _BRIDGE:
+            self.hud.selected_bridge_type, self.status_message = _BRIDGE[action]
+            return
+
+        if action == "close_garage_panel":
             self._garage_panel_tile = None
+            return
+
+        # Tool toggle dispatch: (tool_to_set, set_of_active_tools_for_this_button, status_msg)
+        _TOOL: dict = {
+            "road":     (Tool.ROAD,     {Tool.ROAD},
+                         "Road mode — click tiles to lay road (${}/tile).".format(ROAD_COST)),
+            "track":    (Tool.TRACK,    {Tool.TRACK},
+                         "Track mode — click tiles to lay train track (${}/tile).".format(TRACK_COST)),
+            "vehicles": (Tool.VEHICLES, {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2},
+                         "Purchase a vehicle or deploy one from your fleet."),
+            "route":    (Tool.ROUTE_P1, {Tool.ROUTE_P1, Tool.ROUTE_P2},
+                         "Route — click first endpoint (entry point or stop)."),
+            "stop":     (Tool.STOP,     {Tool.STOP},
+                         "Stop mode — click a road or track tile to place a stop."),
+            "bridge":   (Tool.BRIDGE,   {Tool.BRIDGE},
+                         "Bridge mode — select level below, then click a WATER tile."),
+            "bulldoze": (Tool.BULLDOZE, {Tool.BULLDOZE},
+                         "Bulldoze — 1st click on route road removes route; 2nd click removes tile."),
+            "garage":   (Tool.GARAGE,   {Tool.GARAGE},
+                         "Garage mode — click an empty tile (${}).".format(GARAGE_COST)),
+        }
+        if action in _TOOL:
+            new_tool, active_set, msg = _TOOL[action]
+            if self.tool in active_set:
+                self._cancel_tool()
+            else:
+                self._set_tool(new_tool, msg)
 
     def _set_tool(self, tool: Tool, msg: str) -> None:
         self.tool = tool
@@ -624,6 +669,16 @@ class Game:
         self.status_message = message
 
     def _build_road(self, x: int, y: int) -> None:
+        """Build a road tile at the given grid position, deducting the cost.
+
+        Validates that the tile is a buildable non-city-road cell, then converts
+        it to a ROAD tile and updates the rendered map and minimap.  A forest
+        clearing surcharge is applied if the tile contains trees.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -647,6 +702,15 @@ class Game:
             )
 
     def _build_track(self, x: int, y: int) -> None:
+        """Build a rail track tile at the given grid position, deducting the cost.
+
+        Validates that the tile is eligible for track construction (not an entry
+        point, and the terrain allows it), then converts it to a TRACK tile.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -671,6 +735,16 @@ class Game:
             )
 
     def _build_stop(self, x: int, y: int) -> None:
+        """Build a cargo/passenger stop on an existing road or track tile.
+
+        The stop is free to place.  A new Stop object is created and linked
+        to the tile so that vehicles can load and unload here.  The stop
+        inherits the tile's zone name so deliveries credit the correct city.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -700,6 +774,16 @@ class Game:
         )
 
     def _build_bridge(self, x: int, y: int) -> None:
+        """Install a bridge on a WATER tile using the currently selected bridge type.
+
+        Bridges are paid for with ore resources from the company inventory rather
+        than cash.  The selected bridge level determines which ore type and
+        quantity are consumed (see ``BRIDGE_ORE_COSTS`` in config).
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -734,6 +818,16 @@ class Game:
         )
 
     def _build_garage(self, x: int, y: int) -> None:
+        """Build a vehicle garage on a grass or forest tile, deducting the cost.
+
+        Creates a Garage object, links it to the tile, and converts the tile to
+        a GRASS garage tile.  The player can later purchase vehicles and store
+        them at this garage.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -762,6 +856,16 @@ class Game:
             )
 
     def _bulldoze(self, x: int, y: int) -> None:
+        """Remove a player-built road, track, stop, bridge, or garage from a tile.
+
+        Restores the tile to GRASS and clears all associated references
+        (stop_ref, garage_ref, bridge_type).  City roads and facility entry
+        points cannot be removed.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None:
             return
@@ -814,6 +918,16 @@ class Game:
             self.status_message = "Nothing to bulldoze here."
 
     def _handle_route_click_p1(self, x: int, y: int) -> None:
+        """Record the first endpoint of a new route being defined by the player.
+
+        Validates that the clicked tile is an entry point or stop, then stores
+        the position and transitions the tool state to ROUTE_P2 so the player
+        can click the second endpoint.
+
+        Args:
+            x: Tile column index of the first endpoint.
+            y: Tile row index of the first endpoint.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None or not (tile.is_entry_point or tile.is_stop):
             self.status_message = "First endpoint must be an entry point (◆) or stop (S)."
@@ -825,6 +939,17 @@ class Game:
         )
 
     def _handle_route_click_p2(self, x: int, y: int) -> None:
+        """Complete route creation by selecting the second endpoint and pathfinding.
+
+        Validates the second endpoint, runs BFS (road or track depending on the
+        tile type), builds a bidirectional loop path, determines route profitability,
+        and adds the route to the route list.  Resets tool state on success or
+        displays an error message if no path is found.
+
+        Args:
+            x: Tile column index of the second endpoint.
+            y: Tile row index of the second endpoint.
+        """
         tile = self.grid.get_tile(x, y)
         if tile is None or not (tile.is_entry_point or tile.is_stop):
             self.status_message = "Second endpoint must be an entry point (◆) or stop (S)."
@@ -1055,6 +1180,18 @@ class Game:
         self.status_message = "{} sold for ${}.".format(vehicle.name, sell_price)
 
     def _calc_revenue(self, distance: int, capacity: int) -> int:
+        """Calculate the revenue earned for one completed route loop.
+
+        Revenue scales with route distance, vehicle capacity, and the current
+        simulation speed to reward players who optimise longer and faster routes.
+
+        Args:
+            distance: Number of tiles in one leg of the route path.
+            capacity: Maximum cargo capacity of the vehicle.
+
+        Returns:
+            The integer currency amount to award to the company.
+        """
         speed_bonus = self.time_speed.value if self.time_speed.value > 0 else 1
         return int(18 * distance + capacity * 6 + speed_bonus * 5)
 
@@ -1062,6 +1199,19 @@ class Game:
         return 0 <= y < WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
 
     def _screen_to_grid(self, screen_x: int, screen_y: int) -> Optional[tuple]:
+        """Convert a screen-space pixel position to tile grid coordinates.
+
+        Accounts for the current camera scroll offset when translating
+        screen pixels to world pixels, then divides by TILE_SIZE.
+
+        Args:
+            screen_x: Horizontal screen position in pixels.
+            screen_y: Vertical screen position in pixels.
+
+        Returns:
+            A ``(grid_x, grid_y)`` tuple if the position falls within the map,
+            or None if it is out of bounds.
+        """
         world_x, world_y = self.camera.screen_to_world(screen_x, screen_y)
         grid_x = world_x // TILE_SIZE
         grid_y = world_y // TILE_SIZE

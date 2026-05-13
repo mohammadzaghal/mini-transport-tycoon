@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.game API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.game</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.game.Game"><code class="flex name class">
+<span>class <span class="ident">Game</span></span>
+<span>(</span><span>screen: pygame.Surface)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Game:
+    &#34;&#34;&#34;Main game controller that owns all subsystems and runs the game loop.
+
+    ``Game`` is the top-level orchestrator.  It creates and holds references to
+    the grid, company, vehicles, routes, stops, garages, camera, renderer, HUD,
+    minimap, and city-growth manager.  Each frame the game loop calls ``tick``
+    which processes events, advances the simulation, and redraws the screen.
+    &#34;&#34;&#34;
+
+    def __init__(self, screen: pygame.Surface) -&gt; None:
+        self.screen = screen
+        self.fullscreen = False
+        self.clock = pygame.time.Clock()
+
+        self.grid = Grid(MAP_WIDTH, MAP_HEIGHT)
+        self.company = Company(&#34;Player Co.&#34;, STARTING_MONEY)
+        self.company.iron_ore = 30
+        self.company.alloy_ore = 10
+        self.company.titanium_ore = 5
+        self.time_speed = TimeSpeed.NORMAL
+        self.tool = Tool.NONE
+        self.status_message = (
+            &#34;Welcome! Build roads [R] or tracks [T], create routes, then buy and deploy vehicles.&#34;
+        )
+
+        self.game_time = 0.0
+        self.tree_growth_timer = 0.0
+
+        self.routes: List[Route] = []
+        self._next_route_id = 1
+        self._route_endpoint_a: Optional[tuple] = None
+
+        self.garage: List[Vehicle] = []
+        self.vehicles: List[Vehicle] = []
+        self._pending_deploy_idx: Optional[int] = None
+        self._deploy_endpoint_a: Optional[tuple] = None
+
+        self.stops: List[Stop] = []
+        self._next_stop_id = 1
+
+        self.garages: List[Garage] = []
+
+        self._garage_panel_tile: Optional[tuple] = None
+
+        self.camera = Camera(
+            map_width_px=MAP_WIDTH * TILE_SIZE,
+            map_height_px=MAP_HEIGHT * TILE_SIZE,
+            view_width=WINDOW_WIDTH,
+            view_height=WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT,
+        )
+        self.renderer = MapRenderer()
+        self.minimap = Minimap()
+        self._show_minimap = True
+        self.hud = HUD()
+
+        map_gen = MapGenerator()
+        self.facilities, city_origins = map_gen.generate(self.grid)
+        self.renderer.build_map_image(self.grid)
+        self.minimap.build(self.grid)
+
+        self.city_growth = CityGrowthManager()
+        for city_name, sx, sy in city_origins:
+            self.city_growth.register_city(city_name, sx, sy)
+
+        self._city_has_water: dict = {name: False for name in _CITY_NAMES}
+
+        self._rng = random.Random()
+        self._hover_tile: Optional[tuple] = None
+
+        self._drag_start_screen: Optional[tuple] = None
+        self._drag_start_camera: Optional[tuple] = None
+        self._dragging_map = False
+        self._drag_threshold = 8
+
+        self._bankrupt = False
+
+    def tick(self, events: list) -&gt; bool:
+        &#34;&#34;&#34;Process one frame: handle events, update simulation, and redraw.
+
+        This is the main entry point called by the game runner every frame.
+        Simulation is paused automatically when the company is bankrupt.
+
+        Args:
+            events: The list of ``pygame.Event`` objects for this frame.
+
+        Returns:
+            True to continue running, False when the player quits or goes bankrupt.
+        &#34;&#34;&#34;
+        dt_ms = self.clock.tick(FPS)
+        real_dt = dt_ms / 1000.0
+
+        for event in events:
+            if event.type == pygame.QUIT:
+                return False
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                self._on_left_press(event.pos)
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                self._on_left_release(event.pos)
+            elif event.type == pygame.MOUSEMOTION:
+                self._on_mouse_move(event.pos, bool(event.buttons[0]))
+            elif event.type == pygame.MOUSEWHEEL:
+                mods = pygame.key.get_mods()
+                scroll = event.y * 48
+                if mods &amp; pygame.KMOD_SHIFT:
+                    self.camera.move(-scroll, 0)
+                else:
+                    self.camera.move(0, -scroll)
+            elif event.type == pygame.KEYDOWN:
+                self._on_key_down(event.key)
+
+        self._handle_camera_input(real_dt)
+
+        if self.time_speed != TimeSpeed.PAUSE and not self._bankrupt:
+            sim_dt = real_dt * self.time_speed.value
+            self.update(sim_dt)
+
+        self.draw()
+        pygame.display.flip()
+
+        return not self._bankrupt
+
+    def update(self, dt: float) -&gt; None:
+        &#34;&#34;&#34;Advance all simulation systems by one time step.
+
+        Updates facilities, vehicles, city growth, tree regeneration, and
+        vehicle maintenance.  Should only be called when the game is not paused.
+
+        Args:
+            dt: Elapsed simulated time in seconds (real time multiplied by the
+                current speed multiplier).
+        &#34;&#34;&#34;
+        self.game_time += dt
+
+        for facility in self.facilities.values():
+            facility.tick(dt)
+
+        for vehicle in list(self.vehicles):
+            completed = vehicle.update(dt)
+
+            if vehicle.at_stop:
+                tile = self.grid.get_tile(int(round(vehicle.x)), int(round(vehicle.y)))
+                if tile is not None and ((tile.is_stop and tile.stop_ref is not None) or tile.is_entry_point):
+                    self._handle_vehicle_at_stop(vehicle, tile)
+
+            if completed:
+                route = next((r for r in self.routes if r.id == vehicle.route_id), None)
+                if route and route.profitable:
+                    for ep in (route.endpoint_a, route.endpoint_b):
+                        ep_tile = self.grid.get_tile(*ep)
+                        if ep_tile and ep_tile.zone_name in _CITY_NAMES:
+                            if self._city_has_water.get(ep_tile.zone_name, False):
+                                self.city_growth.on_delivery(ep_tile.zone_name)
+
+            vehicle.age_days += dt / GAME_SECONDS_PER_DAY
+            vehicle.maintenance_timer += dt / GAME_SECONDS_PER_DAY
+            if (
+                vehicle.maintenance_timer &gt;= vehicle.maintenance_due_days
+                and not vehicle.needs_maintenance
+            ):
+                vehicle.needs_maintenance = True
+                age_factor = max(1.0, vehicle.age_days / 30.0)
+                cost = int(MAINTENANCE_BASE_COST * age_factor)
+                self.company.spend(cost)
+                vehicle.maintenance_timer = 0.0
+                vehicle.maintenance_due_days = float(MAINTENANCE_INTERVAL_DAYS)
+                vehicle.needs_maintenance = False
+                self.status_message = (
+                    &#34;{} maintenance — paid ${}.&#34;.format(vehicle.name, cost)
+                )
+
+        self.city_growth.tick(self.grid, self.renderer, self.minimap)
+
+        self.tree_growth_timer += dt
+        if self.tree_growth_timer &gt;= TREE_GROWTH_INTERVAL:
+            self.tree_growth_timer -= TREE_GROWTH_INTERVAL
+            self._update_trees()
+
+        if self.company.is_bankrupt:
+            self._bankrupt = True
+            self.status_message = &#34;BANKRUPT! Game over. Close the window to exit.&#34;
+
+    def _handle_vehicle_at_stop(self, vehicle: Vehicle, tile) -&gt; None:
+        &#34;&#34;&#34;Process cargo loading, unloading, and revenue when a vehicle reaches a stop.
+
+        Called each time a vehicle&#39;s position index advances to a tile that is
+        a stop, entry point, or garage.  Handles passenger pickups for buses,
+        cargo transfers between vehicle and stop/facility inventories, fuel
+        refuelling at garages, and city-growth point awards on delivery.
+
+        Args:
+            vehicle: The vehicle that has just arrived at the stop tile.
+            tile: The Tile object the vehicle has arrived at.
+        &#34;&#34;&#34;
+        from src.config import CARGO_PRICE
+
+        zone = tile.zone_name or (tile.stop_ref.zone_name if tile.stop_ref else &#34;&#34;)
+
+        if vehicle.vehicle_type == VehicleType.BUS:
+            passengers = self._rng.randint(0, vehicle.capacity)
+            if passengers &gt; 0:
+                income = passengers * PASSENGER_FARE
+                self.company.earn(income)
+                self.status_message = (
+                    &#34;{} picked up {} passengers at stop (+${}).&#34;.format(
+                        vehicle.name, passengers, income
+                    )
+                )
+            return
+
+        if CargoType.FUEL in vehicle.cargo_on_board and vehicle.cargo_on_board[CargoType.FUEL] &gt; 0:
+            for nb in self.grid.neighbors4(tile.x, tile.y):
+                if nb.is_garage:
+                    fuel_amount = int(vehicle.cargo_on_board.pop(CargoType.FUEL, 0))
+                    self.company.fuel += fuel_amount
+                    self.status_message = (
+                        &#34;{} deposited {} FUEL at garage (total: {}). Click garage to upgrade!&#34;.format(
+                            vehicle.name, fuel_amount, self.company.fuel
+                        )
+                    )
+                    return
+
+        if vehicle.total_cargo &gt; 0 and zone in _CITY_NAMES:
+            city_has_water = self._city_has_water.get(zone, False)
+            for cargo_type, amount in vehicle.unload_all().items():
+                if cargo_type == CargoType.IRON_ORE:
+                    self.company.iron_ore += amount
+                elif cargo_type == CargoType.ALLOY_ORE:
+                    self.company.alloy_ore += amount
+                elif cargo_type == CargoType.TITANIUM_ORE:
+                    self.company.titanium_ore += amount
+                elif cargo_type == CargoType.FUEL:
+                    self.company.fuel += amount
+
+                revenue = int(amount * CARGO_PRICE.get(cargo_type, 5))
+                if revenue &gt; 0:
+                    self.company.earn(revenue)
+
+                if cargo_type == CargoType.AQUATICS and not city_has_water:
+                    self._city_has_water[zone] = True
+                    city_has_water = True
+                    self.city_growth.on_delivery(zone)
+                    self.status_message = &#34;{}  UNLOCKED — water connected! City can now grow.&#34;.format(zone)
+                elif revenue &gt; 0:
+                    if city_has_water:
+                        self.city_growth.on_delivery(zone)
+                        self.status_message = &#34;{} delivery +${} (city growing).&#34;.format(zone, revenue)
+                    else:
+                        self.status_message = &#34;{} delivery +${} (connect H2O to unlock city growth).&#34;.format(zone, revenue)
+
+        if zone and zone not in _CITY_NAMES:
+            facility = self.facilities.get(zone)
+            if facility is not None:
+                for cargo_type in list(facility.produces.keys()):
+                    available = facility.stock(cargo_type)
+                    if available &gt; 0:
+                        space = vehicle.capacity - int(vehicle.total_cargo)
+                        to_load = min(float(space), available)
+                        if to_load &gt; 0:
+                            taken = facility.give(cargo_type, to_load)
+                            vehicle.load(cargo_type, taken)
+
+    def _update_trees(self) -&gt; None:
+        new_forests = []
+        for tile in self.grid.iter_tiles():
+            if self._rng.random() &lt; 0.45:
+                continue
+            if tile.tile_type == TileType.FOREST:
+                if tile.tree_count &lt; 4 and self._rng.random() &lt; 0.07:
+                    tile.tree_count += 1
+                for nb in self.grid.neighbors4(tile.x, tile.y):
+                    if nb.tile_type == TileType.GRASS and self._rng.random() &lt; 0.012:
+                        new_forests.append(nb)
+        for tile in new_forests:
+            if tile.tile_type == TileType.GRASS:
+                tile.tile_type = TileType.FOREST
+                tile.tree_count = 1
+                self.renderer.update_tile(tile.x, tile.y, tile)
+
+    def draw(self) -&gt; None:
+        &#34;&#34;&#34;Render the current frame to the screen surface.
+
+        Draws the map, vehicles, minimap, HUD, scrollbars, and any active
+        tool overlays.  Call ``pygame.display.flip()`` after this method to
+        push the frame to the display.
+        &#34;&#34;&#34;
+        self.renderer.draw(
+            self.screen, self.grid, self.camera,
+            self.routes, self.vehicles, self._hover_tile, self.stops,
+        )
+        self._draw_scrollbars()
+
+        if self._show_minimap:
+            if self.minimap._dirty:
+                self.minimap.build(self.grid)
+            self.minimap.draw(self.screen, self.camera, self.vehicles, self.stops)
+
+        self.hud.draw(
+            self.screen,
+            money=self.company.money,
+            oil=self.company.fuel,
+            iron_ore=self.company.iron_ore,
+            alloy_ore=self.company.alloy_ore,
+            titanium_ore=self.company.titanium_ore,
+            game_time=self.game_time,
+            time_speed=self.time_speed,
+            tool=self.tool,
+            status=self.status_message,
+            garage=self.garage,
+            vehicles=self.vehicles,
+            stops=self.stops,
+            routes=self.routes,
+            garage_panel_tile=self._garage_panel_tile,
+            garage_vehicles=self._get_garage_vehicles_at(self._garage_panel_tile),
+        )
+
+        if self._bankrupt:
+            overlay = pygame.Surface(
+                (WINDOW_WIDTH, WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT), pygame.SRCALPHA
+            )
+            overlay.fill((180, 0, 0, 120))
+            self.screen.blit(overlay, (0, 0))
+            font = font_display(48, bold=True)              
+            surf = font.render(&#34;BANKRUPT — GAME OVER&#34;, True, (255, 60, 60))
+            self.screen.blit(
+                surf,
+                (
+                    WINDOW_WIDTH // 2 - surf.get_width() // 2,
+                    (WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT) // 2 - 30,
+                ),
+            )
+
+    def _get_garage_vehicles_at(self, garage_tile: Optional[tuple]) -&gt; List[Vehicle]:
+        return list(self.garage) + list(self.vehicles)
+
+    def _draw_scrollbars(self) -&gt; None:
+        bar_width = 10
+        bar_x = WINDOW_WIDTH - bar_width
+        bar_height = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
+        thumb_height = min(
+            bar_height,
+            int(bar_height * self.camera.view_height / self.camera.map_height_px),
+        )
+        thumb_y = int(
+            (bar_height - thumb_height)
+            * self.camera.y
+            / max(1, self.camera.map_height_px - self.camera.view_height)
+        )
+        pygame.draw.rect(self.screen, (200, 200, 200), (bar_x, 0, bar_width, bar_height))
+        pygame.draw.rect(self.screen, (100, 100, 100), (bar_x, thumb_y, bar_width, thumb_height))
+        bar_y = WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT - bar_width
+        bar_width_h = WINDOW_WIDTH
+        thumb_width = min(
+            bar_width_h,
+            int(bar_width_h * self.camera.view_width / self.camera.map_width_px),
+        )
+        thumb_x = int(
+            (bar_width_h - thumb_width)
+            * self.camera.x
+            / max(1, self.camera.map_width_px - self.camera.view_width)
+        )
+        pygame.draw.rect(self.screen, (200, 200, 200), (0, bar_y, bar_width_h, bar_width))
+        pygame.draw.rect(self.screen, (100, 100, 100), (thumb_x, bar_y, thumb_width, bar_width))
+
+    def _on_left_press(self, pos: tuple) -&gt; None:
+        x, y = pos
+        if self._is_in_map_view(x, y):
+            self._drag_start_screen = pos
+            self._drag_start_camera = (self.camera.x, self.camera.y)
+            self._dragging_map = False
+
+    def _on_mouse_move(self, pos: tuple, left_held: bool) -&gt; None:
+        x, y = pos
+        self._update_hover_from_screen(x, y)
+
+        if left_held and self._drag_start_screen is not None:
+            sx, sy = self._drag_start_screen
+            dx = x - sx
+            dy = y - sy
+            if abs(dx) &gt;= self._drag_threshold or abs(dy) &gt;= self._drag_threshold:
+                self._dragging_map = True
+            if self._dragging_map and self._drag_start_camera is not None:
+                cam_sx, cam_sy = self._drag_start_camera
+                self.camera.x = cam_sx - dx
+                self.camera.y = cam_sy - dy
+                self.camera.clamp()
+
+        if not (left_held and self._dragging_map):
+            grid_pos = self._screen_to_grid(x, y)
+            if grid_pos is not None:
+                gx, gy = grid_pos
+                tile = self.grid.get_tile(gx, gy)
+                if tile is not None:
+                    parts = [&#34;Tile ({},{}) {}&#34;.format(gx, gy, tile.tile_type.name)]
+                    if tile.zone_name:
+                        parts.append(tile.zone_name)
+                    if tile.is_entry_point:
+                        parts.append(&#34;ENTRY&#34;)
+                    if tile.is_bank:
+                        parts.append(&#34;BANK&#34;)
+                    if tile.is_stop:
+                        parts.append(&#34;STOP&#34;)
+                    if tile.is_garage:
+                        parts.append(&#34;GARAGE&#34;)
+                    if tile.bridge_type is not None:
+                        parts.append(&#34;BRIDGE:{}&#34;.format(tile.bridge_type.value))
+                    if tile.is_city_road:
+                        parts.append(&#34;CITY ROAD&#34;)
+                    self.status_message = &#34;  |  &#34;.join(parts)
+
+    def _on_left_release(self, pos: tuple) -&gt; None:
+        x, y = pos
+        if self._dragging_map:
+            self._clear_drag_state()
+            return
+
+        if self._show_minimap and self.minimap.handle_click(x, y, self.camera):
+            self._clear_drag_state()
+            return
+
+        if self._garage_panel_tile is not None:
+            garage_veh = self._get_garage_vehicles_at(self._garage_panel_tile)
+            garage_action = self.hud.garage_panel_button_at(x, y, garage_veh)
+            if garage_action is not None:
+                self._handle_hud_action(garage_action)
+                self._clear_drag_state()
+                return
+            if self.hud.is_in_garage_panel(x, y):
+                self._clear_drag_state()
+                return
+
+        hud_action = self.hud.button_at(x, y, self.tool, self.garage, self.routes)
+        if hud_action is not None:
+            self._handle_hud_action(hud_action)
+            self._clear_drag_state()
+            return
+
+        if not self._is_in_map_view(x, y):
+            self._clear_drag_state()
+            return
+
+        grid_pos = self._screen_to_grid(x, y)
+        if grid_pos is None:
+            self._clear_drag_state()
+            return
+
+        gx, gy = grid_pos
+
+        if self.tool == Tool.NONE:
+            tile = self.grid.get_tile(gx, gy)
+            if tile is not None and tile.is_garage:
+                self._garage_panel_tile = (gx, gy) if self._garage_panel_tile != (gx, gy) else None
+                self._clear_drag_state()
+                return
+            if self._garage_panel_tile is not None:
+                self._garage_panel_tile = None
+        #validate vehicle type vs route path type
+        if self.tool == Tool.ROAD:
+            self._build_road(gx, gy)
+        elif self.tool == Tool.TRACK:
+            self._build_track(gx, gy)
+        elif self.tool == Tool.ROUTE_P1:
+            self._handle_route_click_p1(gx, gy)
+        elif self.tool == Tool.ROUTE_P2:
+            self._handle_route_click_p2(gx, gy)
+        elif self.tool == Tool.DEPLOY_VEHICLE_P1:
+            self._handle_deploy_click_p1(gx, gy)
+        elif self.tool == Tool.DEPLOY_VEHICLE_P2:
+            self._handle_deploy_click_p2(gx, gy)
+        elif self.tool == Tool.BULLDOZE:
+            self._bulldoze(gx, gy)
+        elif self.tool == Tool.STOP:
+            self._build_stop(gx, gy)
+        elif self.tool == Tool.BRIDGE:
+            self._build_bridge(gx, gy)
+        elif self.tool == Tool.GARAGE:
+            self._build_garage(gx, gy)
+
+        self._clear_drag_state()
+
+    def _on_key_down(self, key: int) -&gt; None:
+        if key == pygame.K_1:
+            self.time_speed = TimeSpeed.PAUSE
+        elif key == pygame.K_2:
+            self.time_speed = TimeSpeed.NORMAL
+        elif key == pygame.K_3:
+            self.time_speed = TimeSpeed.FAST
+        elif key == pygame.K_4:
+            self.time_speed = TimeSpeed.VERY_FAST
+        elif key == pygame.K_ESCAPE:
+            self._cancel_tool()
+            self._garage_panel_tile = None
+        elif key == pygame.K_r:
+            self._set_tool(Tool.ROAD, &#34;Road mode — click tiles to lay road [${}/tile].&#34;.format(ROAD_COST))
+        elif key == pygame.K_t:
+            self._set_tool(Tool.TRACK, &#34;Track mode — click tiles to lay train track [${}/tile].&#34;.format(TRACK_COST))
+        elif key == pygame.K_b:
+            self._set_tool(Tool.BULLDOZE, &#34;Bulldoze — click a route road to remove the route, click again to remove the tile.&#34;)
+        elif key == pygame.K_s:
+            self._set_tool(Tool.STOP, &#34;Stop mode — click a road or track tile to place a stop.&#34;)
+        elif key == pygame.K_g:
+            self._set_tool(
+                Tool.GARAGE,
+                &#34;Garage mode — click an empty tile to build a garage (${}).&#34;.format(GARAGE_COST),
+            )
+        elif key == pygame.K_k:
+            self._set_tool(Tool.BRIDGE, &#34;Bridge mode — select bridge type below, then click a water tile.&#34;)
+        elif key == pygame.K_m:
+            self._show_minimap = not self._show_minimap
+            self.status_message = &#34;Minimap {}.&#34;.format(&#34;on&#34; if self._show_minimap else &#34;off&#34;)
+        elif key == pygame.K_F11:
+            self._toggle_fullscreen()
+
+    def _toggle_fullscreen(self) -&gt; None:
+        self.fullscreen = not self.fullscreen
+        flags = pygame.FULLSCREEN if self.fullscreen else 0
+        self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), flags)
+
+    def _handle_camera_input(self, dt: float) -&gt; None:
+        keys = pygame.key.get_pressed()
+        step = int(500 * dt)
+        use_wasd = self.tool == Tool.NONE
+        if (use_wasd and keys[pygame.K_a]) or keys[pygame.K_LEFT]:
+            self.camera.move(-step, 0)
+        if (use_wasd and keys[pygame.K_d]) or keys[pygame.K_RIGHT]:
+            self.camera.move(step, 0)
+        if (use_wasd and keys[pygame.K_w]) or keys[pygame.K_UP]:
+            self.camera.move(0, -step)
+        if (use_wasd and keys[pygame.K_s]) or keys[pygame.K_DOWN]:
+            self.camera.move(0, step)
+
+    def _handle_hud_action(self, action: str) -&gt; None:
+        if action == &#34;road&#34;:
+            if self.tool == Tool.ROAD:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.ROAD, &#34;Road mode — click tiles to lay road (${}/tile).&#34;.format(ROAD_COST))
+        elif action == &#34;track&#34;:
+            if self.tool == Tool.TRACK:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.TRACK, &#34;Track mode — click tiles to lay train track (${}/tile).&#34;.format(TRACK_COST))
+        elif action == &#34;vehicles&#34;:
+            if self.tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2}:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.VEHICLES, &#34;Purchase a vehicle or deploy one from your fleet.&#34;)
+        elif action == &#34;route&#34;:
+            if self.tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.ROUTE_P1, &#34;Route — click first endpoint (entry point or stop).&#34;)
+        elif action == &#34;stop&#34;:
+            if self.tool == Tool.STOP:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.STOP, &#34;Stop mode — click a road or track tile to place a stop.&#34;)
+        elif action == &#34;bridge&#34;:
+            if self.tool == Tool.BRIDGE:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.BRIDGE, &#34;Bridge mode — select level below, then click a WATER tile.&#34;)
+        elif action == &#34;bulldoze&#34;:
+            if self.tool == Tool.BULLDOZE:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.BULLDOZE, &#34;Bulldoze — 1st click on route road removes route; 2nd click removes tile.&#34;)
+        elif action == &#34;garage&#34;:
+            if self.tool == Tool.GARAGE:
+                self._cancel_tool()
+            else:
+                self._set_tool(Tool.GARAGE, &#34;Garage mode — click an empty tile (${}).&#34;.format(GARAGE_COST))
+        elif action == &#34;bridge_wooden&#34;:
+            self.hud.selected_bridge_type = BridgeType.WOODEN
+            self.status_message = &#34;L1 Basic bridge — costs 10 Iron Ore/tile · Hauler only. Click a water tile.&#34;
+        elif action == &#34;bridge_stone&#34;:
+            self.hud.selected_bridge_type = BridgeType.STONE
+            self.status_message = &#34;L2 Reinforced bridge — costs 10 Alloy Ore/tile · Hauler + Rover. Click a water tile.&#34;
+        elif action == &#34;bridge_steel&#34;:
+            self.hud.selected_bridge_type = BridgeType.STEEL
+            self.status_message = &#34;L3 Magnetic bridge — costs 10 Titanium Ore/tile · all vehicles. Click a water tile.&#34;
+        elif action == &#34;speed_pause&#34;:
+            self.time_speed = TimeSpeed.PAUSE
+        elif action == &#34;speed_1&#34;:
+            self.time_speed = TimeSpeed.NORMAL
+        elif action == &#34;speed_2&#34;:
+            self.time_speed = TimeSpeed.FAST
+        elif action == &#34;speed_4&#34;:
+            self.time_speed = TimeSpeed.VERY_FAST
+        elif action.startswith(&#34;buy_vehicle_&#34;):
+            idx = int(action.split(&#34;_&#34;)[-1])
+            self._buy_vehicle(idx)
+        elif action.startswith(&#34;deploy_type_&#34;):
+            type_idx = int(action.split(&#34;_&#34;)[-1])
+            self._select_garage_vehicle_by_type(type_idx)
+        elif action.startswith(&#34;remove_route_&#34;):
+            route_id = int(action.split(&#34;_&#34;)[-1])
+            route = next((r for r in self.routes if r.id == route_id), None)
+            if route:
+                self._dissolve_route(route)
+        elif action.startswith(&#34;upgrade_vehicle_&#34;):
+            v_idx = int(action.split(&#34;_&#34;)[-1])
+            self._upgrade_vehicle(v_idx)
+        elif action.startswith(&#34;sell_vehicle_&#34;):
+            v_idx = int(action.split(&#34;_&#34;)[-1])
+            self._sell_garage_vehicle(v_idx)
+        elif action == &#34;close_garage_panel&#34;:
+            self._garage_panel_tile = None
+
+    def _set_tool(self, tool: Tool, msg: str) -&gt; None:
+        self.tool = tool
+        self.status_message = msg
+
+    def _cancel_tool(self, message: str = &#34;Ready.&#34;) -&gt; None:
+        self.tool = Tool.NONE
+        self._route_endpoint_a = None
+        self._deploy_endpoint_a = None
+        self._pending_deploy_idx = None
+        self.status_message = message
+
+    def _build_road(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Build a road tile at the given grid position, deducting the cost.
+
+        Validates that the tile is a buildable non-city-road cell, then converts
+        it to a ROAD tile and updates the rendered map and minimap.  A forest
+        clearing surcharge is applied if the tile contains trees.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.is_city_road:
+            self.status_message = &#34;City roads cannot be modified.&#34;
+            return
+        if not self.grid.is_road_buildable(x, y):
+            self.status_message = &#34;Roads can only be built on grass or forest tiles.&#34;
+            return
+        cost = ROAD_COST + (FOREST_CLEAR_COST if tile.tile_type == TileType.FOREST else 0)
+        solvent = self.company.spend(cost)
+        tile.tile_type = TileType.ROAD
+        tile.tree_count = 0
+        self.renderer.update_tile(x, y, tile)
+        self.minimap.update_tile(x, y, tile)
+        if solvent:
+            self.status_message = &#34;Road built at ({},{}) — ${}.&#34;.format(x, y, cost)
+        else:
+            self.status_message = &#34;Road built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).&#34;.format(
+                x, y, cost, self.company.money
+            )
+
+    def _build_track(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Build a rail track tile at the given grid position, deducting the cost.
+
+        Validates that the tile is eligible for track construction (not an entry
+        point, and the terrain allows it), then converts it to a TRACK tile.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.is_entry_point:
+            self.status_message = &#34;Cannot build track on an entry point.&#34;
+            return
+        if not self.grid.is_track_buildable(x, y):
+            self.status_message = &#34;Tracks can only be built on grass, forest, or road tiles.&#34;
+            return
+        cost = TRACK_COST + (FOREST_CLEAR_COST if tile.tile_type == TileType.FOREST else 0)
+        solvent = self.company.spend(cost)
+        tile.tile_type = TileType.TRACK
+        tile.is_route_road = False
+        tile.tree_count = 0
+        self.renderer.update_tile(x, y, tile)
+        self.minimap.update_tile(x, y, tile)
+        if solvent:
+            self.status_message = &#34;Track built at ({},{}) — ${}.&#34;.format(x, y, cost)
+        else:
+            self.status_message = &#34;Track built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).&#34;.format(
+                x, y, cost, self.company.money
+            )
+
+    def _build_stop(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Build a cargo/passenger stop on an existing road or track tile.
+
+        The stop is free to place.  A new Stop object is created and linked
+        to the tile so that vehicles can load and unload here.  The stop
+        inherits the tile&#39;s zone name so deliveries credit the correct city.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.tile_type not in {TileType.ROAD, TileType.TRACK}:
+            self.status_message = &#34;Stops can only be placed on road or track tiles.&#34;
+            return
+        if tile.is_stop:
+            self.status_message = &#34;There is already a stop here.&#34;
+            return
+
+        zone_name = tile.zone_name
+        if not zone_name:
+            for nb in self.grid.neighbors4(x, y):
+                if nb.zone_name:
+                    zone_name = nb.zone_name
+                    break
+
+        stop = Stop(id=self._next_stop_id, x=x, y=y, zone_name=zone_name)
+        self._next_stop_id += 1
+        tile.is_stop = True
+        tile.stop_ref = stop
+        self.stops.append(stop)
+        self.renderer.update_tile(x, y, tile)
+        self.minimap.update_tile(x, y, tile)
+        self.status_message = &#34;Stop #{} placed at ({},{}) — serves {}.&#34;.format(
+            stop.id, x, y, zone_name or &#34;general&#34;
+        )
+
+    def _build_bridge(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Install a bridge on a WATER tile using the currently selected bridge type.
+
+        Bridges are paid for with ore resources from the company inventory rather
+        than cash.  The selected bridge level determines which ore type and
+        quantity are consumed (see ``BRIDGE_ORE_COSTS`` in config).
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.tile_type != TileType.WATER:
+            self.status_message = &#34;Bridges can only be built on water tiles.&#34;
+            return
+        if tile.bridge_type is not None:
+            self.status_message = &#34;There is already a bridge here.&#34;
+            return
+
+        bridge_type = self.hud.selected_bridge_type
+        ore_cargo, ore_cost = BRIDGE_ORE_COSTS[bridge_type]
+        reserve_attr = ore_cargo.name.lower()
+        current_ore = getattr(self.company, reserve_attr)
+        if current_ore &lt; ore_cost:
+            self.status_message = &#34;Need {} {} to build this bridge (have {}).&#34;.format(
+                ore_cost, ore_cargo.value, current_ore
+            )
+            return
+
+        setattr(self.company, reserve_attr, current_ore - ore_cost)
+        tile.bridge_type = bridge_type
+        self.renderer.update_tile(x, y, tile)
+        self.minimap.update_tile(x, y, tile)
+        lv = {
+            &#34;Wooden&#34;: &#34;L1 (Hauler only)&#34;,
+            &#34;Stone&#34;:  &#34;L2 (Hauler+Rover)&#34;,
+            &#34;Steel&#34;:  &#34;L3 (all vehicles)&#34;,
+        }
+        self.status_message = &#34;{} bridge at ({},{}) — cost: {} {}.&#34;.format(
+            lv.get(bridge_type.value, bridge_type.value), x, y, ore_cost, ore_cargo.value
+        )
+
+    def _build_garage(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Build a vehicle garage on a grass or forest tile, deducting the cost.
+
+        Creates a Garage object, links it to the tile, and converts the tile to
+        a GRASS garage tile.  The player can later purchase vehicles and store
+        them at this garage.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+        if tile.tile_type not in {TileType.GRASS, TileType.FOREST}:
+            self.status_message = &#34;Garages can only be built on grass or forest tiles.&#34;
+            return
+        if tile.is_garage:
+            self.status_message = &#34;There is already a garage here.&#34;
+            return
+        solvent = self.company.spend(GARAGE_COST)
+        garage = Garage(x=x, y=y)
+        tile.tile_type = TileType.GRASS
+        tile.is_garage = True
+        tile.garage_ref = garage
+        tile.tree_count = 0
+        self.garages.append(garage)
+        self.renderer.update_tile(x, y, tile)
+        self.minimap.update_tile(x, y, tile)
+        if solvent:
+            self.status_message = &#34;Garage built at ({},{}) — ${}.  Click it to upgrade vehicles.&#34;.format(
+                x, y, GARAGE_COST
+            )
+        else:
+            self.status_message = &#34;Garage built at ({},{}) — ${}. WARNING: balance ${} (bankrupt!).&#34;.format(
+                x, y, GARAGE_COST, self.company.money
+            )
+
+    def _bulldoze(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Remove a player-built road, track, stop, bridge, or garage from a tile.
+
+        Restores the tile to GRASS and clears all associated references
+        (stop_ref, garage_ref, bridge_type).  City roads and facility entry
+        points cannot be removed.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None:
+            return
+
+        if tile.is_city_road and tile.is_entry_point:
+            self.status_message = &#34;Entry points cannot be removed.&#34;
+            return
+
+        if tile.is_stop:
+            self.stops = [s for s in self.stops if not (s.x == x and s.y == y)]
+            tile.is_stop = False
+            tile.stop_ref = None
+            self.renderer.update_tile(x, y, tile)
+            self.minimap.update_tile(x, y, tile)
+            self.status_message = &#34;Stop removed at ({},{}).&#34;.format(x, y)
+            return
+
+        if tile.bridge_type is not None:
+            tile.bridge_type = None
+            tile.tile_type = TileType.WATER
+            self.renderer.update_tile(x, y, tile)
+            self.minimap.update_tile(x, y, tile)
+            self.status_message = &#34;Bridge removed at ({},{}) — water restored.&#34;.format(x, y)
+            return
+
+        if tile.is_garage:
+            self.garages = [g for g in self.garages if not (g.x == x and g.y == y)]
+            tile.is_garage = False
+            tile.garage_ref = None
+            self.renderer.update_tile(x, y, tile)
+            self.minimap.update_tile(x, y, tile)
+            if self._garage_panel_tile == (x, y):
+                self._garage_panel_tile = None
+            self.status_message = &#34;Garage removed at ({},{}).&#34;.format(x, y)
+            return
+
+        if tile.tile_type in {TileType.ROAD, TileType.TRACK} and not tile.is_entry_point:
+            route = next(
+                (r for r in self.routes if (x, y) in r.path), None
+            )
+            if route is not None:
+                self._dissolve_route(route)
+                return
+            tile.tile_type = TileType.GRASS
+            tile.is_route_road = False
+            self.renderer.update_tile(x, y, tile)
+            self.minimap.update_tile(x, y, tile)
+            self.status_message = &#34;Tile removed at ({},{}).&#34;.format(x, y)
+        else:
+            self.status_message = &#34;Nothing to bulldoze here.&#34;
+
+    def _handle_route_click_p1(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Record the first endpoint of a new route being defined by the player.
+
+        Validates that the clicked tile is an entry point or stop, then stores
+        the position and transitions the tool state to ROUTE_P2 so the player
+        can click the second endpoint.
+
+        Args:
+            x: Tile column index of the first endpoint.
+            y: Tile row index of the first endpoint.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not (tile.is_entry_point or tile.is_stop):
+            self.status_message = &#34;First endpoint must be an entry point (◆) or stop (S).&#34;
+            return
+        self._route_endpoint_a = (x, y)
+        self.tool = Tool.ROUTE_P2
+        self.status_message = &#34;First: {} at ({},{}). Now click the second endpoint.&#34;.format(
+            tile.zone_name or &#34;stop&#34;, x, y
+        )
+
+    def _handle_route_click_p2(self, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Complete route creation by selecting the second endpoint and pathfinding.
+
+        Validates the second endpoint, runs BFS (road or track depending on the
+        tile type), builds a bidirectional loop path, determines route profitability,
+        and adds the route to the route list.  Resets tool state on success or
+        displays an error message if no path is found.
+
+        Args:
+            x: Tile column index of the second endpoint.
+            y: Tile row index of the second endpoint.
+        &#34;&#34;&#34;
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not (tile.is_entry_point or tile.is_stop):
+            self.status_message = &#34;Second endpoint must be an entry point (◆) or stop (S).&#34;
+            return
+        if (x, y) == self._route_endpoint_a:
+            self.status_message = &#34;Endpoints must be different tiles.&#34;
+            return
+
+        ep_a = self._route_endpoint_a
+        ep_b = (x, y)
+
+        outbound = find_road_path(self.grid, ep_a, ep_b)
+        path_type = &#34;road&#34;
+        if not outbound:
+            outbound = find_track_path(self.grid, ep_a, ep_b)
+            path_type = &#34;track&#34;
+
+        if not outbound:
+            self._cancel_tool(&#34;No road or track connecting those endpoints — build a path first.&#34;)
+            return
+
+        inbound = list(reversed(outbound))
+        loop_path = outbound + inbound[1:]
+
+        tile_a = self.grid.get_tile(*ep_a)
+        tile_b = self.grid.get_tile(*ep_b)
+        a_is_city = tile_a.zone_name in _CITY_NAMES
+        b_is_city = tile_b.zone_name in _CITY_NAMES
+        profitable = a_is_city != b_is_city
+
+        route = Route(
+            id=self._next_route_id,
+            name=&#34;Route {}&#34;.format(self._next_route_id),
+            endpoint_a=ep_a,
+            endpoint_b=ep_b,
+            path=loop_path,
+            profitable=profitable,
+            path_type=path_type,
+        )
+        self._next_route_id += 1
+        self.routes.append(route)
+
+        for rx, ry in outbound:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None:
+                t.is_route_road = True
+                self.renderer.update_tile(rx, ry, t)
+                self.minimap.update_tile(rx, ry, t)
+
+        vtype = &#34;train&#34; if path_type == &#34;track&#34; else &#34;bus/truck&#34;
+        income_note = &#34;Earns income.&#34; if profitable else &#34;No income — connect facility→city.&#34;
+        self.status_message = &#34;{} ({}) created ({} tiles). {} Deploy a {}!&#34;.format(
+            route.name, path_type, len(outbound), income_note, vtype
+        )
+        self._cancel_tool()
+
+    def _handle_deploy_click_p1(self, x: int, y: int) -&gt; None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not (tile.is_entry_point or tile.is_stop):
+            self.status_message = &#34;First endpoint must be an entry point (◆) or stop (S).&#34;
+            return
+        self._deploy_endpoint_a = (x, y)
+        self.tool = Tool.DEPLOY_VEHICLE_P2
+        self.status_message = &#34;First endpoint: ({},{}). Now click the second endpoint.&#34;.format(x, y)
+
+    def _handle_deploy_click_p2(self, x: int, y: int) -&gt; None:
+        tile = self.grid.get_tile(x, y)
+        if tile is None or not (tile.is_entry_point or tile.is_stop):
+            self.status_message = &#34;Second endpoint must be an entry point (◆) or stop (S).&#34;
+            return
+        if (x, y) == self._deploy_endpoint_a:
+            self.status_message = &#34;Endpoints must be different tiles.&#34;
+            return
+
+        ep_a = self._deploy_endpoint_a
+        ep_b = (x, y)
+        endpoints = {ep_a, ep_b}
+
+        matching = [r for r in self.routes if {r.endpoint_a, r.endpoint_b} == endpoints]
+        if not matching:
+            self._cancel_tool(&#34;No route connects those endpoints. Create a route first.&#34;)
+            return
+
+        route = matching[0]
+
+        if self._pending_deploy_idx is None:
+            self._cancel_tool()
+            return
+
+        vehicle = self.garage[self._pending_deploy_idx]
+
+        if vehicle.vehicle_type == VehicleType.TRAIN and route.path_type != &#34;track&#34;:
+            self._cancel_tool(&#34;Trains can only run on track routes. Build a track route first.&#34;)
+            return
+        if vehicle.vehicle_type in {VehicleType.BUS, VehicleType.TRUCK} and route.path_type == &#34;track&#34;:
+            self._cancel_tool(&#34;Buses and trucks cannot run on track routes.&#34;)
+            return
+
+        vtype_key = {VehicleType.BUS: &#34;bus&#34;, VehicleType.TRUCK: &#34;truck&#34;, VehicleType.TRAIN: &#34;train&#34;}[vehicle.vehicle_type]
+        for rx, ry in route.path:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None and t.bridge_type is not None:
+                support = BRIDGE_VEHICLE_SUPPORT.get(t.bridge_type, {})
+                if not support.get(vtype_key, True):
+                    bridge_name = {BridgeType.WOODEN: &#34;L1 Basic&#34;, BridgeType.STONE: &#34;L2 Reinforced&#34;, BridgeType.STEEL: &#34;L3 Magnetic&#34;}[t.bridge_type]
+                    self._cancel_tool(
+                        &#34;{} cannot cross {} bridge on this route. Build a higher bridge level.&#34;.format(
+                            vehicle.name, bridge_name))
+                    return
+
+        distance = max(1, len(route.path) // 2)
+        vehicle.reward_distance = distance
+        vehicle.revenue_per_leg = self._calc_revenue(distance, vehicle.capacity)
+        vehicle.path = route.path
+        vehicle.route_id = route.id
+        vehicle.initialize_position()
+
+        self.vehicles.append(vehicle)
+        self.garage.pop(self._pending_deploy_idx)
+        self._pending_deploy_idx = None
+        self._deploy_endpoint_a = None
+
+        self.status_message = &#34;{} deployed on {}.&#34;.format(vehicle.name, route.name)
+        self._cancel_tool()
+
+    def _dissolve_route(self, route: Route) -&gt; None:
+        for rx, ry in route.path:
+            t = self.grid.get_tile(rx, ry)
+            if t is not None:
+                t.is_route_road = False
+                self.renderer.update_tile(rx, ry, t)
+                self.minimap.update_tile(rx, ry, t)
+
+        staying = [v for v in self.vehicles if v.route_id != route.id]
+        returning = [v for v in self.vehicles if v.route_id == route.id]
+        for v in returning:
+            v.path = []
+            v.route_id = -1
+            v.current_index = 0
+            self.garage.append(v)
+        self.vehicles = staying
+        self.routes = [r for r in self.routes if r.id != route.id]
+        self.status_message = &#34;{} removed. {} vehicle(s) returned to garage. Roads intact.&#34;.format(
+            route.name, len(returning)
+        )
+
+    def _buy_vehicle(self, vdef_index: int) -&gt; None:
+        vdef = VEHICLE_DEFS[vdef_index]
+        solvent = self.company.spend(vdef[&#34;cost&#34;])
+        vehicle_number = len(self.garage) + len(self.vehicles) + 1
+        vtype = vdef[&#34;vehicle_type&#34;]
+        spd = vdef[&#34;speed&#34;]
+        cap = vdef[&#34;capacity&#34;]
+        vehicle = Vehicle(
+            name=&#34;{} {}&#34;.format(vdef[&#34;name&#34;], vehicle_number),
+            vehicle_type=vtype,
+            path=[],
+            speed_tiles_per_second=spd,
+            capacity=cap,
+            base_speed=spd,
+            base_capacity=cap,
+            level=1,
+            color=vdef[&#34;color&#34;],
+            route_id=-1,
+            vdef_name=vdef[&#34;name&#34;],
+        )
+        self.garage.append(vehicle)
+        if solvent:
+            self.status_message = &#34;{} purchased for ${}. Open Fleet to deploy it.&#34;.format(
+                vdef[&#34;name&#34;], vdef[&#34;cost&#34;]
+            )
+        else:
+            self.status_message = &#34;{} purchased for ${}. WARNING: balance ${} (bankrupt!).&#34;.format(
+                vdef[&#34;name&#34;], vdef[&#34;cost&#34;], self.company.money
+            )
+
+    def _select_garage_vehicle_by_type(self, type_idx: int) -&gt; None:
+        vdef_name = VEHICLE_DEFS[type_idx][&#34;name&#34;]
+        for i, v in enumerate(self.garage):
+            if v.vdef_name == vdef_name:
+                self._pending_deploy_idx = i
+                self._set_tool(
+                    Tool.DEPLOY_VEHICLE_P1,
+                    &#34;Deploying {} — click first route endpoint.&#34;.format(vdef_name),
+                )
+                return
+        self.status_message = &#34;No {} in garage.&#34;.format(vdef_name)
+
+    def _upgrade_vehicle(self, v_idx: int) -&gt; None:
+        all_vehicles = list(self.garage) + list(self.vehicles)
+        if v_idx &lt; 0 or v_idx &gt;= len(all_vehicles):
+            return
+        vehicle = all_vehicles[v_idx]
+        if vehicle.level &gt;= 3:
+            self.status_message = &#34;{} is already at max level.&#34;.format(vehicle.name)
+            return
+        next_level = vehicle.level + 1
+        level_def = VEHICLE_LEVEL_DEFS.get(vehicle.vehicle_type, {}).get(next_level)
+        if level_def is None:
+            return
+        oil_cost = level_def[&#34;oil&#34;]
+        if self.company.fuel &lt; oil_cost:
+            self.status_message = &#34;Need {} FUEL to upgrade {} to L{} (have {}).&#34;.format(
+                oil_cost, vehicle.name, next_level, self.company.fuel
+            )
+            return
+
+        self.company.fuel -= oil_cost
+        vehicle.level = next_level
+        vehicle.speed_tiles_per_second = vehicle.base_speed * (level_def[&#34;speed_mult&#34;] ** (next_level - 1))
+        vehicle.capacity = int(vehicle.base_capacity * (level_def[&#34;cap_mult&#34;] ** (next_level - 1)))
+        self.status_message = &#34;{} upgraded to Level {}! Speed: {:.1f}, Capacity: {}.&#34;.format(
+            vehicle.name, next_level, vehicle.speed_tiles_per_second, vehicle.capacity
+        )
+
+    def _sell_garage_vehicle(self, v_idx: int) -&gt; None:
+        all_vehicles = list(self.garage) + list(self.vehicles)
+        if v_idx &lt; 0 or v_idx &gt;= len(all_vehicles):
+            return
+        vehicle = all_vehicles[v_idx]
+        vdef = next((d for d in VEHICLE_DEFS if d[&#34;name&#34;] == vehicle.vdef_name), None)
+        sell_price = int(vdef[&#34;cost&#34;] * 0.5) if vdef else 200
+        if vehicle in self.garage:
+            self.garage.remove(vehicle)
+        elif vehicle in self.vehicles:
+            self.vehicles.remove(vehicle)
+        self.company.earn(sell_price)
+        self.status_message = &#34;{} sold for ${}.&#34;.format(vehicle.name, sell_price)
+
+    def _calc_revenue(self, distance: int, capacity: int) -&gt; int:
+        &#34;&#34;&#34;Calculate the revenue earned for one completed route loop.
+
+        Revenue scales with route distance, vehicle capacity, and the current
+        simulation speed to reward players who optimise longer and faster routes.
+
+        Args:
+            distance: Number of tiles in one leg of the route path.
+            capacity: Maximum cargo capacity of the vehicle.
+
+        Returns:
+            The integer currency amount to award to the company.
+        &#34;&#34;&#34;
+        speed_bonus = self.time_speed.value if self.time_speed.value &gt; 0 else 1
+        return int(18 * distance + capacity * 6 + speed_bonus * 5)
+
+    def _is_in_map_view(self, x: int, y: int) -&gt; bool:
+        return 0 &lt;= y &lt; WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT
+
+    def _screen_to_grid(self, screen_x: int, screen_y: int) -&gt; Optional[tuple]:
+        &#34;&#34;&#34;Convert a screen-space pixel position to tile grid coordinates.
+
+        Accounts for the current camera scroll offset when translating
+        screen pixels to world pixels, then divides by TILE_SIZE.
+
+        Args:
+            screen_x: Horizontal screen position in pixels.
+            screen_y: Vertical screen position in pixels.
+
+        Returns:
+            A ``(grid_x, grid_y)`` tuple if the position falls within the map,
+            or None if it is out of bounds.
+        &#34;&#34;&#34;
+        world_x, world_y = self.camera.screen_to_world(screen_x, screen_y)
+        grid_x = world_x // TILE_SIZE
+        grid_y = world_y // TILE_SIZE
+        if not self.grid.in_bounds(grid_x, grid_y):
+            return None
+        return grid_x, grid_y
+
+    def _update_hover_from_screen(self, screen_x: int, screen_y: int) -&gt; None:
+        if not self._is_in_map_view(screen_x, screen_y):
+            self._hover_tile = None
+            return
+        self._hover_tile = self._screen_to_grid(screen_x, screen_y)
+
+    def _clear_drag_state(self) -&gt; None:
+        self._drag_start_screen = None
+        self._drag_start_camera = None
+        self._dragging_map = False</code></pre>
+</details>
+<div class="desc"><p>Main game controller that owns all subsystems and runs the game loop.</p>
+<p><code><a title="src.game.Game" href="#src.game.Game">Game</a></code> is the top-level orchestrator.
+It creates and holds references to
+the grid, company, vehicles, routes, stops, garages, camera, renderer, HUD,
+minimap, and city-growth manager.
+Each frame the game loop calls <code>tick</code>
+which processes events, advances the simulation, and redraws the screen.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="src.game.Game.draw"><code class="name flex">
+<span>def <span class="ident">draw</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def draw(self) -&gt; None:
+    &#34;&#34;&#34;Render the current frame to the screen surface.
+
+    Draws the map, vehicles, minimap, HUD, scrollbars, and any active
+    tool overlays.  Call ``pygame.display.flip()`` after this method to
+    push the frame to the display.
+    &#34;&#34;&#34;
+    self.renderer.draw(
+        self.screen, self.grid, self.camera,
+        self.routes, self.vehicles, self._hover_tile, self.stops,
+    )
+    self._draw_scrollbars()
+
+    if self._show_minimap:
+        if self.minimap._dirty:
+            self.minimap.build(self.grid)
+        self.minimap.draw(self.screen, self.camera, self.vehicles, self.stops)
+
+    self.hud.draw(
+        self.screen,
+        money=self.company.money,
+        oil=self.company.fuel,
+        iron_ore=self.company.iron_ore,
+        alloy_ore=self.company.alloy_ore,
+        titanium_ore=self.company.titanium_ore,
+        game_time=self.game_time,
+        time_speed=self.time_speed,
+        tool=self.tool,
+        status=self.status_message,
+        garage=self.garage,
+        vehicles=self.vehicles,
+        stops=self.stops,
+        routes=self.routes,
+        garage_panel_tile=self._garage_panel_tile,
+        garage_vehicles=self._get_garage_vehicles_at(self._garage_panel_tile),
+    )
+
+    if self._bankrupt:
+        overlay = pygame.Surface(
+            (WINDOW_WIDTH, WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT), pygame.SRCALPHA
+        )
+        overlay.fill((180, 0, 0, 120))
+        self.screen.blit(overlay, (0, 0))
+        font = font_display(48, bold=True)              
+        surf = font.render(&#34;BANKRUPT — GAME OVER&#34;, True, (255, 60, 60))
+        self.screen.blit(
+            surf,
+            (
+                WINDOW_WIDTH // 2 - surf.get_width() // 2,
+                (WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT) // 2 - 30,
+            ),
+        )</code></pre>
+</details>
+<div class="desc"><p>Render the current frame to the screen surface.</p>
+<p>Draws the map, vehicles, minimap, HUD, scrollbars, and any active
+tool overlays.
+Call <code>pygame.display.flip()</code> after this method to
+push the frame to the display.</p></div>
+</dd>
+<dt id="src.game.Game.tick"><code class="name flex">
+<span>def <span class="ident">tick</span></span>(<span>self, events: list) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tick(self, events: list) -&gt; bool:
+    &#34;&#34;&#34;Process one frame: handle events, update simulation, and redraw.
+
+    This is the main entry point called by the game runner every frame.
+    Simulation is paused automatically when the company is bankrupt.
+
+    Args:
+        events: The list of ``pygame.Event`` objects for this frame.
+
+    Returns:
+        True to continue running, False when the player quits or goes bankrupt.
+    &#34;&#34;&#34;
+    dt_ms = self.clock.tick(FPS)
+    real_dt = dt_ms / 1000.0
+
+    for event in events:
+        if event.type == pygame.QUIT:
+            return False
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            self._on_left_press(event.pos)
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+            self._on_left_release(event.pos)
+        elif event.type == pygame.MOUSEMOTION:
+            self._on_mouse_move(event.pos, bool(event.buttons[0]))
+        elif event.type == pygame.MOUSEWHEEL:
+            mods = pygame.key.get_mods()
+            scroll = event.y * 48
+            if mods &amp; pygame.KMOD_SHIFT:
+                self.camera.move(-scroll, 0)
+            else:
+                self.camera.move(0, -scroll)
+        elif event.type == pygame.KEYDOWN:
+            self._on_key_down(event.key)
+
+    self._handle_camera_input(real_dt)
+
+    if self.time_speed != TimeSpeed.PAUSE and not self._bankrupt:
+        sim_dt = real_dt * self.time_speed.value
+        self.update(sim_dt)
+
+    self.draw()
+    pygame.display.flip()
+
+    return not self._bankrupt</code></pre>
+</details>
+<div class="desc"><p>Process one frame: handle events, update simulation, and redraw.</p>
+<p>This is the main entry point called by the game runner every frame.
+Simulation is paused automatically when the company is bankrupt.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>events</code></strong></dt>
+<dd>The list of <code>pygame.Event</code> objects for this frame.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>True to continue running, False when the player quits or goes bankrupt.</p></div>
+</dd>
+<dt id="src.game.Game.update"><code class="name flex">
+<span>def <span class="ident">update</span></span>(<span>self, dt: float) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update(self, dt: float) -&gt; None:
+    &#34;&#34;&#34;Advance all simulation systems by one time step.
+
+    Updates facilities, vehicles, city growth, tree regeneration, and
+    vehicle maintenance.  Should only be called when the game is not paused.
+
+    Args:
+        dt: Elapsed simulated time in seconds (real time multiplied by the
+            current speed multiplier).
+    &#34;&#34;&#34;
+    self.game_time += dt
+
+    for facility in self.facilities.values():
+        facility.tick(dt)
+
+    for vehicle in list(self.vehicles):
+        completed = vehicle.update(dt)
+
+        if vehicle.at_stop:
+            tile = self.grid.get_tile(int(round(vehicle.x)), int(round(vehicle.y)))
+            if tile is not None and ((tile.is_stop and tile.stop_ref is not None) or tile.is_entry_point):
+                self._handle_vehicle_at_stop(vehicle, tile)
+
+        if completed:
+            route = next((r for r in self.routes if r.id == vehicle.route_id), None)
+            if route and route.profitable:
+                for ep in (route.endpoint_a, route.endpoint_b):
+                    ep_tile = self.grid.get_tile(*ep)
+                    if ep_tile and ep_tile.zone_name in _CITY_NAMES:
+                        if self._city_has_water.get(ep_tile.zone_name, False):
+                            self.city_growth.on_delivery(ep_tile.zone_name)
+
+        vehicle.age_days += dt / GAME_SECONDS_PER_DAY
+        vehicle.maintenance_timer += dt / GAME_SECONDS_PER_DAY
+        if (
+            vehicle.maintenance_timer &gt;= vehicle.maintenance_due_days
+            and not vehicle.needs_maintenance
+        ):
+            vehicle.needs_maintenance = True
+            age_factor = max(1.0, vehicle.age_days / 30.0)
+            cost = int(MAINTENANCE_BASE_COST * age_factor)
+            self.company.spend(cost)
+            vehicle.maintenance_timer = 0.0
+            vehicle.maintenance_due_days = float(MAINTENANCE_INTERVAL_DAYS)
+            vehicle.needs_maintenance = False
+            self.status_message = (
+                &#34;{} maintenance — paid ${}.&#34;.format(vehicle.name, cost)
+            )
+
+    self.city_growth.tick(self.grid, self.renderer, self.minimap)
+
+    self.tree_growth_timer += dt
+    if self.tree_growth_timer &gt;= TREE_GROWTH_INTERVAL:
+        self.tree_growth_timer -= TREE_GROWTH_INTERVAL
+        self._update_trees()
+
+    if self.company.is_bankrupt:
+        self._bankrupt = True
+        self.status_message = &#34;BANKRUPT! Game over. Close the window to exit.&#34;</code></pre>
+</details>
+<div class="desc"><p>Advance all simulation systems by one time step.</p>
+<p>Updates facilities, vehicles, city growth, tree regeneration, and
+vehicle maintenance.
+Should only be called when the game is not paused.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dt</code></strong></dt>
+<dd>Elapsed simulated time in seconds (real time multiplied by the
+current speed multiplier).</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.game.Game" href="#src.game.Game">Game</a></code></h4>
+<ul class="">
+<li><code><a title="src.game.Game.draw" href="#src.game.Game.draw">draw</a></code></li>
+<li><code><a title="src.game.Game.tick" href="#src.game.Game.tick">tick</a></code></li>
+<li><code><a title="src.game.Game.update" href="#src.game.Game.update">update</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

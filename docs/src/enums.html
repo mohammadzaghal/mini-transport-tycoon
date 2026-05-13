@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.enums API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.enums</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.enums.BridgeType"><code class="flex name class">
+<span>class <span class="ident">BridgeType</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BridgeType(Enum):
+    &#34;&#34;&#34;The structural level of a bridge built over a water tile.&#34;&#34;&#34;
+
+    WOODEN = &#34;Wooden&#34;  # Level 1 — trucks only; paid with iron ore
+    STONE  = &#34;Stone&#34;   # Level 2 — trucks and buses; paid with alloy ore
+    STEEL  = &#34;Steel&#34;   # Level 3 — all vehicles including maglev; paid with titanium ore</code></pre>
+</details>
+<div class="desc"><p>The structural level of a bridge built over a water tile.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.BridgeType.STEEL"><code class="name">var <span class="ident">STEEL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.BridgeType.STONE"><code class="name">var <span class="ident">STONE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.BridgeType.WOODEN"><code class="name">var <span class="ident">WOODEN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.CargoType"><code class="flex name class">
+<span>class <span class="ident">CargoType</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CargoType(Enum):
+    &#34;&#34;&#34;The type of goods or resources that can be transported.&#34;&#34;&#34;
+
+    IRON_ORE     = &#34;Iron Ore&#34;      # Basic ore produced by ore mines
+    ALLOY_ORE    = &#34;Alloy Ore&#34;     # Mid-tier ore produced by ore mines
+    TITANIUM_ORE = &#34;Titanium Ore&#34;  # High-value ore produced by ore mines
+    FUEL         = &#34;Fuel&#34;          # Energy resource produced by fuel rigs
+    AQUATICS     = &#34;Aquatics&#34;      # Water supply produced by aqua domes
+    CRYSTALS     = &#34;Crystals&#34;      # Rare material produced by crystal labs</code></pre>
+</details>
+<div class="desc"><p>The type of goods or resources that can be transported.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.CargoType.ALLOY_ORE"><code class="name">var <span class="ident">ALLOY_ORE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.CargoType.AQUATICS"><code class="name">var <span class="ident">AQUATICS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.CargoType.CRYSTALS"><code class="name">var <span class="ident">CRYSTALS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.CargoType.FUEL"><code class="name">var <span class="ident">FUEL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.CargoType.IRON_ORE"><code class="name">var <span class="ident">IRON_ORE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.CargoType.TITANIUM_ORE"><code class="name">var <span class="ident">TITANIUM_ORE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.FacilityType"><code class="flex name class">
+<span>class <span class="ident">FacilityType</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FacilityType(Enum):
+    &#34;&#34;&#34;The production category of an industrial facility.&#34;&#34;&#34;
+
+    ORE_MINE    = &#34;Ore Mine&#34;      # Produces iron, alloy, and titanium ores
+    FUEL_RIG    = &#34;Fuel Rig&#34;      # Produces fuel
+    AQUA_DOME   = &#34;Aqua Dome&#34;     # Produces aquatics (water supply)
+    CRYSTAL_LAB = &#34;Crystal Lab&#34;   # Produces crystals</code></pre>
+</details>
+<div class="desc"><p>The production category of an industrial facility.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.FacilityType.AQUA_DOME"><code class="name">var <span class="ident">AQUA_DOME</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.FacilityType.CRYSTAL_LAB"><code class="name">var <span class="ident">CRYSTAL_LAB</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.FacilityType.FUEL_RIG"><code class="name">var <span class="ident">FUEL_RIG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.FacilityType.ORE_MINE"><code class="name">var <span class="ident">ORE_MINE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.TileType"><code class="flex name class">
+<span>class <span class="ident">TileType</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TileType(Enum):
+    &#34;&#34;&#34;The terrain or infrastructure type of a single map tile.&#34;&#34;&#34;
+
+    GRASS    = &#34;grass&#34;     # Open, buildable land
+    FOREST   = &#34;forest&#34;    # Tree-covered land; costs extra to clear
+    ROAD     = &#34;road&#34;      # Player-built or city road; driveable by wheeled vehicles
+    TRACK    = &#34;track&#34;     # Player-built rail; driveable by maglev only
+    CITY     = &#34;city&#34;      # City building block; not directly buildable
+    FACILITY = &#34;facility&#34;  # Industrial facility footprint tile
+    WATER    = &#34;water&#34;     # Impassable unless bridged</code></pre>
+</details>
+<div class="desc"><p>The terrain or infrastructure type of a single map tile.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.TileType.CITY"><code class="name">var <span class="ident">CITY</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.FACILITY"><code class="name">var <span class="ident">FACILITY</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.FOREST"><code class="name">var <span class="ident">FOREST</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.GRASS"><code class="name">var <span class="ident">GRASS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.ROAD"><code class="name">var <span class="ident">ROAD</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.TRACK"><code class="name">var <span class="ident">TRACK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TileType.WATER"><code class="name">var <span class="ident">WATER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.TimeSpeed"><code class="flex name class">
+<span>class <span class="ident">TimeSpeed</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TimeSpeed(Enum):
+    &#34;&#34;&#34;The simulation speed multiplier applied to the game world.&#34;&#34;&#34;
+
+    PAUSE     = 0  # Simulation frozen; no updates run
+    NORMAL    = 1  # Real-time simulation
+    FAST      = 2  # 2× accelerated simulation
+    VERY_FAST = 4  # 4× accelerated simulation</code></pre>
+</details>
+<div class="desc"><p>The simulation speed multiplier applied to the game world.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.TimeSpeed.FAST"><code class="name">var <span class="ident">FAST</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TimeSpeed.NORMAL"><code class="name">var <span class="ident">NORMAL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TimeSpeed.PAUSE"><code class="name">var <span class="ident">PAUSE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.TimeSpeed.VERY_FAST"><code class="name">var <span class="ident">VERY_FAST</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.Tool"><code class="flex name class">
+<span>class <span class="ident">Tool</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Tool(Enum):
+    &#34;&#34;&#34;The currently active player action tool selected from the HUD.&#34;&#34;&#34;
+
+    NONE              = &#34;none&#34;               # No tool selected; cursor is passive
+    ROAD              = &#34;road&#34;               # Click tiles to build roads
+    TRACK             = &#34;track&#34;              # Click tiles to build rail tracks
+    ROUTE_P1          = &#34;route_p1&#34;           # Waiting for first route endpoint click
+    ROUTE_P2          = &#34;route_p2&#34;           # Waiting for second route endpoint click
+    VEHICLES          = &#34;vehicles&#34;           # Vehicle purchase panel open
+    DEPLOY_VEHICLE_P1 = &#34;deploy_vehicle_p1&#34;  # Waiting for first deploy endpoint
+    DEPLOY_VEHICLE_P2 = &#34;deploy_vehicle_p2&#34;  # Waiting for second deploy endpoint
+    BULLDOZE          = &#34;bulldoze&#34;           # Click tiles to remove infrastructure
+    STOP              = &#34;stop&#34;               # Click road/track to place a stop
+    BRIDGE            = &#34;bridge&#34;             # Click water tiles to build bridges
+    GARAGE            = &#34;garage&#34;             # Click grass to build a vehicle garage</code></pre>
+</details>
+<div class="desc"><p>The currently active player action tool selected from the HUD.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.Tool.BRIDGE"><code class="name">var <span class="ident">BRIDGE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.BULLDOZE"><code class="name">var <span class="ident">BULLDOZE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.DEPLOY_VEHICLE_P1"><code class="name">var <span class="ident">DEPLOY_VEHICLE_P1</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.DEPLOY_VEHICLE_P2"><code class="name">var <span class="ident">DEPLOY_VEHICLE_P2</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.GARAGE"><code class="name">var <span class="ident">GARAGE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.NONE"><code class="name">var <span class="ident">NONE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.ROAD"><code class="name">var <span class="ident">ROAD</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.ROUTE_P1"><code class="name">var <span class="ident">ROUTE_P1</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.ROUTE_P2"><code class="name">var <span class="ident">ROUTE_P2</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.STOP"><code class="name">var <span class="ident">STOP</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.TRACK"><code class="name">var <span class="ident">TRACK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.Tool.VEHICLES"><code class="name">var <span class="ident">VEHICLES</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="src.enums.VehicleType"><code class="flex name class">
+<span>class <span class="ident">VehicleType</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class VehicleType(Enum):
+    &#34;&#34;&#34;The class of vehicle, which determines which infrastructure it can use.&#34;&#34;&#34;
+
+    BUS   = &#34;Rover&#34;   # Wheeled bus for road routes; carries passengers
+    TRUCK = &#34;Hauler&#34;  # Wheeled truck for road routes; carries cargo
+    TRAIN = &#34;Maglev&#34;  # Rail vehicle for track routes; high-capacity bulk cargo</code></pre>
+</details>
+<div class="desc"><p>The class of vehicle, which determines which infrastructure it can use.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="src.enums.VehicleType.BUS"><code class="name">var <span class="ident">BUS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.VehicleType.TRAIN"><code class="name">var <span class="ident">TRAIN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="src.enums.VehicleType.TRUCK"><code class="name">var <span class="ident">TRUCK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src" href="index.html">src</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.enums.BridgeType" href="#src.enums.BridgeType">BridgeType</a></code></h4>
+<ul class="">
+<li><code><a title="src.enums.BridgeType.STEEL" href="#src.enums.BridgeType.STEEL">STEEL</a></code></li>
+<li><code><a title="src.enums.BridgeType.STONE" href="#src.enums.BridgeType.STONE">STONE</a></code></li>
+<li><code><a title="src.enums.BridgeType.WOODEN" href="#src.enums.BridgeType.WOODEN">WOODEN</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.CargoType" href="#src.enums.CargoType">CargoType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="src.enums.CargoType.ALLOY_ORE" href="#src.enums.CargoType.ALLOY_ORE">ALLOY_ORE</a></code></li>
+<li><code><a title="src.enums.CargoType.AQUATICS" href="#src.enums.CargoType.AQUATICS">AQUATICS</a></code></li>
+<li><code><a title="src.enums.CargoType.CRYSTALS" href="#src.enums.CargoType.CRYSTALS">CRYSTALS</a></code></li>
+<li><code><a title="src.enums.CargoType.FUEL" href="#src.enums.CargoType.FUEL">FUEL</a></code></li>
+<li><code><a title="src.enums.CargoType.IRON_ORE" href="#src.enums.CargoType.IRON_ORE">IRON_ORE</a></code></li>
+<li><code><a title="src.enums.CargoType.TITANIUM_ORE" href="#src.enums.CargoType.TITANIUM_ORE">TITANIUM_ORE</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.FacilityType" href="#src.enums.FacilityType">FacilityType</a></code></h4>
+<ul class="">
+<li><code><a title="src.enums.FacilityType.AQUA_DOME" href="#src.enums.FacilityType.AQUA_DOME">AQUA_DOME</a></code></li>
+<li><code><a title="src.enums.FacilityType.CRYSTAL_LAB" href="#src.enums.FacilityType.CRYSTAL_LAB">CRYSTAL_LAB</a></code></li>
+<li><code><a title="src.enums.FacilityType.FUEL_RIG" href="#src.enums.FacilityType.FUEL_RIG">FUEL_RIG</a></code></li>
+<li><code><a title="src.enums.FacilityType.ORE_MINE" href="#src.enums.FacilityType.ORE_MINE">ORE_MINE</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.TileType" href="#src.enums.TileType">TileType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="src.enums.TileType.CITY" href="#src.enums.TileType.CITY">CITY</a></code></li>
+<li><code><a title="src.enums.TileType.FACILITY" href="#src.enums.TileType.FACILITY">FACILITY</a></code></li>
+<li><code><a title="src.enums.TileType.FOREST" href="#src.enums.TileType.FOREST">FOREST</a></code></li>
+<li><code><a title="src.enums.TileType.GRASS" href="#src.enums.TileType.GRASS">GRASS</a></code></li>
+<li><code><a title="src.enums.TileType.ROAD" href="#src.enums.TileType.ROAD">ROAD</a></code></li>
+<li><code><a title="src.enums.TileType.TRACK" href="#src.enums.TileType.TRACK">TRACK</a></code></li>
+<li><code><a title="src.enums.TileType.WATER" href="#src.enums.TileType.WATER">WATER</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.TimeSpeed" href="#src.enums.TimeSpeed">TimeSpeed</a></code></h4>
+<ul class="">
+<li><code><a title="src.enums.TimeSpeed.FAST" href="#src.enums.TimeSpeed.FAST">FAST</a></code></li>
+<li><code><a title="src.enums.TimeSpeed.NORMAL" href="#src.enums.TimeSpeed.NORMAL">NORMAL</a></code></li>
+<li><code><a title="src.enums.TimeSpeed.PAUSE" href="#src.enums.TimeSpeed.PAUSE">PAUSE</a></code></li>
+<li><code><a title="src.enums.TimeSpeed.VERY_FAST" href="#src.enums.TimeSpeed.VERY_FAST">VERY_FAST</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.Tool" href="#src.enums.Tool">Tool</a></code></h4>
+<ul class="two-column">
+<li><code><a title="src.enums.Tool.BRIDGE" href="#src.enums.Tool.BRIDGE">BRIDGE</a></code></li>
+<li><code><a title="src.enums.Tool.BULLDOZE" href="#src.enums.Tool.BULLDOZE">BULLDOZE</a></code></li>
+<li><code><a title="src.enums.Tool.DEPLOY_VEHICLE_P1" href="#src.enums.Tool.DEPLOY_VEHICLE_P1">DEPLOY_VEHICLE_P1</a></code></li>
+<li><code><a title="src.enums.Tool.DEPLOY_VEHICLE_P2" href="#src.enums.Tool.DEPLOY_VEHICLE_P2">DEPLOY_VEHICLE_P2</a></code></li>
+<li><code><a title="src.enums.Tool.GARAGE" href="#src.enums.Tool.GARAGE">GARAGE</a></code></li>
+<li><code><a title="src.enums.Tool.NONE" href="#src.enums.Tool.NONE">NONE</a></code></li>
+<li><code><a title="src.enums.Tool.ROAD" href="#src.enums.Tool.ROAD">ROAD</a></code></li>
+<li><code><a title="src.enums.Tool.ROUTE_P1" href="#src.enums.Tool.ROUTE_P1">ROUTE_P1</a></code></li>
+<li><code><a title="src.enums.Tool.ROUTE_P2" href="#src.enums.Tool.ROUTE_P2">ROUTE_P2</a></code></li>
+<li><code><a title="src.enums.Tool.STOP" href="#src.enums.Tool.STOP">STOP</a></code></li>
+<li><code><a title="src.enums.Tool.TRACK" href="#src.enums.Tool.TRACK">TRACK</a></code></li>
+<li><code><a title="src.enums.Tool.VEHICLES" href="#src.enums.Tool.VEHICLES">VEHICLES</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="src.enums.VehicleType" href="#src.enums.VehicleType">VehicleType</a></code></h4>
+<ul class="">
+<li><code><a title="src.enums.VehicleType.BUS" href="#src.enums.VehicleType.BUS">BUS</a></code></li>
+<li><code><a title="src.enums.VehicleType.TRAIN" href="#src.enums.VehicleType.TRAIN">TRAIN</a></code></li>
+<li><code><a title="src.enums.VehicleType.TRUCK" href="#src.enums.VehicleType.TRUCK">TRUCK</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

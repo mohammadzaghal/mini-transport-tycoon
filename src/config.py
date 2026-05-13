@@ -1,3 +1,11 @@
+"""Game-wide configuration constants.
+
+This module centralises all tunable parameters for the Mini Transport Tycoon
+simulation.  Adjust values here to change game balance, map dimensions, UI
+layout, vehicle stats, facility production rates, and bridge costs without
+touching logic code.
+"""
+
 from src.enums import CargoType, FacilityType, BridgeType, VehicleType
 
 WINDOW_WIDTH  = 1280

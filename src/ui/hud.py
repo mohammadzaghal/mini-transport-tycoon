@@ -69,6 +69,12 @@ def _hex_to_rgb(h: str) -> tuple:
 
 
 class HUD:
+    """Heads-up display that renders the bottom toolbar and all interactive panels.
+
+    The HUD draws tool buttons, speed controls, vehicle cards, route lists, and
+    the garage management panel.  It also handles hit-testing so that the Game
+    can map mouse clicks to named actions.
+    """
     def __init__(self) -> None:
         self._fonts: dict = {}
         self.selected_bridge_type: BridgeType = BridgeType.WOODEN
@@ -94,6 +100,24 @@ class HUD:
         garage: Optional[List] = None,
         routes: Optional[List] = None,
      ) -> Optional[str]:
+        """Return the action name for a HUD button click at the given screen position.
+
+        Hit-tests the click against all visible buttons for the current tool
+        state.  Context-sensitive panels (bridge levels, vehicle cards, route
+        list, fleet deployment) are only tested when the relevant tool is active.
+
+        Args:
+            x: Screen x-coordinate of the click.
+            y: Screen y-coordinate of the click.
+            tool: The currently active Tool enum value.
+            garage: Optional list of Vehicle objects in the player's garage
+                (needed for fleet panel hit-testing).
+            routes: Optional list of Route objects (needed for route panel).
+
+        Returns:
+            A string action identifier (e.g. ``"road"``, ``"buy_vehicle_0"``,
+            ``"speed_2"``), or None if the click does not hit any button.
+        """
         if _in_rect(_BTN_ROAD,     x, y): return "road"
         if _in_rect(_BTN_TRACK,    x, y): return "track"          
         if _in_rect(_BTN_VEHICLES, x, y): return "vehicles"
@@ -129,6 +153,15 @@ class HUD:
         return None
 
     def is_in_garage_panel(self, x: int, y: int) -> bool:
+        """Return True if the screen position falls within the garage management panel.
+
+        Args:
+            x: Screen x-coordinate.
+            y: Screen y-coordinate.
+
+        Returns:
+            True if the point is inside the garage panel bounds.
+        """
         panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
         return (
             _GARAGE_PANEL_X - 4 <= x <= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
@@ -136,42 +169,21 @@ class HUD:
         )
 
     def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]:
+        """Return the action name for a click inside the garage management panel.
+
+        Args:
+            x: Screen x-coordinate of the click.
+            y: Screen y-coordinate of the click.
+            garage_vehicles: The list of Vehicle objects currently in the garage.
+
+        Returns:
+            An action string such as ``"upgrade_vehicle_0"`` or
+            ``"sell_vehicle_2"`` or ``"close_garage_panel"``, or None if the
+            click does not hit a button.
+        """
         if not garage_vehicles:
             return None
         px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
-        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
-        close_y = _GARAGE_PANEL_Y + 4
-        if close_x <= x <= close_x + 18 and close_y <= y <= close_y + 16:
-            return "close_garage_panel"
-        for i in range(len(garage_vehicles)):
-            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
-            if ry <= y <= ry + _GARAGE_ROW_H - 2:
-                upg_x1 = px2 - 128
-                upg_x2 = px2 - 68
-                sell_x1 = px2 - 63
-                sell_x2 = px2 - 4
-                if upg_x1 <= x <= upg_x2:
-                    return "upgrade_vehicle_{}".format(i)
-                if sell_x1 <= x <= sell_x2:
-                    return "sell_vehicle_{}".format(i)
-        return None
-
-
-
-    def is_in_garage_panel(self, x: int, y: int) -> bool:    
-        """Return True if (x, y) falls within the garage upgrade panel bounds."""
-        panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
-        return (
-            _GARAGE_PANEL_X - 4 <= x <= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
-            and _GARAGE_PANEL_Y - 4 <= y <= _GARAGE_PANEL_Y + panel_h_max + 8
-        )
-
-    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -> Optional[str]: 
-        """Hit-test for the garage upgrade panel buttons."""
-        if not garage_vehicles:
-            return None
-        px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
-        # Close button
         close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
         close_y = _GARAGE_PANEL_Y + 4
         if close_x <= x <= close_x + 18 and close_y <= y <= close_y + 16:
@@ -248,6 +260,31 @@ class HUD:
         garage_panel_tile: Optional[tuple] = None,
         garage_vehicles: Optional[List] = None,
      ) -> None:
+        """Render the full HUD including the toolbar, resource counters, and panels.
+
+        Draws the bottom bar background, tool buttons, speed controls, resource
+        display, status message, context hints, and any active side panels
+        (vehicle purchase, route list, garage management).
+
+        Args:
+            screen: The pygame surface to draw onto.
+            money: Player's current cash balance to display.
+            oil: Current fuel stock (displayed as oil units).
+            iron_ore: Current iron ore stock.
+            alloy_ore: Current alloy ore stock.
+            titanium_ore: Current titanium ore stock.
+            game_time: Elapsed simulated time in seconds (used to display day count).
+            time_speed: Current simulation speed for highlighting the speed button.
+            tool: Currently active tool for highlighting the correct tool button.
+            status: Status message string to show at the bottom of the screen.
+            garage: List of Vehicle objects in the garage (for fleet panel).
+            vehicles: List of deployed Vehicle objects (for fleet overview).
+            stops: List of active Stop objects (for route/stop panels).
+            routes: List of active Route objects (for route list panel).
+            garage_panel_tile: Optional (x, y) of the selected garage tile to
+                show the per-garage management panel.
+            garage_vehicles: List of Vehicle objects stored in the selected garage.
+        """
         bar_y = _BAR_Y
 
         pygame.draw.rect(screen, (18, 10, 8), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
@@ -279,7 +316,7 @@ class HUD:
         self._text(screen, hint, WINDOW_WIDTH // 2, bar_y + 8, 10, (180, 210, 160), anchor="center")
 
         self._draw_action_btn(screen, _BTN_ROAD,     "ROAD[R]",  tool == Tool.ROAD)
-        self._draw_action_btn(screen, _BTN_TRACK,    "RAIL[T]",  tool == Tool.TRACK)  # v1.1 #18
+        self._draw_action_btn(screen, _BTN_TRACK,    "RAIL[T]",  tool == Tool.TRACK)
         self._draw_action_btn(screen, _BTN_VEHICLES, "FLEET",    tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2})
         self._draw_action_btn(screen, _BTN_ROUTE,    "ROUTE",    tool in {Tool.ROUTE_P1, Tool.ROUTE_P2})
         self._draw_action_btn(screen, _BTN_STOP,     "STOP[S]",  tool == Tool.STOP)
@@ -331,7 +368,7 @@ class HUD:
         cy = (y1 + y2) // 2
         self._text(screen, label, cx, cy, 12, (255, 255, 255), bold=True, anchor="center")
 
-    def _draw_bridge_sub(self, screen: pygame.Surface) -> None:   # v1.1 #7
+    def _draw_bridge_sub(self, screen: pygame.Surface) -> None:
         specs = [
             (_BTN_BRIDGE_L1, "L1 BASIC\n10 Fe · Hauler", BridgeType.WOODEN),
             (_BTN_BRIDGE_L2, "L2 REIN\n10 Al · +Rover", BridgeType.STONE),

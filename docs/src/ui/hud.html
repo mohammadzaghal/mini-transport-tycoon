@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.ui.hud API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.ui.hud</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.ui.hud.HUD"><code class="flex name class">
+<span>class <span class="ident">HUD</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class HUD:
+    &#34;&#34;&#34;Heads-up display that renders the bottom toolbar and all interactive panels.
+
+    The HUD draws tool buttons, speed controls, vehicle cards, route lists, and
+    the garage management panel.  It also handles hit-testing so that the Game
+    can map mouse clicks to named actions.
+    &#34;&#34;&#34;
+    def __init__(self) -&gt; None:
+        self._fonts: dict = {}
+        self.selected_bridge_type: BridgeType = BridgeType.WOODEN
+
+    def _font(self, size: int, bold: bool = False) -&gt; pygame.font.Font:
+        return font_ui(size, bold=bold)
+
+    def _text(self, screen, text, x, y, size, color, bold=False, anchor=&#34;nw&#34;):
+        surf = self._font(size, bold).render(text, True, color)
+        if anchor == &#34;center&#34;:
+            x -= surf.get_width() // 2
+            y -= surf.get_height() // 2
+        elif anchor in (&#34;ne&#34;, &#34;e&#34;):
+            x -= surf.get_width()
+        screen.blit(surf, (x, y))
+
+
+    def button_at(
+        self,
+        x: int,
+        y: int,
+        tool: Tool,
+        garage: Optional[List] = None,
+        routes: Optional[List] = None,
+     ) -&gt; Optional[str]:
+        &#34;&#34;&#34;Return the action name for a HUD button click at the given screen position.
+
+        Hit-tests the click against all visible buttons for the current tool
+        state.  Context-sensitive panels (bridge levels, vehicle cards, route
+        list, fleet deployment) are only tested when the relevant tool is active.
+
+        Args:
+            x: Screen x-coordinate of the click.
+            y: Screen y-coordinate of the click.
+            tool: The currently active Tool enum value.
+            garage: Optional list of Vehicle objects in the player&#39;s garage
+                (needed for fleet panel hit-testing).
+            routes: Optional list of Route objects (needed for route panel).
+
+        Returns:
+            A string action identifier (e.g. ``&#34;road&#34;``, ``&#34;buy_vehicle_0&#34;``,
+            ``&#34;speed_2&#34;``), or None if the click does not hit any button.
+        &#34;&#34;&#34;
+        if _in_rect(_BTN_ROAD,     x, y): return &#34;road&#34;
+        if _in_rect(_BTN_TRACK,    x, y): return &#34;track&#34;          
+        if _in_rect(_BTN_VEHICLES, x, y): return &#34;vehicles&#34;
+        if _in_rect(_BTN_ROUTE,    x, y): return &#34;route&#34;
+        if _in_rect(_BTN_STOP,     x, y): return &#34;stop&#34;
+        if _in_rect(_BTN_BRIDGE,   x, y): return &#34;bridge&#34;
+        if _in_rect(_BTN_BULLDOZE, x, y): return &#34;bulldoze&#34;
+        if _in_rect(_BTN_GARAGE,   x, y): return &#34;garage&#34;
+        if _in_rect(_BTN_SPD_PAUSE, x, y): return &#34;speed_pause&#34;
+        if _in_rect(_BTN_SPD_1,     x, y): return &#34;speed_1&#34;
+        if _in_rect(_BTN_SPD_2,     x, y): return &#34;speed_2&#34;
+        if _in_rect(_BTN_SPD_4,     x, y): return &#34;speed_4&#34;
+
+        if tool == Tool.BRIDGE:
+            if _in_rect(_BTN_BRIDGE_L1, x, y): return &#34;bridge_wooden&#34;
+            if _in_rect(_BTN_BRIDGE_L2, x, y): return &#34;bridge_stone&#34;
+            if _in_rect(_BTN_BRIDGE_L3, x, y): return &#34;bridge_steel&#34;
+
+        if tool == Tool.VEHICLES:
+            idx = self._vehicle_card_index(x, y)
+            if idx is not None:
+                return &#34;buy_vehicle_{}&#34;.format(idx)
+            if garage is not None:
+                tidx = self._fleet_type_index(x, y, garage)
+                if tidx is not None:
+                    return &#34;deploy_type_{}&#34;.format(tidx)
+
+        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2} and routes is not None:  
+            action = self._routes_panel_action(x, y, routes)
+            if action is not None:
+                return action
+
+        return None
+
+    def is_in_garage_panel(self, x: int, y: int) -&gt; bool:
+        &#34;&#34;&#34;Return True if the screen position falls within the garage management panel.
+
+        Args:
+            x: Screen x-coordinate.
+            y: Screen y-coordinate.
+
+        Returns:
+            True if the point is inside the garage panel bounds.
+        &#34;&#34;&#34;
+        panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
+        return (
+            _GARAGE_PANEL_X - 4 &lt;= x &lt;= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
+            and _GARAGE_PANEL_Y - 4 &lt;= y &lt;= _GARAGE_PANEL_Y + panel_h_max + 8
+        )
+
+    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -&gt; Optional[str]:
+        &#34;&#34;&#34;Return the action name for a click inside the garage management panel.
+
+        Args:
+            x: Screen x-coordinate of the click.
+            y: Screen y-coordinate of the click.
+            garage_vehicles: The list of Vehicle objects currently in the garage.
+
+        Returns:
+            An action string such as ``&#34;upgrade_vehicle_0&#34;`` or
+            ``&#34;sell_vehicle_2&#34;`` or ``&#34;close_garage_panel&#34;``, or None if the
+            click does not hit a button.
+        &#34;&#34;&#34;
+        if not garage_vehicles:
+            return None
+        px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        if close_x &lt;= x &lt;= close_x + 18 and close_y &lt;= y &lt;= close_y + 16:
+            return &#34;close_garage_panel&#34;
+        for i in range(len(garage_vehicles)):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            if ry &lt;= y &lt;= ry + _GARAGE_ROW_H - 2:
+                upg_x1 = px2 - 128
+                upg_x2 = px2 - 68
+                sell_x1 = px2 - 63
+                sell_x2 = px2 - 4
+                if upg_x1 &lt;= x &lt;= upg_x2:
+                    return &#34;upgrade_vehicle_{}&#34;.format(i)
+                if sell_x1 &lt;= x &lt;= sell_x2:
+                    return &#34;sell_vehicle_{}&#34;.format(i)
+        return None
+
+
+
+    def is_in_garage_panel(self, x: int, y: int) -&gt; bool:    
+        &#34;&#34;&#34;Return True if (x, y) falls within the garage upgrade panel bounds.&#34;&#34;&#34;
+        panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
+        return (
+            _GARAGE_PANEL_X - 4 &lt;= x &lt;= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
+            and _GARAGE_PANEL_Y - 4 &lt;= y &lt;= _GARAGE_PANEL_Y + panel_h_max + 8
+        )
+
+    def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -&gt; Optional[str]: 
+        &#34;&#34;&#34;Hit-test for the garage upgrade panel buttons.&#34;&#34;&#34;
+        if not garage_vehicles:
+            return None
+        px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+        # Close button
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        if close_x &lt;= x &lt;= close_x + 18 and close_y &lt;= y &lt;= close_y + 16:
+            return &#34;close_garage_panel&#34;
+        for i in range(len(garage_vehicles)):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            if ry &lt;= y &lt;= ry + _GARAGE_ROW_H - 2:
+                upg_x1 = px2 - 128
+                upg_x2 = px2 - 68
+                sell_x1 = px2 - 63
+                sell_x2 = px2 - 4
+                if upg_x1 &lt;= x &lt;= upg_x2:
+                    return &#34;upgrade_vehicle_{}&#34;.format(i)
+                if sell_x1 &lt;= x &lt;= sell_x2:
+                    return &#34;sell_vehicle_{}&#34;.format(i)
+        return None
+
+
+
+    def _vehicle_card_index(self, x: int, y: int) -&gt; Optional[int]:
+        if not (_POPUP_Y1 &lt;= y &lt;= _POPUP_Y2):
+            return None
+        for i in range(len(VEHICLE_DEFS)):
+            cx1 = _POPUP_X1 + i * (_CARD_W + _CARD_GAP)
+            cx2 = cx1 + _CARD_W
+            if cx1 &lt;= x &lt;= cx2:
+                return i
+        return None
+
+    def _fleet_type_index(self, x: int, y: int, garage: List) -&gt; Optional[int]:
+        if not (_FLEET_X1 &lt;= x &lt;= _FLEET_X2):
+            return None
+        owned_y0 = _POPUP_Y1 + 20
+        for i, vdef in enumerate(VEHICLE_DEFS):
+            row_y = owned_y0 + i * _FLEET_ROW_H
+            if row_y &lt;= y &lt;= row_y + _FLEET_ROW_H - 2:
+                count = sum(1 for v in garage if v.vdef_name == vdef[&#34;name&#34;])
+                return i if count &gt; 0 else None
+        return None
+
+    def _routes_panel_action(self, x: int, y: int, routes: List) -&gt; Optional[str]:
+        if not routes:
+            return None
+        px1 = _ROUTES_PANEL_X
+        px2 = _ROUTES_PANEL_X + _ROUTES_PANEL_W
+        if not (px1 &lt;= x &lt;= px2):
+            return None
+        for i, route in enumerate(routes):
+            ry = _ROUTES_PANEL_Y + 26 + i * _ROUTES_ROW_H
+            if ry &lt;= y &lt;= ry + _ROUTES_ROW_H - 2:
+                bx1 = px2 - 60
+                bx2 = px2 - 4
+                if bx1 &lt;= x &lt;= bx2:
+                    return &#34;remove_route_{}&#34;.format(route.id)
+        return None
+
+
+    def draw(
+        self,
+        screen: pygame.Surface,
+        money: int,
+        oil: int = 0,
+        iron_ore: int = 0,
+        alloy_ore: int = 0,
+        titanium_ore: int = 0,
+        game_time: float = 0.0,
+        time_speed: TimeSpeed = TimeSpeed.NORMAL,
+        tool: Tool = Tool.NONE,
+        status: str = &#34;&#34;,
+        garage: Optional[List] = None,
+        vehicles: Optional[List] = None,
+        stops: Optional[List] = None,
+        routes: Optional[List] = None,
+        garage_panel_tile: Optional[tuple] = None,
+        garage_vehicles: Optional[List] = None,
+     ) -&gt; None:
+        &#34;&#34;&#34;Render the full HUD including the toolbar, resource counters, and panels.
+
+        Draws the bottom bar background, tool buttons, speed controls, resource
+        display, status message, context hints, and any active side panels
+        (vehicle purchase, route list, garage management).
+
+        Args:
+            screen: The pygame surface to draw onto.
+            money: Player&#39;s current cash balance to display.
+            oil: Current fuel stock (displayed as oil units).
+            iron_ore: Current iron ore stock.
+            alloy_ore: Current alloy ore stock.
+            titanium_ore: Current titanium ore stock.
+            game_time: Elapsed simulated time in seconds (used to display day count).
+            time_speed: Current simulation speed for highlighting the speed button.
+            tool: Currently active tool for highlighting the correct tool button.
+            status: Status message string to show at the bottom of the screen.
+            garage: List of Vehicle objects in the garage (for fleet panel).
+            vehicles: List of deployed Vehicle objects (for fleet overview).
+            stops: List of active Stop objects (for route/stop panels).
+            routes: List of active Route objects (for route list panel).
+            garage_panel_tile: Optional (x, y) of the selected garage tile to
+                show the per-garage management panel.
+            garage_vehicles: List of Vehicle objects stored in the selected garage.
+        &#34;&#34;&#34;
+        bar_y = _BAR_Y
+
+        pygame.draw.rect(screen, (18, 10, 8), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
+        pygame.draw.line(screen, (160, 80, 30), (0, bar_y), (WINDOW_WIDTH, bar_y), 2)
+
+        self._text(screen, &#34;CREDITS&#34;, WINDOW_WIDTH - 8, bar_y + 8, 9, (255, 180, 80),
+                   bold=True, anchor=&#34;ne&#34;)
+        self._text(screen, &#34;${:,}&#34;.format(money), WINDOW_WIDTH - 8, bar_y + 24, 20,
+                   (255, 224, 96) if money &gt;= 0 else (255, 80, 80), bold=True, anchor=&#34;ne&#34;)
+        fuel_col = (100, 240, 255) if oil &gt; 0 else (80, 100, 110)
+        self._text(screen, &#34;FUEL: {}&#34;.format(int(oil)), WINDOW_WIDTH - 8, bar_y + 50, 9,
+                   fuel_col, bold=True, anchor=&#34;ne&#34;)
+      
+        ore_col = (255, 200, 120)
+        self._text(screen, &#34;Fe: {}  Al: {}  Ti: {}&#34;.format(int(iron_ore), int(alloy_ore), int(titanium_ore)),
+                   WINDOW_WIDTH - 8, bar_y + 63, 11, ore_col, bold=True, anchor=&#34;ne&#34;)
+
+        
+        total_secs = int(game_time)
+        h = total_secs // 3600
+        m = (total_secs % 3600) // 60
+        s = total_secs % 60
+        day = total_secs // 60 + 1
+        self._text(screen, &#34;SOL {:d}  {:02d}:{:02d}:{:02d}&#34;.format(day, h, m, s),
+                   WINDOW_WIDTH - 8, bar_y + 90, 9, (200, 180, 140), bold=True, anchor=&#34;ne&#34;)
+
+        
+        hint = self._hint_text(tool, status)
+        self._text(screen, hint, WINDOW_WIDTH // 2, bar_y + 8, 10, (180, 210, 160), anchor=&#34;center&#34;)
+
+        self._draw_action_btn(screen, _BTN_ROAD,     &#34;ROAD[R]&#34;,  tool == Tool.ROAD)
+        self._draw_action_btn(screen, _BTN_TRACK,    &#34;RAIL[T]&#34;,  tool == Tool.TRACK)  # v1.1 #18
+        self._draw_action_btn(screen, _BTN_VEHICLES, &#34;FLEET&#34;,    tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2})
+        self._draw_action_btn(screen, _BTN_ROUTE,    &#34;ROUTE&#34;,    tool in {Tool.ROUTE_P1, Tool.ROUTE_P2})
+        self._draw_action_btn(screen, _BTN_STOP,     &#34;STOP[S]&#34;,  tool == Tool.STOP)
+        self._draw_action_btn(screen, _BTN_BRIDGE,   &#34;BRIDGE[K]&#34;,tool == Tool.BRIDGE)
+        self._draw_action_btn(screen, _BTN_BULLDOZE, &#34;DEMO[B]&#34;,  tool == Tool.BULLDOZE)
+        self._draw_action_btn(screen, _BTN_GARAGE,   &#34;GARAGE[G]&#34;,tool == Tool.GARAGE)
+
+        if tool == Tool.BRIDGE:
+            self._draw_bridge_sub(screen)
+
+        self._draw_speed_buttons(screen, time_speed)
+
+        if tool == Tool.VEHICLES:
+            self._draw_vehicle_popup(screen, garage or [], vehicles or [])
+
+        if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
+            self._draw_routes_panel(screen, routes or [])
+
+        if garage_panel_tile is not None:
+            self._draw_garage_panel(screen, garage_vehicles or [])
+
+
+
+    def _hint_text(self, tool: Tool, status: str) -&gt; str:
+        hints = {
+            Tool.ROAD:              &#34;Click tiles to build dust roads  [ESC to cancel]&#34;,
+            Tool.TRACK:             &#34;Click tiles to lay mag-rails  [ESC to cancel]&#34;,
+            Tool.ROUTE_P1:          &#34;Click FIRST entry point (◆) or stop (S)&#34;,
+            Tool.ROUTE_P2:          &#34;Click SECOND entry point (◆) or stop (S)&#34;,
+            Tool.STOP:              &#34;Click a road or rail tile to place a stop  [ESC to cancel]&#34;,
+            Tool.BRIDGE:            &#34;Select bridge level below, then click an ICE tile&#34;,
+            Tool.BULLDOZE:          &#34;1st click: remove route (road stays). 2nd click: remove tile.&#34;,
+            Tool.GARAGE:            &#34;Click an open regolith tile to build a garage  [ESC to cancel]&#34;,
+            Tool.DEPLOY_VEHICLE_P1: &#34;Click FIRST route endpoint&#34;,
+            Tool.DEPLOY_VEHICLE_P2: &#34;Click SECOND route endpoint&#34;,
+        }
+        return hints.get(tool, status)
+
+
+
+
+    def _draw_action_btn(self, screen: pygame.Surface, rect, label: str, active: bool) -&gt; None:
+        x1, y1, x2, y2 = rect
+        fill    = (208, 80, 16)  if active else (90, 32, 8)
+        outline = (255, 176, 96) if active else (224, 96, 32)
+        pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1))
+        pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 2)
+        cx = (x1 + x2) // 2
+        cy = (y1 + y2) // 2
+        self._text(screen, label, cx, cy, 12, (255, 255, 255), bold=True, anchor=&#34;center&#34;)
+
+    def _draw_bridge_sub(self, screen: pygame.Surface) -&gt; None:   # v1.1 #7
+        specs = [
+            (_BTN_BRIDGE_L1, &#34;L1 BASIC\n10 Fe · Hauler&#34;, BridgeType.WOODEN),
+            (_BTN_BRIDGE_L2, &#34;L2 REIN\n10 Al · +Rover&#34;, BridgeType.STONE),
+            (_BTN_BRIDGE_L3, &#34;L3 MAG\n10 Ti · +Maglev&#34;, BridgeType.STEEL),
+        ]
+        for rect, label, bt in specs:
+            x1, y1, x2, y2 = rect
+            active = self.selected_bridge_type == bt
+            fill    = (60, 90, 130) if active else (25, 40, 60)
+            outline = (120, 180, 255) if active else (60, 90, 130)
+            pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1), border_radius=3)
+            pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 2, border_radius=3)
+            cx = (x1 + x2) // 2
+            line1, line2 = label.split(&#34;\n&#34;)
+            self._text(screen, line1, cx, y1 + 5, 9, (200, 220, 255), bold=True, anchor=&#34;center&#34;)
+            self._text(screen, line2, cx, y1 + 19, 8, (160, 200, 255), anchor=&#34;center&#34;)
+
+
+    def _draw_speed_buttons(self, screen: pygame.Surface, time_speed: TimeSpeed) -&gt; None:
+        specs = [
+            (_BTN_SPD_PAUSE, &#34;||&#34;,  TimeSpeed.PAUSE),
+            (_BTN_SPD_1,     &#34;1x&#34;,  TimeSpeed.NORMAL),
+            (_BTN_SPD_2,     &#34;2x&#34;,  TimeSpeed.FAST),
+            (_BTN_SPD_4,     &#34;4x&#34;,  TimeSpeed.VERY_FAST),
+        ]
+        for rect, label, spd in specs:
+            x1, y1, x2, y2 = rect
+            active = time_speed == spd
+            fill    = (50, 80, 50) if active else (20, 30, 20)
+            outline = (100, 200, 80) if active else (40, 70, 40)
+            pygame.draw.rect(screen, fill,    (x1, y1, x2 - x1, y2 - y1), border_radius=3)
+            pygame.draw.rect(screen, outline, (x1, y1, x2 - x1, y2 - y1), 1, border_radius=3)
+            cx = (x1 + x2) // 2
+            cy = (y1 + y2) // 2
+            self._text(screen, label, cx, cy, 9, (200, 255, 180), bold=True, anchor=&#34;center&#34;)
+
+
+    def _draw_vehicle_popup(self, screen: pygame.Surface, garage: List, vehicles: List) -&gt; None:  
+        card_h = _POPUP_Y2 - _POPUP_Y1
+        total_w = len(VEHICLE_DEFS) * (_CARD_W + _CARD_GAP) + _FLEET_W + 30
+
+        pygame.draw.rect(screen, (12, 18, 28), (_POPUP_X1 - 8, _POPUP_Y1 - 30, total_w + 16, card_h + 40))
+        pygame.draw.rect(screen, (50, 120, 50), (_POPUP_X1 - 8, _POPUP_Y1 - 30, total_w + 16, card_h + 40), 2)
+
+        self._text(screen, &#34;PURCHASE VEHICLES:&#34;, _POPUP_X1, _POPUP_Y1 - 22, 10, (100, 200, 100), bold=True)
+
+        type_labels = {
+            VehicleType.BUS:   &#34;Road · Passengers&#34;,
+            VehicleType.TRUCK: &#34;Road · Cargo&#34;,
+            VehicleType.TRAIN: &#34;Track · Bulk Cargo&#34;,
+        }
+
+        for i, vdef in enumerate(VEHICLE_DEFS):
+            cx1 = _POPUP_X1 + i * (_CARD_W + _CARD_GAP)
+            pygame.draw.rect(screen, (20, 30, 44), (cx1, _POPUP_Y1, _CARD_W, card_h))
+            pygame.draw.rect(screen, (50, 90, 50), (cx1, _POPUP_Y1, _CARD_W, card_h), 1)
+
+            swatch = _hex_to_rgb(vdef[&#34;color&#34;])
+            pygame.draw.rect(screen, swatch,          (cx1 + 8, _POPUP_Y1 + 10, 20, 20))
+            pygame.draw.rect(screen, (255, 255, 255), (cx1 + 8, _POPUP_Y1 + 10, 20, 20), 1)
+
+            self._text(screen, vdef[&#34;name&#34;],  cx1 + 34, _POPUP_Y1 + 12, 11, (220, 255, 200), bold=True)
+            self._text(screen, type_labels.get(vdef[&#34;vehicle_type&#34;], &#34;&#34;), cx1 + 8, _POPUP_Y1 + 38, 8, (160, 200, 180))
+            self._text(screen, &#34;${:,}&#34;.format(vdef[&#34;cost&#34;]), cx1 + 8, _POPUP_Y1 + 56, 13, (255, 220, 80), bold=True)
+            self._text(screen, &#34;Spd {:.1f}  Cap {}&#34;.format(vdef[&#34;speed&#34;], vdef[&#34;capacity&#34;]),
+                       cx1 + 8, _POPUP_Y1 + 78, 8, (160, 190, 160))
+            self._text(screen, vdef[&#34;desc&#34;], cx1 + 8, _POPUP_Y1 + 96, 8, (140, 170, 140))
+            self._text(screen, &#34;▶ Click to buy&#34;, (cx1 + cx1 + _CARD_W) // 2, _POPUP_Y2 - 12, 8, (80, 200, 80), anchor=&#34;center&#34;)
+
+        pygame.draw.line(screen, (50, 120, 50), (_FLEET_X1 - 10, _POPUP_Y1 - 26), (_FLEET_X1 - 10, _POPUP_Y2), 1)
+
+        owned_y0  = _POPUP_Y1 + 20
+        active_y0 = owned_y0 + len(VEHICLE_DEFS) * _FLEET_ROW_H + 18
+
+        self._text(screen, &#34;OWNED&#34;,     _FLEET_X1, _POPUP_Y1 + 4, 9, (100, 200, 100), bold=True)
+        self._text(screen, &#34;ON ROUTES&#34;, _FLEET_X1, active_y0 - 14, 9, (100, 200, 100), bold=True)
+        pygame.draw.line(screen, (50, 100, 50), (_FLEET_X1, active_y0 - 16), (_FLEET_X2, active_y0 - 16), 1)
+
+        for i, vdef in enumerate(VEHICLE_DEFS):
+            color    = _hex_to_rgb(vdef[&#34;color&#34;])
+            n_owned  = sum(1 for v in garage   if v.vdef_name == vdef[&#34;name&#34;])
+            n_active = sum(1 for v in vehicles if v.vdef_name == vdef[&#34;name&#34;])
+
+            oy = owned_y0 + i * _FLEET_ROW_H
+            if n_owned &gt; 0:
+                pygame.draw.rect(screen, (25, 50, 25), (_FLEET_X1, oy, _FLEET_W, _FLEET_ROW_H - 2))
+            pygame.draw.rect(screen, color, (_FLEET_X1 + 3, oy + 5, 10, 10))
+            nc = (220, 255, 200) if n_owned &gt; 0 else (80, 110, 80)
+            self._text(screen, vdef[&#34;name&#34;], _FLEET_X1 + 16, oy + 4, 9, nc)
+            cc = (255, 200, 60) if n_owned &gt; 0 else (70, 100, 70)
+            self._text(screen, &#34;×{}&#34;.format(n_owned), _FLEET_X2 - 3, oy + 4, 9, cc, bold=True, anchor=&#34;ne&#34;)
+            if n_owned &gt; 0:
+                self._text(screen, &#34;deploy ▶&#34;, _FLEET_X1 + 16, oy + 14, 7, (80, 200, 80))
+
+            ay = active_y0 + i * _FLEET_ROW_H
+            if n_active &gt; 0:
+                pygame.draw.rect(screen, (20, 50, 20), (_FLEET_X1, ay, _FLEET_W, _FLEET_ROW_H - 2))
+            pygame.draw.rect(screen, color, (_FLEET_X1 + 3, ay + 5, 10, 10))
+            nc2 = (180, 255, 180) if n_active &gt; 0 else (60, 90, 60)
+            self._text(screen, vdef[&#34;name&#34;], _FLEET_X1 + 16, ay + 4, 9, nc2)
+            cc2 = (80, 220, 80) if n_active &gt; 0 else (50, 80, 50)
+            self._text(screen, &#34;×{}&#34;.format(n_active), _FLEET_X2 - 3, ay + 4, 9, cc2, bold=True, anchor=&#34;ne&#34;)
+
+
+
+    def _draw_routes_panel(self, screen: pygame.Surface, routes: List) -&gt; None:  
+        if not routes:
+            panel_h = 48
+        else:
+            panel_h = 30 + len(routes) * _ROUTES_ROW_H + 10
+
+        pygame.draw.rect(screen, (12, 18, 30), (_ROUTES_PANEL_X - 4, _ROUTES_PANEL_Y - 4,
+                                                 _ROUTES_PANEL_W + 8, panel_h + 8))
+        pygame.draw.rect(screen, (50, 120, 50), (_ROUTES_PANEL_X - 4, _ROUTES_PANEL_Y - 4,
+                                                  _ROUTES_PANEL_W + 8, panel_h + 8), 2)
+
+        self._text(screen, &#34;ACTIVE ROUTES  (✕ removes route, roads stay intact)&#34;,
+                   _ROUTES_PANEL_X, _ROUTES_PANEL_Y + 4, 9, (100, 200, 100), bold=True)
+
+        if not routes:
+            self._text(screen, &#34;No routes yet. Click two entry/stop points to create one.&#34;,
+                       _ROUTES_PANEL_X, _ROUTES_PANEL_Y + 26, 9, (140, 160, 140))
+            return
+
+        for i, route in enumerate(routes):
+            ry = _ROUTES_PANEL_Y + 26 + i * _ROUTES_ROW_H
+            col = (25, 45, 25) if i % 2 == 0 else (20, 38, 20)
+            pygame.draw.rect(screen, col, (_ROUTES_PANEL_X, ry, _ROUTES_PANEL_W, _ROUTES_ROW_H - 2))
+
+            ptype_col = (100, 200, 255) if route.path_type == &#34;track&#34; else (150, 255, 150)
+            ptype_lbl = &#34;[TRAIN]&#34; if route.path_type == &#34;track&#34; else &#34;[BUS/TRUCK]&#34;
+            self._text(screen, route.name, _ROUTES_PANEL_X + 4, ry + 5, 9, (200, 240, 200), bold=True)
+            self._text(screen, ptype_lbl, _ROUTES_PANEL_X + 80, ry + 5, 8, ptype_col)
+            tiles = len(route.path) // 2
+            prof = &#34;profitable&#34; if route.profitable else &#34;no income&#34;
+            self._text(screen, &#34;{} tiles · {}&#34;.format(tiles, prof),
+                       _ROUTES_PANEL_X + 160, ry + 5, 8, (140, 165, 140))
+
+            bx1 = _ROUTES_PANEL_X + _ROUTES_PANEL_W - 58
+            bx2 = _ROUTES_PANEL_X + _ROUTES_PANEL_W - 4
+            pygame.draw.rect(screen, (100, 30, 30), (bx1, ry + 2, bx2 - bx1, _ROUTES_ROW_H - 6), border_radius=3)
+            pygame.draw.rect(screen, (200, 80, 80), (bx1, ry + 2, bx2 - bx1, _ROUTES_ROW_H - 6), 1, border_radius=3)
+            self._text(screen, &#34;✕ Remove&#34;, (bx1 + bx2) // 2, ry + _ROUTES_ROW_H // 2 - 4,
+                       8, (255, 160, 160), anchor=&#34;center&#34;)
+
+   
+   
+    def _draw_garage_panel(self, screen: pygame.Surface, garage_vehicles: List) -&gt; None: 
+        panel_h = max(60, 36 + len(garage_vehicles) * _GARAGE_ROW_H + 10)
+
+        pygame.draw.rect(screen, (14, 22, 38), (_GARAGE_PANEL_X - 4, _GARAGE_PANEL_Y - 4,
+                                                  _GARAGE_PANEL_W + 8, panel_h + 8))
+        pygame.draw.rect(screen, (80, 120, 200), (_GARAGE_PANEL_X - 4, _GARAGE_PANEL_Y - 4,
+                                                   _GARAGE_PANEL_W + 8, panel_h + 8), 2)
+
+        self._text(screen, &#34;GARAGE — Upgrade with FUEL  |  Sell vehicles&#34;,
+                   _GARAGE_PANEL_X, _GARAGE_PANEL_Y + 4, 9, (140, 180, 255), bold=True)
+
+        close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+        close_y = _GARAGE_PANEL_Y + 4
+        pygame.draw.rect(screen, (80, 30, 30), (close_x, close_y, 18, 16), border_radius=3)
+        self._text(screen, &#34;✕&#34;, close_x + 9, close_y + 1, 9, (255, 160, 160), anchor=&#34;center&#34;)
+
+        if not garage_vehicles:
+            self._text(screen, &#34;No vehicles in garage. Buy from FLEET.&#34;,
+                       _GARAGE_PANEL_X, _GARAGE_PANEL_Y + 28, 9, (140, 160, 140))
+            return
+
+        for i, v in enumerate(garage_vehicles):
+            ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+            col = (22, 38, 55) if i % 2 == 0 else (18, 30, 45)
+            pygame.draw.rect(screen, col, (_GARAGE_PANEL_X, ry, _GARAGE_PANEL_W, _GARAGE_ROW_H - 2))
+
+            lv_col = {1: (180, 180, 180), 2: (100, 220, 100), 3: (255, 200, 60)}.get(v.level, (180, 180, 180))
+            self._text(screen, v.name, _GARAGE_PANEL_X + 4, ry + 5, 9, (200, 220, 255), bold=True)
+            self._text(screen, &#34;L{}&#34;.format(v.level), _GARAGE_PANEL_X + 110, ry + 5, 9, lv_col, bold=True)
+            self._text(screen, &#34;Spd:{:.1f} Cap:{}&#34;.format(v.speed_tiles_per_second, v.capacity),
+                       _GARAGE_PANEL_X + 130, ry + 5, 8, (160, 180, 200))
+
+            px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+            upg_x1 = px2 - 128
+            upg_x2 = px2 - 68
+            if v.level &lt; 3:
+                next_level = v.level + 1
+                level_def = VEHICLE_LEVEL_DEFS.get(v.vehicle_type, {}).get(next_level, {})
+                oil_cost = level_def.get(&#34;oil&#34;, &#34;?&#34;)
+                upg_label = &#34;↑L{} ({}fuel)&#34;.format(next_level, oil_cost)
+                pygame.draw.rect(screen, (30, 70, 120), (upg_x1, ry + 2, upg_x2 - upg_x1, _GARAGE_ROW_H - 6), border_radius=3)
+                pygame.draw.rect(screen, (80, 160, 255), (upg_x1, ry + 2, upg_x2 - upg_x1, _GARAGE_ROW_H - 6), 1, border_radius=3)
+                self._text(screen, upg_label, (upg_x1 + upg_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                           7, (180, 220, 255), anchor=&#34;center&#34;)
+            else:
+                self._text(screen, &#34;MAX LVL&#34;, (upg_x1 + upg_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                           7, (255, 200, 60), bold=True, anchor=&#34;center&#34;)
+
+            sell_x1 = px2 - 63
+            sell_x2 = px2 - 4
+            pygame.draw.rect(screen, (70, 30, 30), (sell_x1, ry + 2, sell_x2 - sell_x1, _GARAGE_ROW_H - 6), border_radius=3)
+            pygame.draw.rect(screen, (200, 80, 80), (sell_x1, ry + 2, sell_x2 - sell_x1, _GARAGE_ROW_H - 6), 1, border_radius=3)
+            self._text(screen, &#34;SELL&#34;, (sell_x1 + sell_x2) // 2, ry + _GARAGE_ROW_H // 2 - 4,
+                       8, (255, 160, 160), anchor=&#34;center&#34;)</code></pre>
+</details>
+<div class="desc"><p>Heads-up display that renders the bottom toolbar and all interactive panels.</p>
+<p>The HUD draws tool buttons, speed controls, vehicle cards, route lists, and
+the garage management panel.
+It also handles hit-testing so that the Game
+can map mouse clicks to named actions.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="src.ui.hud.HUD.button_at"><code class="name flex">
+<span>def <span class="ident">button_at</span></span>(<span>self,<br>x: int,<br>y: int,<br>tool: Tool,<br>garage: Optional[List] = None,<br>routes: Optional[List] = None) ‑> str | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def button_at(
+    self,
+    x: int,
+    y: int,
+    tool: Tool,
+    garage: Optional[List] = None,
+    routes: Optional[List] = None,
+ ) -&gt; Optional[str]:
+    &#34;&#34;&#34;Return the action name for a HUD button click at the given screen position.
+
+    Hit-tests the click against all visible buttons for the current tool
+    state.  Context-sensitive panels (bridge levels, vehicle cards, route
+    list, fleet deployment) are only tested when the relevant tool is active.
+
+    Args:
+        x: Screen x-coordinate of the click.
+        y: Screen y-coordinate of the click.
+        tool: The currently active Tool enum value.
+        garage: Optional list of Vehicle objects in the player&#39;s garage
+            (needed for fleet panel hit-testing).
+        routes: Optional list of Route objects (needed for route panel).
+
+    Returns:
+        A string action identifier (e.g. ``&#34;road&#34;``, ``&#34;buy_vehicle_0&#34;``,
+        ``&#34;speed_2&#34;``), or None if the click does not hit any button.
+    &#34;&#34;&#34;
+    if _in_rect(_BTN_ROAD,     x, y): return &#34;road&#34;
+    if _in_rect(_BTN_TRACK,    x, y): return &#34;track&#34;          
+    if _in_rect(_BTN_VEHICLES, x, y): return &#34;vehicles&#34;
+    if _in_rect(_BTN_ROUTE,    x, y): return &#34;route&#34;
+    if _in_rect(_BTN_STOP,     x, y): return &#34;stop&#34;
+    if _in_rect(_BTN_BRIDGE,   x, y): return &#34;bridge&#34;
+    if _in_rect(_BTN_BULLDOZE, x, y): return &#34;bulldoze&#34;
+    if _in_rect(_BTN_GARAGE,   x, y): return &#34;garage&#34;
+    if _in_rect(_BTN_SPD_PAUSE, x, y): return &#34;speed_pause&#34;
+    if _in_rect(_BTN_SPD_1,     x, y): return &#34;speed_1&#34;
+    if _in_rect(_BTN_SPD_2,     x, y): return &#34;speed_2&#34;
+    if _in_rect(_BTN_SPD_4,     x, y): return &#34;speed_4&#34;
+
+    if tool == Tool.BRIDGE:
+        if _in_rect(_BTN_BRIDGE_L1, x, y): return &#34;bridge_wooden&#34;
+        if _in_rect(_BTN_BRIDGE_L2, x, y): return &#34;bridge_stone&#34;
+        if _in_rect(_BTN_BRIDGE_L3, x, y): return &#34;bridge_steel&#34;
+
+    if tool == Tool.VEHICLES:
+        idx = self._vehicle_card_index(x, y)
+        if idx is not None:
+            return &#34;buy_vehicle_{}&#34;.format(idx)
+        if garage is not None:
+            tidx = self._fleet_type_index(x, y, garage)
+            if tidx is not None:
+                return &#34;deploy_type_{}&#34;.format(tidx)
+
+    if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2} and routes is not None:  
+        action = self._routes_panel_action(x, y, routes)
+        if action is not None:
+            return action
+
+    return None</code></pre>
+</details>
+<div class="desc"><p>Return the action name for a HUD button click at the given screen position.</p>
+<p>Hit-tests the click against all visible buttons for the current tool
+state.
+Context-sensitive panels (bridge levels, vehicle cards, route
+list, fleet deployment) are only tested when the relevant tool is active.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>Screen x-coordinate of the click.</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>Screen y-coordinate of the click.</dd>
+<dt><strong><code>tool</code></strong></dt>
+<dd>The currently active Tool enum value.</dd>
+<dt><strong><code>garage</code></strong></dt>
+<dd>Optional list of Vehicle objects in the player's garage
+(needed for fleet panel hit-testing).</dd>
+<dt><strong><code>routes</code></strong></dt>
+<dd>Optional list of Route objects (needed for route panel).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A string action identifier (e.g. <code>"road"</code>, <code>"buy_vehicle_0"</code>,
+<code>"speed_2"</code>), or None if the click does not hit any button.</p></div>
+</dd>
+<dt id="src.ui.hud.HUD.draw"><code class="name flex">
+<span>def <span class="ident">draw</span></span>(<span>self,<br>screen: pygame.Surface,<br>money: int,<br>oil: int = 0,<br>iron_ore: int = 0,<br>alloy_ore: int = 0,<br>titanium_ore: int = 0,<br>game_time: float = 0.0,<br>time_speed: TimeSpeed = TimeSpeed.NORMAL,<br>tool: Tool = Tool.NONE,<br>status: str = '',<br>garage: Optional[List] = None,<br>vehicles: Optional[List] = None,<br>stops: Optional[List] = None,<br>routes: Optional[List] = None,<br>garage_panel_tile: Optional[tuple] = None,<br>garage_vehicles: Optional[List] = None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def draw(
+    self,
+    screen: pygame.Surface,
+    money: int,
+    oil: int = 0,
+    iron_ore: int = 0,
+    alloy_ore: int = 0,
+    titanium_ore: int = 0,
+    game_time: float = 0.0,
+    time_speed: TimeSpeed = TimeSpeed.NORMAL,
+    tool: Tool = Tool.NONE,
+    status: str = &#34;&#34;,
+    garage: Optional[List] = None,
+    vehicles: Optional[List] = None,
+    stops: Optional[List] = None,
+    routes: Optional[List] = None,
+    garage_panel_tile: Optional[tuple] = None,
+    garage_vehicles: Optional[List] = None,
+ ) -&gt; None:
+    &#34;&#34;&#34;Render the full HUD including the toolbar, resource counters, and panels.
+
+    Draws the bottom bar background, tool buttons, speed controls, resource
+    display, status message, context hints, and any active side panels
+    (vehicle purchase, route list, garage management).
+
+    Args:
+        screen: The pygame surface to draw onto.
+        money: Player&#39;s current cash balance to display.
+        oil: Current fuel stock (displayed as oil units).
+        iron_ore: Current iron ore stock.
+        alloy_ore: Current alloy ore stock.
+        titanium_ore: Current titanium ore stock.
+        game_time: Elapsed simulated time in seconds (used to display day count).
+        time_speed: Current simulation speed for highlighting the speed button.
+        tool: Currently active tool for highlighting the correct tool button.
+        status: Status message string to show at the bottom of the screen.
+        garage: List of Vehicle objects in the garage (for fleet panel).
+        vehicles: List of deployed Vehicle objects (for fleet overview).
+        stops: List of active Stop objects (for route/stop panels).
+        routes: List of active Route objects (for route list panel).
+        garage_panel_tile: Optional (x, y) of the selected garage tile to
+            show the per-garage management panel.
+        garage_vehicles: List of Vehicle objects stored in the selected garage.
+    &#34;&#34;&#34;
+    bar_y = _BAR_Y
+
+    pygame.draw.rect(screen, (18, 10, 8), (0, bar_y, WINDOW_WIDTH, BOTTOM_BAR_HEIGHT))
+    pygame.draw.line(screen, (160, 80, 30), (0, bar_y), (WINDOW_WIDTH, bar_y), 2)
+
+    self._text(screen, &#34;CREDITS&#34;, WINDOW_WIDTH - 8, bar_y + 8, 9, (255, 180, 80),
+               bold=True, anchor=&#34;ne&#34;)
+    self._text(screen, &#34;${:,}&#34;.format(money), WINDOW_WIDTH - 8, bar_y + 24, 20,
+               (255, 224, 96) if money &gt;= 0 else (255, 80, 80), bold=True, anchor=&#34;ne&#34;)
+    fuel_col = (100, 240, 255) if oil &gt; 0 else (80, 100, 110)
+    self._text(screen, &#34;FUEL: {}&#34;.format(int(oil)), WINDOW_WIDTH - 8, bar_y + 50, 9,
+               fuel_col, bold=True, anchor=&#34;ne&#34;)
+  
+    ore_col = (255, 200, 120)
+    self._text(screen, &#34;Fe: {}  Al: {}  Ti: {}&#34;.format(int(iron_ore), int(alloy_ore), int(titanium_ore)),
+               WINDOW_WIDTH - 8, bar_y + 63, 11, ore_col, bold=True, anchor=&#34;ne&#34;)
+
+    
+    total_secs = int(game_time)
+    h = total_secs // 3600
+    m = (total_secs % 3600) // 60
+    s = total_secs % 60
+    day = total_secs // 60 + 1
+    self._text(screen, &#34;SOL {:d}  {:02d}:{:02d}:{:02d}&#34;.format(day, h, m, s),
+               WINDOW_WIDTH - 8, bar_y + 90, 9, (200, 180, 140), bold=True, anchor=&#34;ne&#34;)
+
+    
+    hint = self._hint_text(tool, status)
+    self._text(screen, hint, WINDOW_WIDTH // 2, bar_y + 8, 10, (180, 210, 160), anchor=&#34;center&#34;)
+
+    self._draw_action_btn(screen, _BTN_ROAD,     &#34;ROAD[R]&#34;,  tool == Tool.ROAD)
+    self._draw_action_btn(screen, _BTN_TRACK,    &#34;RAIL[T]&#34;,  tool == Tool.TRACK)  # v1.1 #18
+    self._draw_action_btn(screen, _BTN_VEHICLES, &#34;FLEET&#34;,    tool in {Tool.VEHICLES, Tool.DEPLOY_VEHICLE_P1, Tool.DEPLOY_VEHICLE_P2})
+    self._draw_action_btn(screen, _BTN_ROUTE,    &#34;ROUTE&#34;,    tool in {Tool.ROUTE_P1, Tool.ROUTE_P2})
+    self._draw_action_btn(screen, _BTN_STOP,     &#34;STOP[S]&#34;,  tool == Tool.STOP)
+    self._draw_action_btn(screen, _BTN_BRIDGE,   &#34;BRIDGE[K]&#34;,tool == Tool.BRIDGE)
+    self._draw_action_btn(screen, _BTN_BULLDOZE, &#34;DEMO[B]&#34;,  tool == Tool.BULLDOZE)
+    self._draw_action_btn(screen, _BTN_GARAGE,   &#34;GARAGE[G]&#34;,tool == Tool.GARAGE)
+
+    if tool == Tool.BRIDGE:
+        self._draw_bridge_sub(screen)
+
+    self._draw_speed_buttons(screen, time_speed)
+
+    if tool == Tool.VEHICLES:
+        self._draw_vehicle_popup(screen, garage or [], vehicles or [])
+
+    if tool in {Tool.ROUTE_P1, Tool.ROUTE_P2}:
+        self._draw_routes_panel(screen, routes or [])
+
+    if garage_panel_tile is not None:
+        self._draw_garage_panel(screen, garage_vehicles or [])</code></pre>
+</details>
+<div class="desc"><p>Render the full HUD including the toolbar, resource counters, and panels.</p>
+<p>Draws the bottom bar background, tool buttons, speed controls, resource
+display, status message, context hints, and any active side panels
+(vehicle purchase, route list, garage management).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>screen</code></strong></dt>
+<dd>The pygame surface to draw onto.</dd>
+<dt><strong><code>money</code></strong></dt>
+<dd>Player's current cash balance to display.</dd>
+<dt><strong><code>oil</code></strong></dt>
+<dd>Current fuel stock (displayed as oil units).</dd>
+<dt><strong><code>iron_ore</code></strong></dt>
+<dd>Current iron ore stock.</dd>
+<dt><strong><code>alloy_ore</code></strong></dt>
+<dd>Current alloy ore stock.</dd>
+<dt><strong><code>titanium_ore</code></strong></dt>
+<dd>Current titanium ore stock.</dd>
+<dt><strong><code>game_time</code></strong></dt>
+<dd>Elapsed simulated time in seconds (used to display day count).</dd>
+<dt><strong><code>time_speed</code></strong></dt>
+<dd>Current simulation speed for highlighting the speed button.</dd>
+<dt><strong><code>tool</code></strong></dt>
+<dd>Currently active tool for highlighting the correct tool button.</dd>
+<dt><strong><code>status</code></strong></dt>
+<dd>Status message string to show at the bottom of the screen.</dd>
+<dt><strong><code>garage</code></strong></dt>
+<dd>List of Vehicle objects in the garage (for fleet panel).</dd>
+<dt><strong><code>vehicles</code></strong></dt>
+<dd>List of deployed Vehicle objects (for fleet overview).</dd>
+<dt><strong><code>stops</code></strong></dt>
+<dd>List of active Stop objects (for route/stop panels).</dd>
+<dt><strong><code>routes</code></strong></dt>
+<dd>List of active Route objects (for route list panel).</dd>
+<dt><strong><code>garage_panel_tile</code></strong></dt>
+<dd>Optional (x, y) of the selected garage tile to
+show the per-garage management panel.</dd>
+<dt><strong><code>garage_vehicles</code></strong></dt>
+<dd>List of Vehicle objects stored in the selected garage.</dd>
+</dl></div>
+</dd>
+<dt id="src.ui.hud.HUD.garage_panel_button_at"><code class="name flex">
+<span>def <span class="ident">garage_panel_button_at</span></span>(<span>self, x: int, y: int, garage_vehicles: List) ‑> str | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def garage_panel_button_at(self, x: int, y: int, garage_vehicles: List) -&gt; Optional[str]: 
+    &#34;&#34;&#34;Hit-test for the garage upgrade panel buttons.&#34;&#34;&#34;
+    if not garage_vehicles:
+        return None
+    px2 = _GARAGE_PANEL_X + _GARAGE_PANEL_W
+    # Close button
+    close_x = _GARAGE_PANEL_X + _GARAGE_PANEL_W - 20
+    close_y = _GARAGE_PANEL_Y + 4
+    if close_x &lt;= x &lt;= close_x + 18 and close_y &lt;= y &lt;= close_y + 16:
+        return &#34;close_garage_panel&#34;
+    for i in range(len(garage_vehicles)):
+        ry = _GARAGE_PANEL_Y + 28 + i * _GARAGE_ROW_H
+        if ry &lt;= y &lt;= ry + _GARAGE_ROW_H - 2:
+            upg_x1 = px2 - 128
+            upg_x2 = px2 - 68
+            sell_x1 = px2 - 63
+            sell_x2 = px2 - 4
+            if upg_x1 &lt;= x &lt;= upg_x2:
+                return &#34;upgrade_vehicle_{}&#34;.format(i)
+            if sell_x1 &lt;= x &lt;= sell_x2:
+                return &#34;sell_vehicle_{}&#34;.format(i)
+    return None</code></pre>
+</details>
+<div class="desc"><p>Hit-test for the garage upgrade panel buttons.</p></div>
+</dd>
+<dt id="src.ui.hud.HUD.is_in_garage_panel"><code class="name flex">
+<span>def <span class="ident">is_in_garage_panel</span></span>(<span>self, x: int, y: int) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_in_garage_panel(self, x: int, y: int) -&gt; bool:    
+    &#34;&#34;&#34;Return True if (x, y) falls within the garage upgrade panel bounds.&#34;&#34;&#34;
+    panel_h_max = 36 + 10 * _GARAGE_ROW_H + 10
+    return (
+        _GARAGE_PANEL_X - 4 &lt;= x &lt;= _GARAGE_PANEL_X + _GARAGE_PANEL_W + 8
+        and _GARAGE_PANEL_Y - 4 &lt;= y &lt;= _GARAGE_PANEL_Y + panel_h_max + 8
+    )</code></pre>
+</details>
+<div class="desc"><p>Return True if (x, y) falls within the garage upgrade panel bounds.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.ui" href="index.html">src.ui</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.ui.hud.HUD" href="#src.ui.hud.HUD">HUD</a></code></h4>
+<ul class="">
+<li><code><a title="src.ui.hud.HUD.button_at" href="#src.ui.hud.HUD.button_at">button_at</a></code></li>
+<li><code><a title="src.ui.hud.HUD.draw" href="#src.ui.hud.HUD.draw">draw</a></code></li>
+<li><code><a title="src.ui.hud.HUD.garage_panel_button_at" href="#src.ui.hud.HUD.garage_panel_button_at">garage_panel_button_at</a></code></li>
+<li><code><a title="src.ui.hud.HUD.is_in_garage_panel" href="#src.ui.hud.HUD.is_in_garage_panel">is_in_garage_panel</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.assets.sprites API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.assets.sprites</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="src.assets.sprites.make_bridge_route_tile"><code class="name flex">
+<span>def <span class="ident">make_bridge_route_tile</span></span>(<span>bridge_type: BridgeType) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_bridge_route_tile(bridge_type: BridgeType) -&gt; pygame.Surface:
+    s = make_bridge_tile(bridge_type)
+    amber = (220, 170, 60)
+    pygame.draw.line(s, amber, (4, 4), (TILE - 4, TILE - 4), 2)
+    pygame.draw.line(s, amber, (TILE - 4, 4), (4, TILE - 4), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_bridge_tile"><code class="name flex">
+<span>def <span class="ident">make_bridge_tile</span></span>(<span>bridge_type: BridgeType) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_bridge_tile(bridge_type: BridgeType) -&gt; pygame.Surface:
+    s = make_ice_tile()
+    deck_c, rail_c = _BRIDGE_COLORS.get(bridge_type, ((140, 130, 120), (170, 160, 150)))
+    pygame.draw.rect(s, deck_c, (0, 10, TILE, 12))
+    pygame.draw.rect(s, deck_c, (10, 0, 12, TILE))
+    pygame.draw.line(s, rail_c, (0, 10), (TILE, 10), 2)
+    pygame.draw.line(s, rail_c, (0, 22), (TILE, 22), 2)
+    pygame.draw.line(s, rail_c, (10, 0), (10, TILE), 2)
+    pygame.draw.line(s, rail_c, (22, 0), (22, TILE), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_bus_sprite"><code class="name flex">
+<span>def <span class="ident">make_bus_sprite</span></span>(<span>color: tuple) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_bus_sprite(color: tuple) -&gt; pygame.Surface:
+    w, h = 28, 16
+    s = _surf(w, h, alpha=True)
+    s.fill((0, 0, 0, 0))
+    dark = tuple(max(0, c - 40) for c in color)
+    pygame.draw.rect(s, dark,  (0, 0, w, h))
+    pygame.draw.rect(s, color, (1, 1, w - 2, h - 2))
+    for wx in range(4, w - 8, 6):
+        pygame.draw.rect(s, (220, 240, 255), (wx, 2, 4, 5))
+        pygame.draw.rect(s, (220, 240, 255), (wx, h - 7, 4, 5))
+    pygame.draw.rect(s, (220, 240, 255), (w - 8, 3, 6, h - 6))
+    pygame.draw.rect(s, (20, 20, 20), (0, 0, w, h), 1)
+    wc = (40, 40, 40)
+    for wx2, wy2 in [(3, 0), (3, h - 1), (20, 0), (20, h - 1)]:
+        pygame.draw.circle(s, wc, (wx2, wy2), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_city_bank_tile"><code class="name flex">
+<span>def <span class="ident">make_city_bank_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_city_bank_tile() -&gt; pygame.Surface:
+    s = make_city_tile(2)
+    pygame.draw.rect(s, (220, 190, 80), (2, 2, TILE - 4, TILE - 4), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_city_tile"><code class="name flex">
+<span>def <span class="ident">make_city_tile</span></span>(<span>variant: int = 0) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_city_tile(variant: int = 0) -&gt; pygame.Surface:
+    &#34;&#34;&#34;Habitat dome tile.&#34;&#34;&#34;
+    s = _surf()
+    s.fill(_DOME_HULL)
+    acc_colors = [_DOME_ACC1, _DOME_ACC2, _DOME_ACC3]
+    acc = acc_colors[variant % len(acc_colors)]
+    pygame.draw.rect(s, acc, (3, 3, TILE - 6, TILE - 10))
+    # Dome arc on top
+    pygame.draw.arc(s, tuple(min(255, c + 40) for c in acc),
+                    (4, 2, TILE - 8, 14), 0, 3.14159, 2)
+    shadow = tuple(max(0, c - 40) for c in acc)
+    pygame.draw.line(s, shadow, (TILE - 3, 3), (TILE - 3, TILE - 10), 3)
+    pygame.draw.line(s, shadow, (3, TILE - 10), (TILE - 3, TILE - 10), 3)
+    # Glow windows (cyan)
+    for wx in range(6, TILE - 4, 8):
+        for wy in range(6, TILE - 8, 8):
+            pygame.draw.rect(s, _DOME_WINDOW, (wx, wy, 4, 4))
+    return s</code></pre>
+</details>
+<div class="desc"><p>Habitat dome tile.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_entry_tile"><code class="name flex">
+<span>def <span class="ident">make_entry_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_entry_tile() -&gt; pygame.Surface:
+    s = _surf()
+    s.fill(ENTRY_POINT_COLOR)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_facility_tile"><code class="name flex">
+<span>def <span class="ident">make_facility_tile</span></span>(<span>fac_type: FacilityType) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_facility_tile(fac_type: FacilityType) -&gt; pygame.Surface:
+    s = _surf()
+    floor_c, roof_c = _FAC_COLORS.get(fac_type, ((80, 80, 80), (120, 120, 120)))
+    s.fill(floor_c)
+    pygame.draw.rect(s, roof_c, (4, 4, TILE - 8, TILE - 8))
+
+    cx, cy = TILE // 2, TILE // 2
+
+    if fac_type == FacilityType.ORE_MINE:
+        col = (255, 165, 40)
+        pygame.draw.line(s, col, (cx - 8, cy - 8), (cx + 8, cy + 8), 3)
+        pygame.draw.line(s, col, (cx + 8, cy - 8), (cx - 8, cy + 8), 3)
+        pygame.draw.circle(s, (255, 220, 100), (cx - 8, cy - 8), 3)
+        pygame.draw.circle(s, (255, 220, 100), (cx + 8, cy - 8), 3)
+
+    elif fac_type == FacilityType.FUEL_RIG:
+        col = (200, 200, 80)
+        pts = [(cx, cy - 11), (cx - 7, cy + 7), (cx + 7, cy + 7)]
+        pygame.draw.polygon(s, col, pts, 2)
+        pygame.draw.line(s, col, (cx - 7, cy + 7), (cx + 7, cy + 7), 3)
+        pygame.draw.line(s, col, (cx - 2, cy - 2), (cx + 2, cy - 2), 2)
+        pygame.draw.line(s, (255, 200, 60), (cx, cy + 7), (cx, cy + 12), 2)
+
+    elif fac_type == FacilityType.AQUA_DOME:
+        col = (80, 200, 255)
+        pygame.draw.circle(s, col, (cx, cy), 9, 2)
+        for ry in [cy - 4, cy, cy + 4]:
+            pygame.draw.line(s, col, (cx - 8, ry), (cx + 8, ry), 1)
+        pygame.draw.circle(s, (150, 230, 255), (cx, cy - 2), 2)
+
+    elif fac_type == FacilityType.CRYSTAL_LAB:
+        col = (100, 220, 255)
+        for ox in [-7, 0, 7]:
+            h_shard = 10 if ox == 0 else 7
+            pts = [(cx + ox, cy - h_shard), (cx + ox - 3, cy + 5), (cx + ox + 3, cy + 5)]
+            pygame.draw.polygon(s, col, pts, 0)
+            pygame.draw.polygon(s, (200, 245, 255), pts, 1)
+
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_garage_tile"><code class="name flex">
+<span>def <span class="ident">make_garage_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_garage_tile() -&gt; pygame.Surface:
+    s = _surf()
+    s.fill((70, 65, 75))
+    pygame.draw.rect(s, (45, 42, 52), (4, 10, TILE - 8, TILE - 14))
+    pygame.draw.rect(s, (100, 95, 110), (4, 10, TILE - 8, TILE - 14), 2)
+    pygame.draw.line(s, (65, 62, 72), (16, 10), (16, TILE - 4), 1)
+    pygame.draw.line(s, (65, 62, 72), (4, 16), (TILE - 4, 16), 1)
+    pygame.draw.rect(s, (90, 85, 100), (2, 2, TILE - 4, 9))
+    pygame.draw.rect(s, (200, 130, 50), (4, 10, TILE - 8, TILE - 14), 1)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_ice_tile"><code class="name flex">
+<span>def <span class="ident">make_ice_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_ice_tile() -&gt; pygame.Surface:
+    &#34;&#34;&#34;Frozen ice channel — replaces water.&#34;&#34;&#34;
+    s = _surf()
+    s.fill(_ICE_DEEP)
+    for i in range(0, TILE, 6):
+        pygame.draw.line(s, _ICE_MID, (0, i), (TILE, i + 2), 1)
+    for px in range(3, TILE, 10):
+        for py in range(5, TILE, 10):
+            pygame.draw.circle(s, _ICE_SHEEN, (px, py), 1)
+    return s</code></pre>
+</details>
+<div class="desc"><p>Frozen ice channel — replaces water.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_regolith_tile"><code class="name flex">
+<span>def <span class="ident">make_regolith_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_regolith_tile() -&gt; pygame.Surface:
+    &#34;&#34;&#34;Rust-orange Martian regolith — replaces grass.&#34;&#34;&#34;
+    s = _surf()
+    s.fill(_REGOLITH_BASE)
+    import random
+    rng = random.Random(42)
+    for _ in range(16):
+        dx = rng.randint(1, TILE - 2)
+        dy = rng.randint(1, TILE - 2)
+        c = _REGOLITH_DARK if rng.random() &lt; 0.5 else _REGOLITH_LIGHT
+        pygame.draw.circle(s, c, (dx, dy), 1)
+    return s</code></pre>
+</details>
+<div class="desc"><p>Rust-orange Martian regolith — replaces grass.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_road_tile"><code class="name flex">
+<span>def <span class="ident">make_road_tile</span></span>(<span>route: bool = False) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_road_tile(route: bool = False) -&gt; pygame.Surface:
+    &#34;&#34;&#34;Compressed dust track.&#34;&#34;&#34;
+    s = _surf()
+    base = ROUTE_ROAD_COLOR if route else _DUST_BASE
+    s.fill(base)
+    dark = tuple(max(0, c - 25) for c in base)
+    pygame.draw.line(s, dark, (0, 0), (TILE - 1, 0), 2)
+    pygame.draw.line(s, dark, (0, TILE - 1), (TILE - 1, TILE - 1), 2)
+    pygame.draw.line(s, dark, (0, 0), (0, TILE - 1), 2)
+    pygame.draw.line(s, dark, (TILE - 1, 0), (TILE - 1, TILE - 1), 2)
+    mark = _DUST_MARK if not route else (255, 220, 100)
+    for i in range(4, TILE - 4, 8):
+        pygame.draw.line(s, mark, (i, TILE // 2), (i + 4, TILE // 2), 1)
+        pygame.draw.line(s, mark, (TILE // 2, i), (TILE // 2, i + 4), 1)
+    return s</code></pre>
+</details>
+<div class="desc"><p>Compressed dust track.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_rock_tile"><code class="name flex">
+<span>def <span class="ident">make_rock_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_rock_tile() -&gt; pygame.Surface:
+    &#34;&#34;&#34;Rocky outcrop — replaces forest.&#34;&#34;&#34;
+    s = _surf()
+    s.fill(_ROCK_DARK)
+    import random
+    rng = random.Random(13)
+    for _ in range(6):
+        dx = rng.randint(3, TILE - 4)
+        dy = rng.randint(3, TILE - 4)
+        r = rng.randint(3, 6)
+        pygame.draw.ellipse(s, _ROCK_MID, (dx - r, dy - r//2, r*2, r))
+        pygame.draw.ellipse(s, _ROCK_LIGHT, (dx - r//2, dy - r//3, r, r//2))
+    return s</code></pre>
+</details>
+<div class="desc"><p>Rocky outcrop — replaces forest.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_rover_sprite"><code class="name flex">
+<span>def <span class="ident">make_rover_sprite</span></span>(<span>color: tuple) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_rover_sprite(color: tuple) -&gt; pygame.Surface:
+    w, h = 20, 12
+    s = _surf(w, h, alpha=True)
+    s.fill((0, 0, 0, 0))
+    dark = tuple(max(0, c - 50) for c in color)
+    pygame.draw.rect(s, dark,  (1, 1, w - 2, h - 2))
+    pygame.draw.rect(s, color, (2, 2, w - 4, h - 4))
+    pygame.draw.rect(s, (200, 230, 255), (w - 7, 3, 5, h - 6))
+    pygame.draw.rect(s, (20, 20, 20), (1, 1, w - 2, h - 2), 1)
+    wc = (40, 40, 40)
+    for wx, wy in [(2, 0), (2, h - 1), (14, 0), (14, h - 1)]:
+        pygame.draw.circle(s, wc, (wx, wy), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_track_route_tile"><code class="name flex">
+<span>def <span class="ident">make_track_route_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_track_route_tile() -&gt; pygame.Surface:                   
+    s = make_track_tile()
+    amber = (255, 200, 80)
+    pygame.draw.line(s, amber, (0, TILE // 2 - 4), (TILE, TILE // 2 - 4), 2)
+    pygame.draw.line(s, amber, (0, TILE // 2 + 4), (TILE, TILE // 2 + 4), 2)
+    pygame.draw.line(s, amber, (TILE // 2 - 4, 0), (TILE // 2 - 4, TILE), 2)
+    pygame.draw.line(s, amber, (TILE // 2 + 4, 0), (TILE // 2 + 4, TILE), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_track_tile"><code class="name flex">
+<span>def <span class="ident">make_track_tile</span></span>(<span>) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_track_tile() -&gt; pygame.Surface:                      
+    &#34;&#34;&#34;Mag-rail track: dark ballast with cross-ties and two rails.&#34;&#34;&#34;
+    s = _surf()
+    s.fill(_TRACK_BALLAST)
+    for i in range(2, TILE, 6):
+        pygame.draw.line(s, _TRACK_TIE, (i, 8), (i, TILE - 9), 2)
+        pygame.draw.line(s, _TRACK_TIE, (8, i), (TILE - 9, i), 2)
+    pygame.draw.line(s, _TRACK_RAIL, (0, TILE // 2 - 4), (TILE, TILE // 2 - 4), 2)
+    pygame.draw.line(s, _TRACK_RAIL, (0, TILE // 2 + 4), (TILE, TILE // 2 + 4), 2)
+    pygame.draw.line(s, _TRACK_RAIL, (TILE // 2 - 4, 0), (TILE // 2 - 4, TILE), 2)
+    pygame.draw.line(s, _TRACK_RAIL, (TILE // 2 + 4, 0), (TILE // 2 + 4, TILE), 2)
+    return s</code></pre>
+</details>
+<div class="desc"><p>Mag-rail track: dark ballast with cross-ties and two rails.</p></div>
+</dd>
+<dt id="src.assets.sprites.make_train_sprite"><code class="name flex">
+<span>def <span class="ident">make_train_sprite</span></span>(<span>color: tuple) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_train_sprite(color: tuple) -&gt; pygame.Surface:        
+    w, h = 36, 16
+    s = _surf(w, h, alpha=True)
+    s.fill((0, 0, 0, 0))
+    dark = tuple(max(0, c - 50) for c in color)
+    light = tuple(min(255, c + 60) for c in color)
+    pygame.draw.rect(s, dark,  (0, 1, 24, h - 2))
+    pygame.draw.rect(s, color, (1, 2, 22, h - 4))
+    pygame.draw.rect(s, dark,  (24, 1, 12, h - 2))
+    pygame.draw.rect(s, light, (25, 2, 10, h - 4))
+    pygame.draw.rect(s, (200, 230, 255), (27, 3, 4, 4))
+    pygame.draw.rect(s, (200, 230, 255), (27, h - 7, 4, 4))
+    pygame.draw.rect(s, dark, (34, 4, 2, h - 8))
+    pygame.draw.rect(s, (20, 20, 20), (0, 1, 24, h - 2), 1)
+    pygame.draw.rect(s, (20, 20, 20), (24, 1, 12, h - 2), 1)
+    wc = (40, 40, 40)
+    for wx in [2, 8, 14, 20, 27]:
+        pygame.draw.circle(s, wc, (wx, 1), 2)
+        pygame.draw.circle(s, wc, (wx, h - 2), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.make_truck_sprite"><code class="name flex">
+<span>def <span class="ident">make_truck_sprite</span></span>(<span>color: tuple) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_truck_sprite(color: tuple) -&gt; pygame.Surface:
+    w, h = 28, 14
+    s = _surf(w, h, alpha=True)
+    s.fill((0, 0, 0, 0))
+    dark = tuple(max(0, c - 50) for c in color)
+    light = tuple(min(255, c + 50) for c in color)
+    pygame.draw.rect(s, dark,  (0, 1, 18, h - 2))
+    pygame.draw.rect(s, color, (1, 2, 16, h - 4))
+    pygame.draw.rect(s, dark,  (18, 2, 10, h - 4))
+    pygame.draw.rect(s, light, (19, 3, 8, h - 6))
+    pygame.draw.rect(s, (180, 220, 255), (21, 4, 5, 5))
+    pygame.draw.rect(s, (20, 20, 20), (0, 1, 18, h - 2), 1)
+    pygame.draw.rect(s, (20, 20, 20), (18, 2, 10, h - 4), 1)
+    wc = (40, 40, 40)
+    for wx, wy in [(2, 0), (2, h - 2), (16, 0), (16, h - 2)]:
+        pygame.draw.circle(s, wc, (wx + 1, wy + 1), 2)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.assets.sprites.SpriteCache"><code class="flex name class">
+<span>class <span class="ident">SpriteCache</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SpriteCache:
+    _instance: SpriteCache | None = None
+
+    def __init__(self) -&gt; None:
+        self._cache: dict = {}
+        self._built = False
+
+    @classmethod
+    def get(cls) -&gt; SpriteCache:
+        if cls._instance is None:
+            cls._instance = SpriteCache()
+        return cls._instance
+
+    def build(self) -&gt; None:
+        if self._built:
+            return
+        self._cache[&#34;grass&#34;]       = make_regolith_tile()
+        self._cache[&#34;forest&#34;]      = make_rock_tile()
+        self._cache[&#34;water&#34;]       = make_ice_tile()
+        self._cache[&#34;road&#34;]        = make_road_tile()
+        self._cache[&#34;road_route&#34;]  = make_road_tile(route=True)
+        self._cache[&#34;road_entry&#34;]  = make_entry_tile()
+        self._cache[&#34;track&#34;]       = make_track_tile()            
+        self._cache[&#34;track_route&#34;] = make_track_route_tile()     
+        self._cache[&#34;city&#34;]        = make_city_tile(0)
+        self._cache[&#34;city_bank&#34;]   = make_city_bank_tile()
+        self._cache[&#34;garage&#34;]      = make_garage_tile()
+        for bt in BridgeType:
+            self._cache[f&#34;bridge_{bt.name}&#34;]       = make_bridge_tile(bt)
+            self._cache[f&#34;bridge_{bt.name}_route&#34;] = make_bridge_route_tile(bt)
+        for ft in FacilityType:
+            self._cache[f&#34;fac_{ft.name}&#34;] = make_facility_tile(ft)
+        # Vehicles
+        self._cache[&#34;rover&#34;]  = make_bus_sprite((120, 200, 80))  
+        self._cache[&#34;hauler&#34;] = make_truck_sprite((80, 160, 220))
+        self._cache[&#34;maglev&#34;] = make_train_sprite((230, 140, 50))
+        self._built = True
+
+    def tile(self, key: str) -&gt; pygame.Surface | None:
+        return self._cache.get(key)
+
+    def vehicle(self, vdef_name: str, color_hex: str) -&gt; pygame.Surface:
+        &#34;&#34;&#34;Return the appropriate vehicle sprite tinted with the vehicle&#39;s colour.&#34;&#34;&#34;
+        key = f&#34;v_{vdef_name}_{color_hex}&#34;
+        if key not in self._cache:
+            rgb = _hex_to_rgb(color_hex)
+            name = vdef_name.lower()
+            if &#34;maglev&#34; in name or &#34;train&#34; in name:              
+                base = make_train_sprite(rgb)
+            elif &#34;rover&#34; in name or &#34;bus&#34; in name:
+                base = make_bus_sprite(rgb)
+            else:
+                base = make_truck_sprite(rgb)
+            self._cache[key] = base
+        return self._cache[key]</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Static methods</h3>
+<dl>
+<dt id="src.assets.sprites.SpriteCache.get"><code class="name flex">
+<span>def <span class="ident">get</span></span>(<span>) ‑> <a title="src.assets.sprites.SpriteCache" href="#src.assets.sprites.SpriteCache">SpriteCache</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="src.assets.sprites.SpriteCache.build"><code class="name flex">
+<span>def <span class="ident">build</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build(self) -&gt; None:
+    if self._built:
+        return
+    self._cache[&#34;grass&#34;]       = make_regolith_tile()
+    self._cache[&#34;forest&#34;]      = make_rock_tile()
+    self._cache[&#34;water&#34;]       = make_ice_tile()
+    self._cache[&#34;road&#34;]        = make_road_tile()
+    self._cache[&#34;road_route&#34;]  = make_road_tile(route=True)
+    self._cache[&#34;road_entry&#34;]  = make_entry_tile()
+    self._cache[&#34;track&#34;]       = make_track_tile()            
+    self._cache[&#34;track_route&#34;] = make_track_route_tile()     
+    self._cache[&#34;city&#34;]        = make_city_tile(0)
+    self._cache[&#34;city_bank&#34;]   = make_city_bank_tile()
+    self._cache[&#34;garage&#34;]      = make_garage_tile()
+    for bt in BridgeType:
+        self._cache[f&#34;bridge_{bt.name}&#34;]       = make_bridge_tile(bt)
+        self._cache[f&#34;bridge_{bt.name}_route&#34;] = make_bridge_route_tile(bt)
+    for ft in FacilityType:
+        self._cache[f&#34;fac_{ft.name}&#34;] = make_facility_tile(ft)
+    # Vehicles
+    self._cache[&#34;rover&#34;]  = make_bus_sprite((120, 200, 80))  
+    self._cache[&#34;hauler&#34;] = make_truck_sprite((80, 160, 220))
+    self._cache[&#34;maglev&#34;] = make_train_sprite((230, 140, 50))
+    self._built = True</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.SpriteCache.tile"><code class="name flex">
+<span>def <span class="ident">tile</span></span>(<span>self, key: str) ‑> pygame.surface.Surface | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tile(self, key: str) -&gt; pygame.Surface | None:
+    return self._cache.get(key)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="src.assets.sprites.SpriteCache.vehicle"><code class="name flex">
+<span>def <span class="ident">vehicle</span></span>(<span>self, vdef_name: str, color_hex: str) ‑> pygame.surface.Surface</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vehicle(self, vdef_name: str, color_hex: str) -&gt; pygame.Surface:
+    &#34;&#34;&#34;Return the appropriate vehicle sprite tinted with the vehicle&#39;s colour.&#34;&#34;&#34;
+    key = f&#34;v_{vdef_name}_{color_hex}&#34;
+    if key not in self._cache:
+        rgb = _hex_to_rgb(color_hex)
+        name = vdef_name.lower()
+        if &#34;maglev&#34; in name or &#34;train&#34; in name:              
+            base = make_train_sprite(rgb)
+        elif &#34;rover&#34; in name or &#34;bus&#34; in name:
+            base = make_bus_sprite(rgb)
+        else:
+            base = make_truck_sprite(rgb)
+        self._cache[key] = base
+    return self._cache[key]</code></pre>
+</details>
+<div class="desc"><p>Return the appropriate vehicle sprite tinted with the vehicle's colour.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.assets" href="index.html">src.assets</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="src.assets.sprites.make_bridge_route_tile" href="#src.assets.sprites.make_bridge_route_tile">make_bridge_route_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_bridge_tile" href="#src.assets.sprites.make_bridge_tile">make_bridge_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_bus_sprite" href="#src.assets.sprites.make_bus_sprite">make_bus_sprite</a></code></li>
+<li><code><a title="src.assets.sprites.make_city_bank_tile" href="#src.assets.sprites.make_city_bank_tile">make_city_bank_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_city_tile" href="#src.assets.sprites.make_city_tile">make_city_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_entry_tile" href="#src.assets.sprites.make_entry_tile">make_entry_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_facility_tile" href="#src.assets.sprites.make_facility_tile">make_facility_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_garage_tile" href="#src.assets.sprites.make_garage_tile">make_garage_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_ice_tile" href="#src.assets.sprites.make_ice_tile">make_ice_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_regolith_tile" href="#src.assets.sprites.make_regolith_tile">make_regolith_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_road_tile" href="#src.assets.sprites.make_road_tile">make_road_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_rock_tile" href="#src.assets.sprites.make_rock_tile">make_rock_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_rover_sprite" href="#src.assets.sprites.make_rover_sprite">make_rover_sprite</a></code></li>
+<li><code><a title="src.assets.sprites.make_track_route_tile" href="#src.assets.sprites.make_track_route_tile">make_track_route_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_track_tile" href="#src.assets.sprites.make_track_tile">make_track_tile</a></code></li>
+<li><code><a title="src.assets.sprites.make_train_sprite" href="#src.assets.sprites.make_train_sprite">make_train_sprite</a></code></li>
+<li><code><a title="src.assets.sprites.make_truck_sprite" href="#src.assets.sprites.make_truck_sprite">make_truck_sprite</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.assets.sprites.SpriteCache" href="#src.assets.sprites.SpriteCache">SpriteCache</a></code></h4>
+<ul class="">
+<li><code><a title="src.assets.sprites.SpriteCache.build" href="#src.assets.sprites.SpriteCache.build">build</a></code></li>
+<li><code><a title="src.assets.sprites.SpriteCache.get" href="#src.assets.sprites.SpriteCache.get">get</a></code></li>
+<li><code><a title="src.assets.sprites.SpriteCache.tile" href="#src.assets.sprites.SpriteCache.tile">tile</a></code></li>
+<li><code><a title="src.assets.sprites.SpriteCache.vehicle" href="#src.assets.sprites.SpriteCache.vehicle">vehicle</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

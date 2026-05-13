@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>src.render.map_renderer API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#ffdd44;--primary:#2a5491;--accent:#4a7cbf;--accent2:#1a3d6e;--text:#222222;--muted:#555555;--bg:#ffffff;--sidebar-bg:#f0f4f8;--border:#c8d8ea;--name-bg:#dce8f5;--name-hover:#b8d0ed;--class-bg:#eef4fb;--fn-color:#6a3d9a;--ident-col:#1a5276;--section-title:#2a5491}*{box-sizing:border-box}body{font-family:"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.6em;color:var(--text);background:var(--bg);margin:0}#sidebar{background:var(--sidebar-bg);border-right:2px solid var(--border);padding:1.5em;overflow:hidden}#sidebar h1{background:var(--accent2);color:#fff;margin:-1.5em -1.5em 1em -1.5em;padding:0.75em 1.2em;font-size:1em;letter-spacing:0.04em;text-transform:uppercase}#sidebar h1 a{color:#fff}#sidebar h2{color:var(--primary);border-bottom:1px solid var(--border);font-size:0.9em;text-transform:uppercase;letter-spacing:0.05em;padding-bottom:4px;margin-top:1.4em}#sidebar a{color:var(--primary);font-size:0.88em}#sidebar a:hover{color:var(--accent);text-decoration:underline}#content{padding:20px 28px}h1.title{background:var(--accent2);color:#fff;margin:-20px -28px 1.5em -28px;padding:0.75em 1.4em;font-size:1.4em;font-weight:600;letter-spacing:0.02em}h1.title code{background:transparent;color:#c8dff8;font-weight:700}h1,h2,h3,h4,h5{font-weight:600}h1{font-size:2em}h2{font-size:1.5em;margin:2em 0 .6em 0}h3{font-size:1.2em;margin:1.4em 0 .5em 0}h4{margin:0;font-size:1em}h2.section-title{color:var(--section-title);background:var(--class-bg);border-left:5px solid var(--primary);padding:0.4em 0.9em;border-radius:2px;font-size:1.1em}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:var(--primary);text-decoration:none;transition:color .15s ease-in-out}a:visited{color:#5a3472}a:hover{color:var(--accent);text-decoration:underline}.ident{color:var(--ident-col);font-weight:bold}.name{background:var(--name-bg);border:1px solid var(--border);border-radius:3px;font-size:.88em;padding:5px 10px;display:inline-block;min-width:40%;font-family:"Consolas","DejaVu Sans Mono",monospace}.name:hover{background:var(--name-hover)}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.name.class{border-left:4px solid var(--primary)}.name.function{border-left:4px solid var(--fn-color)}.desc{padding:4px 0 4px 12px;border-left:3px solid var(--border);margin-left:4px}.desc h2{font-weight:500;font-size:1.1em;color:var(--primary)}.desc h3{font-size:.95em;color:var(--muted)}.desc dt code{background:inherit}.desc > div > p:first-child{margin-top:0.5em}code{background:#f0f5fb;font-family:"Consolas","DejaVu Sans Mono",monospace;font-size:0.88em;padding:2px 5px;border-radius:3px;border:1px solid #d4e3f2;overflow-wrap:break-word}h1 code{background:transparent;border:none}pre{border:1px solid var(--border);border-radius:4px;background:#f8fbff;margin:1em 0;overflow:auto}pre code{font-size:.85em;line-height:1.4em;padding:1em;display:block;background:transparent;border:none}.source > summary,.git-link-div{color:var(--muted);text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase;cursor:pointer}.source summary > *{white-space:nowrap;cursor:pointer}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent;border:none}#index h3{border-bottom:1px solid var(--border);color:var(--primary);font-size:0.85em}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.inherited{color:#999;border-left:5px solid var(--border);padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}#footer{display:none !important}.http-server-breadcrumbs{font-size:115%;margin:0 0 15px 0;color:var(--muted)}.admonition{padding:.3em 1em;margin:1em 0;border-radius:3px}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#d6e8fb;border-left:4px solid var(--primary)}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#d5f0d5;border-left:4px solid #2e7d32}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fff3cd;border-left:4px solid #f59e0b}.admonition.error,.admonition.danger,.admonition.caution{background:#fde8e8;border-left:4px solid #c0392b}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:28%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:72%;max-width:110ch;padding:0 4em 3em 4em;border-left:2px solid var(--border)}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}*{background:transparent !important;color:#000 !important;box-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>src.render.map_renderer</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="src.render.map_renderer.MapRenderer"><code class="flex name class">
+<span>class <span class="ident">MapRenderer</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MapRenderer:
+    &#34;&#34;&#34;Renders the game map, vehicles, routes, and UI overlays to a pygame surface.
+
+    The renderer maintains an off-screen surface of the full map that is built
+    once and then partially invalidated as tiles change.  Each frame only the
+    visible portion is blitted to the screen, making rendering efficient even
+    for large maps.
+    &#34;&#34;&#34;
+
+    def __init__(self) -&gt; None:
+        self._map_surface: pygame.Surface | None = None
+        self._map_w = 0
+        self._map_h = 0
+        self._bank_font: pygame.font.Font | None = None
+        self._stop_font: pygame.font.Font | None = None
+        self._label_font: pygame.font.Font | None = None
+        self._sprites: SpriteCache | None = None
+
+    def _get_bank_font(self) -&gt; pygame.font.Font:
+        if self._bank_font is None:
+            self._bank_font = font_map(14, bold=True)
+        return self._bank_font
+
+    def _get_stop_font(self) -&gt; pygame.font.Font:
+        if self._stop_font is None:
+            self._stop_font = font_map(12, bold=True)
+        return self._stop_font
+
+    def _get_label_font(self) -&gt; pygame.font.Font:
+        if self._label_font is None:
+            self._label_font = font_map(10, bold=True)
+        return self._label_font
+
+    def _get_sprites(self) -&gt; SpriteCache:
+        if self._sprites is None:
+            self._sprites = SpriteCache.get()
+            self._sprites.build()
+        return self._sprites
+
+    def _tile_sprite_key(self, tile) -&gt; str | None:
+        &#34;&#34;&#34;Return sprite cache key for a tile, or None to use fallback.&#34;&#34;&#34;
+        if tile.is_entry_point:
+            return &#34;road_entry&#34;
+        if tile.is_garage:
+            return &#34;garage&#34;
+        if tile.bridge_type is not None:
+            suffix = &#34;_route&#34; if tile.is_route_road else &#34;&#34;
+            return f&#34;bridge_{tile.bridge_type.name}{suffix}&#34;
+        if tile.tile_type == TileType.WATER:
+            return &#34;water&#34;
+        if tile.tile_type == TileType.GRASS:
+            return &#34;grass&#34;
+        if tile.tile_type == TileType.FOREST:
+            return &#34;forest&#34;
+        if tile.tile_type == TileType.ROAD:
+            return &#34;road_route&#34; if tile.is_route_road else &#34;road&#34;
+        if tile.tile_type == TileType.TRACK:                      # v1.1 #3
+            return &#34;track_route&#34; if tile.is_route_road else &#34;track&#34;
+        if tile.tile_type == TileType.CITY:
+            return &#34;city_bank&#34; if tile.is_bank else &#34;city&#34;
+        if tile.tile_type == TileType.FACILITY:
+            if tile.facility_ref is not None:
+                return f&#34;fac_{tile.facility_ref.fac_type.name}&#34;
+        return None
+
+    def build_map_image(self, grid: Grid) -&gt; None:
+        &#34;&#34;&#34;Build the full off-screen map surface from the given grid.
+
+        This must be called once after map generation and again whenever the
+        map is fully regenerated.  For incremental tile changes, use
+        ``update_tile`` instead.
+
+        Args:
+            grid: The game grid whose tiles will be rendered.
+        &#34;&#34;&#34;
+        sp = self._get_sprites()
+        self._map_w = grid.width  * TILE_SIZE
+        self._map_h = grid.height * TILE_SIZE
+        self._map_surface = pygame.Surface((self._map_w, self._map_h))
+        for tile in grid.iter_tiles():
+            self._paint_tile(tile)
+
+    def _paint_tile(self, tile) -&gt; None:
+        if self._map_surface is None:
+            return
+        x0 = tile.x * TILE_SIZE
+        y0 = tile.y * TILE_SIZE
+        sp = self._get_sprites()
+        key = self._tile_sprite_key(tile)
+        surf = sp.tile(key) if key else None
+        if surf is not None:
+            self._map_surface.blit(surf, (x0, y0))
+        else:
+            color = _tile_color(tile)
+            pygame.draw.rect(self._map_surface, color, (x0, y0, TILE_SIZE, TILE_SIZE))
+
+    def update_tile(self, x: int, y: int, tile) -&gt; None:
+        &#34;&#34;&#34;Redraw a single tile on the off-screen map surface.
+
+        Call this whenever a tile&#39;s type or appearance changes (road built,
+        bridge placed, tree grown, etc.) to keep the cached surface in sync.
+
+        Args:
+            x: Tile column index.
+            y: Tile row index.
+            tile: The updated Tile object to repaint.
+        &#34;&#34;&#34;
+        if self._map_surface is None:
+            return
+        self._paint_tile(tile)
+
+    def draw(
+        self,
+        screen: pygame.Surface,
+        grid: Grid,
+        camera,
+        routes,
+        vehicles,
+        hover_tile=None,
+        stops=None,
+    ) -&gt; None:
+        &#34;&#34;&#34;Render the visible map area plus all overlays to the screen surface.
+
+        Blits the pre-built map surface with camera offset applied, then draws
+        route highlights, entry-point markers, vehicle sprites, stop icons,
+        hover highlights, and facility labels on top.
+
+        Args:
+            screen: The pygame surface to draw onto (typically the display surface).
+            grid: The game grid (used for overlay queries).
+            camera: The Camera providing the current scroll offset.
+            routes: List of active Route objects whose paths should be highlighted.
+            vehicles: List of active Vehicle objects to render.
+            hover_tile: Optional (x, y) tile the mouse is currently over.
+            stops: Optional list of Stop objects to render stop icons for.
+        &#34;&#34;&#34;
+        screen.fill((10, 6, 4))  # Dark Mars background
+
+        if self._map_surface is not None:
+            screen.blit(self._map_surface, (-camera.x, -camera.y))
+
+        visible_left   = max(0, camera.x // TILE_SIZE)
+        visible_top    = max(0, camera.y // TILE_SIZE)
+        visible_right  = min(grid.width,  (camera.x + WINDOW_WIDTH) // TILE_SIZE + 2)
+        visible_bottom = min(grid.height, (camera.y + WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT) // TILE_SIZE + 2)
+
+        for y in range(visible_top, visible_bottom):
+            for x in range(visible_left, visible_right):
+                tile = grid.get_tile(x, y)
+                if tile is None:
+                    continue
+                sx = x * TILE_SIZE - camera.x
+                sy = y * TILE_SIZE - camera.y
+
+                if tile.tile_type == TileType.FOREST:
+                    self._draw_rocks(screen, sx, sy)
+
+                if tile.is_entry_point:
+                    self._draw_entry_marker(screen, sx, sy)
+
+                if tile.is_bank:
+                    self._draw_bank_marker(screen, sx, sy)
+
+                if tile.is_stop:
+                    self._draw_stop_marker(screen, sx, sy)
+
+                if tile.is_garage:
+                    self._draw_garage_label(screen, sx, sy)
+
+                if (tile.tile_type == TileType.FACILITY
+                        and tile.facility_ref is not None
+                        and tile.x == tile.facility_ref.x
+                        and tile.y == tile.facility_ref.y):
+                    self._draw_facility_label(screen, sx, sy, tile)
+
+                if hover_tile == (x, y):
+                    pygame.draw.rect(
+                        screen, (255, 200, 80),
+                        (sx + 1, sy + 1, TILE_SIZE - 2, TILE_SIZE - 2), 2,
+                    )
+
+        self._draw_vehicles(screen, camera, vehicles)
+
+    def _draw_rocks(self, screen: pygame.Surface, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Draw rock-outcrop detail overlay on rocky tiles.&#34;&#34;&#34;
+        import random
+        rng = random.Random(x * 100 + y)
+        for _ in range(2):
+            rx = x + rng.randint(4, TILE_SIZE - 5)
+            ry = y + rng.randint(4, TILE_SIZE - 5)
+            rw = rng.randint(5, 10)
+            rh = rng.randint(3, 6)
+            pygame.draw.ellipse(screen, (155, 85, 50), (rx - rw//2, ry - rh//2, rw, rh))
+            pygame.draw.ellipse(screen, (195, 115, 68), (rx - rw//2, ry - rh//2, rw, rh), 1)
+
+    def _draw_entry_marker(self, screen: pygame.Surface, x: int, y: int) -&gt; None:
+        mid = TILE_SIZE // 2
+        r = 6
+        pts = [
+            (x + mid,     y + mid - r),
+            (x + mid + r, y + mid),
+            (x + mid,     y + mid + r),
+            (x + mid - r, y + mid),
+        ]
+        pygame.draw.polygon(screen, (255, 230, 40), pts)
+        pygame.draw.polygon(screen, (200, 140,  0), pts, 1)
+
+    def _draw_bank_marker(self, screen: pygame.Surface, x: int, y: int) -&gt; None:
+        font = self._get_bank_font()
+        surf = font.render(&#34;$&#34;, True, (255, 208, 96))
+        screen.blit(surf, (
+            x + TILE_SIZE // 2 - surf.get_width()  // 2,
+            y + TILE_SIZE // 2 - surf.get_height() // 2,
+        ))
+
+    def _draw_stop_marker(self, screen: pygame.Surface, x: int, y: int) -&gt; None:
+        &#34;&#34;&#34;Draw a small stop sign on stop tiles.&#34;&#34;&#34;
+        pygame.draw.rect(screen, (220, 220, 220), (x + TILE_SIZE // 2 - 1, y + 4, 2, 20))
+        pygame.draw.rect(screen, (20, 100, 220), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9))
+        pygame.draw.rect(screen, (255, 255, 255), (x + TILE_SIZE // 2 - 6, y + 4, 12, 9), 1)
+        font = self._get_stop_font()
+        surf = font.render(&#34;S&#34;, True, (255, 255, 255))
+        screen.blit(surf, (x + TILE_SIZE // 2 - surf.get_width() // 2, y + 4))
+
+    def _draw_garage_label(self, screen: pygame.Surface, x: int, y: int) -&gt; None:
+        font = self._get_bank_font()
+        surf = font.render(&#34;G&#34;, True, (255, 180, 80))
+        screen.blit(surf, (
+            x + TILE_SIZE // 2 - surf.get_width()  // 2,
+            y + TILE_SIZE // 2 - surf.get_height() // 2,
+        ))
+
+    def _draw_facility_label(self, screen: pygame.Surface, sx: int, sy: int, tile) -&gt; None:
+        &#34;&#34;&#34;Draw abbreviated facility name badge on the top-left tile of the facility.&#34;&#34;&#34;
+        name = tile.facility_ref.name
+        abbr = _FAC_ABBR.get(name, name[:4].upper())
+
+        badge = pygame.Surface((TILE_SIZE - 2, 12), pygame.SRCALPHA)
+        badge.fill((0, 0, 0, 160))
+        screen.blit(badge, (sx + 1, sy + TILE_SIZE - 13))
+        font = self._get_label_font()
+        surf = font.render(abbr, True, (255, 240, 180))
+        screen.blit(surf, (
+            sx + TILE_SIZE // 2 - surf.get_width() // 2,
+            sy + TILE_SIZE - 13,
+        ))
+
+    def _draw_vehicles(self, screen: pygame.Surface, camera, vehicles) -&gt; None:
+        sp = self._get_sprites()
+        for vehicle in vehicles:
+            world_x = int(vehicle.x * TILE_SIZE + TILE_SIZE // 2)
+            world_y = int(vehicle.y * TILE_SIZE + TILE_SIZE // 2)
+            sx = world_x - camera.x
+            sy = world_y - camera.y
+
+            vsurf = sp.vehicle(vehicle.vdef_name, vehicle.color)
+            vw, vh = vsurf.get_size()
+            screen.blit(vsurf, (sx - vw // 2, sy - vh // 2))</code></pre>
+</details>
+<div class="desc"><p>Renders the game map, vehicles, routes, and UI overlays to a pygame surface.</p>
+<p>The renderer maintains an off-screen surface of the full map that is built
+once and then partially invalidated as tiles change.
+Each frame only the
+visible portion is blitted to the screen, making rendering efficient even
+for large maps.</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="src.render.map_renderer.MapRenderer.build_map_image"><code class="name flex">
+<span>def <span class="ident">build_map_image</span></span>(<span>self, grid: Grid) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def build_map_image(self, grid: Grid) -&gt; None:
+    &#34;&#34;&#34;Build the full off-screen map surface from the given grid.
+
+    This must be called once after map generation and again whenever the
+    map is fully regenerated.  For incremental tile changes, use
+    ``update_tile`` instead.
+
+    Args:
+        grid: The game grid whose tiles will be rendered.
+    &#34;&#34;&#34;
+    sp = self._get_sprites()
+    self._map_w = grid.width  * TILE_SIZE
+    self._map_h = grid.height * TILE_SIZE
+    self._map_surface = pygame.Surface((self._map_w, self._map_h))
+    for tile in grid.iter_tiles():
+        self._paint_tile(tile)</code></pre>
+</details>
+<div class="desc"><p>Build the full off-screen map surface from the given grid.</p>
+<p>This must be called once after map generation and again whenever the
+map is fully regenerated.
+For incremental tile changes, use
+<code>update_tile</code> instead.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>grid</code></strong></dt>
+<dd>The game grid whose tiles will be rendered.</dd>
+</dl></div>
+</dd>
+<dt id="src.render.map_renderer.MapRenderer.draw"><code class="name flex">
+<span>def <span class="ident">draw</span></span>(<span>self,<br>screen: pygame.Surface,<br>grid: Grid,<br>camera,<br>routes,<br>vehicles,<br>hover_tile=None,<br>stops=None) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def draw(
+    self,
+    screen: pygame.Surface,
+    grid: Grid,
+    camera,
+    routes,
+    vehicles,
+    hover_tile=None,
+    stops=None,
+) -&gt; None:
+    &#34;&#34;&#34;Render the visible map area plus all overlays to the screen surface.
+
+    Blits the pre-built map surface with camera offset applied, then draws
+    route highlights, entry-point markers, vehicle sprites, stop icons,
+    hover highlights, and facility labels on top.
+
+    Args:
+        screen: The pygame surface to draw onto (typically the display surface).
+        grid: The game grid (used for overlay queries).
+        camera: The Camera providing the current scroll offset.
+        routes: List of active Route objects whose paths should be highlighted.
+        vehicles: List of active Vehicle objects to render.
+        hover_tile: Optional (x, y) tile the mouse is currently over.
+        stops: Optional list of Stop objects to render stop icons for.
+    &#34;&#34;&#34;
+    screen.fill((10, 6, 4))  # Dark Mars background
+
+    if self._map_surface is not None:
+        screen.blit(self._map_surface, (-camera.x, -camera.y))
+
+    visible_left   = max(0, camera.x // TILE_SIZE)
+    visible_top    = max(0, camera.y // TILE_SIZE)
+    visible_right  = min(grid.width,  (camera.x + WINDOW_WIDTH) // TILE_SIZE + 2)
+    visible_bottom = min(grid.height, (camera.y + WINDOW_HEIGHT - BOTTOM_BAR_HEIGHT) // TILE_SIZE + 2)
+
+    for y in range(visible_top, visible_bottom):
+        for x in range(visible_left, visible_right):
+            tile = grid.get_tile(x, y)
+            if tile is None:
+                continue
+            sx = x * TILE_SIZE - camera.x
+            sy = y * TILE_SIZE - camera.y
+
+            if tile.tile_type == TileType.FOREST:
+                self._draw_rocks(screen, sx, sy)
+
+            if tile.is_entry_point:
+                self._draw_entry_marker(screen, sx, sy)
+
+            if tile.is_bank:
+                self._draw_bank_marker(screen, sx, sy)
+
+            if tile.is_stop:
+                self._draw_stop_marker(screen, sx, sy)
+
+            if tile.is_garage:
+                self._draw_garage_label(screen, sx, sy)
+
+            if (tile.tile_type == TileType.FACILITY
+                    and tile.facility_ref is not None
+                    and tile.x == tile.facility_ref.x
+                    and tile.y == tile.facility_ref.y):
+                self._draw_facility_label(screen, sx, sy, tile)
+
+            if hover_tile == (x, y):
+                pygame.draw.rect(
+                    screen, (255, 200, 80),
+                    (sx + 1, sy + 1, TILE_SIZE - 2, TILE_SIZE - 2), 2,
+                )
+
+    self._draw_vehicles(screen, camera, vehicles)</code></pre>
+</details>
+<div class="desc"><p>Render the visible map area plus all overlays to the screen surface.</p>
+<p>Blits the pre-built map surface with camera offset applied, then draws
+route highlights, entry-point markers, vehicle sprites, stop icons,
+hover highlights, and facility labels on top.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>screen</code></strong></dt>
+<dd>The pygame surface to draw onto (typically the display surface).</dd>
+<dt><strong><code>grid</code></strong></dt>
+<dd>The game grid (used for overlay queries).</dd>
+<dt><strong><code>camera</code></strong></dt>
+<dd>The Camera providing the current scroll offset.</dd>
+<dt><strong><code>routes</code></strong></dt>
+<dd>List of active Route objects whose paths should be highlighted.</dd>
+<dt><strong><code>vehicles</code></strong></dt>
+<dd>List of active Vehicle objects to render.</dd>
+<dt><strong><code>hover_tile</code></strong></dt>
+<dd>Optional (x, y) tile the mouse is currently over.</dd>
+<dt><strong><code>stops</code></strong></dt>
+<dd>Optional list of Stop objects to render stop icons for.</dd>
+</dl></div>
+</dd>
+<dt id="src.render.map_renderer.MapRenderer.update_tile"><code class="name flex">
+<span>def <span class="ident">update_tile</span></span>(<span>self, x: int, y: int, tile) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_tile(self, x: int, y: int, tile) -&gt; None:
+    &#34;&#34;&#34;Redraw a single tile on the off-screen map surface.
+
+    Call this whenever a tile&#39;s type or appearance changes (road built,
+    bridge placed, tree grown, etc.) to keep the cached surface in sync.
+
+    Args:
+        x: Tile column index.
+        y: Tile row index.
+        tile: The updated Tile object to repaint.
+    &#34;&#34;&#34;
+    if self._map_surface is None:
+        return
+    self._paint_tile(tile)</code></pre>
+</details>
+<div class="desc"><p>Redraw a single tile on the off-screen map surface.</p>
+<p>Call this whenever a tile's type or appearance changes (road built,
+bridge placed, tree grown, etc.) to keep the cached surface in sync.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>Tile column index.</dd>
+<dt><strong><code>y</code></strong></dt>
+<dd>Tile row index.</dd>
+<dt><strong><code>tile</code></strong></dt>
+<dd>The updated Tile object to repaint.</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="src.render" href="index.html">src.render</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="src.render.map_renderer.MapRenderer" href="#src.render.map_renderer.MapRenderer">MapRenderer</a></code></h4>
+<ul class="">
+<li><code><a title="src.render.map_renderer.MapRenderer.build_map_image" href="#src.render.map_renderer.MapRenderer.build_map_image">build_map_image</a></code></li>
+<li><code><a title="src.render.map_renderer.MapRenderer.draw" href="#src.render.map_renderer.MapRenderer.draw">draw</a></code></li>
+<li><code><a title="src.render.map_renderer.MapRenderer.update_tile" href="#src.render.map_renderer.MapRenderer.update_tile">update_tile</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
