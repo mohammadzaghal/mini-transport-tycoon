@@ -1,10 +1,10 @@
-# AI ABUSEEs - Mini Transport Tycoon Game Project
+# Mini Transport Tycoon Game Project
 
 ## Description
 This project involves developing a simplified transportation-economic simulation game, inspired by *Transport Tycoon*, for the 2025/2026 Spring semester at ELTE Faculty of Informatics. The main goal of the game is to simulate road freight and passenger transport between cities and industrial facilities. The player will be tasked with organizing and managing a road transport network, purchasing vehicles, and maximizing profit through strategic route management.
 
 ## Team Information
-- **Team Name**: AI ABUSEEs
+- **Team Name**: 
 - **Game Title**: Mini Transport Tycoon
 - **Class**: Software Technology Practice, 2025/2026 Spring
 - **University**: ELTE Faculty of Informatics
