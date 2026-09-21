@@ -52,8 +52,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install pygame-ce pdoc3
 
-      - name: Generate HTML documentation
-        run: python -m pdoc --html --output-dir docs/ --template-dir pdoc_templates/ src/
+      - name: Generate docs
+        run: python -m pdoc --html --force --output-dir docs/ --template-dir pdoc_templates/ src/
 
       - name: Upload API docs artifact
         uses: actions/upload-artifact@v4
